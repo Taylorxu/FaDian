@@ -9,15 +9,20 @@ import android.view.View;
  * Created by XZG on 2018/2/9.
  */
 
-public class XViewHolder<Data,Binding extends ViewDataBinding> extends RecyclerView.ViewHolder {
+public class XViewHolder<Data, Binding extends ViewDataBinding> extends RecyclerView.ViewHolder {
     Binding binding;
+
     public XViewHolder(View itemView) {
         super(itemView);
-        binding= DataBindingUtil.bind(itemView);
+        binding = DataBindingUtil.bind(itemView);
     }
 
     //为每个item中的BR 添加数据
-    public void fill(int variableId, Data data){
-        binding.setVariable(variableId,data);
+    public void fill(int variableId, Data data) {
+        binding.setVariable(variableId, data);
+    }
+
+    public Binding getBinding() {
+        return binding;
     }
 }
