@@ -20,6 +20,7 @@ import com.powerge.wise.powerge.bean.Items;
 import com.powerge.wise.powerge.databinding.FragmentFirstBinding;
 import com.powerge.wise.powerge.databinding.ItemFirstFragmentGridListBinding;
 import com.powerge.wise.powerge.helper.GridSpacingItemDecoration;
+import com.powerge.wise.powerge.otherPages.FuHeManagementActivity;
 import com.wisesignsoft.OperationManagement.utils.ToastUtil;
 
 import java.util.ArrayList;
@@ -36,9 +37,10 @@ public class FirstFragment extends Fragment {
     XAdapter.OnItemClickListener<Items, ItemFirstFragmentGridListBinding> itemClickListener = new XAdapter.OnItemClickListener<Items, ItemFirstFragmentGridListBinding>() {
         @Override
         public void onItemClick(XViewHolder<Items, ItemFirstFragmentGridListBinding> holder) {
-            ToastUtil.toast(getContext(), holder.getBinding().getData().getName());
+            goToActivity(holder.getBinding().getData().getNumber());
         }
     };
+
 
     public FirstFragment() {
     }
@@ -70,6 +72,7 @@ public class FirstFragment extends Fragment {
         for (int i = 0; i < name.length; i++) {
             Items items = new Items();
             items.setName(name[i]);
+            items.setNumber(i);
             this.items.add(items);
         }
     }
@@ -94,5 +97,18 @@ public class FirstFragment extends Fragment {
     public interface OnFirstFragmentInteractionListener {
 
         void onFragmentInteraction(Uri uri);
+    }
+
+    /**
+     * Grid的跳转
+     *
+     * @param number
+     */
+    private void goToActivity(int number) {
+        if (number == 0) {
+            FuHeManagementActivity.start(getContext());
+        } else {
+            ToastUtil.toast(getContext(), "暂无");
+        }
     }
 }
