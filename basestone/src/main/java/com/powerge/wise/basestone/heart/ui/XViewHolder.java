@@ -9,8 +9,9 @@ import android.view.View;
  * Created by XZG on 2018/2/9.
  */
 
-public class XViewHolder<Data, Binding extends ViewDataBinding> extends RecyclerView.ViewHolder {
+public class XViewHolder<Data, Binding extends ViewDataBinding> extends RecyclerView.ViewHolder implements View.OnClickListener{
     Binding binding;
+    OnClickListener<Data, Binding> clickListener;
 
     public XViewHolder(View itemView) {
         super(itemView);
@@ -25,4 +26,23 @@ public class XViewHolder<Data, Binding extends ViewDataBinding> extends Recycler
     public Binding getBinding() {
         return binding;
     }
+
+    /**
+     * initHolder 时候可以set监听
+     * @param clickListener
+     */
+    public void setClickListener(OnClickListener<Data, Binding> clickListener) {
+        this.clickListener = clickListener;
+    }
+
+    public interface OnClickListener<Data, Binding extends ViewDataBinding> {
+        void onClick(XViewHolder<Data, Binding> holder, View v);
+    }
+
+    @Override
+    public void onClick(View v) {
+        if (clickListener != null)
+            clickListener.onClick(this, v);
+    }
+
 }
