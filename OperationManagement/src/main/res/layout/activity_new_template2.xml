@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_new_template2"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <com.wisesignsoft.OperationManagement.view.mview.MyTitle
+        android:id="@+id/mt_new_template2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <!--<RelativeLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="60dp">-->
+
+        <!--<com.wisesignsoft.OperationManagement.view.mview.KeyValueView-->
+            <!--android:id="@+id/kvv_new_template2"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--app:keyText="类型："-->
+            <!--app:keySize="14sp"-->
+            <!--app:keyColor="@color/c4"-->
+            <!--app:valueColor="@color/c1"-->
+            <!--app:valueSize="14sp"-->
+            <!--android:layout_marginLeft="12dp"-->
+            <!--android:layout_centerVertical="true" />-->
+
+        <!--<TextView-->
+            <!--android:textSize="14sp"-->
+            <!--android:text="返回重选"-->
+            <!--android:textColor="@color/c1"-->
+            <!--android:layout_marginRight="12dp"-->
+            <!--android:id="@+id/tv_new_template2"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:layout_centerVertical="true" />-->
+    <!--</RelativeLayout>-->
+    <!--<View-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="20dp"-->
+        <!--android:background="@color/c9"/>-->
+    <com.wisesignsoft.OperationManagement.view.mview.WorkOrderDetailView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:id="@+id/wodv_new_template2"/>
+    <LinearLayout
+        android:id="@+id/ll_new_template"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/home_line"/>
+    </LinearLayout>
+</LinearLayout>

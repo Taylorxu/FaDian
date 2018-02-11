@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="83dp"
+    android:layout_height="83dp"
+    xmlns:tool="http://schemas.android.com/tools"
+    android:layout_marginTop="10dp">
+
+    <ImageView
+        android:id="@+id/iv_attachment_view_content"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:background="@color/c2"
+        android:scaleType="fitXY" />
+
+    <TextView
+        android:id="@+id/tv_attachment_name"
+        android:layout_width="80dp"
+        android:layout_height="20dp"
+        android:layout_below="@+id/iv_attachment_view_content"
+        android:lines="1"
+        android:textColor="@color/c5"
+        android:gravity="center_vertical"
+        android:textSize="10sp"
+        android:maxLines="1"
+        android:ellipsize="end"
+        tool:text="文件名字文件名字文件名字文件名字文件名字"/>
+
+    <ImageView
+        android:id="@+id/iv_attachment_view_del"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="5dp"
+        android:src="@drawable/imagedelete" />
+</RelativeLayout>

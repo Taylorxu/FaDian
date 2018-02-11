@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:id="@+id/activity_message_detail"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <com.wisesignsoft.OperationManagement.view.mview.MyTitle
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/mt_message_detail"/>
+    <TextView
+        android:layout_marginTop="12dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        style="@style/ContentViewColorSize"
+        android:text="888"
+        android:layout_width="match_parent"
+        android:id="@+id/tv_message_detail_title"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:layout_marginLeft="12dp"
+        android:id="@+id/tv_message_detail_name"
+        style="@style/TitleViewColorSize"
+        android:text="888"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:layout_marginLeft="12dp"
+        android:id="@+id/tv_message_detail_time"
+        style="@style/TitleViewColorSize"
+        android:text="8888"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <View
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/home_line"/>
+    <TextView
+        android:id="@+id/tv_message_detail_content"
+        android:padding="12dp"
+        style="@style/ContentViewColorSize"
+        android:text="888888888888"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</LinearLayout>

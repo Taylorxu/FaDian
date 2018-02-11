@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_mult_select_res_model"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.wisesignsoft.OperationManagement.view.mview.MyTitle
+        android:id="@+id/mt_mult_res_model"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <com.wisesignsoft.OperationManagement.view.mview.SeachView
+        android:id="@+id/sv_mult_res_model"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_mult_res_model"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+    <com.wisesignsoft.OperationManagement.view.mview.EmptyView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/ev_mult_res_model"/>
+</LinearLayout>

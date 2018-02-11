@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:id="@+id/activity_all_dept_tree"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <com.wisesignsoft.OperationManagement.view.mview.MyTitle
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/mt_all_dept_tree"/>
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/rv_all_dept_tree"/>
+    <com.wisesignsoft.OperationManagement.view.mview.EmptyView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/ev_all_dept_tree"/>
+
+</LinearLayout>
