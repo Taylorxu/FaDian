@@ -57,8 +57,16 @@ public class FirstFragment extends Fragment {
         return fragmentBinding.getRoot();
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        if(items.size()==0){
+            createdData();
+        }
+    }
+
     private void init() {
-        createdData();
+
         fragmentBinding.content.setLayoutManager(new GridLayoutManager(getContext(), 4));
         fragmentBinding.content.addItemDecoration(new GridSpacingItemDecoration(4, DensityUtil.px2dip(getContext(), 10), true));
         fragmentBinding.content.setHasFixedSize(true);

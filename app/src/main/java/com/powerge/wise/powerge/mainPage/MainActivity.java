@@ -15,6 +15,7 @@ import android.view.View;
 import com.powerge.wise.basestone.heart.util.LogUtils;
 import com.powerge.wise.powerge.LoginActivity;
 import com.powerge.wise.powerge.R;
+import com.powerge.wise.powerge.anim.ZoomOutPageTransformer;
 import com.powerge.wise.powerge.databinding.ActivityMainBinding;
 import com.powerge.wise.powerge.helper.BottomNavigationViewHelper;
 
@@ -29,13 +30,6 @@ public class MainActivity extends AppCompatActivity implements FirstFragment.OnF
         mSectionsPagerAdapter = new MainAdapter(getSupportFragmentManager());
         mainBinding.container.setAdapter(mSectionsPagerAdapter);
         mainBinding.container.addOnPageChangeListener(onPageChangeListener);
-        mainBinding.container.setPageTransformer(true, new ViewPager.PageTransformer() {
-            @Override
-            public void transformPage(View page, float position) {
-                final float alphaValue = Math.abs(Math.abs(position) - 1);
-                page.setAlpha(alphaValue);
-            }
-        });
         BottomNavigationViewHelper.disableShiftMode(mainBinding.navigation);
         mainBinding.navigation.setOnNavigationItemSelectedListener(OnNISListener);
 
@@ -48,16 +42,16 @@ public class MainActivity extends AppCompatActivity implements FirstFragment.OnF
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    mainBinding.container.setCurrentItem(0);
+                    mainBinding.container.setCurrentItem(0,false);
                     return true;
                 case R.id.navigation_dashboard:
-                    mainBinding.container.setCurrentItem(1);
+                    mainBinding.container.setCurrentItem(1,false);
                     return true;
                 case R.id.navigation_notifications:
-                    mainBinding.container.setCurrentItem(2);
+                    mainBinding.container.setCurrentItem(2,false);
                     return true;
                 case R.id.navigation_mine:
-                    mainBinding.container.setCurrentItem(3);
+                    mainBinding.container.setCurrentItem(3,false);
                     return true;
             }
             return false;
