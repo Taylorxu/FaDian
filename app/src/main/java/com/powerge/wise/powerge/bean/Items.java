@@ -6,8 +6,9 @@ package com.powerge.wise.powerge.bean;
 
 public class Items {
     int id;
-    String name;
-    int number;
+    public String name;
+    public int number;
+    public int icon;
 
     public int getId() {
         return id;
@@ -31,5 +32,13 @@ public class Items {
 
     public void setNumber(int number) {
         this.number = number;
+    }
+
+    public int getIcon() {
+        return icon;
+    }
+
+    public void setIcon(int icon) {
+        this.icon = icon;
     }
 }

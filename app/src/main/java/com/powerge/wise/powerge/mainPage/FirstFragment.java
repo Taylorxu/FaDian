@@ -35,7 +35,14 @@ public class FirstFragment extends Fragment {
     FragmentFirstBinding fragmentBinding;
     List<Items> items = new ArrayList<>();
 
-    XAdapter<Items, ItemFirstFragmentGridListBinding> adapter = new XAdapter.SimpleAdapter<>(BR.data, R.layout.item_first_fragment_grid_list);
+    XAdapter<Items, ItemFirstFragmentGridListBinding> adapter = new XAdapter.SimpleAdapter<Items, ItemFirstFragmentGridListBinding>(0, R.layout.item_first_fragment_grid_list) {
+        @Override
+        public void onBindViewHolder(XViewHolder<Items, ItemFirstFragmentGridListBinding> holder, int position) {
+            super.onBindViewHolder(holder, position);
+            holder.getBinding().imgItemGrid.setImageResource(items.get(position).getIcon());
+            holder.getBinding().textItemGrid.setText(items.get(position).getName());
+        }
+    };
     XAdapter.OnItemClickListener<Items, ItemFirstFragmentGridListBinding> itemClickListener = new XAdapter.OnItemClickListener<Items, ItemFirstFragmentGridListBinding>() {
         @Override
         public void onItemClick(XViewHolder<Items, ItemFirstFragmentGridListBinding> holder) {
@@ -59,16 +66,9 @@ public class FirstFragment extends Fragment {
         return fragmentBinding.getRoot();
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        if(items.size()==0){
-            createdData();
-        }
-    }
 
     private void init() {
-
+        createdData();
         fragmentBinding.content.setLayoutManager(new GridLayoutManager(getContext(), 4));
         fragmentBinding.content.addItemDecoration(new GridSpacingItemDecoration(4, DensityUtil.px2dip(getContext(), 10), true));
         fragmentBinding.content.setHasFixedSize(true);
@@ -77,14 +77,29 @@ public class FirstFragment extends Fragment {
         adapter.setList(items);
     }
 
+    int[] icon = new int[]{R.drawable.ic_fuhe_mangment,
+            R.drawable.ic_dianliang_guanli,
+            R.drawable.ic_jingji_zhibiao,
+            R.drawable.ic_tongji_baobiao,
+            R.drawable.ic_shei_bei_xin_xi,
+            R.drawable.ic_zhizhang_log,
+            R.drawable.ic_shengchan_zaohui,
+            R.drawable.ic_zhiji_jingsai,
+            R.drawable.ic_huanbao_zhibiao,
+            R.drawable.ic_que_xian_guan_li
+    };
+
     public void createdData() {
+        items.clear();
         String[] name = getResources().getStringArray(R.array.item_name_array);
         for (int i = 0; i < name.length; i++) {
             Items items = new Items();
             items.setName(name[i]);
             items.setNumber(i);
+            items.setIcon(icon[i]);
             this.items.add(items);
         }
+
     }
 
     @Override
@@ -115,8 +130,8 @@ public class FirstFragment extends Fragment {
      * @param number
      */
     private void goToActivity(int number) {
-        if(User.getCurrentUser()==null||!User.getCurrentUser().isLogin()){
-            ToastUtil.toast(getContext(),"please login");
+        if (User.getCurrentUser() == null || !User.getCurrentUser().isLogin()) {
+            ToastUtil.toast(getContext(), "please login");
             LoginActivity.start(getContext());
             return;
         }

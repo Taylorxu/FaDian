@@ -37,6 +37,19 @@
         <item name="first_fragment_item10">缺陷管理</item>
     </array>
 
+    <array name="item_icon_array">
+        <item>@drawable/ic_fuhe_mangment</item>
+        <item>@drawable/ic_dianliang_guanli</item>
+        <item>@drawable/ic_jingji_zhibiao</item>
+        <item>@drawable/ic_tongji_baobiao</item>
+        <item>@drawable/ic_shei_bei_xin_xi</item>
+        <item>@drawable/ic_zhizhang_log</item>
+        <item>@drawable/ic_shengchan_zaohui</item>
+        <item>@drawable/ic_zhiji_jingsai</item>
+        <item>@drawable/ic_huanbao_zhibiao</item>
+        <item>@drawable/ic_que_xian_guan_li</item>
+    </array>
+
     <string name="btn_all_fh_text">全厂</string>
     <string name="btn_1_fh_text">1#机组</string>
     <string name="btn_2_fh_text">2#机组</string>
