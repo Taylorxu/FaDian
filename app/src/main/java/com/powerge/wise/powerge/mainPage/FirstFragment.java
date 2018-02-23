@@ -17,10 +17,12 @@ import com.powerge.wise.basestone.heart.util.DensityUtils;
 import com.powerge.wise.powerge.BR;
 import com.powerge.wise.powerge.R;
 import com.powerge.wise.powerge.bean.Items;
+import com.powerge.wise.powerge.bean.User;
 import com.powerge.wise.powerge.databinding.FragmentFirstBinding;
 import com.powerge.wise.powerge.databinding.ItemFirstFragmentGridListBinding;
 import com.powerge.wise.powerge.helper.GridSpacingItemDecoration;
 import com.powerge.wise.powerge.otherPages.FuHeManagementActivity;
+import com.powerge.wise.powerge.otherPages.LoginActivity;
 import com.wisesignsoft.OperationManagement.utils.ToastUtil;
 
 import java.util.ArrayList;
@@ -113,6 +115,11 @@ public class FirstFragment extends Fragment {
      * @param number
      */
     private void goToActivity(int number) {
+        if(User.getCurrentUser()==null||!User.getCurrentUser().isLogin()){
+            ToastUtil.toast(getContext(),"please login");
+            LoginActivity.start(getContext());
+            return;
+        }
         if (number == 0) {
             FuHeManagementActivity.start(getContext());
         } else {

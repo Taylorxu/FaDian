@@ -1,9 +1,12 @@
-package com.powerge.wise.powerge;
+package com.powerge.wise.powerge.otherPages;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.databinding.DataBindingUtil;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -34,11 +37,17 @@ import com.powerge.wise.basestone.heart.network.FlatMapTopRes;
 import com.powerge.wise.basestone.heart.network.TopResponse;
 import com.powerge.wise.basestone.heart.util.LogUtils;
 import com.powerge.wise.basestone.heart.util.MD5;
+import com.powerge.wise.powerge.ApiService;
+import com.powerge.wise.powerge.R;
 import com.powerge.wise.powerge.bean.User;
+import com.powerge.wise.powerge.databinding.ActivityLoginBinding;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import io.realm.Realm;
+import io.realm.RealmQuery;
+import io.realm.RealmResults;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -46,18 +55,23 @@ import rx.schedulers.Schedulers;
 import static android.Manifest.permission.READ_CONTACTS;
 
 public class LoginActivity extends AppCompatActivity {
-    private AutoCompleteTextView mEmailView;
+    private AutoCompleteTextView mAccountView;
     private EditText mPasswordView;
+    ActivityLoginBinding loginBinding;
 
+    public static void start(Context context) {
+        Intent starter = new Intent(context, LoginActivity.class);
+        context.startActivity(starter);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-        // Set up the login form.
-        mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
+        loginBinding = DataBindingUtil.setContentView(this, R.layout.activity_login);
+        mAccountView = (AutoCompleteTextView) findViewById(R.id.account);
         mPasswordView = (EditText) findViewById(R.id.password);
-        mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        //当确定密码时登录
+        loginBinding.password.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
                 if (id == EditorInfo.IME_ACTION_DONE || id == EditorInfo.IME_NULL) {
@@ -67,9 +81,8 @@ public class LoginActivity extends AppCompatActivity {
                 return false;
             }
         });
-
-        Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
-        mEmailSignInButton.setOnClickListener(new OnClickListener() {
+        // 点击登录按钮去登陆
+        loginBinding.signInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 attemptLogin();
@@ -80,33 +93,10 @@ public class LoginActivity extends AppCompatActivity {
 
 
     private void attemptLogin() {
-        ApiService.Creator.get().login("18801458001", MD5.getMD5("cmcc1234"))//MD5.getMD5("cmcc123")
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .flatMap(new FlatMapResponse<TopResponse<User>>())
-                .flatMap(new FlatMapTopRes<User>())
-                .subscribe(new Subscriber<User>() {
-                    @Override
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        LogUtils.e(e.getMessage());
-
-                    }
-
-                    @Override
-                    public void onNext(User user) {
-                        LogUtils.e(user.getId()+"++++++++++++++++++++");
-                    }
-                });
-
+        //TODO 登录成功后 更新reaml 的数据
+        User.login();
+        finish();
     }
-
-
-
 
 
 }

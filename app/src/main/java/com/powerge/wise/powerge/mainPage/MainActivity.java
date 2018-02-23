@@ -1,6 +1,5 @@
 package com.powerge.wise.powerge.mainPage;
 
-import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.net.Uri;
 import android.support.annotation.NonNull;
@@ -10,12 +9,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
 
-import com.powerge.wise.basestone.heart.util.LogUtils;
-import com.powerge.wise.powerge.LoginActivity;
 import com.powerge.wise.powerge.R;
-import com.powerge.wise.powerge.anim.ZoomOutPageTransformer;
 import com.powerge.wise.powerge.databinding.ActivityMainBinding;
 import com.powerge.wise.powerge.helper.BottomNavigationViewHelper;
 

@@ -33,7 +33,9 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:name=".MyApplication"
+        >
         <activity
             android:name=".mainPage.MainActivity"
             android:label="@string/app_name"
@@ -45,7 +47,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LoginActivity"
+            android:name=".otherPages.LoginActivity"
             android:label="@string/title_activity_login" />
 
         <!-- 产品项目operation -->
