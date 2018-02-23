@@ -34,6 +34,60 @@
             </FrameLayout>
         </android.support.design.widget.AppBarLayout>
 
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            <!--内容树根-->
+            <LinearLayout
+                android:id="@+id/content_panel"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/bg_gray"
+                android:orientation="vertical">
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+
+                    <RadioGroup
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/btn_all_fh"
+                            style="@style/style_fu_he_top_radios"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:layout_weight="1"
+                            android:checked="true"
+                            android:text="@string/btn_all_fh_text" />
+
+                        <RadioButton
+                            android:id="@+id/btn_1_fh"
+                            style="@style/style_fu_he_top_radios"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:layout_weight="1"
+                            android:text="@string/btn_1_fh_text" />
+
+                        <RadioButton
+                            android:id="@+id/btn_2_fh"
+                            style="@style/style_fu_he_top_radios"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:layout_weight="1"
+                            android:text="@string/btn_2_fh_text" />
+                    </RadioGroup>
+
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </android.support.v4.widget.NestedScrollView>
     </android.support.design.widget.CoordinatorLayout>
 </layout>

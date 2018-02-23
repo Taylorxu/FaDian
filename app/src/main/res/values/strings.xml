@@ -36,4 +36,8 @@
         <item name="first_fragment_item9">环保指标</item>
         <item name="first_fragment_item10">缺陷管理</item>
     </array>
+
+    <string name="btn_all_fh_text">全厂</string>
+    <string name="btn_1_fh_text">1#机组</string>
+    <string name="btn_2_fh_text">2#机组</string>
 </resources>
