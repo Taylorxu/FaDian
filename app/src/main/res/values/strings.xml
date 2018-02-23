@@ -40,4 +40,5 @@
     <string name="btn_all_fh_text">全厂</string>
     <string name="btn_1_fh_text">1#机组</string>
     <string name="btn_2_fh_text">2#机组</string>
+    <string name="btn_hour_data_fh_text">近一小时数据</string>
 </resources>

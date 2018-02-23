@@ -45,7 +45,7 @@
                 android:layout_height="match_parent"
                 android:background="@color/bg_gray"
                 android:orientation="vertical">
-
+                <!--全场 机组 button-->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -85,6 +85,88 @@
 
 
                 </LinearLayout>
+
+                <!--统计图-->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/white"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp">
+
+                    <FrameLayout
+                        android:id="@+id/chart_first_panel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true">
+
+                        <TextView
+                            android:id="@+id/text_today"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="left|center_vertical"
+                            android:text="2018-02-23" />
+
+                        <Button
+                            android:id="@+id/btn_hour_data"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right"
+                            android:text="@string/btn_hour_data_fh_text" />
+                    </FrameLayout>
+
+                    <!--统计图view-->
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_below="@+id/chart_first_panel"
+                        android:orientation="vertical">
+
+                        <com.github.mikephil.charting.charts.LineChart
+                            android:id="@+id/chart1"
+                            android:layout_width="match_parent"
+                            android:layout_height="200dp"
+                            android:layout_gravity="center" />
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal"
+                                android:layout_centerInParent="true"
+                                >
+
+                                <TextView
+                                    android:id="@+id/bt_today"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="10dp"
+                                    android:text="今日"
+                                    android:textColor="#C0FF8C"
+                                    android:gravity="center"
+                                    />
+
+                                <TextView
+                                    android:id="@+id/bt_yesterday"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:padding="10dp"
+                                    android:text="昨日"
+                                    android:textColor="#FFF78C"
+                                    android:gravity="center"
+                                    android:layout_marginLeft="40dp"
+                                    />
+                            </LinearLayout>
+
+                        </RelativeLayout>
+                    </LinearLayout>
+
+
+                </RelativeLayout>
 
             </LinearLayout>
 
