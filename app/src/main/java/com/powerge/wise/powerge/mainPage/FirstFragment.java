@@ -39,7 +39,7 @@ public class FirstFragment extends Fragment {
         @Override
         public void onBindViewHolder(XViewHolder<Items, ItemFirstFragmentGridListBinding> holder, int position) {
             super.onBindViewHolder(holder, position);
-            holder.getBinding().imgItemGrid.setImageResource(items.get(position).getIcon());
+            holder.getBinding().imgItemGrid.setBackgroundResource(items.get(position).getIcon());
             holder.getBinding().textItemGrid.setText(items.get(position).getName());
         }
     };
