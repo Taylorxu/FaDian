@@ -54,4 +54,7 @@
     <string name="btn_1_fh_text">1#机组</string>
     <string name="btn_2_fh_text">2#机组</string>
     <string name="btn_hour_data_fh_text">近一小时数据</string>
+
+    <string name="first_page_app_name">发电企业移动管理辅助决策系统</string>
+
 </resources>

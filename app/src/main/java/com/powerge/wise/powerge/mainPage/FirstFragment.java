@@ -35,7 +35,7 @@ public class FirstFragment extends Fragment {
     FragmentFirstBinding fragmentBinding;
     List<Items> items = new ArrayList<>();
 
-    XAdapter<Items, ItemFirstFragmentGridListBinding> adapter = new XAdapter.SimpleAdapter<Items, ItemFirstFragmentGridListBinding>(0, R.layout.item_first_fragment_grid_list) {
+    XAdapter<Items, ItemFirstFragmentGridListBinding> adapter = new XAdapter.SimpleAdapter<Items, ItemFirstFragmentGridListBinding>(BR.item, R.layout.item_first_fragment_grid_list) {
         @Override
         public void onBindViewHolder(XViewHolder<Items, ItemFirstFragmentGridListBinding> holder, int position) {
             super.onBindViewHolder(holder, position);
@@ -46,7 +46,7 @@ public class FirstFragment extends Fragment {
     XAdapter.OnItemClickListener<Items, ItemFirstFragmentGridListBinding> itemClickListener = new XAdapter.OnItemClickListener<Items, ItemFirstFragmentGridListBinding>() {
         @Override
         public void onItemClick(XViewHolder<Items, ItemFirstFragmentGridListBinding> holder) {
-            goToActivity(holder.getBinding().getData().getNumber());
+            goToActivity(holder.getBinding().getItem().getNumber());
         }
     };
 

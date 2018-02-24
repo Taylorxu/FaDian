@@ -4,8 +4,12 @@ import android.app.Application;
 import android.content.Context;
 import android.support.multidex.MultiDex;
 
+import com.facebook.cache.disk.DiskCacheConfig;
+import com.facebook.drawee.backends.pipeline.Fresco;
+import com.facebook.imagepipeline.backends.okhttp3.OkHttpImagePipelineConfigFactory;
 import com.powerge.wise.basestone.heart.WApp;
 
+import java.io.File;
 import java.util.Map;
 
 import io.realm.Realm;
@@ -21,6 +25,11 @@ public class MyApplication extends WApp {
         super.onCreate();
         Realm.init(this);
         configRealm();
+        frescoConfig();
+    }
+
+    private void frescoConfig() {
+        Fresco.initialize(getInstance());//初始化Fresc
     }
 
     private void configRealm() {
