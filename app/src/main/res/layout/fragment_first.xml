@@ -1,246 +1,401 @@
-<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        layout_height="match_parent"
-        layout_width="match_parent"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context="com.powerge.wise.powerge.mainPage.FirstFragment">
+        android:layout_height="match_parent">
 
-
-        <android.support.design.widget.AppBarLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            android:scrollbars="none">
 
-            <FrameLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-                <com.facebook.drawee.view.SimpleDraweeView
+                <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:placeholderImage="@mipmap/first_page_top_bg"
-                    app:placeholderImageScaleType="fitXY"
-                    app:viewAspectRatio="1.7" />
+                    android:layout_height="wrap_content">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <RelativeLayout
+                    <com.facebook.drawee.view.SimpleDraweeView
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        app:placeholderImage="@mipmap/first_page_top_bg"
+                        app:placeholderImageScaleType="fitXY"
+                        app:viewAspectRatio="1.7" />
 
-                        <FrameLayout
-                            android:id="@id/app_name"
-                            android:layout_width="match_parent"
-                            android:layout_height="44dp"
-                            android:paddingLeft="15dp"
-                            android:paddingRight="15dp">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_vertical"
-                                android:text="@string/first_page_app_name"
-                                android:textColor="@android:color/white"
-                                android:textSize="18sp" />
-
-                        </FrameLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
 
                         <RelativeLayout
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/app_name"
-                            android:layout_marginTop="14dp"
-                            android:paddingLeft="15dp">
-
-                            <TextView
-                                android:id="@+id/text_tempter"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:includeFontPadding="false"
-                                android:text="-7"
-                                android:textColor="@color/text_color_fe4f"
-                                android:textSize="48sp" />
+                            android:layout_height="wrap_content">
 
                             <FrameLayout
-                                android:layout_width="10dp"
-                                android:layout_height="10dp"
-                                android:layout_marginTop="5dp"
-                                android:layout_toRightOf="@+id/text_tempter"
-                                android:background="@drawable/shape_circle_white" />
+                                android:id="@id/app_name"
+                                android:layout_width="match_parent"
+                                android:layout_height="44dp"
+                                android:paddingLeft="15dp">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:text="@string/first_page_app_name"
+                                    android:textColor="@android:color/white"
+                                    android:textSize="18sp" />
+                                <!--在FrameLayout该层添加click-->
+                                <FrameLayout
+                                    android:layout_width="50dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_gravity="right|center_vertical"
+                                    android:paddingBottom="12dp"
+                                    android:paddingLeft="15dp"
+                                    android:paddingRight="15dp"
+                                    android:paddingTop="12dp">
+
+                                    <ImageView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:background="@drawable/ic_top_add" />
+                                </FrameLayout>
+
+
+                            </FrameLayout>
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/app_name"
+                                android:layout_marginTop="14dp"
+                                android:paddingLeft="15dp">
+
+                                <TextView
+                                    android:id="@+id/text_tempter"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:includeFontPadding="false"
+                                    android:text="-7"
+                                    android:textColor="@color/text_color_fe4f"
+                                    android:textSize="48sp" />
+
+                                <FrameLayout
+                                    android:layout_width="10dp"
+                                    android:layout_height="10dp"
+                                    android:layout_marginTop="5dp"
+                                    android:layout_toRightOf="@+id/text_tempter"
+                                    android:background="@drawable/shape_circle_white" />
+                            </RelativeLayout>
+
                         </RelativeLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_above="@+id/bottom_item"
+                            android:layout_marginTop="32dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="99999"
+                                android:textColor="@color/text_color_fe4f"
+                                android:textSize="24sp" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="99999"
+                                android:textColor="@color/text_color_fe4f"
+                                android:textSize="24sp" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="98%"
+                                android:textColor="@color/text_color_fe4f"
+                                android:textSize="24sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/bottom_item"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_marginTop="12dp"
+                            android:orientation="horizontal">
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:text="全厂电量"
+                                    android:textColor="@color/text_color_fe4f"
+                                    android:textSize="13sp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:text="(万千瓦时)"
+                                    android:textColor="@color/text_color_fe4f"
+                                    android:textSize="9sp" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:text="全厂负荷"
+                                    android:textColor="@color/text_color_fe4f"
+                                    android:textSize="13sp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center"
+                                    android:text="(MW)"
+                                    android:textColor="@color/text_color_fe4f"
+                                    android:textSize="9sp" />
+                            </LinearLayout>
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:text="全厂负荷率"
+                                android:textColor="@color/text_color_fe4f"
+                                android:textSize="13sp" />
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                </FrameLayout>
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="70dp"
+                    android:scrollbars="none">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="80dp"
+                            android:layout_height="match_parent"
+                            android:background="?android:attr/selectableItemBackground"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="999"
+                                android:textColor="@color/text_color_jizu_fuhe"
+                                android:textSize="20sp"
+
+                                />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="1#机组"
+                                android:textColor="@color/text_color_jizu_name"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </HorizontalScrollView>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="5dp"
+                    android:background="@color/color_line" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="13dp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="5dp"
+                    android:background="@color/color_line" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="185dp"
+                    android:layout_margin="5dp"
+                    android:orientation="horizontal">
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@drawable/shape_gradient">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="16dp"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <com.facebook.drawee.view.SimpleDraweeView
+                                android:layout_width="4dp"
+                                android:layout_height="13dp"
+                                android:layout_marginLeft="10dp"
+                                app:placeholderImage="@color/color_cff"
+                                app:roundedCornerRadius="1dp" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="5dp"
+                                android:includeFontPadding="false"
+                                android:text="@string/xun_jian_guan_li"
+                                android:textColor="@color/color_4d"
+                                android:textSize="18sp" />
+                        </LinearLayout>
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="true"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginBottom="20dp"
+                            android:layout_marginRight="18dp"
+                            android:background="@drawable/ic_xun_jian" />
 
                     </RelativeLayout>
 
                     <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_above="@+id/bottom_item"
-                        android:layout_marginTop="32dp"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:text="99999"
-                            android:textColor="@color/text_color_fe4f"
-                            android:textSize="24sp" />
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:text="99999"
-                            android:textColor="@color/text_color_fe4f"
-                            android:textSize="24sp" />
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:text="98%"
-                            android:textColor="@color/text_color_fe4f"
-                            android:textSize="24sp" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/bottom_item"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentBottom="true"
-                        android:layout_marginTop="12dp"
-                        android:orientation="horizontal">
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:gravity="center"
-                                android:text="全厂电量"
-                                android:textColor="@color/text_color_fe4f"
-                                android:textSize="13sp" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:gravity="center"
-                                android:text="(万千瓦时)"
-                                android:textColor="@color/text_color_fe4f"
-                                android:textSize="9sp" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:gravity="center"
-                                android:text="全厂负荷"
-                                android:textColor="@color/text_color_fe4f"
-                                android:textSize="13sp" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:gravity="center"
-                                android:text="(MW)"
-                                android:textColor="@color/text_color_fe4f"
-                                android:textSize="9sp" />
-                        </LinearLayout>
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:gravity="center"
-                            android:text="全厂负荷率"
-                            android:textColor="@color/text_color_fe4f"
-                            android:textSize="13sp" />
-                    </LinearLayout>
-
-
-                </LinearLayout>
-
-            </FrameLayout>
-
-
-        </android.support.design.widget.AppBarLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-            <HorizontalScrollView
-                android:layout_width="match_parent"
-                android:layout_height="70dp"
-                android:scrollbars="none">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
-
-                    <LinearLayout
-                        android:layout_width="80dp"
+                        android:layout_width="180dp"
                         android:layout_height="match_parent"
-                        android:background="?android:attr/selectableItemBackground"
-                        android:gravity="center"
+                        android:layout_marginLeft="5dp"
                         android:orientation="vertical">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="999"
-                            android:textColor="@color/text_color_jizu_fuhe"
-                            android:textSize="20sp"
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_marginBottom="5dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/shape_gradient2">
 
-                            />
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginTop="16dp"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="1#机组"
-                            android:textColor="@color/text_color_jizu_name"
-                            android:textSize="12sp" />
+                                <com.facebook.drawee.view.SimpleDraweeView
+                                    android:layout_width="4dp"
+                                    android:layout_height="13dp"
+                                    android:layout_marginLeft="10dp"
+                                    app:placeholderImage="@color/color_c600"
+                                    app:roundedCornerRadius="1dp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="5dp"
+                                    android:includeFontPadding="false"
+                                    android:text="@string/wen_ti_pai_cha"
+                                    android:textColor="@color/color_4d"
+                                    android:textSize="18sp" />
+                            </LinearLayout>
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentBottom="true"
+                                android:layout_alignParentRight="true"
+                                android:layout_marginBottom="10dp"
+                                android:layout_marginRight="10dp"
+                                android:background="@drawable/ic_wen_ti_pai_cha" />
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/shape_gradient1">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_marginTop="16dp"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+
+                                <com.facebook.drawee.view.SimpleDraweeView
+                                    android:layout_width="4dp"
+                                    android:layout_height="13dp"
+                                    android:layout_marginLeft="10dp"
+                                    app:placeholderImage="@color/color_ff67"
+                                    app:roundedCornerRadius="1dp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="5dp"
+                                    android:includeFontPadding="false"
+                                    android:text="@string/ji_hua_ren_wu_guan_li"
+                                    android:textColor="@color/color_4d"
+                                    android:textSize="18sp" />
+                            </LinearLayout>
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentBottom="true"
+                                android:layout_alignParentRight="true"
+                                android:layout_marginBottom="10dp"
+                                android:layout_marginRight="10dp"
+                                android:background="@drawable/ic_plan" />
+
+                        </RelativeLayout>
+
                     </LinearLayout>
-
                 </LinearLayout>
-            </HorizontalScrollView>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="5dp"
-                android:background="@color/color_line" />
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/content"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="13dp"
-                />
-        </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+    </FrameLayout>
 
 
-    </android.support.design.widget.CoordinatorLayout>
 </layout>
