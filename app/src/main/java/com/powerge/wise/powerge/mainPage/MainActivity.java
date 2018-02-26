@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.RadioGroup;
 
 import com.powerge.wise.powerge.R;
 import com.powerge.wise.powerge.databinding.ActivityMainBinding;
@@ -25,49 +26,47 @@ public class MainActivity extends AppCompatActivity implements FirstFragment.OnF
         mSectionsPagerAdapter = new MainAdapter(getSupportFragmentManager());
         mainBinding.container.setAdapter(mSectionsPagerAdapter);
         mainBinding.container.addOnPageChangeListener(onPageChangeListener);
-        BottomNavigationViewHelper.disableShiftMode(mainBinding.navigation);
-        mainBinding.navigation.setOnNavigationItemSelectedListener(OnNISListener);
+
+        mainBinding.navigation.setOnCheckedChangeListener(OnNISListener);
 
     }
 
-
-    private BottomNavigationView.OnNavigationItemSelectedListener OnNISListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+    RadioGroup.OnCheckedChangeListener OnNISListener = new RadioGroup.OnCheckedChangeListener() {
         @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            switch (item.getItemId()) {
-                case R.id.navigation_home:
-                    mainBinding.container.setCurrentItem(0,false);
-                    return true;
-                case R.id.navigation_dashboard:
-                    mainBinding.container.setCurrentItem(1,false);
-                    return true;
-                case R.id.navigation_notifications:
-                    mainBinding.container.setCurrentItem(2,false);
-                    return true;
-                case R.id.navigation_mine:
-                    mainBinding.container.setCurrentItem(3,false);
-                    return true;
+        public void onCheckedChanged(RadioGroup group, int checkedId) {
+            switch (checkedId) {
+                case R.id.tab1:
+                    mainBinding.container.setCurrentItem(0, false);
+                    break;
+                case R.id.tab2:
+                    mainBinding.container.setCurrentItem(1, false);
+                    break;
+                case R.id.tab3:
+                    mainBinding.container.setCurrentItem(2, false);
+                    break;
+                case R.id.tab4:
+                    mainBinding.container.setCurrentItem(3, false);
+                    break;
             }
-            return false;
         }
     };
+
 
     ViewPager.OnPageChangeListener onPageChangeListener = new ViewPager.SimpleOnPageChangeListener() {
         @Override
         public void onPageSelected(int position) {
             switch (position) {
                 case 0:
-                    mainBinding.navigation.setSelectedItemId(R.id.navigation_home);
+                    mainBinding.tab1.setChecked(true);
                     break;
                 case 1:
-                    mainBinding.navigation.setSelectedItemId(R.id.navigation_dashboard);
+                    mainBinding.tab2.setChecked(true);
                     break;
                 case 2:
-                    mainBinding.navigation.setSelectedItemId(R.id.navigation_notifications);
+                    mainBinding.tab3.setChecked(true);
                     break;
                 case 3:
-                    mainBinding.navigation.setSelectedItemId(R.id.navigation_mine);
+                    mainBinding.tab4.setChecked(true);
                     break;
             }
 
