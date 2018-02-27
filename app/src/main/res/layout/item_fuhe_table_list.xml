@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="fuheData"
+            type="com.powerge.wise.powerge.bean.FuHeAllData" />
+    </data>
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@android:color/white"
+            android:orientation="horizontal">
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/fuhe_column_text"
+                    style="@style/item_fuhe_listview_table_text"
+                    android:textColor="@color/text_color_jizu_fuhe"
+                    android:text="@{fuheData.column}" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/fuhe_column1_text"
+                    style="@style/item_fuhe_listview_table_text"
+                    android:text="@{fuheData.column1}" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/fuhe_column2_text"
+                    style="@style/item_fuhe_listview_table_text"
+                    android:text="@{fuheData.column2}" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <TextView
+                    style="@style/item_fuhe_listview_table_text"
+                    android:text="@{fuheData.column3}" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <TextView
+                    style="@style/item_fuhe_listview_table_text"
+                    android:text="@{fuheData.column4}" />
+            </FrameLayout>
+
+        </LinearLayout>
+    </FrameLayout>
+</layout>

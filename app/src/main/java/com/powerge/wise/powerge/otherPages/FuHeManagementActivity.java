@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.DashPathEffect;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 
 import com.github.mikephil.charting.components.XAxis;
@@ -15,17 +16,24 @@ import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.powerge.wise.basestone.heart.ui.XAdapter;
+import com.powerge.wise.powerge.BR;
 import com.powerge.wise.powerge.R;
+import com.powerge.wise.powerge.bean.FuHeAllData;
 import com.powerge.wise.powerge.databinding.ActivityFuHeMagmentBinding;
+import com.powerge.wise.powerge.databinding.ItemFuheTableListBinding;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class FuHeManagementActivity extends AppCompatActivity {
     ActivityFuHeMagmentBinding binding;
+
     public static void start(Context context) {
         Intent starter = new Intent(context, FuHeManagementActivity.class);
         context.startActivity(starter);
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +41,41 @@ public class FuHeManagementActivity extends AppCompatActivity {
         binding.title.setText(getResources().getStringArray(R.array.item_name_array)[0]);
 
         initChartView();
+        initTableList();
+    }
+
+    XAdapter<FuHeAllData, ItemFuheTableListBinding> tableListAdapter = new XAdapter.SimpleAdapter<>(BR.fuheData, R.layout.item_fuhe_table_list);
+
+    /**
+     * 初始化 第一个列表
+     */
+    List<FuHeAllData> list = new ArrayList<>();
+
+    private void initTableList() {
+        createTableListDate();
+        binding.fuheTableList.setLayoutManager(new LinearLayoutManager(this));
+        binding.fuheTableList.setAdapter(tableListAdapter);
+        tableListAdapter.setList(list);
+    }
+
+    private void createTableListDate() {
+
+        for (int i = 0; i < 3; i++) {
+            FuHeAllData data = new FuHeAllData();
+            if (i == 0) {
+                data.setColumn("全长");
+            } else if (i == 1) {
+                data.setColumn("1#");
+            } else {
+                data.setColumn("2#");
+
+            }
+            data.setColumn1(50 + i + "%");
+            data.setColumn2(50 + i + "%");
+            data.setColumn3(500 + i + "mw");
+            data.setColumn4(500 + i + "mw");
+            list.add(data);
+        }
     }
 
     /**
@@ -120,9 +163,10 @@ public class FuHeManagementActivity extends AppCompatActivity {
 
     /**
      * 昨天和今天 数据线 切换 TODO 如果是能切换则需要加一个全部按钮
+     *
      * @param view
      */
-    public void onClickChart(View view){
+    public void onClickChart(View view) {
         LineDataSet line_today = (LineDataSet) binding.chart1.getData().getDataSetByIndex(0);
         LineDataSet line_yesterday = (LineDataSet) binding.chart1.getData().getDataSetByIndex(1);
         if (view.getId() == R.id.bt_today) {
