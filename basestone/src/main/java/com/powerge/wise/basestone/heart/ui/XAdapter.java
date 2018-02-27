@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -88,5 +89,61 @@ public abstract class XAdapter<Data, Binding extends ViewDataBinding> extends Re
 
     public interface OnItemClickListener<Data, Binding extends ViewDataBinding> {
         void onItemClick(XViewHolder<Data, Binding> holder);
+    }
+
+
+
+
+    public void addItem(Data data) {
+        if (this.list == null) this.list = new ArrayList<>();
+        this.list.add(data);
+        notifyItemInserted(this.list.size() - 1);
+    }
+
+    public void addItem(Data data, int position) {
+        if (this.list == null) this.list = new ArrayList<>();
+        this.list.add(position, data);
+        notifyItemInserted(position);
+    }
+
+    public void addItems(List<Data> datas) {
+        if (datas == null || datas.isEmpty()) return;
+        if (this.list == null || this.list.isEmpty()) {
+            setList(datas);
+            return;
+        }
+        this.list.addAll(datas);
+        notifyItemRangeChanged(this.list.size() - datas.size(), datas.size());
+    }
+
+    public void addItems(List<Data> datas, int position) {
+        if (datas == null || datas.isEmpty()) return;
+        if (this.list == null || this.list.isEmpty()) {
+            setList(datas);
+            return;
+        }
+        if (this.list.size() - 1 < position) {
+            addItems(datas);
+            return;
+        }
+        this.list.addAll(position, datas);
+        notifyItemRangeChanged(position, datas.size());
+    }
+
+    public void remove(int position) {
+        if (getItemCount() == 0 || position < 0 || position > getItemCount() - 1) return;
+        this.list.remove(position);
+        notifyItemRemoved(position);
+    }
+
+    public void remove(Data data) {
+        if (getItemCount() == 0) return;
+        remove(this.list.indexOf(data));
+    }
+
+    public void removeAll() {
+        if (getItemCount() == 0) return;
+        this.list.clear();
+        notifyDataSetChanged();
     }
 }

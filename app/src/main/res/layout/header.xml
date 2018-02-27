@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <com.aspsine.irecyclerview.RefreshHeaderLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <TextView
+            android:id="@+id/header"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#f9777979"
+            android:gravity="center"
+            android:text="刷新中"
+            android:textColor="#fde70b0b"
+            android:textSize="10sp" />
+    </com.aspsine.irecyclerview.RefreshHeaderLayout>
+
+
+</layout>
