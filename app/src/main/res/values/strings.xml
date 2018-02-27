@@ -65,4 +65,6 @@
     <string name="fuhe_table_huanbi">符合率日环比</string>
     <string name="fuhe_table_AGC">A G C 指令值</string>
     <string name="fuhe_table_fuhe">实时负荷</string>
+
+    <string name="fuhelv_change">负荷率变化趋势图</string>
 </resources>

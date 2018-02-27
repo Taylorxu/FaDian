@@ -101,7 +101,24 @@ public class FuHeManagementActivity extends AppCompatActivity {
 
         binding.chart1.setPinchZoom(false);
 
-        setData();
+        /*负荷率变化*/
+        binding.chart2.setViewPortOffsets(100, 50, 20, 100);
+        binding.chart2.setDrawGridBackground(false);
+        binding.chart2.getDescription().setEnabled(false);
+        binding.chart2.setDrawBorders(false);//去掉边框
+        binding.chart2.getLegend().setEnabled(false);//去掉图例
+        binding.chart2.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
+        binding.chart2.getXAxis().setDrawGridLines(false);
+        binding.chart2.getAxisRight().setEnabled(false);
+        binding.chart2.getAxisLeft().setDrawGridLines(true);
+        binding.chart2.getAxisLeft().setGridDashedLine(new DashPathEffect(new float[]{8, 10, 8, 10}, 0));
+        binding.chart2.setTouchEnabled(true);
+        binding.chart2.setDragEnabled(true);
+        binding.chart2.setScaleEnabled(true);
+        binding.chart2.setPinchZoom(false);
+
+        setChart1Data();
+        setChart2Data();
     }
 
 
@@ -111,7 +128,7 @@ public class FuHeManagementActivity extends AppCompatActivity {
     };
 
 
-    private void setData() {
+    private void setChart1Data() {
 
         ArrayList<ILineDataSet> dataSets = new ArrayList<ILineDataSet>();
 
@@ -152,6 +169,39 @@ public class FuHeManagementActivity extends AppCompatActivity {
         binding.chart1.setData(data);
         binding.chart1.animateXY(3000, 3000);
         binding.chart1.invalidate();
+    }
+
+    private void setChart2Data() {
+
+        ArrayList<ILineDataSet> dataSets = new ArrayList<ILineDataSet>();
+
+        ArrayList<Entry> values = new ArrayList<Entry>();
+        ArrayList<Entry> values1 = new ArrayList<Entry>();
+        ArrayList<Entry>[] arrayLists = new ArrayList[]{values, values1};
+        //Entry 类是每条线在x、y 轴 上的数值
+        for (int i = 0; i < 20; i++) {
+            float mult = 30 / 2f;
+            float val = (float) (Math.random() * mult) + 50;
+            arrayLists[0].add(new Entry(i, (float) val));
+        }
+        //每个LineDataSet 代表着一条线
+        LineDataSet d = new LineDataSet(arrayLists[0], "DataSet " + (0 + 1));
+        d.setMode(LineDataSet.Mode.CUBIC_BEZIER);
+        d.setLineWidth(2f);
+//            d.setCircleRadius(4f);
+
+        int color = mColors[0];
+        d.setColor(color);
+        d.setHighLightColor(Color.RED);
+        d.setHighlightEnabled(true);
+//            d.setCircleColor(color);
+        dataSets.add(d);
+
+
+        LineData data = new LineData(dataSets);
+        binding.chart2.setData(data);
+        binding.chart2.animateXY(3000, 3000);
+        binding.chart2.invalidate();
     }
 
     public void onClick(View view) {
