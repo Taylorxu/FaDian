@@ -43,7 +43,7 @@
                 android:id="@+id/content_panel"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/bg_gray"
+                android:background="@color/color_line"
                 android:orientation="vertical">
                 <!--全场 机组 button-->
                 <LinearLayout
@@ -86,35 +86,44 @@
 
                 </LinearLayout>
 
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/color_e6" />
                 <!--统计图-->
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@android:color/white"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp">
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp">
 
                     <FrameLayout
                         android:id="@+id/chart_first_panel"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentTop="true">
+                        android:layout_alignParentTop="true"
+                        android:layout_marginTop="11dp">
 
                         <TextView
                             android:id="@+id/text_today"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="left|center_vertical"
-                            android:text="2018-02-23" />
+                            android:text="2018-02-23"
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="15sp" />
 
                         <Button
                             android:id="@+id/btn_hour_data"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                            android:layout_width="99dp"
+                            android:layout_height="30dp"
                             android:layout_gravity="right"
-                            android:text="@string/btn_hour_data_fh_text" />
+                            android:background="@drawable/shape_corners_primary"
+                            android:elevation="2dp"
+                            android:text="@string/btn_hour_data_fh_text"
+                            android:textColor="@color/btn_white_normal" />
                     </FrameLayout>
-
                     <!--统计图view-->
 
                     <LinearLayout
@@ -123,11 +132,18 @@
                         android:layout_below="@+id/chart_first_panel"
                         android:orientation="vertical">
 
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="7dp"
+                            android:text="WM"
+                            android:textColor="@color/text_color_jizu_name"
+                            android:textSize="10sp" />
+
                         <com.github.mikephil.charting.charts.LineChart
                             android:id="@+id/chart1"
                             android:layout_width="match_parent"
-                            android:layout_height="200dp"
-                            android:layout_gravity="center" />
+                            android:layout_height="200dp" />
 
                         <RelativeLayout
                             android:layout_width="match_parent"
@@ -136,30 +152,56 @@
                             <LinearLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:orientation="horizontal"
                                 android:layout_centerInParent="true"
-                                >
+                                android:orientation="horizontal">
 
-                                <TextView
-                                    android:id="@+id/bt_today"
+                                <LinearLayout
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:padding="10dp"
-                                    android:text="今日"
-                                    android:textColor="#C0FF8C"
-                                    android:gravity="center"
-                                    />
+                                    android:orientation="horizontal"
+                                    android:gravity="center_vertical"
+                                    >
 
-                                <TextView
-                                    android:id="@+id/bt_yesterday"
+                                    <View
+                                        android:layout_width="10dp"
+                                        android:layout_height="10dp"
+                                        android:background="@color/color_724"
+                                        android:layout_marginRight="5dp"/>
+
+                                    <TextView
+                                        android:id="@+id/bt_today"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center"
+                                        android:text="昨日"
+                                        android:textColor="@color/color_4d"
+                                        android:textSize="12sp" />
+                                </LinearLayout>
+
+                                <LinearLayout
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:padding="10dp"
-                                    android:text="昨日"
-                                    android:textColor="#FFF78C"
-                                    android:gravity="center"
-                                    android:layout_marginLeft="40dp"
-                                    />
+                                    android:layout_marginLeft="24dp"
+                                    android:orientation="horizontal"
+                                    android:gravity="center_vertical"
+                                    >
+
+                                    <View
+                                        android:layout_width="10dp"
+                                        android:layout_height="10dp"
+                                        android:background="@color/color_8f3"
+                                        android:layout_marginRight="5dp"
+                                        />
+
+                                    <TextView
+                                        android:id="@+id/bt_yesterday"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center"
+                                        android:text="今日"
+                                        android:textColor="@color/color_4d"
+                                        android:textSize="12sp" />
+                                </LinearLayout>
                             </LinearLayout>
 
                         </RelativeLayout>

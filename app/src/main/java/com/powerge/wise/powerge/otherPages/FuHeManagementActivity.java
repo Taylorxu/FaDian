@@ -63,9 +63,8 @@ public class FuHeManagementActivity extends AppCompatActivity {
 
 
     private int[] mColors = new int[]{
-            ColorTemplate.VORDIPLOM_COLORS[0],
-            ColorTemplate.VORDIPLOM_COLORS[1]
-
+            Color.rgb(239, 151, 36),
+            Color.rgb(196, 8, 243)
     };
 
 
@@ -94,14 +93,14 @@ public class FuHeManagementActivity extends AppCompatActivity {
             //每个LineDataSet 代表着一条线
             LineDataSet d = new LineDataSet(arrayLists[z], "DataSet " + (z + 1));
             d.setMode(LineDataSet.Mode.CUBIC_BEZIER);
-            d.setLineWidth(2.5f);
-            d.setCircleRadius(4f);
+            d.setLineWidth(2f);
+//            d.setCircleRadius(4f);
 
             int color = mColors[z];
             d.setColor(color);
             d.setHighLightColor(Color.RED);
             d.setHighlightEnabled(true);
-            d.setCircleColor(color);
+//            d.setCircleColor(color);
             dataSets.add(d);
         }
 
