@@ -38,9 +38,9 @@ public class SimpleListTextItem {
         this.date = date;
     }
 
-    public String getFormtDate(){
-        Date date=new Date(System.currentTimeMillis());
-        String r= (String) DateFormat.format("yyyy-MM-dd hh:MM:ss",date);
+    public String getFormtDate() {
+        Date date = new Date(System.currentTimeMillis());
+        String r = (String) DateFormat.format("yyyy-MM-dd", date);
         return r;
     }
 }

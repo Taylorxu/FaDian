@@ -20,8 +20,12 @@ import com.powerge.wise.basestone.heart.ui.XAdapter;
 import com.powerge.wise.powerge.BR;
 import com.powerge.wise.powerge.R;
 import com.powerge.wise.powerge.bean.FuHeAllData;
+import com.powerge.wise.powerge.bean.Items;
+import com.powerge.wise.powerge.bean.SimpleListTextItem;
 import com.powerge.wise.powerge.databinding.ActivityFuHeMagmentBinding;
+import com.powerge.wise.powerge.databinding.ItemFirstFragmentGridListBinding;
 import com.powerge.wise.powerge.databinding.ItemFuheTableListBinding;
+import com.powerge.wise.powerge.databinding.ItemTowTextBinding;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,16 +44,17 @@ public class FuHeManagementActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_fu_he_magment);
         binding.title.setText(getResources().getStringArray(R.array.item_name_array)[0]);
 
-        initChartView();
-        initTableList();
+        initChartView();//2张统计图
+        initTableList();//机组负荷数据表
+        initPerDayList();//每日负荷率
     }
 
-    XAdapter<FuHeAllData, ItemFuheTableListBinding> tableListAdapter = new XAdapter.SimpleAdapter<>(BR.fuheData, R.layout.item_fuhe_table_list);
 
     /**
      * 初始化 第一个列表
      */
     List<FuHeAllData> list = new ArrayList<>();
+    XAdapter<FuHeAllData, ItemFuheTableListBinding> tableListAdapter = new XAdapter.SimpleAdapter<>(BR.fuheData, R.layout.item_fuhe_table_list);
 
     private void initTableList() {
         createTableListDate();
@@ -75,6 +80,26 @@ public class FuHeManagementActivity extends AppCompatActivity {
             data.setColumn3(500 + i + "mw");
             data.setColumn4(500 + i + "mw");
             list.add(data);
+        }
+    }
+
+    XAdapter<SimpleListTextItem, ItemTowTextBinding> perdayAdapter = new XAdapter.SimpleAdapter<>(BR.textItem, R.layout.item_tow_text);
+
+    private void initPerDayList() {
+
+        createPerdayData();
+        binding.perdayFhvContent.setLayoutManager(new LinearLayoutManager(this));
+        binding.perdayFhvContent.setAdapter(perdayAdapter);
+        perdayAdapter.setList(items);
+    }
+
+    List<SimpleListTextItem> items = new ArrayList<>();
+
+    private void createPerdayData() {
+        for (int i = 0; i < 10; i++) {
+            SimpleListTextItem item = new SimpleListTextItem();
+            item.setContent(200 + i + "%");
+            items.add(item);
         }
     }
 
