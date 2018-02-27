@@ -1,25 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
 
-    <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.powerge.wise.powerge.otherPages.FuHeManagementActivity">
+        android:fitsSystemWindows="false"
+        tools:context="com.powerge.wise.powerge.otherPages.FuHeManagementActivity"
+        android:focusableInTouchMode="true"
+        >
 
-        <android.support.design.widget.AppBarLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:clipToPadding="true"
-            android:gravity="center"
-            app:elevation="0dp">
 
             <FrameLayout
                 android:id="@+id/bar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/colorPrimaryDark">
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:background="@color/colorPrimaryDark"
+                >
 
                 <ImageButton
                     android:id="@+id/btn_back"
@@ -32,12 +33,16 @@
 
 
             </FrameLayout>
-        </android.support.design.widget.AppBarLayout>
 
-        <android.support.v4.widget.NestedScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        <ScrollView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:id="@+id/scroll_view_content"
+            app:layout_constraintTop_toBottomOf="@+id/bar"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            >
             <!--内容树根-->
             <LinearLayout
                 android:id="@+id/content_panel"
@@ -279,7 +284,8 @@
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/fuhe_table_list"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    />
 
                 <View
                     android:layout_width="match_parent"
@@ -400,10 +406,11 @@
                     android:id="@+id/perday_fhv_content"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@android:color/white" />
+                    android:background="@android:color/white"
+                    />
 
             </LinearLayout>
 
-        </android.support.v4.widget.NestedScrollView>
-    </android.support.design.widget.CoordinatorLayout>
+        </ScrollView>
+    </android.support.constraint.ConstraintLayout>
 </layout>
