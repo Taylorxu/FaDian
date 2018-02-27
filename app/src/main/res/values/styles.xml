@@ -50,6 +50,7 @@
         <item name="android:gravity">center</item>
         <item name="android:textColor">@drawable/selector_primary_white_text</item>
     </style>
+
     <style name="MainTab">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">50dp</item>
@@ -64,5 +65,17 @@
         <item name="android:textColor">@drawable/selector_color_white_accent</item>
         <item name="android:checked">false</item>
         <!--<item name="android:background">@drawable/selector_color_transparent_bg</item>-->
+    </style>
+
+    <style name="fuhe_listview_table_text">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/text_color_jizu_fuhe</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:maxEms">3</item>
+        <item name="android:maxLines">2</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+
     </style>
 </resources>

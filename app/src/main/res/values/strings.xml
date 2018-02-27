@@ -59,4 +59,10 @@
     <string name="xun_jian_guan_li">巡检管理</string>
     <string name="wen_ti_pai_cha">问题排查</string>
     <string name="ji_hua_ren_wu_guan_li">计划任务管理</string>
+
+    <string name="fuhe_table_type">类型</string>
+    <string name="fuhe_table_average">日平均负荷率</string>
+    <string name="fuhe_table_huanbi">符合率日环比</string>
+    <string name="fuhe_table_AGC">A G C 指令值</string>
+    <string name="fuhe_table_fuhe">实时负荷</string>
 </resources>
