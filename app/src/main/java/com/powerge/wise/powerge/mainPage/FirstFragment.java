@@ -25,6 +25,7 @@ import com.powerge.wise.powerge.otherPages.DianLiangManagementActivity;
 import com.powerge.wise.powerge.otherPages.FuHeManagementActivity;
 import com.powerge.wise.powerge.otherPages.JingJiZhiBiaoActivity;
 import com.powerge.wise.powerge.otherPages.LoginActivity;
+import com.powerge.wise.powerge.otherPages.ZHiZhangLogActivity;
 import com.wisesignsoft.OperationManagement.utils.ToastUtil;
 
 import java.util.ArrayList;
@@ -143,6 +144,8 @@ public class FirstFragment extends Fragment {
             DianLiangManagementActivity.start(getContext());
         } else if (number == 2) {
             JingJiZhiBiaoActivity.start(getContext());
+        }else if (number == 5) {
+            ZHiZhangLogActivity.start(getContext());
         } else {
             ToastUtil.toast(getContext(), "暂无");
         }

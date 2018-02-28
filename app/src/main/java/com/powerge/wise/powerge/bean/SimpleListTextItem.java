@@ -13,6 +13,7 @@ public class SimpleListTextItem {
     String title;
     String content;
     String date;
+    String logTitle;
 
     public String getTitle() {
         return title;
@@ -42,5 +43,13 @@ public class SimpleListTextItem {
         Date date = new Date(System.currentTimeMillis());
         String r = (String) DateFormat.format("yyyy-MM-dd", date);
         return r;
+    }
+
+    public String getLogTitle() {
+        return logTitle;
+    }
+
+    public void setLogTitle(String logTitle) {
+        this.logTitle = logTitle;
     }
 }
