@@ -240,7 +240,8 @@
         </receiver>
 
         <activity android:name=".otherPages.FuHeManagementActivity" />
-        <activity android:name=".otherPages.DianLiangManagementActivity"></activity>
+        <activity android:name=".otherPages.DianLiangManagementActivity" />
+        <activity android:name=".otherPages.DianLiangFillFormActivity"></activity>
     </application>
 
 </manifest>

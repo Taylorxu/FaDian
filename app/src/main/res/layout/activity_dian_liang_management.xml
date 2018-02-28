@@ -27,7 +27,16 @@
                 android:id="@+id/title"
                 style="@style/Title" />
 
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btn_fill_form"
+                android:background="@drawable/ic_fill_form_dian_liang"
+                android:layout_gravity="right|center_vertical"
+                android:layout_marginRight="20dp"
+                android:onClick="onClick"
 
+                />
         </FrameLayout>
 
         <ScrollView

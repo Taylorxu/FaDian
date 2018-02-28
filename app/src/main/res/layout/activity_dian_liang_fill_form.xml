@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.powerge.wise.powerge.otherPages.DianLiangFillFormActivity">
+
+        <FrameLayout
+            android:id="@+id/bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryDark"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageButton
+                android:id="@+id/btn_back"
+                style="@style/BackButton"
+                android:onClick="onClick" />
+
+            <TextView
+                android:id="@+id/title"
+                style="@style/Title" />
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bar">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/color_line"
+                android:orientation="horizontal"
+                android:weightSum="3">
+
+                <RadioGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/btn_all_fh"
+                        style="@style/style_fu_he_top_radios"
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
+                        android:layout_weight="1"
+                        android:checked="true"
+                        android:text="@string/btn_all_fh_text" />
+
+                    <RadioButton
+                        android:id="@+id/btn_1_fh"
+                        style="@style/style_fu_he_top_radios"
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
+                        android:layout_weight="1"
+                        android:text="@string/btn_1_fh_text" />
+
+                    <RadioButton
+                        android:id="@+id/btn_2_fh"
+                        style="@style/style_fu_he_top_radios"
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
+                        android:layout_weight="1"
+                        android:text="@string/btn_2_fh_text" />
+                </RadioGroup>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/color_line" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_alignParentTop="true"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="@string/ridianliang"
+                    android:textColor="@color/color_4d"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="5dp"
+                    android:layout_toLeftOf="@+id/icon_img"
+                    android:text="选择日期"
+                    android:textColor="@color/text_color_jizu_name"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:id="@+id/icon_img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/ic_fuhe_calender" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="@color/color_line" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp">
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:id="@+id/jizu_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1#机组"
+                        android:textColor="@color/color_4d"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBaseline="@+id/jizu_1"
+                        android:layout_toRightOf="@+id/jizu_1"
+                        android:text="(万千瓦时)"
+                        android:textColor="@color/text_color_jizu_name"
+                        android:textSize="12sp" />
+
+
+                </RelativeLayout>
+
+                <EditText
+                    android:id="@+id/edit_jizu_1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:background="@color/transparent"
+                    android:cursorVisible="false"
+                    android:gravity="right|center_vertical"
+                    android:hint="@string/fill_hint"
+                    android:textColor="@color/color_4d"
+                    android:textColorHint="@color/text_color_jizu_name"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="@color/color_line" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp">
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:id="@+id/jizu_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="2#机组"
+                        android:textColor="@color/color_4d"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBaseline="@+id/jizu_2"
+                        android:layout_toRightOf="@+id/jizu_2"
+                        android:text="(万千瓦时)"
+                        android:textColor="@color/text_color_jizu_name"
+                        android:textSize="12sp" />
+
+
+                </RelativeLayout>
+
+                <EditText
+                    android:id="@+id/edit_jizu_2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:background="@color/transparent"
+                    android:cursorVisible="false"
+                    android:gravity="right|center_vertical"
+                    android:hint="@string/fill_hint"
+                    android:textColor="@color/color_4d"
+                    android:textColorHint="@color/text_color_jizu_name"
+                    android:textSize="13sp" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="@color/color_line" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp">
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:id="@+id/quanchang"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="全厂"
+                        android:textColor="@color/color_4d"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBaseline="@+id/quanchang"
+                        android:layout_toRightOf="@+id/quanchang"
+                        android:text="(万千瓦时)"
+                        android:textColor="@color/text_color_jizu_name"
+                        android:textSize="12sp" />
+
+
+                </RelativeLayout>
+
+                <EditText
+                    android:id="@+id/edit_quanchang"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:background="@color/transparent"
+                    android:cursorVisible="false"
+                    android:gravity="right|center_vertical"
+                    android:hint="@string/fill_hint"
+                    android:textColor="@color/color_4d"
+                    android:textColorHint="@color/text_color_jizu_name"
+                    android:textSize="13sp" />
+            </LinearLayout>
+        </LinearLayout>
+    </android.support.constraint.ConstraintLayout>
+</layout>

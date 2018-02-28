@@ -37,6 +37,10 @@
         <item name="first_fragment_item10">缺陷管理</item>
     </array>
 
+    <string-array name="title_array">
+        <item>电量填报</item>
+    </string-array>
+
     <array name="item_icon_array">
         <item>@drawable/ic_fuhe_mangment</item>
         <item>@drawable/ic_dianliang_guanli</item>
@@ -76,7 +80,7 @@
     <string name="ridianliang">日电量</string>
     <string name="yuedianliang">月电量</string>
     <string name="ninadianliang">年电量</string>
-
+    <string name="fill_hint">点击填写</string>
 
     <string name="ripingjun">日平均负荷:</string>
     <string name="zuoridian">昨日电量:</string>
