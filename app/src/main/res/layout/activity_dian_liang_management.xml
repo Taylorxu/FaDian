@@ -28,12 +28,12 @@
                 style="@style/Title" />
 
             <ImageView
+                android:id="@+id/btn_fill_form"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/btn_fill_form"
-                android:background="@drawable/ic_fill_form_dian_liang"
                 android:layout_gravity="right|center_vertical"
                 android:layout_marginRight="20dp"
+                android:background="@drawable/ic_fill_form_dian_liang"
                 android:onClick="onClick"
 
                 />
@@ -42,6 +42,8 @@
         <ScrollView
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:fadeScrollbars="true"
+            android:scrollbars="none"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"

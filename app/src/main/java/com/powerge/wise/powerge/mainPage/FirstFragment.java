@@ -23,6 +23,7 @@ import com.powerge.wise.powerge.databinding.ItemFirstFragmentGridListBinding;
 import com.powerge.wise.powerge.helper.GridSpacingItemDecoration;
 import com.powerge.wise.powerge.otherPages.DianLiangManagementActivity;
 import com.powerge.wise.powerge.otherPages.FuHeManagementActivity;
+import com.powerge.wise.powerge.otherPages.JingJiZhiBiaoActivity;
 import com.powerge.wise.powerge.otherPages.LoginActivity;
 import com.wisesignsoft.OperationManagement.utils.ToastUtil;
 
@@ -140,6 +141,8 @@ public class FirstFragment extends Fragment {
             FuHeManagementActivity.start(getContext());
         } else if (number == 1) {
             DianLiangManagementActivity.start(getContext());
+        } else if (number == 2) {
+            JingJiZhiBiaoActivity.start(getContext());
         } else {
             ToastUtil.toast(getContext(), "暂无");
         }

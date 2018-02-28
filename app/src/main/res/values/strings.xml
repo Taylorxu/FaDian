@@ -91,4 +91,13 @@
     <string name="yueliyong">月利用小时数:</string>
     <string name="nianjihua">年计划电量:</string>
     <string name="ninashiji">年实际电量:</string>
+
+    <string name="zhi_bia">指标</string>
+    <string name="kong_qi_shi_du">空气湿度</string>
+    <string name="kong_qi_ya_li">空气压力</string>
+    <string name="you_gong_fu">有功负荷</string>
+    <string name="qi_ta">其它</string>
+    <string name="xian_e_zhi">限额标志</string>
+
+
 </resources>
