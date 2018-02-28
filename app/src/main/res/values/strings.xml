@@ -67,4 +67,24 @@
     <string name="fuhe_table_fuhe">实时负荷</string>
 
     <string name="fuhelv_change">负荷率变化趋势图</string>
+    <string name="wanqianwanshi">万千瓦时</string>
+    <string name="yiqianwanshi">亿千瓦时</string>
+    <string name="xiaoshi">小时</string>
+    <string name="rihuanbi">日环比</string>
+    <string name="yuehuanbi">月环比</string>
+    <string name="tongbi">同比</string>
+    <string name="ridianliang">日电量</string>
+    <string name="yuedianliang">月电量</string>
+    <string name="ninadianliang">年电量</string>
+
+
+    <string name="ripingjun">日平均负荷:</string>
+    <string name="zuoridian">昨日电量:</string>
+    <string name="riliyong">日利用小时数:</string>
+    <string name="shengyu">剩余日均电量:</string>
+    <string name="benyue">本月计划电量:</string>
+    <string name="yuejihua">月计划完成率:</string>
+    <string name="yueliyong">月利用小时数:</string>
+    <string name="nianjihua">年计划电量:</string>
+    <string name="ninashiji">年实际电量:</string>
 </resources>

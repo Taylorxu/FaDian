@@ -1,0 +1,805 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:focusableInTouchMode="true"
+        tools:context="com.powerge.wise.powerge.otherPages.DianLiangManagementActivity">
+
+        <FrameLayout
+            android:id="@+id/bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimaryDark"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageButton
+                android:id="@+id/btn_back"
+                style="@style/BackButton"
+                android:onClick="onClick" />
+
+            <TextView
+                android:id="@+id/title"
+                style="@style/Title" />
+
+
+        </FrameLayout>
+
+        <ScrollView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bar">
+
+            <!--内容树根-->
+            <LinearLayout
+                android:id="@+id/content_panel"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/color_line"
+                android:orientation="vertical">
+                <!--全场 机组 button-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+
+                    <RadioGroup
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/btn_all_fh"
+                            style="@style/style_fu_he_top_radios"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:layout_weight="1"
+                            android:checked="true"
+                            android:text="@string/btn_all_fh_text" />
+
+                        <RadioButton
+                            android:id="@+id/btn_1_fh"
+                            style="@style/style_fu_he_top_radios"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:layout_weight="1"
+                            android:text="@string/btn_1_fh_text" />
+
+                        <RadioButton
+                            android:id="@+id/btn_2_fh"
+                            style="@style/style_fu_he_top_radios"
+                            android:layout_width="0dp"
+                            android:layout_height="40dp"
+                            android:layout_weight="1"
+                            android:text="@string/btn_2_fh_text" />
+                    </RadioGroup>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/color_line" />
+                <!--日电量-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="193dp"
+                    android:background="@android:color/white"
+                    android:orientation="vertical"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp">
+                    <!--title 日电量 值-->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:text="@string/ridianliang"
+                            android:textColor="@color/color_4d"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/text_dian_liang_day"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_toLeftOf="@+id/text_1"
+                            android:text="1045.22"
+                            android:textColor="@color/color_42b1"
+                            android:textSize="24sp" />
+
+                        <TextView
+                            android:id="@+id/text_1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignBaseline="@+id/text_dian_liang_day"
+                            android:layout_alignParentRight="true"
+                            android:text="@string/wanqianwanshi"
+                            android:textColor="@color/text_color_jizu_name"
+                            android:textSize="10sp" />
+
+                    </RelativeLayout>
+                    <!--日电量饼图-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="15dp"
+                        android:orientation="horizontal">
+
+                        <FrameLayout
+                            android:layout_width="105dp"
+                            android:layout_height="105dp">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/rihuanbi"
+                                    android:textColor="@color/text_color_jizu_name"
+                                    android:textSize="12sp" />
+
+                                <TextView
+                                    android:id="@+id/text_ri_huan_bi"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="-3.0.3%"
+                                    android:textColor="@color/color_42b1"
+                                    android:textSize="15sp" />
+
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="105dp"
+                                android:layout_height="105dp"
+                                android:background="@drawable/shape_circle_kind_blue" />
+                        </FrameLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="30dp"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+                            <!--日平均负荷-->
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:orientation="horizontal"
+
+                                >
+
+                                <FrameLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                        android:text="@string/ripingjun"
+                                        android:textColor="@color/text_color_jizu_name"
+                                        android:textSize="12sp" />
+
+                                </FrameLayout>
+
+                                <RelativeLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1">
+
+                                    <TextView
+                                        android:id="@+id/text_rijun"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_centerVertical="true"
+                                        android:text="1100"
+                                        android:textColor="@color/color_42b1"
+                                        android:textSize="18sp" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_alignBaseline="@+id/text_rijun"
+                                        android:layout_toRightOf="@+id/text_rijun"
+                                        android:text="MW"
+                                        android:textColor="@color/text_color_jizu_name"
+                                        android:textSize="10sp" />
+                                </RelativeLayout>
+
+                            </LinearLayout>
+                            <!--昨日电量-->
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:orientation="horizontal">
+
+                                <FrameLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                        android:text="@string/zuoridian"
+                                        android:textColor="@color/text_color_jizu_name"
+                                        android:textSize="12sp" />
+
+                                </FrameLayout>
+
+                                <RelativeLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1">
+
+                                    <TextView
+                                        android:id="@+id/text_zuori"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_centerVertical="true"
+                                        android:text="1100"
+                                        android:textColor="@color/color_42b1"
+                                        android:textSize="18sp" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_alignBaseline="@+id/text_zuori"
+                                        android:layout_toRightOf="@+id/text_zuori"
+                                        android:text="@string/wanqianwanshi"
+                                        android:textColor="@color/text_color_jizu_name"
+                                        android:textSize="10sp" />
+                                </RelativeLayout>
+
+                            </LinearLayout>
+                            <!--日利用小时数-->
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:orientation="horizontal">
+
+                                <FrameLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                        android:text="@string/riliyong"
+                                        android:textColor="@color/text_color_jizu_name"
+                                        android:textSize="12sp" />
+
+                                </FrameLayout>
+
+                                <RelativeLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1">
+
+                                    <TextView
+                                        android:id="@+id/text_riliyong"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_centerVertical="true"
+                                        android:text="1100"
+                                        android:textColor="@color/color_42b1"
+                                        android:textSize="18sp" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_alignBaseline="@+id/text_riliyong"
+                                        android:layout_toRightOf="@+id/text_riliyong"
+                                        android:text="@string/wanqianwanshi"
+                                        android:textColor="@color/text_color_jizu_name"
+                                        android:textSize="10sp" />
+                                </RelativeLayout>
+
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:background="@color/color_line" />
+                <!--月电量-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="193dp"
+                    android:background="@android:color/white"
+                    android:orientation="vertical"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp">
+                    <!--title 月电量 值-->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:text="@string/yuedianliang"
+                            android:textColor="@color/color_4d"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/text_dian_liang_month"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_toLeftOf="@+id/text_2"
+                            android:text="1045.22"
+                            android:textColor="@color/color_ffb72"
+                            android:textSize="24sp" />
+
+                        <TextView
+                            android:id="@+id/text_2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignBaseline="@+id/text_dian_liang_month"
+                            android:layout_alignParentRight="true"
+                            android:text="@string/wanqianwanshi"
+                            android:textColor="@color/text_color_jizu_name"
+                            android:textSize="10sp" />
+
+                    </RelativeLayout>
+                    <!--月电量饼图-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="15dp"
+                        android:orientation="horizontal">
+
+                        <FrameLayout
+                            android:layout_width="105dp"
+                            android:layout_height="105dp">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/yuehuanbi"
+                                    android:textColor="@color/text_color_jizu_name"
+                                    android:textSize="12sp" />
+
+                                <TextView
+                                    android:id="@+id/text_yue_huan_bi"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="-3.0.3%"
+                                    android:textColor="@color/color_ffb72"
+                                    android:textSize="15sp" />
+
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="105dp"
+                                android:layout_height="105dp"
+                                android:background="@drawable/shape_circle_kind_orange" />
+                        </FrameLayout>
+
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="30dp"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+                            <!--剩余日均电量-->
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:orientation="horizontal">
+
+                                <FrameLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                        android:text="@string/shengyu"
+                                        android:textColor="@color/text_color_jizu_name"
+                                        android:textSize="12sp" />
+
+                                </FrameLayout>
+
+                                <RelativeLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1">
+
+                                    <TextView
+                                        android:id="@+id/text_shengyu"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_centerVertical="true"
+                                        android:text="1100"
+                                        android:textColor="@color/color_ffb72"
+                                        android:textSize="18sp" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_alignBaseline="@+id/text_shengyu"
+                                        android:layout_toRightOf="@+id/text_shengyu"
+                                        android:text="@string/wanqianwanshi"
+                                        android:textColor="@color/text_color_jizu_name"
+                                        android:textSize="10sp" />
+                                </RelativeLayout>
+
+                            </LinearLayout>
+                            <!--本月计划电量-->
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:orientation="horizontal">
+
+                                <FrameLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                        android:text="@string/benyue"
+                                        android:textColor="@color/text_color_jizu_name"
+                                        android:textSize="12sp" />
+
+                                </FrameLayout>
+
+                                <RelativeLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1">
+
+                                    <TextView
+                                        android:id="@+id/text_benyue_jihua"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_centerVertical="true"
+                                        android:text="1100"
+                                        android:textColor="@color/color_ffb72"
+                                        android:textSize="18sp" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_alignBaseline="@+id/text_benyue_jihua"
+                                        android:layout_toRightOf="@+id/text_benyue_jihua"
+                                        android:text="@string/wanqianwanshi"
+                                        android:textColor="@color/text_color_jizu_name"
+                                        android:textSize="10sp" />
+                                </RelativeLayout>
+
+                            </LinearLayout>
+                            <!--月计划完成率-->
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:orientation="horizontal">
+
+                                <FrameLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                        android:text="@string/yuejihua"
+                                        android:textColor="@color/text_color_jizu_name"
+                                        android:textSize="12sp" />
+
+                                </FrameLayout>
+
+                                <RelativeLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1">
+
+                                    <TextView
+                                        android:id="@+id/text_yuejihua"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_centerVertical="true"
+                                        android:text="1100"
+                                        android:textColor="@color/color_ffb72"
+                                        android:textSize="18sp" />
+
+                                    <!--
+                                                                        <TextView
+                                                                            android:layout_width="wrap_content"
+                                                                            android:layout_height="wrap_content"
+                                                                            android:layout_alignBaseline="@+id/text_yuejihua"
+                                                                            android:layout_toRightOf="@+id/text_yuejihua"
+                                                                            android:text="@string/wanqianwanshi"
+                                                                            android:textColor="@color/text_color_jizu_name"
+                                                                            android:textSize="10sp" />
+                                    -->
+                                </RelativeLayout>
+
+                            </LinearLayout>
+                            <!--月利用小时数-->
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:orientation="horizontal">
+
+                                <FrameLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                        android:text="@string/yueliyong"
+                                        android:textColor="@color/text_color_jizu_name"
+                                        android:textSize="12sp" />
+
+                                </FrameLayout>
+
+                                <RelativeLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1">
+
+                                    <TextView
+                                        android:id="@+id/text_yueliyong"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_centerVertical="true"
+                                        android:text="1100"
+                                        android:textColor="@color/color_ffb72"
+                                        android:textSize="18sp" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_alignBaseline="@+id/text_yueliyong"
+                                        android:layout_toRightOf="@+id/text_yueliyong"
+                                        android:text="@string/xiaoshi"
+                                        android:textColor="@color/text_color_jizu_name"
+                                        android:textSize="10sp" />
+                                </RelativeLayout>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:background="@color/color_line" />
+                <!--年电量-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="193dp"
+                    android:background="@android:color/white"
+                    android:orientation="vertical"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="15dp">
+                    <!--title 年电量 值-->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:text="@string/ninadianliang"
+                            android:textColor="@color/color_4d"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:id="@+id/text_dian_liang_year"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_toLeftOf="@+id/text_3"
+                            android:text="1045.22"
+                            android:textColor="@color/color_e159"
+                            android:textSize="24sp" />
+
+                        <TextView
+                            android:id="@+id/text_3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignBaseline="@+id/text_dian_liang_year"
+                            android:layout_alignParentRight="true"
+                            android:text="@string/yiqianwanshi"
+                            android:textColor="@color/text_color_jizu_name"
+                            android:textSize="10sp" />
+
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="15dp"
+                        android:orientation="horizontal">
+
+                        <FrameLayout
+                            android:layout_width="105dp"
+                            android:layout_height="105dp">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/tongbi"
+                                    android:textColor="@color/text_color_jizu_name"
+                                    android:textSize="12sp" />
+
+                                <TextView
+                                    android:id="@+id/text_year_huan_bi"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="-3.0.3%"
+                                    android:textColor="@color/color_e159"
+                                    android:textSize="15sp" />
+
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="105dp"
+                                android:layout_height="105dp"
+                                android:background="@drawable/shape_circle_kind_e159" />
+                        </FrameLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="30dp"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:orientation="horizontal">
+
+                                <FrameLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                        android:text="@string/nianjihua"
+                                        android:textColor="@color/text_color_jizu_name"
+                                        android:textSize="12sp" />
+
+                                </FrameLayout>
+
+                                <RelativeLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1">
+
+                                    <TextView
+                                        android:id="@+id/text_nian_jihua"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_centerVertical="true"
+                                        android:text="1100"
+                                        android:textColor="@color/color_e159"
+                                        android:textSize="18sp" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_alignBaseline="@+id/text_nian_jihua"
+                                        android:layout_toRightOf="@+id/text_nian_jihua"
+                                        android:text="@string/yiqianwanshi"
+                                        android:textColor="@color/text_color_jizu_name"
+                                        android:textSize="10sp" />
+                                </RelativeLayout>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="30dp"
+                                android:orientation="horizontal">
+
+                                <FrameLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                        android:text="@string/ninashiji"
+                                        android:textColor="@color/text_color_jizu_name"
+                                        android:textSize="12sp" />
+
+                                </FrameLayout>
+
+                                <RelativeLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1">
+
+                                    <TextView
+                                        android:id="@+id/text_nian_shiji"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_centerVertical="true"
+                                        android:text="1100"
+                                        android:textColor="@color/color_e159"
+                                        android:textSize="18sp" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_alignBaseline="@+id/text_nian_shiji"
+                                        android:layout_toRightOf="@+id/text_nian_shiji"
+                                        android:text="@string/yiqianwanshi"
+                                        android:textColor="@color/text_color_jizu_name"
+                                        android:textSize="10sp" />
+                                </RelativeLayout>
+
+                            </LinearLayout>
+
+
+                        </LinearLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

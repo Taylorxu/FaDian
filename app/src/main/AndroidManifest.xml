@@ -240,7 +240,7 @@
         </receiver>
 
         <activity android:name=".otherPages.FuHeManagementActivity" />
-
+        <activity android:name=".otherPages.DianLiangManagementActivity"></activity>
     </application>
 
 </manifest>
