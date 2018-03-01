@@ -44,6 +44,14 @@ public class SheBeiInfoActivity extends AppCompatActivity {
                 return false;
             }
         });
+
+        /*binding.contentSheBei.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+            @Override
+            public boolean onChildClick(ExpandableListView parent, View v, int groupPosition, int childPosition, long id) {
+
+                return false;
+            }
+        });*/
     }
 
     List<SheBeiRootBean> list = new ArrayList<>();

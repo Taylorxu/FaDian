@@ -243,7 +243,8 @@
         <activity android:name=".otherPages.DianLiangManagementActivity" />
         <activity android:name=".otherPages.DianLiangFillFormActivity" />
         <activity android:name=".otherPages.JingJiZhiBiaoActivity" />
-        <activity android:name=".otherPages.ZHiZhangLogActivity"></activity>
+        <activity android:name=".otherPages.ZHiZhangLogActivity" />
+        <activity android:name=".otherPages.SheBeiInfoActivity"></activity>
     </application>
 
 </manifest>
