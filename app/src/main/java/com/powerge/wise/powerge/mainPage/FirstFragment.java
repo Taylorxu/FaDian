@@ -5,6 +5,7 @@ import android.databinding.DataBindingUtil;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +22,7 @@ import com.powerge.wise.powerge.bean.User;
 import com.powerge.wise.powerge.databinding.FragmentFirstBinding;
 import com.powerge.wise.powerge.databinding.ItemFirstFragmentGridListBinding;
 import com.powerge.wise.powerge.helper.GridSpacingItemDecoration;
+import com.powerge.wise.powerge.helper.StartActivity;
 import com.powerge.wise.powerge.otherPages.DianLiangManagementActivity;
 import com.powerge.wise.powerge.otherPages.FuHeManagementActivity;
 import com.powerge.wise.powerge.otherPages.JingJiZhiBiaoActivity;
@@ -134,26 +136,13 @@ public class FirstFragment extends Fragment {
      *
      * @param number
      */
+
     private void goToActivity(int number) {
         if (User.getCurrentUser() == null || !User.getCurrentUser().isLogin()) {
             ToastUtil.toast(getContext(), "please login");
             LoginActivity.start(getContext());
             return;
         }
-        if (number == 0) {
-            FuHeManagementActivity.start(getContext());
-        } else if (number == 1) {
-            DianLiangManagementActivity.start(getContext());
-        } else if (number == 2) {
-            JingJiZhiBiaoActivity.start(getContext());
-        } else if (number == 4) {
-            SheBeiInfoActivity.start(getContext());
-        } else if (number == 5) {
-            ZHiZhangLogActivity.start(getContext());
-        } else if (number == 6) {
-            MorningMeetingActivity.start(getContext());
-        } else {
-            ToastUtil.toast(getContext(), "暂无");
-        }
+        StartActivity.go(number,getContext());
     }
 }
