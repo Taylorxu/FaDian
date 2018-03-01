@@ -244,7 +244,8 @@
         <activity android:name=".otherPages.DianLiangFillFormActivity" />
         <activity android:name=".otherPages.JingJiZhiBiaoActivity" />
         <activity android:name=".otherPages.ZHiZhangLogActivity" />
-        <activity android:name=".otherPages.SheBeiInfoActivity"></activity>
+        <activity android:name=".otherPages.SheBeiInfoActivity" />
+        <activity android:name=".otherPages.MorningMeetingActivity"></activity>
     </application>
 
 </manifest>

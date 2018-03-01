@@ -25,6 +25,7 @@ import com.powerge.wise.powerge.otherPages.DianLiangManagementActivity;
 import com.powerge.wise.powerge.otherPages.FuHeManagementActivity;
 import com.powerge.wise.powerge.otherPages.JingJiZhiBiaoActivity;
 import com.powerge.wise.powerge.otherPages.LoginActivity;
+import com.powerge.wise.powerge.otherPages.MorningMeetingActivity;
 import com.powerge.wise.powerge.otherPages.SheBeiInfoActivity;
 import com.powerge.wise.powerge.otherPages.ZHiZhangLogActivity;
 import com.wisesignsoft.OperationManagement.utils.ToastUtil;
@@ -149,6 +150,8 @@ public class FirstFragment extends Fragment {
             SheBeiInfoActivity.start(getContext());
         } else if (number == 5) {
             ZHiZhangLogActivity.start(getContext());
+        } else if (number == 6) {
+            MorningMeetingActivity.start(getContext());
         } else {
             ToastUtil.toast(getContext(), "暂无");
         }
