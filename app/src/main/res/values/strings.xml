@@ -98,6 +98,6 @@
     <string name="you_gong_fu">有功负荷</string>
     <string name="qi_ta">其它</string>
     <string name="xian_e_zhi">限额标志</string>
-
+    <string name="search_hint_text">请输入您要搜索的信息</string>
 
 </resources>
