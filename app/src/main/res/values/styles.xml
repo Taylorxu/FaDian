@@ -51,6 +51,15 @@
         <item name="android:textColor">@drawable/selector_primary_white_text</item>
     </style>
 
+    <style name="style_huan_bao_line_chart_radios">
+        <item name="android:layout_margin">10dp</item>
+        <item name="android:background">@drawable/selector_primary_white_btn_bg_border</item>
+        <item name="android:button">@null</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@drawable/selector_primary_gray_text</item>
+
+    </style>
+
     <style name="MainTab">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">50dp</item>

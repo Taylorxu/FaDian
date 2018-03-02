@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 
+import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
@@ -106,27 +107,32 @@ public class FuHeManagementActivity extends AppCompatActivity {
     /**
      * 初始化统计图
      */
+    LineChart lineCharts []=new LineChart[]{binding.chart1,binding.chart2};
     private void initChartView() {
-        binding.chart1.setViewPortOffsets(100, 50, 20, 100);
-        binding.chart1.setDrawGridBackground(false);
-        binding.chart1.getDescription().setEnabled(false);
-        binding.chart1.setDrawBorders(false);//去掉边框
-        binding.chart1.getLegend().setEnabled(false);//去掉图例
+        for(int i=0;i<lineCharts.length;i++){
+
+            lineCharts[i].setViewPortOffsets(100, 50, 20, 100);
+            lineCharts[i].setDrawGridBackground(false);
+            lineCharts[i].getDescription().setEnabled(false);
+            lineCharts[i].setDrawBorders(false);//去掉边框
+            lineCharts[i].getLegend().setEnabled(false);//去掉图例
 
 
-        binding.chart1.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
-        binding.chart1.getXAxis().setDrawGridLines(false);
-        binding.chart1.getAxisRight().setEnabled(false);
-        binding.chart1.getAxisLeft().setDrawGridLines(true);
-        binding.chart1.getAxisLeft().setGridDashedLine(new DashPathEffect(new float[]{8, 10, 8, 10}, 0));
+            lineCharts[i].getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM);
+            lineCharts[i].getXAxis().setDrawGridLines(false);
+            lineCharts[i].getAxisRight().setEnabled(false);
+            lineCharts[i].getAxisLeft().setDrawGridLines(true);
+            lineCharts[i].getAxisLeft().setGridDashedLine(new DashPathEffect(new float[]{8, 10, 8, 10}, 0));
 
-        binding.chart1.setTouchEnabled(true);
-        binding.chart1.setDragEnabled(true);
-        binding.chart1.setScaleEnabled(true);
+            lineCharts[i].setTouchEnabled(true);
+            lineCharts[i].setDragEnabled(true);
+            lineCharts[i].setScaleEnabled(true);
 
-        binding.chart1.setPinchZoom(false);
+            lineCharts[i].setPinchZoom(false);
+        }
 
-        /*负荷率变化*/
+
+        /*负荷率变化*//*
         binding.chart2.setViewPortOffsets(100, 50, 20, 100);
         binding.chart2.setDrawGridBackground(false);
         binding.chart2.getDescription().setEnabled(false);
@@ -140,7 +146,7 @@ public class FuHeManagementActivity extends AppCompatActivity {
         binding.chart2.setTouchEnabled(true);
         binding.chart2.setDragEnabled(true);
         binding.chart2.setScaleEnabled(true);
-        binding.chart2.setPinchZoom(false);
+        binding.chart2.setPinchZoom(false);*/
 
         setChart1Data();
         setChart2Data();
@@ -236,22 +242,5 @@ public class FuHeManagementActivity extends AppCompatActivity {
         }
     }
 
-    /**
-     * 昨天和今天 数据线 切换 TODO 如果是能切换则需要加一个全部按钮
-     *
-     * @param view
-     */
-    public void onClickChart(View view) {
-        LineDataSet line_today = (LineDataSet) binding.chart1.getData().getDataSetByIndex(0);
-        LineDataSet line_yesterday = (LineDataSet) binding.chart1.getData().getDataSetByIndex(1);
-        if (view.getId() == R.id.bt_today) {
-            if (!line_today.isVisible()) line_today.setVisible(true);
-            line_yesterday.setVisible(false);
-        } else if (view.getId() == R.id.bt_yesterday) {
-            line_today.setVisible(false);
-            if (!line_yesterday.isVisible()) line_yesterday.setVisible(true);
-        }
-        binding.chart1.invalidate();
 
-    }
 }
