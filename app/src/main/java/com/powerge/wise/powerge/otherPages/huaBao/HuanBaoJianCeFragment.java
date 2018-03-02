@@ -1,11 +1,19 @@
 package com.powerge.wise.powerge.otherPages.huaBao;
 
 
+import android.annotation.SuppressLint;
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
 import android.graphics.DashPathEffect;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.RelativeSizeSpan;
+import android.text.style.StyleSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,11 +24,16 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
+import com.powerge.wise.basestone.heart.ui.XAdapter;
+import com.powerge.wise.powerge.BR;
 import com.powerge.wise.powerge.R;
+import com.powerge.wise.powerge.bean.HuanBaoBean;
 import com.powerge.wise.powerge.databinding.FragmentHuanBaoJianCeBinding;
+import com.powerge.wise.powerge.databinding.HuanBaoItemDuiBiBinding;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class HuanBaoJianCeFragment extends Fragment {
@@ -45,13 +58,51 @@ public class HuanBaoJianCeFragment extends Fragment {
         return binding.getRoot();
     }
 
+    XAdapter<HuanBaoBean, HuanBaoItemDuiBiBinding> adapter = new XAdapter.SimpleAdapter<>(BR.hbata, R.layout.huan_bao_item_dui_bi);
+
+    @SuppressLint("ResourceAsColor")
+    private SpannableString generateCenterSpannableText(String text) {
+        SpannableString s = new SpannableString(text);
+        s.setSpan(new RelativeSizeSpan(0.5f), text.length() - 1, text.length(), Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
+//        s.setSpan(new ForegroundColorSpan(R.color.color_673), 0, 2, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+        return s;
+    }
 
     private void initView() {
+        binding.btnYangLine.setText(generateCenterSpannableText("SO2"));
+        binding.btnLiuLine.setText(generateCenterSpannableText("NOX"));
         binding.btnAllLine.setOnClickListener(new onClickShowLine());
         binding.btnYangLine.setOnClickListener(new onClickShowLine());
         binding.btnLiuLine.setOnClickListener(new onClickShowLine());
         binding.btnYanChenLine.setOnClickListener(new onClickShowLine());
         drawLinChart();
+        createListData();
+        binding.content.setLayoutManager(new LinearLayoutManager(getContext()));
+        binding.content.setAdapter(adapter);
+        adapter.setList(listData);
+
+    }
+
+    List<HuanBaoBean> listData = new ArrayList<>();
+
+    private void createListData() {
+        for (int i = 0; i < 10; i++) {
+            HuanBaoBean baoBean = new HuanBaoBean();
+            HuanBaoBean.JizuBean jizuBean = new HuanBaoBean.JizuBean();
+            HuanBaoBean.HuanBaoJuBean huanBaoJuBean = new HuanBaoBean.HuanBaoJuBean();
+            huanBaoJuBean.setName(" 环保局");
+            huanBaoJuBean.setNO("123");
+            huanBaoJuBean.setSO("3453");
+            huanBaoJuBean.setYanchen("234");
+            jizuBean.setName(i + "#");
+            jizuBean.setNO("123");
+            jizuBean.setSO("3453");
+            jizuBean.setYanchen("234");
+            baoBean.setJizu(jizuBean);
+            baoBean.setHuanBaoJu(huanBaoJuBean);
+
+            listData.add(baoBean);
+        }
     }
 
     //SO Nox 烟尘
@@ -148,6 +199,7 @@ public class HuanBaoJianCeFragment extends Fragment {
 
 
     }
+
 
 
 }

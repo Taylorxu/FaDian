@@ -8,6 +8,7 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
+import android.view.View;
 
 import com.powerge.wise.basestone.heart.ui.EndLessOnScrollListener;
 import com.powerge.wise.basestone.heart.ui.XAdapter;
@@ -82,5 +83,7 @@ public class ZHiZhangLogActivity extends AppCompatActivity {
         binding.refreshLayout.setRefreshing(false);
     }
 
-
+    public void onClick(View view) {
+        finish();
+    }
 }

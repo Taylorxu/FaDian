@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 
 import com.powerge.wise.powerge.R;
 import com.powerge.wise.powerge.databinding.ActivityHuanBaoBinding;
@@ -26,5 +27,9 @@ public class HuanBaoActivity extends AppCompatActivity {
         binding.huanBaoMainPage.setAdapter(new HuanBaoFragmentAdapter(getSupportFragmentManager()));
         binding.huanBaoTabL.setupWithViewPager(binding.huanBaoMainPage);
 
+    }
+
+    public void onClick(View view) {
+        finish();
     }
 }

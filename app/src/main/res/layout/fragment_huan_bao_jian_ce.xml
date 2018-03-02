@@ -5,6 +5,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:focusableInTouchMode="true"
         tools:context="com.powerge.wise.powerge.otherPages.huaBao.HuanBaoJianCeFragment">
 
         <android.support.design.widget.CoordinatorLayout
@@ -224,8 +225,9 @@
                                             android:layout_height="30dp"
                                             android:layout_weight="1"
                                             android:tag="0"
-                                            android:text="SO2"
-                                            android:textSize="12sp" />
+                                            android:textSize="12sp"
+
+                                            />
 
                                         <RadioButton
                                             android:id="@+id/btn_liu_line"
@@ -234,7 +236,6 @@
                                             android:layout_height="30dp"
                                             android:layout_weight="1"
                                             android:tag="1"
-                                            android:text="NOx"
                                             android:textSize="12sp" />
 
                                         <RadioButton
@@ -261,6 +262,111 @@
                         android:layout_height="10dp"
                         android:background="@color/color_line" />
 
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:orientation="horizontal"
+                        android:paddingLeft="20dp"
+                        android:paddingRight="20dp">
+
+                        <FrameLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:text="时间"
+                                android:textColor="@color/color_420a"
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+
+                        </FrameLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:weightSum="3">
+
+                            <RelativeLayout
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center">
+
+                                <TextView
+                                    android:id="@+id/text_left"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="SO"
+                                    android:textColor="@color/color_420a"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignBaseline="@+id/text_left"
+                                    android:layout_toRightOf="@+id/text_left"
+                                    android:text="2"
+                                    android:textColor="@color/color_420a"
+                                    android:textSize="7sp" />
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center">
+
+                                <TextView
+                                    android:id="@+id/text_left_1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="NO"
+                                    android:textColor="@color/color_420a"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignBaseline="@+id/text_left_1"
+                                    android:layout_toRightOf="@+id/text_left_1"
+                                    android:text="x"
+                                    android:textColor="@color/color_420a"
+                                    android:textSize="7sp" />
+                            </RelativeLayout>
+
+                            <RelativeLayout
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="center">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="烟尘"
+                                    android:textColor="@color/color_420a"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold" />
+
+                            </RelativeLayout>
+                        </LinearLayout>
+
+
+                    </LinearLayout>
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/content"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:paddingRight="20dp"></android.support.v7.widget.RecyclerView>
                 </LinearLayout>
 
 
