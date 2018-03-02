@@ -5,9 +5,11 @@ import android.content.Context;
 import com.powerge.wise.powerge.otherPages.DianLiangManagementActivity;
 import com.powerge.wise.powerge.otherPages.FuHeManagementActivity;
 import com.powerge.wise.powerge.otherPages.JingJiZhiBiaoActivity;
+import com.powerge.wise.powerge.otherPages.JingSaiActivity;
 import com.powerge.wise.powerge.otherPages.MorningMeetingActivity;
 import com.powerge.wise.powerge.otherPages.SheBeiInfoActivity;
 import com.powerge.wise.powerge.otherPages.ZHiZhangLogActivity;
+import com.powerge.wise.powerge.otherPages.huaBao.HuanBaoActivity;
 import com.wisesignsoft.OperationManagement.utils.ToastUtil;
 
 import static com.wisesignsoft.OperationManagement.MyApplication.getContext;
@@ -30,6 +32,10 @@ public class StartActivity {
             ZHiZhangLogActivity.start(context);
         } else if (where == 6) {
             MorningMeetingActivity.start(context);
+        } else if (where == 7) {
+            JingSaiActivity.start(context);
+        } else if (where == 8) {
+            HuanBaoActivity.start(context);
         } else {
             ToastUtil.toast(context, "暂无");
         }
