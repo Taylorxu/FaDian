@@ -4,7 +4,7 @@
             "outputFile": "F:\\FaDianChang\\easeui\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-sv\\values-sv.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-23.0.0.aar\\2c292455844560243b1c06bd598cc9c8\\res\\values-sv\\values-sv.xml",
+                    "source": "C:\\Users\\Administrator\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-23.0.0.aar\\2c85a61e0e35a7299139c47c30f6a18a\\res\\values-sv\\values-sv.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
