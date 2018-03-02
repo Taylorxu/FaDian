@@ -54,7 +54,7 @@ public class HuanBaoJianCeFragment extends Fragment {
         drawLinChart();
     }
 
-//SO Nox 烟尘
+    //SO Nox 烟尘
     private int[] mColors = new int[]{
             Color.rgb(64, 153, 255),
             Color.rgb(239, 151, 36),
@@ -126,10 +126,6 @@ public class HuanBaoJianCeFragment extends Fragment {
         binding.chart1.animateXY(3000, 3000);
         binding.chart1.invalidate();
     }
-  /* LineDataSet line_yang = (LineDataSet) binding.chart1.getData().getDataSetByIndex(0);
-        LineDataSet line_liu = (LineDataSet) binding.chart1.getData().getDataSetByIndex(1);
-        LineDataSet line_yan = (LineDataSet) binding.chart1.getData().getDataSetByIndex(2);
-*/
 
     public class onClickShowLine implements View.OnClickListener {
         @Override
@@ -140,7 +136,7 @@ public class HuanBaoJianCeFragment extends Fragment {
                 }
             } else {
                 for (int i = 0; i < dataSets.size(); i++) {
-                    if (view.getTag().equals(i+"")) {
+                    if (view.getTag().equals(i + "")) {
                         dataSets.get(i).setVisible(true);
                     } else {
                         dataSets.get(i).setVisible(false);
