@@ -10,6 +10,7 @@ import com.powerge.wise.powerge.otherPages.MorningMeetingActivity;
 import com.powerge.wise.powerge.otherPages.SheBeiInfoActivity;
 import com.powerge.wise.powerge.otherPages.ZHiZhangLogActivity;
 import com.powerge.wise.powerge.otherPages.huaBao.HuanBaoActivity;
+import com.powerge.wise.powerge.otherPages.queXian.QueXianMagActivity;
 import com.wisesignsoft.OperationManagement.utils.ToastUtil;
 
 import static com.wisesignsoft.OperationManagement.MyApplication.getContext;
@@ -36,6 +37,8 @@ public class StartActivity {
             JingSaiActivity.start(context);
         } else if (where == 8) {
             HuanBaoActivity.start(context);
+        } else if (where == 9) {
+            QueXianMagActivity.start(context);
         } else {
             ToastUtil.toast(context, "暂无");
         }

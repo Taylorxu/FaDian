@@ -247,7 +247,8 @@
         <activity android:name=".otherPages.SheBeiInfoActivity" />
         <activity android:name=".otherPages.MorningMeetingActivity" />
         <activity android:name=".otherPages.JingSaiActivity" />
-        <activity android:name=".otherPages.huaBao.HuanBaoActivity"></activity>
+        <activity android:name=".otherPages.huaBao.HuanBaoActivity" />
+        <activity android:name=".otherPages.queXian.QueXianMagActivity"></activity>
     </application>
 
 </manifest>
