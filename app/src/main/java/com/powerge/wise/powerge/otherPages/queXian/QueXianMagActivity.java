@@ -37,6 +37,11 @@ public class QueXianMagActivity extends AppCompatActivity {
             case R.id.btn_back:
                 finish();
                 break;
+
+            case R.id.ic_bao_biao:
+                break;
+            case R.id.text_1:
+                break;
         }
     }
 

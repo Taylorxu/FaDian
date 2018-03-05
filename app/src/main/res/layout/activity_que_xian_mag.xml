@@ -26,6 +26,17 @@
                 <TextView
                     android:id="@+id/title"
                     style="@style/Title" />
+
+                <ImageView
+                    android:id="@+id/btn_slect_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right|center_vertical"
+                    android:layout_marginRight="20dp"
+                    android:background="@drawable/ic_calander_qx"
+                    android:onClick="onClick"
+
+                    />
             </FrameLayout>
 
             <RelativeLayout
@@ -47,10 +58,13 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:id="@+id/ic_bao_biao"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="5dp"
                     android:layout_toLeftOf="@+id/text_1"
-                    android:background="@drawable/ic_qx_pie_view" />
+                    android:background="@drawable/ic_qx_pie_view"
+                    android:onClick="onClick"
+                    />
 
                 <TextView
                     android:id="@+id/text_1"
@@ -60,7 +74,9 @@
                     android:layout_centerVertical="true"
                     android:text="查看报表"
                     android:textColor="@color/color_42b1"
-                    android:textSize="15sp" />
+                    android:textSize="15sp"
+                    android:onClick="onClick"
+                    />
             </RelativeLayout>
 
             <View
