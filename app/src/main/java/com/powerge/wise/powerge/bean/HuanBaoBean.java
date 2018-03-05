@@ -27,7 +27,7 @@ public class HuanBaoBean {
 
     public String getFormTime() {
         Date date = new Date(System.currentTimeMillis());
-        String r = (String) DateFormat.format("hh:mm:ss", date);
+        String r = (String) DateFormat.format("hh:mm:ss ", date);
         return r;
     }
 
