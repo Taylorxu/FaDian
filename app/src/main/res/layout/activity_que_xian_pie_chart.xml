@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.powerge.wise.powerge.otherPages.queXian.QueXianPieChartActivity">
+
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <FrameLayout
+                android:id="@+id/bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimaryDark">
+
+                <ImageButton
+                    android:id="@+id/btn_back"
+                    style="@style/BackButton"
+                    android:onClick="onClick" />
+
+                <TextView
+                    android:id="@+id/title"
+                    style="@style/Title" />
+
+                <ImageView
+                    android:id="@+id/btn_slect_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right|center_vertical"
+                    android:layout_marginRight="20dp"
+                    android:background="@drawable/ic_calander_qx"
+                    android:onClick="onClick"
+
+                    />
+            </FrameLayout>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:background="@color/color_line" />
+
+            <android.support.design.widget.TabLayout
+                android:id="@+id/que_xian_tab_l"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/white"
+                app:tabIndicatorColor="@color/colorPrimary"
+                app:tabIndicatorHeight="2dp"
+                app:tabMode="fixed"
+                app:tabSelectedTextColor="@color/colorPrimary"
+                app:tabTextColor="@color/text_color_jizu_name">
+
+            </android.support.design.widget.TabLayout>
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@color/color_line"
+                android:scrollbars="none">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <RadioGroup
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <RadioButton
+                            android:id="@+id/btn_all_line"
+                            style="@style/style_huan_bao_line_chart_radios"
+                            android:layout_width="60dp"
+                            android:layout_height="34dp"
+                            android:layout_weight="1"
+                            android:checked="true"
+                            android:text="全部"
+                            android:textSize="12sp" />
+
+                        <RadioButton
+                            android:id="@+id/btn_yang_line"
+                            style="@style/style_huan_bao_line_chart_radios"
+                            android:layout_width="60dp"
+                            android:layout_height="34dp"
+                            android:layout_weight="1"
+                            android:tag="0"
+                            android:text="机组"
+                            android:textSize="12sp"
+
+                            />
+
+                        <RadioButton
+                            android:id="@+id/btn_liu_line"
+                            style="@style/style_huan_bao_line_chart_radios"
+                            android:layout_width="60dp"
+                            android:layout_height="34dp"
+                            android:layout_weight="1"
+                            android:tag="1"
+                            android:text="汽机"
+                            android:textSize="12sp" />
+
+                        <RadioButton
+                            android:id="@+id/btn_yan_chen_line"
+                            style="@style/style_huan_bao_line_chart_radios"
+                            android:layout_width="60dp"
+                            android:layout_height="34dp"
+                            android:layout_weight="1"
+                            android:tag="2"
+                            android:text="锅炉"
+                            android:textSize="12sp" />
+
+                        <RadioButton
+                            style="@style/style_huan_bao_line_chart_radios"
+                            android:layout_width="60dp"
+                            android:layout_height="34dp"
+                            android:layout_weight="1"
+                            android:tag="2"
+                            android:text="电气"
+                            android:textSize="12sp" />
+                    </RadioGroup>
+
+
+                </LinearLayout>
+            </HorizontalScrollView>
+
+
+        </android.support.design.widget.AppBarLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:orientation="vertical"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right|center_vertical"
+                    android:layout_marginRight="15dp"
+                    android:text="6月第二周"
+                    android:textColor="@color/text_color_jizu_name"
+                    android:textSize="15sp" />
+            </FrameLayout>
+
+            <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/pie_chart_ji_shi"
+                android:layout_width="105dp"
+                android:layout_height="105dp"
+                android:layout_gravity="center" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="34dp"
+                android:background="@color/color_line" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:orientation="horizontal"
+                android:weightSum="3">
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+
+                    >
+
+                    <com.github.mikephil.charting.charts.PieChart
+                        android:id="@+id/pie_chart_emergency"
+                        android:layout_width="76dp"
+                        android:layout_height="76dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="13dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/pie_chart_emergency"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="10dp"
+                        android:text="非常紧急"
+                        android:textColor="@color/text_color_jizu_name"
+                        android:textSize="12sp" />
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <com.github.mikephil.charting.charts.PieChart
+                        android:id="@+id/pie_chart_urgency"
+                        android:layout_width="76dp"
+                        android:layout_height="76dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="13dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/pie_chart_urgency"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="10dp"
+                        android:text="紧急"
+                        android:textColor="@color/text_color_jizu_name"
+                        android:textSize="12sp" />
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <com.github.mikephil.charting.charts.PieChart
+                        android:id="@+id/pie_chart_normal"
+                        android:layout_width="76dp"
+                        android:layout_height="76dp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="13dp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/pie_chart_normal"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="10dp"
+                        android:text="一般"
+                        android:textColor="@color/text_color_jizu_name"
+                        android:textSize="12sp" />
+                </RelativeLayout>
+
+
+            </LinearLayout>
+        </LinearLayout>
+
+    </android.support.design.widget.CoordinatorLayout>
+</layout>

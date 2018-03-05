@@ -11,6 +11,7 @@ import com.powerge.wise.powerge.otherPages.SheBeiInfoActivity;
 import com.powerge.wise.powerge.otherPages.ZHiZhangLogActivity;
 import com.powerge.wise.powerge.otherPages.huaBao.HuanBaoActivity;
 import com.powerge.wise.powerge.otherPages.queXian.QueXianMagActivity;
+import com.powerge.wise.powerge.otherPages.queXian.QueXianPieChartActivity;
 import com.wisesignsoft.OperationManagement.utils.ToastUtil;
 
 import static com.wisesignsoft.OperationManagement.MyApplication.getContext;
@@ -39,6 +40,8 @@ public class StartActivity {
             HuanBaoActivity.start(context);
         } else if (where == 9) {
             QueXianMagActivity.start(context);
+        } else if (where == 10) {
+            QueXianPieChartActivity.start(context);
         } else {
             ToastUtil.toast(context, "暂无");
         }

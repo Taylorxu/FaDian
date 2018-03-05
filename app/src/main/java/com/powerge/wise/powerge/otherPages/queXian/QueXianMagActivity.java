@@ -9,6 +9,7 @@ import android.view.View;
 
 import com.powerge.wise.powerge.R;
 import com.powerge.wise.powerge.databinding.ActivityQueXianMagBinding;
+import com.powerge.wise.powerge.helper.StartActivity;
 
 public class QueXianMagActivity extends AppCompatActivity {
     ActivityQueXianMagBinding binding;
@@ -37,10 +38,11 @@ public class QueXianMagActivity extends AppCompatActivity {
             case R.id.btn_back:
                 finish();
                 break;
-
             case R.id.ic_bao_biao:
+                StartActivity.go(10, this);
                 break;
             case R.id.text_1:
+                StartActivity.go(10, this);
                 break;
         }
     }
