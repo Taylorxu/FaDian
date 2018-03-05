@@ -33,6 +33,7 @@ import java.util.List;
 
 public class FuHeManagementActivity extends AppCompatActivity {
     ActivityFuHeMagmentBinding binding;
+    LineChart lineCharts[];
 
     public static void start(Context context) {
         Intent starter = new Intent(context, FuHeManagementActivity.class);
@@ -44,7 +45,7 @@ public class FuHeManagementActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_fu_he_magment);
         binding.title.setText(getResources().getStringArray(R.array.item_name_array)[0]);
-
+        lineCharts = new LineChart[]{binding.chart1, binding.chart2};
         initChartView();//2张统计图
         initTableList();//机组负荷数据表
         initPerDayList();//每日负荷率
@@ -107,9 +108,9 @@ public class FuHeManagementActivity extends AppCompatActivity {
     /**
      * 初始化统计图
      */
-    LineChart lineCharts []=new LineChart[]{binding.chart1,binding.chart2};
+
     private void initChartView() {
-        for(int i=0;i<lineCharts.length;i++){
+        for (int i = 0; i < lineCharts.length; i++) {
 
             lineCharts[i].setViewPortOffsets(100, 50, 20, 100);
             lineCharts[i].setDrawGridBackground(false);
