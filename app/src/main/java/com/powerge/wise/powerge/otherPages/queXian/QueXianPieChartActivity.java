@@ -12,6 +12,7 @@ import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.RelativeSizeSpan;
 import android.text.style.StyleSpan;
+import android.view.View;
 
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.PieChart;
@@ -137,5 +138,12 @@ public class QueXianPieChartActivity extends AppCompatActivity {
         return s;
     }
 
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.btn_back:
+                finish();
+                break;
+        }
+    }
 
 }

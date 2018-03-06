@@ -251,7 +251,8 @@
         <activity android:name=".otherPages.queXian.QueXianMagActivity" />
         <activity android:name=".otherPages.queXian.QueXianPieChartActivity" />
         <activity android:name=".otherPages.xunJian.XunJianMagActivity" />
-        <activity android:name=".otherPages.xunJian.XunJianDianSignListActivity"></activity>
+        <activity android:name=".otherPages.xunJian.XunJianDianSignListActivity" />
+        <activity android:name=".otherPages.PlanTasksMag.PlanTasksMagActivity"></activity>
     </application>
 
 </manifest>
