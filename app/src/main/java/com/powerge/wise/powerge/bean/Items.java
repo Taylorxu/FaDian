@@ -1,6 +1,9 @@
 package com.powerge.wise.powerge.bean;
 
+import android.graphics.Color;
+import android.text.SpannableString;
 import android.text.format.DateFormat;
+import android.text.style.ForegroundColorSpan;
 
 import java.util.Date;
 
@@ -19,6 +22,8 @@ public class Items {
     String text3;
     String text4;
     String text5;
+    String text6;
+    int state;
 
     public int getId() {
         return id;
@@ -63,7 +68,7 @@ public class Items {
 
     public String getText2() {
         Date date = new Date(System.currentTimeMillis());
-        String r= (String) DateFormat.format("yyyy-MM-dd hh:MM:ss",date);
+        String r = (String) DateFormat.format("yyyy-MM-dd hh:MM:ss", date);
         return r;
 
     }
@@ -94,5 +99,35 @@ public class Items {
 
     public void setText5(String text5) {
         this.text5 = text5;
+    }
+
+    public String getText6() {
+        return text6;
+    }
+
+    public void setText6(String text6) {
+        this.text6 = text6;
+    }
+
+    public int getState() {
+        return state;
+    }
+
+    public void setState(int state) {
+        this.state = state;
+    }
+
+    String stateArry[] = new String[]{"处理中", "超计划", "已完成"};
+
+    public SpannableString getFormState() {
+        SpannableString s = new SpannableString(stateArry[state]);
+        if (state == 0) {//处理中
+            s.setSpan(new ForegroundColorSpan(Color.rgb(17, 189, 106)), 0, 3, 0);
+        } else if (state == 1) {//超计划
+            s.setSpan(new ForegroundColorSpan(Color.rgb(227, 30, 77)), 0, 3, 0);
+        } else {
+            s.setSpan(new ForegroundColorSpan(Color.rgb(255, 138, 0)), 0, 3, 0);
+        }
+        return s;
     }
 }
