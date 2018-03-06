@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -14,8 +15,15 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.hyphenate.util.DensityUtil;
+import com.powerge.wise.basestone.heart.ui.XAdapter;
+import com.powerge.wise.powerge.BR;
 import com.powerge.wise.powerge.R;
+import com.powerge.wise.powerge.bean.XunJianSign;
 import com.powerge.wise.powerge.databinding.ActivityXunJianMagBinding;
+import com.powerge.wise.powerge.databinding.ItemXunJianSingListBinding;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class XunJianMagActivity extends AppCompatActivity {
     ActivityXunJianMagBinding binding;
@@ -45,6 +53,33 @@ public class XunJianMagActivity extends AppCompatActivity {
     private void initView() {
         //初始化 月份 buttion 列表
         createMonthGroup();
+        initContentSign();
+    }
+
+    List<XunJianSign> list = new ArrayList<>();
+
+    /*初始换巡检*/
+    private void initContentSign() {
+        createData();
+        XAdapter<XunJianSign, ItemXunJianSingListBinding> adapter = new XAdapter.SimpleAdapter<>(BR.xunJianSign, R.layout.item_xun_jian_sing_list);
+        binding.contentSingList.setLayoutManager(new LinearLayoutManager(this));
+        binding.contentSingList.setAdapter(adapter);
+        adapter.setList(list);
+    }
+
+    private void createData() {
+        for (int i = 0; i < 20; i++) {
+            XunJianSign sign = new XunJianSign();
+            sign.setShouldSign(i + "/" + "5");
+            if (i / 2 == 0) {
+                sign.setSign(false);
+            } else {
+                sign.setSign(true);
+            }
+            sign.setXunJianDian("锅炉房" + i);
+            list.add(sign);
+        }
+
     }
 
     @SuppressLint("ResourceType")
