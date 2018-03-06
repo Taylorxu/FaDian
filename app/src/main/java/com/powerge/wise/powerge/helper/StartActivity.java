@@ -5,7 +5,7 @@ import android.content.Context;
 import com.powerge.wise.powerge.otherPages.DianLiangManagementActivity;
 import com.powerge.wise.powerge.otherPages.FuHeManagementActivity;
 import com.powerge.wise.powerge.otherPages.JingJiZhiBiaoActivity;
-import com.powerge.wise.powerge.otherPages.JingSaiActivity;
+import com.powerge.wise.powerge.otherPages.JingSai.JingSaiActivity;
 import com.powerge.wise.powerge.otherPages.MorningMeetingActivity;
 import com.powerge.wise.powerge.otherPages.PlanTasksMag.PlanTasksMagActivity;
 import com.powerge.wise.powerge.otherPages.SheBeiInfoActivity;
@@ -15,8 +15,6 @@ import com.powerge.wise.powerge.otherPages.queXian.QueXianMagActivity;
 import com.powerge.wise.powerge.otherPages.queXian.QueXianPieChartActivity;
 import com.powerge.wise.powerge.otherPages.xunJian.XunJianMagActivity;
 import com.wisesignsoft.OperationManagement.utils.ToastUtil;
-
-import static com.wisesignsoft.OperationManagement.MyApplication.getContext;
 
 /**
  * Created by Administrator on 2018/3/1.

@@ -1,39 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context="com.powerge.wise.powerge.otherPages.JingSaiActivity">
+        tools:context="com.powerge.wise.powerge.otherPages.JingSai.JingSaiActivity">
 
-        <FrameLayout
-            android:id="@+id/bar"
+        <android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <FrameLayout
+                android:id="@+id/bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimaryDark">
+
+                <ImageButton
+                    android:id="@+id/btn_back"
+                    style="@style/BackButton"
+                    android:onClick="onClick" />
+
+                <TextView
+                    android:id="@+id/title"
+                    style="@style/Title" />
+            </FrameLayout>
+
+            <android.support.design.widget.TabLayout
+                android:id="@+id/jing_sai_tab_l"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/white"
+                app:tabIndicatorColor="@color/colorPrimary"
+                app:tabIndicatorHeight="2dp"
+                app:tabMode="fixed"
+                app:tabSelectedTextColor="@color/color_420a"
+                app:tabTextColor="@color/color_673">
+
+            </android.support.design.widget.TabLayout>
+        </android.support.design.widget.AppBarLayout>
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/jing_sai_main_page"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimaryDark">
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"></android.support.v4.view.ViewPager>
 
-            <ImageButton
-                android:id="@+id/btn_back"
-                style="@style/BackButton"
-                android:onClick="onClick" />
-
-            <TextView
-                android:id="@+id/title"
-                style="@style/Title" />
-        </FrameLayout>
-
-        <View
-            android:layout_width="match_parent "
-            android:layout_height="10dp"
-            android:background="@color/color_line" />
-
-        <ExpandableListView
-            android:id="@+id/content_jing_sai"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"></ExpandableListView>
-
-    </LinearLayout>
+    </android.support.design.widget.CoordinatorLayout>
 </layout>

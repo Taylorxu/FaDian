@@ -1,4 +1,4 @@
-package com.powerge.wise.powerge.otherPages;
+package com.powerge.wise.powerge.otherPages.JingSai;
 
 import android.content.Context;
 import android.content.Intent;
@@ -22,5 +22,8 @@ public class JingSaiActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_jing_sai);
         binding.title.setText(getResources().getStringArray(R.array.item_name_array)[7]);
+        binding.jingSaiMainPage.setAdapter(new JingSaiFragmentAdapter(getSupportFragmentManager()));
+        binding.jingSaiTabL.setupWithViewPager(binding.jingSaiMainPage);
+
     }
 }
