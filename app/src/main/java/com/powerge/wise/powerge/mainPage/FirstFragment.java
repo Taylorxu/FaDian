@@ -82,6 +82,11 @@ public class FirstFragment extends Fragment {
         fragmentBinding.content.setAdapter(adapter);
         adapter.setItemClickListener(itemClickListener);
         adapter.setList(items);
+
+        fragmentBinding.xunJianBtn.setOnClickListener(new BtnOnClick());
+        fragmentBinding.wenTiPcBtn.setOnClickListener(new BtnOnClick());
+        fragmentBinding.planMagBtn.setOnClickListener(new BtnOnClick());
+
     }
 
     int[] icon = new int[]{R.drawable.ic_fuhe_mangment,
@@ -143,6 +148,25 @@ public class FirstFragment extends Fragment {
             LoginActivity.start(getContext());
             return;
         }
-        StartActivity.go(number,getContext());
+        StartActivity.go(number, getContext());
+    }
+
+
+    private class BtnOnClick implements View.OnClickListener {
+        @Override
+        public void onClick(View view) {
+            switch (view.getId()) {
+                case R.id.xun_jian_btn:
+                    StartActivity.go(11, getContext());
+                    break;
+                case R.id.wen_ti_pc_btn:
+                    StartActivity.go(12, getContext());
+                    break;
+                case R.id.plan_mag_btn:
+                    StartActivity.go(13, getContext());
+                    break;
+
+            }
+        }
     }
 }

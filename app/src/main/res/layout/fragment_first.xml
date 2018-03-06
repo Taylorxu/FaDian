@@ -260,6 +260,7 @@
                     android:orientation="horizontal">
 
                     <RelativeLayout
+                        android:id="@+id/xun_jian_btn"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -308,6 +309,7 @@
                         android:orientation="vertical">
 
                         <RelativeLayout
+                            android:id="@+id/wen_ti_pc_btn"
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_marginBottom="5dp"
@@ -351,6 +353,7 @@
                         </RelativeLayout>
 
                         <RelativeLayout
+                            android:id="@+id/plan_mag_btn"
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_weight="1"
