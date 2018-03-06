@@ -16,6 +16,7 @@ import android.widget.RadioGroup;
 
 import com.hyphenate.util.DensityUtil;
 import com.powerge.wise.basestone.heart.ui.XAdapter;
+import com.powerge.wise.basestone.heart.ui.XViewHolder;
 import com.powerge.wise.powerge.BR;
 import com.powerge.wise.powerge.R;
 import com.powerge.wise.powerge.bean.XunJianSign;
@@ -65,7 +66,17 @@ public class XunJianMagActivity extends AppCompatActivity {
         binding.contentSingList.setLayoutManager(new LinearLayoutManager(this));
         binding.contentSingList.setAdapter(adapter);
         adapter.setList(list);
+        adapter.setItemClickListener(onItemClickListener);
     }
+
+    XAdapter.OnItemClickListener onItemClickListener = new XAdapter.OnItemClickListener<XunJianSign, ItemXunJianSingListBinding>() {
+
+        @Override
+        public void onItemClick(XViewHolder<XunJianSign, ItemXunJianSingListBinding> holder) {
+            XunJianDianSignListActivity.start(getBaseContext(), holder.getBinding().getXunJianSign().getXunJianDian());
+        }
+    };
+
 
     private void createData() {
         for (int i = 0; i < 20; i++) {

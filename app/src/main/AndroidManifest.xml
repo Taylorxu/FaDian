@@ -250,7 +250,8 @@
         <activity android:name=".otherPages.huaBao.HuanBaoActivity" />
         <activity android:name=".otherPages.queXian.QueXianMagActivity" />
         <activity android:name=".otherPages.queXian.QueXianPieChartActivity" />
-        <activity android:name=".otherPages.xunJian.XunJianMagActivity"></activity>
+        <activity android:name=".otherPages.xunJian.XunJianMagActivity" />
+        <activity android:name=".otherPages.xunJian.XunJianDianSignListActivity"></activity>
     </application>
 
 </manifest>
