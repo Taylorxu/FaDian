@@ -58,6 +58,9 @@ public abstract class XAdapter<Data, Binding extends ViewDataBinding> extends Re
         notifyDataSetChanged();
     }
 
+    public Data getItemData(int position) {
+        return list.get(position);
+    }
 
     public static class SimpleAdapter<Data, Binding extends ViewDataBinding> extends XAdapter<Data, Binding> {
         int holderLayout;
@@ -90,8 +93,6 @@ public abstract class XAdapter<Data, Binding extends ViewDataBinding> extends Re
     public interface OnItemClickListener<Data, Binding extends ViewDataBinding> {
         void onItemClick(XViewHolder<Data, Binding> holder);
     }
-
-
 
 
     public void addItem(Data data) {
