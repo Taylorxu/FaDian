@@ -10,8 +10,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.powerge.wise.basestone.heart.network.Notification;
+import com.powerge.wise.basestone.heart.ui.WFragment;
 import com.powerge.wise.basestone.heart.ui.XAdapter;
 import com.powerge.wise.basestone.heart.ui.XViewHolder;
+import com.powerge.wise.basestone.heart.util.RxBus;
 import com.powerge.wise.powerge.R;
 import com.powerge.wise.powerge.bean.Items;
 import com.powerge.wise.powerge.bean.SimpleListTextItem;
@@ -21,8 +24,8 @@ import com.powerge.wise.powerge.databinding.ItemJingSaiDeFenBinding;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JingSaiDeFenFragment extends Fragment {
-    FragmentJingSaiDeFenBinding binding;
+public class JingSaiDeFenFragment extends WFragment<FragmentJingSaiDeFenBinding> implements View.OnClickListener {
+//    FragmentJingSaiDeFenBinding binding = getBinding();
 
     public JingSaiDeFenFragment() {
     }
@@ -36,13 +39,24 @@ public class JingSaiDeFenFragment extends Fragment {
         return fragment;
     }
 
-    @Override
+   /* @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_jing_sai_de_fen, container, false);
         getData();
         initView();
         return binding.getRoot();
+    }*/
+
+    @Override
+    protected void onCreateView(Bundle savedInstanceState) {
+        getData();
+        initView();
+    }
+
+    @Override
+    protected int layoutId() {
+        return R.layout.fragment_jing_sai_de_fen;
     }
 
 
@@ -63,27 +77,30 @@ public class JingSaiDeFenFragment extends Fragment {
             holder.getBinding().zuiYou.setText(data.getText4());
             holder.getBinding().shiYing.setText(data.getText5());
             holder.getBinding().junZhi.setText(data.getText6());
-            if (position<3) {
+            if (position < 3) {
                 holder.getBinding().zhiBiaoName.setTextColor(textColor[position]);
                 holder.getBinding().zhiBiaoValue.setTextColor(textColor[position]);
                 holder.getBinding().zuiYou.setTextColor(textColor[position]);
                 holder.getBinding().shiYing.setTextColor(textColor[position]);
                 holder.getBinding().junZhi.setTextColor(textColor[position]);
 
-            }else{
-                holder.getBinding().zhiBiaoName.setTextColor(textColor[position-1]);
-                holder.getBinding().zhiBiaoValue.setTextColor(textColor[position-1]);
-                holder.getBinding().zuiYou.setTextColor(textColor[position-1]);
-                holder.getBinding().shiYing.setTextColor(textColor[position-1]);
-                holder.getBinding().junZhi.setTextColor(textColor[position-1]);
+            } else {
+                holder.getBinding().zhiBiaoName.setTextColor(textColor[position - 1]);
+                holder.getBinding().zhiBiaoValue.setTextColor(textColor[position - 1]);
+                holder.getBinding().zuiYou.setTextColor(textColor[position - 1]);
+                holder.getBinding().shiYing.setTextColor(textColor[position - 1]);
+                holder.getBinding().junZhi.setTextColor(textColor[position - 1]);
             }
 
         }
     };
 
     private void initView() {
-        binding.contentDeFenList.setLayoutManager(new LinearLayoutManager(getContext()));
-        binding.contentDeFenList.setAdapter(adapter);
+        getBinding().btnAllZb.setOnClickListener(this);
+        getBinding().btnAllJz.setOnClickListener(this);
+
+        getBinding().contentDeFenList.setLayoutManager(new LinearLayoutManager(getContext()));
+        getBinding().contentDeFenList.setAdapter(adapter);
         adapter.setList(list);
     }
 
@@ -105,6 +122,17 @@ public class JingSaiDeFenFragment extends Fragment {
             list.add(item);
         }
 
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btn_all_jz:
+                RxBus.getDefault().post(new Notification(001, 0));
+                break;
+            case R.id.btn_all_zb:
+                break;
+        }
     }
 
 }

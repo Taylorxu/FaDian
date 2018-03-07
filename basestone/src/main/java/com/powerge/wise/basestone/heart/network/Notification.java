@@ -34,6 +34,12 @@ public class Notification {
         this.id = id;
     }
 
+    /**
+     * 001 竞赛 全部指标
+     * 002 竞赛 全部机组
+     *
+     * @return
+     */
     public int getCode() {
         return code;
     }

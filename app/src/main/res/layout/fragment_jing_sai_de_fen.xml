@@ -19,6 +19,7 @@
                 android:orientation="horizontal">
 
                 <RelativeLayout
+                    android:id="@+id/btn_all_jz"
                     android:layout_width="150dp"
                     android:layout_height="34dp"
                     android:background="@drawable/shape_corners_white">
@@ -33,6 +34,7 @@
                         android:textSize="14sp" />
 
                     <ImageView
+                        android:id="@+id/ic_triangle_z"
                         android:layout_width="7dp"
                         android:layout_height="4dp"
                         android:layout_centerVertical="true"
@@ -42,6 +44,7 @@
                 </RelativeLayout>
 
                 <RelativeLayout
+                    android:id="@+id/btn_all_zb"
                     android:layout_width="150dp"
                     android:layout_height="34dp"
                     android:layout_marginLeft="20dp"
@@ -57,6 +60,7 @@
                         android:textSize="14sp" />
 
                     <ImageView
+                        android:id="@+id/ic_triangle_j"
                         android:layout_width="7dp"
                         android:layout_height="4dp"
                         android:layout_centerVertical="true"
