@@ -8,9 +8,9 @@
         android:paddingRight="15dp">
 
         <TextView
+            android:id="@+id/item_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/item_text"
             android:layout_gravity="center_vertical"
             android:text="指标"
             android:textColor="@color/color_4d"
@@ -19,8 +19,9 @@
         <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:id="@+id/check_btn"
+            android:focusable="false"
             android:layout_gravity="right|center_vertical"
-
-            />
+             />
     </FrameLayout>
 </layout>

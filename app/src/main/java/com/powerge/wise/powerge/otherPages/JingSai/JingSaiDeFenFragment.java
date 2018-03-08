@@ -131,6 +131,7 @@ public class JingSaiDeFenFragment extends WFragment<FragmentJingSaiDeFenBinding>
                 RxBus.getDefault().post(new Notification(001, 0));
                 break;
             case R.id.btn_all_zb:
+                RxBus.getDefault().post(new Notification(002, 0));
                 break;
         }
     }

@@ -2,6 +2,7 @@ package com.powerge.wise.powerge.otherPages.JingSai;
 
 import android.content.Context;
 import android.content.Intent;
+import android.database.DatabaseUtils;
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -9,21 +10,26 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.RadioButton;
 
 import com.powerge.wise.powerge.R;
 import com.powerge.wise.powerge.databinding.ActivityJingSaiBinding;
 
 import com.powerge.wise.basestone.heart.network.Notification;
 import com.powerge.wise.powerge.databinding.ItemJingSaiPopBinding;
+import com.powerge.wise.powerge.databinding.ItemJingSaiRadioPopBinding;
 import com.powerge.wise.powerge.databinding.JingSaiPopListBinding;
+import com.wisesignsoft.OperationManagement.utils.ToastUtil;
 
 import rx.Subscription;
 import rx.functions.Action1;
 
-public class JingSaiActivity extends AppCompatActivity {
+public class JingSaiActivity extends AppCompatActivity implements View.OnClickListener {
     public Subscription notification;
 
     public static void start(Context context) {
@@ -47,19 +53,49 @@ public class JingSaiActivity extends AppCompatActivity {
 
 
     private String[] datas = {"指标1", "指标2", "指标3", "指标4", "指标5"};
+    private String[] datas1 = {"机组1", "机组2", "机组3", "机组4", "机组5"};
+    PopupWindow window = null;
+    RadioButton oldRadioBtn = null;
 
-    private void showPop() {
+    private void showPop(int type) {
         JingSaiPopListBinding popBinding = DataBindingUtil.inflate(LayoutInflater.from(this), R.layout.jing_sai_pop_list, null, false);
-        popBinding.jingSaiPopList.setAdapter(new ArrayAdapter<String>(this, R.layout.item_jing_sai_pop, R.id.item_text, datas));
+        if (window != null) {
+            window.dismiss();
+        }
+        if (type == 0) {
+            popBinding.jingSaiPopList.setAdapter(new ArrayAdapter<String>(this, R.layout.item_jing_sai_pop, R.id.item_text, datas));
+            popBinding.jingSaiPopList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    ItemJingSaiPopBinding bind = DataBindingUtil.bind(view);
+                    bind.checkBtn.setChecked(true);
 
-        PopupWindow window = new PopupWindow(popBinding.getRoot(), LinearLayout.LayoutParams.MATCH_PARENT, 900);
-        // TODO: 2016/5/17 设置动画
-//        window.setAnimationStyle(R.style.popup_window_anim);
+                }
+            });
+        } else {
+            final ArrayAdapter arrayAdapter = new ArrayAdapter<String>(this, R.layout.item_jing_sai_radio_pop, R.id.item_text, datas);
+            popBinding.jingSaiPopList.setAdapter(arrayAdapter);
+            popBinding.jingSaiPopList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    ItemJingSaiRadioPopBinding radioPopBinding = DataBindingUtil.bind(view);
+                    radioPopBinding.radioBtn.setChecked(true);
+                    if (oldRadioBtn != null) oldRadioBtn.setChecked(false);
+                    oldRadioBtn = radioPopBinding.radioBtn;
+                }
+            });
+        }
+        popBinding.btnSure.setOnClickListener(this);
+        popBinding.btnCancel.setOnClickListener(this);
+        window = new PopupWindow(popBinding.getRoot(), LinearLayout.LayoutParams.MATCH_PARENT, 900);
+
+        window.setAnimationStyle(R.style.popup_window_anim);
         window.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#F8F8F8")));
-        window.setFocusable(true);
+        window.setFocusable(false);
         window.setOutsideTouchable(false);
         window.update();
         window.showAtLocation(popBinding.getRoot(), Gravity.BOTTOM, 0, 0);
+
     }
 
 
@@ -67,7 +103,9 @@ public class JingSaiActivity extends AppCompatActivity {
         @Override
         public void call(Notification notification) {
             if (notification.getCode() == 001) {
-                showPop();
+                showPop(0);
+            } else if (notification.getCode() == 002) {
+                showPop(1);
             }
         }
     };
@@ -82,5 +120,17 @@ public class JingSaiActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         notification.unsubscribe();
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btn_sure:
+                ToastUtil.toast(this, "sure");
+                break;
+            case R.id.btn_cancel:
+                window.dismiss();
+                break;
+        }
     }
 }
