@@ -1,15 +1,24 @@
 package com.powerge.wise.powerge.mainPage;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.databinding.DataBindingUtil;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
+import android.util.DisplayMetrics;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 
 import com.hyphenate.util.DensityUtil;
 import com.powerge.wise.basestone.heart.ui.XAdapter;
@@ -21,6 +30,7 @@ import com.powerge.wise.powerge.bean.Items;
 import com.powerge.wise.powerge.bean.User;
 import com.powerge.wise.powerge.databinding.FragmentFirstBinding;
 import com.powerge.wise.powerge.databinding.ItemFirstFragmentGridListBinding;
+import com.powerge.wise.powerge.databinding.PopWindowFirstFragmentBinding;
 import com.powerge.wise.powerge.helper.GridSpacingItemDecoration;
 import com.powerge.wise.powerge.helper.StartActivity;
 import com.powerge.wise.powerge.otherPages.DianLiangManagementActivity;
@@ -86,7 +96,7 @@ public class FirstFragment extends Fragment {
         fragmentBinding.xunJianBtn.setOnClickListener(new BtnOnClick());
         fragmentBinding.wenTiPcBtn.setOnClickListener(new BtnOnClick());
         fragmentBinding.planMagBtn.setOnClickListener(new BtnOnClick());
-
+        fragmentBinding.btnOpenDoor.setOnClickListener(new BtnOnClick());
     }
 
     int[] icon = new int[]{R.drawable.ic_fuhe_mangment,
@@ -165,8 +175,29 @@ public class FirstFragment extends Fragment {
                 case R.id.plan_mag_btn:
                     StartActivity.go(13, getContext());
                     break;
-
+                case R.id.btn_open_door:
+                    showPopWindow();
+                    break;
             }
         }
+    }
+
+    private PopupWindow window;
+
+    @SuppressLint("Range")
+    private void showPopWindow() {
+        PopWindowFirstFragmentBinding popBinding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.pop_window_first_fragment, null, false);
+//        window = new PopupWindow(popBinding.getRoot(), LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT);
+        window = new PopupWindow(popBinding.getRoot(), 520, 432);
+        window.setAnimationStyle(R.style.popup_window_anim);
+        window.setFocusable(true);
+        window.setOutsideTouchable(true);
+        window.update();
+        int w = fragmentBinding.btnOpenDoor.getWidth();
+        int h = fragmentBinding.btnOpenDoor.getHeight();
+        int[] location = new int[2];
+        fragmentBinding.btnOpenDoor.getLocationOnScreen(location);
+        int lx = location[0] - window.getWidth() + w - 20;//20 是距离右边的距离值
+        window.showAtLocation(popBinding.getRoot(), Gravity.NO_GRAVITY, lx, location[1] + h);
     }
 }

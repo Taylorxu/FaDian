@@ -51,6 +51,7 @@
                                     android:textSize="18sp" />
                                 <!--在FrameLayout该层添加click-->
                                 <FrameLayout
+                                    android:id="@+id/btn_open_door"
                                     android:layout_width="50dp"
                                     android:layout_height="match_parent"
                                     android:layout_gravity="right|center_vertical"

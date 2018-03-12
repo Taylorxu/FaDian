@@ -54,5 +54,5 @@ dependencies {
  *
  */
     compile 'com.github.Aspsine:IRecyclerView:0.0.5'
-
+    compile 'com.mostafagazar:customshapeimageview:1.0.4'
 }
