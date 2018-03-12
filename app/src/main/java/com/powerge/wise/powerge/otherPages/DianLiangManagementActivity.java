@@ -43,8 +43,6 @@ public class DianLiangManagementActivity extends AppCompatActivity {
         int id = view.getId();
         if (id == R.id.btn_back) {
             finish();
-        } else if (id == R.id.btn_fill_form) {
-            DianLiangFillFormActivity.start(this);
         }
     }
 }

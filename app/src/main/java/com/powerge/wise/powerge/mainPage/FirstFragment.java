@@ -77,6 +77,16 @@ public class FirstFragment extends Fragment {
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+        if (User.getCurrentUser() == null || !User.getCurrentUser().isLogin()) {
+            ToastUtil.toast(getContext(), getResources().getString(R.string.error_login_login_need));
+            LoginActivity.start(getContext());
+            return;
+        }
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         fragmentBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_first, container, false);
         init();
@@ -153,11 +163,6 @@ public class FirstFragment extends Fragment {
      */
 
     private void goToActivity(int number) {
-        if (User.getCurrentUser() == null || !User.getCurrentUser().isLogin()) {
-            ToastUtil.toast(getContext(), "please login");
-            LoginActivity.start(getContext());
-            return;
-        }
         StartActivity.go(number, getContext());
     }
 
