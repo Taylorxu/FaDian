@@ -27,7 +27,7 @@ import java.util.Map;
  */
 
 public class ExpandableListAdapter extends BaseExpandableListAdapter {
-    List<SheBeiRootBean> list;
+    List<SheBeiRootBean.SheBeiChildBean> list;
     private SparseArray<ImageView> mIndicators;
 
     ItemTextExpandListBinding expandListBinding;
@@ -35,7 +35,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     ItemTextChildExpandListBinding childExpandListBinding;
     ItemSecondExpandListBinding secondExpandListBinding;
 
-    public ExpandableListAdapter(List<SheBeiRootBean> list) {
+    public ExpandableListAdapter(List<SheBeiRootBean.SheBeiChildBean> list) {
         this.list = list;
         this.mIndicators = new SparseArray<>();
     }
@@ -49,7 +49,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     //组中的view个数
     @Override
     public int getChildrenCount(int groupPosition) {
-        return list.get(groupPosition).getSheBeiChild().size();
+        return 1;
     }
 
     //获取组的数据
@@ -61,7 +61,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     //获取组中view的数据
     @Override
     public Object getChild(int groupPosition, int childPosition) {
-        return list.get(groupPosition).getSheBeiChild().get(childPosition);
+        return list.get(groupPosition).getName();
     }
 
     @Override
@@ -99,25 +99,14 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getChildView(int groupPosition, final int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-        Log.e("root groupPosition", "------" + groupPosition);
         if (convertView == null) {
-            secondExpandListBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.item_second_expand_list, parent, false);
-            convertView = secondExpandListBinding.getRoot();
-            convertView.setTag(secondExpandListBinding);
+            textBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.item_text, parent, false);
+            convertView = textBinding.getRoot();
+            convertView.setTag(textBinding);
         } else {
-            secondExpandListBinding = (ItemSecondExpandListBinding) convertView.getTag();
+            textBinding = (ItemTextBinding) convertView.getTag();
         }
-        final SecondExpandAdapter listAdapter = new SecondExpandAdapter(list.get(groupPosition).getSheBeiChild().get(childPosition), childPosition);
-        secondExpandListBinding.childExpandListContent.setAdapter(listAdapter);
-        secondExpandListBinding.childExpandListContent.setGroupIndicator(null);
-        secondExpandListBinding.childExpandListContent.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
-            @Override
-            public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
-                boolean groupExpanded = parent.isGroupExpanded(childPosition);//需要传入 child的 position
-                listAdapter.setIndicatorState2level(childPosition, groupExpanded);
-                return false;
-            }
-        });
+        textBinding.textContent.setText(list.get(groupPosition).getName());
 
         return convertView;
     }
@@ -137,15 +126,17 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     }
 
     /*root下面的二级expandListView*/
-    class SecondExpandAdapter extends BaseExpandableListAdapter {
-        private final int childPosition;
-        SheBeiRootBean.SheBeiChildBean sheBeiChildBeans;
-        private SparseArray<ImageView> mIndicators;
+    /**
+     * 改为一层父级
+     class SecondExpandAdapter extends BaseExpandableListAdapter {
+     private final int childPosition;
+     SheBeiRootBean.SheBeiChildBean sheBeiChildBeans;
+     private SparseArray<ImageView> mIndicators;
 
-        /**
-         * @param sheBeiChild
-         * @param childPosition 最顶部的 每个子view possition（有多少层字view 就会在开展开时调用多少次）
-         */
+     *//**
+     * @param sheBeiChild
+     * @param childPosition 最顶部的 每个子view possition（有多少层字view 就会在开展开时调用多少次）
+     *//*
         public SecondExpandAdapter(SheBeiRootBean.SheBeiChildBean sheBeiChild, int childPosition) {
             this.sheBeiChildBeans = sheBeiChild;
             this.childPosition = childPosition;
@@ -231,7 +222,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         }
 
 
-    }
+    }*/
 
 
 }

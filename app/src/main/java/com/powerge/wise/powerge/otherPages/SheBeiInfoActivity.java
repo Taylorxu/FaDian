@@ -54,23 +54,20 @@ public class SheBeiInfoActivity extends AppCompatActivity {
         });*/
     }
 
-    List<SheBeiRootBean> list = new ArrayList<>();
+    List<SheBeiRootBean.SheBeiChildBean> list = new ArrayList<>();
 
     private void createData() {
         String[] shebeiName = new String[]{"机组设备", "电气设备", "通风设备"};
-        for (int i = 0; i < 3; i++) {
-            SheBeiRootBean bean = new SheBeiRootBean();
-            bean.setSheBeiName(shebeiName[i]);
-            List<SheBeiRootBean.SheBeiChildBean> beiChildBeans = new ArrayList<>();
-            for (int j = 0; j < 3; j++) {
-                SheBeiRootBean.SheBeiChildBean childBean = new SheBeiRootBean.SheBeiChildBean();
-                childBean.setName(j + "#" + shebeiName[i]);
-                beiChildBeans.add(childBean);
-            }
-            bean.setSheBeiChild(beiChildBeans);
-            list.add(bean);
+
+        for (int j = 0; j < 3; j++) {
+            SheBeiRootBean.SheBeiChildBean childBean = new SheBeiRootBean.SheBeiChildBean();
+            childBean.setName(j + "#" + shebeiName[j]);
+            list.add(childBean);
         }
+
     }
+
+
 
 
     public void onClick(View view) {

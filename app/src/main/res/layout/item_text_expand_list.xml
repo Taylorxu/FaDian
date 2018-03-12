@@ -5,7 +5,7 @@
 
         <variable
             name="expand"
-            type="com.powerge.wise.powerge.bean.SheBeiRootBean" />
+            type="com.powerge.wise.powerge.bean.SheBeiRootBean.SheBeiChildBean" />
     </data>
 
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -18,10 +18,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:text="@{expand.sheBeiName}"
+            android:text="@{expand.name}"
             android:textColor="@color/color_4d"
-            android:textSize="16sp"
-            android:textStyle="bold"
+            android:textSize="15sp"
             />
 
         <ImageView
