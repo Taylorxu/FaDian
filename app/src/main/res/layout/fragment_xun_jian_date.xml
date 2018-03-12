@@ -1,0 +1,33 @@
+<layout>
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.powerge.wise.powerge.otherPages.xunJian.XunJianDateFragment">
+
+        <HorizontalScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="54dp"
+            android:background="@color/color_line"
+            android:scrollbars="none"
+            android:layout_gravity="center"
+            >
+
+
+            <RadioGroup
+                android:id="@+id/month_group"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp">
+
+
+            </RadioGroup>
+
+        </HorizontalScrollView>
+
+    </FrameLayout>
+</layout>

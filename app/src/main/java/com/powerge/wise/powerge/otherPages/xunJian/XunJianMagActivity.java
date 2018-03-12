@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -26,7 +27,7 @@ import com.powerge.wise.powerge.databinding.ItemXunJianSingListBinding;
 import java.util.ArrayList;
 import java.util.List;
 
-public class XunJianMagActivity extends AppCompatActivity {
+public class XunJianMagActivity extends AppCompatActivity implements XunJianDateFragment.OnDateCehckedListener {
     ActivityXunJianMagBinding binding;
 
     public static void start(Context context) {
@@ -52,8 +53,9 @@ public class XunJianMagActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        //初始化 月份 buttion 列表
-        createMonthGroup();
+        binding.dateContent.setAdapter(new XunJianDatePagerAdapter(getSupportFragmentManager()));
+        binding.xunJianTabL.setupWithViewPager(binding.dateContent);
+
         initContentSign();
     }
 
@@ -93,30 +95,11 @@ public class XunJianMagActivity extends AppCompatActivity {
 
     }
 
-    @SuppressLint("ResourceType")
-    private void createMonthGroup() {
-        for (int i = 0; i < 13; i++) {
-            RadioButton radioButton = new RadioButton(this);
-            RadioGroup.LayoutParams params = new RadioGroup.LayoutParams(DensityUtil.dip2px(this, 60), DensityUtil.dip2px(this, 34));
-            params.setMargins(DensityUtil.dip2px(this, 5), DensityUtil.dip2px(this, 10), DensityUtil.dip2px(this, 5), DensityUtil.dip2px(this, 10));
-            radioButton.setLayoutParams(params);
-            radioButton.setGravity(Gravity.CENTER);
-            radioButton.setTextColor(getResources().getColorStateList(R.drawable.selector_primary_gray_text));
-            radioButton.setBackgroundResource(R.drawable.selector_primary_white_btn_bg_border);
-            radioButton.setButtonDrawable(android.R.color.transparent);//隐藏单选圆形按钮
-            radioButton.setTextSize(14f);
-            if (i == 0) {
-                radioButton.setText("全部");
-                radioButton.setTag("全部");
-                radioButton.setChecked(true);
 
-            } else {
-                radioButton.setText(i + "月");
-                radioButton.setTag(i + "月");
-            }
-            radioButton.setId(i);
-            binding.monthGroup.addView(radioButton);
 
-        }
+    //TODO 选择时间后条件查询
+    @Override
+    public void onDateCehckedListener(Uri uri) {
+
     }
 }

@@ -51,6 +51,9 @@
     <string name="btn_1_fh_text">1#机组</string>
     <string name="btn_2_fh_text">2#机组</string>
     <string name="btn_hour_data_fh_text">近一小时数据</string>
+    <string name="string_year">年</string>
+    <string name="string_month">月</string>
+    <string name="string_day">日</string>
 
     <string name="first_page_app_name">发电企业移动管理辅助决策系统</string>
     <string name="xun_jian_guan_li">巡检管理</string>
