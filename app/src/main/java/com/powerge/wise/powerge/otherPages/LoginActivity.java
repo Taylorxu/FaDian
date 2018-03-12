@@ -95,6 +95,14 @@ public class LoginActivity extends AppCompatActivity {
         finish();
     }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if ((keyCode == KeyEvent.KEYCODE_BACK)) {
+            return false;
+        }else {
+            return super.onKeyDown(keyCode, event);
+        }
 
+    }
 }
 
