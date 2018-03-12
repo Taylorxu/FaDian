@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class ThirdFragment extends Fragment {
+public class ThirdFragment extends Fragment implements View.OnClickListener {
     FragmentThirdBinding binding;
 
 
@@ -48,6 +48,8 @@ public class ThirdFragment extends Fragment {
 
     private void initView() {
         binding.title.setText("消息");
+        binding.btnBack.setOnClickListener(this);
+
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         binding.contentView.setLayoutManager(layoutManager);
         binding.contentView.setItemAnimator(new DefaultItemAnimator());
@@ -77,13 +79,13 @@ public class ThirdFragment extends Fragment {
 
     private void setData(int page) {
         if (page == 1) {
-            List<SimpleListTextItem> list  = new ArrayList<>();
+            List<SimpleListTextItem> list = new ArrayList<>();
             for (int i = 0; i < 10; i++) {
                 SimpleListTextItem textItem = new SimpleListTextItem();
                 textItem.setTitle("title" + i);
                 textItem.setContent("这条公告讲的是" + i);
 //                textItem.setDate("");
-                list .add(textItem);
+                list.add(textItem);
             }
             adapter.setList(list);
             binding.contentView.setState(list == null || list.size() < 10 ? PagingRecyclerView.State.NoMore : PagingRecyclerView.State.LoadSuccess);
@@ -102,5 +104,8 @@ public class ThirdFragment extends Fragment {
         binding.refreshLayout.setRefreshing(false);
     }
 
+    public void onClick(View view) {
+        getActivity().finish();
+    }
 
 }

@@ -55,8 +55,7 @@ import rx.schedulers.Schedulers;
 import static android.Manifest.permission.READ_CONTACTS;
 
 public class LoginActivity extends AppCompatActivity {
-    private AutoCompleteTextView mAccountView;
-    private EditText mPasswordView;
+
     ActivityLoginBinding loginBinding;
 
     public static void start(Context context) {
@@ -68,8 +67,6 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         loginBinding = DataBindingUtil.setContentView(this, R.layout.activity_login);
-        mAccountView = (AutoCompleteTextView) findViewById(R.id.account);
-        mPasswordView = (EditText) findViewById(R.id.password);
         //当确定密码时登录
         loginBinding.password.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override

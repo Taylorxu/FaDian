@@ -8,10 +8,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.powerge.wise.powerge.R;
+import com.powerge.wise.powerge.bean.User;
 import com.powerge.wise.powerge.databinding.FragmentFourthBinding;
+import com.powerge.wise.powerge.otherPages.LoginActivity;
 
 
-public class FourthFragment extends Fragment {
+public class FourthFragment extends Fragment implements View.OnClickListener {
     FragmentFourthBinding binding;
 
     public FourthFragment() {
@@ -31,8 +33,22 @@ public class FourthFragment extends Fragment {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_fourth, container, false);
         binding.title.setText(getResources().getString(R.string.title_mine));
+        binding.btnBack.setOnClickListener(this);
+        binding.btnLogOut.setOnClickListener(this);
         return binding.getRoot();
     }
 
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btn_log_out:
+                User.logout();
+                LoginActivity.start(getContext());
+                break;
+            case R.id.btn_back:
+                getActivity().finish();
+                break;
+        }
+    }
 }
