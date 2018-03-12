@@ -71,7 +71,7 @@ public class FirstFragment extends Fragment {
     public FirstFragment() {
     }
 
-    public FirstFragment newInstance() {
+    public static FirstFragment newInstance() {
         FirstFragment firstFragment = new FirstFragment();
         return firstFragment;
     }

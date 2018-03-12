@@ -17,13 +17,13 @@ public class MainAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position){
             case 0:
-                return new FirstFragment().newInstance();
+                return  FirstFragment.newInstance();
             case 1:
-                return new SecondFragment().newInstance();
+                return  SecondFragment.newInstance();
             case 2:
-                return new ThirdFragment().newInstance();
+                return  ThirdFragment.newInstance();
             case 3:
-                return new FourthFragment().newInstance();
+                return  FourthFragment.newInstance();
         }
         return new FirstFragment().newInstance();
     }

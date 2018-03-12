@@ -33,7 +33,7 @@ public class SecondFragment extends Fragment {
 
     }
 
-    public SecondFragment newInstance() {
+    public static SecondFragment newInstance() {
         SecondFragment secondFragment = new SecondFragment();
         return secondFragment;
     }
