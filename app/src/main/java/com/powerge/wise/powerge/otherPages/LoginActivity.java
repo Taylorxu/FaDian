@@ -22,6 +22,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -32,6 +33,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.powerge.wise.basestone.heart.network.FlatMapResponse;
 import com.powerge.wise.basestone.heart.network.FlatMapTopRes;
 import com.powerge.wise.basestone.heart.network.TopResponse;
@@ -40,6 +43,13 @@ import com.powerge.wise.basestone.heart.util.MD5;
 import com.powerge.wise.powerge.ApiService;
 import com.powerge.wise.powerge.R;
 import com.powerge.wise.powerge.bean.User;
+import com.powerge.wise.powerge.config.soap.NectConfig;
+import com.powerge.wise.powerge.config.soap.beans.LoginBean;
+import com.powerge.wise.powerge.config.soap.beans.ResultModel;
+import com.powerge.wise.powerge.config.soap.request.RequestBody;
+import com.powerge.wise.powerge.config.soap.request.RequestEnvelope;
+import com.powerge.wise.powerge.config.soap.request.RequestModel;
+import com.powerge.wise.powerge.config.soap.response.ResponseEnvelope;
 import com.powerge.wise.powerge.databinding.ActivityLoginBinding;
 
 import java.util.ArrayList;
@@ -48,6 +58,9 @@ import java.util.List;
 import io.realm.Realm;
 import io.realm.RealmQuery;
 import io.realm.RealmResults;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -91,8 +104,34 @@ public class LoginActivity extends AppCompatActivity {
 
     private void attemptLogin() {
         //TODO 登录成功后 更新reaml 的数据
-        User.login();
-        finish();
+      /*  User.login();
+        finish();*/
+    }
+
+
+    public void sing(View view) {
+
+        RequestModel.getRequestModel().userName="itil";
+        RequestModel.getRequestModel().userPassward="1";
+        RequestBody.getRequestBody().setMobileLogin(RequestModel.getRequestModel());
+        RequestEnvelope.getRequestEnvelope().setBody(RequestBody.getRequestBody());
+        Call<ResponseEnvelope> call= NectConfig.getInterfaceApi().login(RequestEnvelope.getRequestEnvelope());
+        call.enqueue(new Callback<ResponseEnvelope>() {
+            @Override
+            public void onResponse(Call<ResponseEnvelope> call, Response<ResponseEnvelope> response) {
+                ResultModel resultModel=new Gson().fromJson(response.body().getResponseBody().getUnderBodyModel().result,ResultModel.class);
+                if (null!=resultModel ) {
+                    LoginBean loginBean=new Gson().fromJson(resultModel.getReturnValue().toString(),new TypeToken<LoginBean>(){}.getType());
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseEnvelope> call, Throwable t) {
+                Log.e("报错",t.getMessage());
+            }
+        });
+
     }
 
     @Override
