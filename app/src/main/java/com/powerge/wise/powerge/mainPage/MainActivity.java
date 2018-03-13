@@ -1,5 +1,7 @@
 package com.powerge.wise.powerge.mainPage;
 
+import android.content.Context;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.net.Uri;
 import android.support.annotation.NonNull;
@@ -18,6 +20,11 @@ import com.powerge.wise.powerge.helper.BottomNavigationViewHelper;
 public class MainActivity extends AppCompatActivity implements FirstFragment.OnFirstFragmentInteractionListener {
     private MainAdapter mSectionsPagerAdapter;
     ActivityMainBinding mainBinding;
+
+    public static void start(Context context) {
+        Intent starter = new Intent(context, MainActivity.class);
+        context.startActivity(starter);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,4 +89,6 @@ public class MainActivity extends AppCompatActivity implements FirstFragment.OnF
     public void onFragmentInteraction(Uri uri) {
 
     }
+
+
 }

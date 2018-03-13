@@ -39,11 +39,11 @@
             android:name=".mainPage.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
+            <!--<intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            </intent-filter>-->
         </activity>
         <activity
             android:name=".otherPages.LoginActivity"
@@ -253,7 +253,16 @@
         <activity android:name=".otherPages.queXian.QueXianPieChartActivity" />
         <activity android:name=".otherPages.xunJian.XunJianMagActivity" />
         <activity android:name=".otherPages.xunJian.XunJianDianSignListActivity" />
-        <activity android:name=".otherPages.PlanTasksMag.PlanTasksMagActivity"></activity>
+        <activity android:name=".otherPages.PlanTasksMag.PlanTasksMagActivity" />
+        <activity
+            android:name=".otherPages.SplashActivity"
+            >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
