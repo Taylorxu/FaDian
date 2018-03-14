@@ -78,29 +78,17 @@ public class ThirdFragment extends Fragment implements View.OnClickListener {
     };
 
     private void setData(int page) {
-        if (page == 1) {
-            List<SimpleListTextItem> list = new ArrayList<>();
-            for (int i = 0; i < 10; i++) {
-                SimpleListTextItem textItem = new SimpleListTextItem();
-                textItem.setTitle("title" + i);
-                textItem.setContent("这条公告讲的是" + i);
+
+        List<SimpleListTextItem> list = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            SimpleListTextItem textItem = new SimpleListTextItem();
+            textItem.setTitle("title" + i);
+            textItem.setContent("这条公告讲的是" + i);
 //                textItem.setDate("");
-                list.add(textItem);
-            }
-            adapter.setList(list);
-            binding.contentView.setState(list == null || list.size() < 10 ? PagingRecyclerView.State.NoMore : PagingRecyclerView.State.LoadSuccess);
-        } else {
-            List<SimpleListTextItem> list = new ArrayList<>();
-            for (int i = 0; i < 10; i++) {
-                SimpleListTextItem textItem = new SimpleListTextItem();
-                textItem.setTitle("title" + i);
-                textItem.setContent("这条公告讲加载出来的" + i);
-//                textItem.setDate("");
-                list.add(textItem);
-            }
-            adapter.addItems(list);
-            binding.contentView.setState(list == null || list.size() < 10 ? PagingRecyclerView.State.NoMore : PagingRecyclerView.State.LoadSuccess);
+            list.add(textItem);
         }
+        adapter.setList(list);
+        binding.contentView.setState(list == null || list.size() <= 10 ? PagingRecyclerView.State.NoMore : PagingRecyclerView.State.LoadSuccess);
         binding.refreshLayout.setRefreshing(false);
     }
 

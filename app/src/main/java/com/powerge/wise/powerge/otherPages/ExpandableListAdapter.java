@@ -1,43 +1,53 @@
 package com.powerge.wise.powerge.otherPages;
 
 import android.databinding.DataBindingUtil;
-import android.util.Log;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
 import android.widget.BaseExpandableListAdapter;
-import android.widget.ExpandableListView;
 import android.widget.ImageView;
-
-import com.powerge.wise.basestone.heart.util.LogUtils;
 import com.powerge.wise.powerge.R;
 import com.powerge.wise.powerge.bean.SheBeiRootBean;
-import com.powerge.wise.powerge.databinding.ItemSecondExpandListBinding;
 import com.powerge.wise.powerge.databinding.ItemTextBinding;
-import com.powerge.wise.powerge.databinding.ItemTextChildExpandListBinding;
 import com.powerge.wise.powerge.databinding.ItemTextExpandListBinding;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by Administrator on 2018/3/1.
  */
 
 public class ExpandableListAdapter extends BaseExpandableListAdapter {
-    List<SheBeiRootBean.SheBeiChildBean> list;
+    static List<SheBeiRootBean> list=new ArrayList<>();
     private SparseArray<ImageView> mIndicators;
 
     ItemTextExpandListBinding expandListBinding;
     ItemTextBinding textBinding;
-    ItemTextChildExpandListBinding childExpandListBinding;
-    ItemSecondExpandListBinding secondExpandListBinding;
 
-    public ExpandableListAdapter(List<SheBeiRootBean.SheBeiChildBean> list) {
+    public ExpandableListAdapter(List<SheBeiRootBean> list) {
         this.list = list;
         this.mIndicators = new SparseArray<>();
+    }
+
+    public ExpandableListAdapter() {
+        this.mIndicators = new SparseArray<>();
+    }
+
+    public void setList(List<SheBeiRootBean> listparam) {
+        list = listparam;
+        notifyDataSetChanged();
+    }
+
+    public void addItems(List<SheBeiRootBean> datas) {
+        if (datas == null || datas.isEmpty()) return;
+        if (this.list == null || this.list.isEmpty()) {
+            setList(datas);
+            return;
+        }
+        this.list.addAll(datas);
+        notifyDataSetChanged();
     }
 
     //分组 个数
@@ -106,7 +116,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         } else {
             textBinding = (ItemTextBinding) convertView.getTag();
         }
-        textBinding.textContent.setText(list.get(groupPosition).getName());
+        textBinding.textContent.setText(list.get(groupPosition).getDeviceDesc());
 
         return convertView;
     }

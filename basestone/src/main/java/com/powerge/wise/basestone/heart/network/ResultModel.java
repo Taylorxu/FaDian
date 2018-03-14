@@ -1,10 +1,22 @@
-package com.powerge.wise.powerge.config.soap.beans;
+package com.powerge.wise.basestone.heart.network;
+
+import android.util.Log;
+
+import com.google.gson.Gson;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.json.JSONStringer;
+
+import java.lang.*;
+
+import static org.json.JSONObject.quote;
 
 /**
  * Created by xu on 2018/2/5.
  */
 
-public class ResultModel<Data>   {
+public class ResultModel<Data> {
     private String returnMsg;
     private Data returnValue;
     private String returnState;
@@ -25,14 +37,7 @@ public class ResultModel<Data>   {
     public void setReturnState(String returnState) {
         this.returnState = returnState;
     }
-/*
-    public String getReturnValue() {
-        return returnValue;
-    }
 
-    public void setReturnValue(String returnValue) {
-        this.returnValue = returnValue;
-    }*/
 
     public Data getReturnValue() {
         return returnValue;
@@ -43,7 +48,8 @@ public class ResultModel<Data>   {
     }
 
     public Error getError() {
-        return new Error(returnMsg);
+        return new Error(Integer.decode(getReturnState()), returnMsg);
     }
+
 
 }

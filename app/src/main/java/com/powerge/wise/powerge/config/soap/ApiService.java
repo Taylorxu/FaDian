@@ -1,22 +1,30 @@
 package com.powerge.wise.powerge.config.soap;
 
 
+import com.powerge.wise.basestone.heart.network.NetConfig;
+import com.powerge.wise.basestone.heart.network.ResultModelData;
+import com.powerge.wise.powerge.bean.SheBeiRootBean;
+import com.powerge.wise.powerge.config.soap.request.BaseUrl;
+import com.powerge.wise.powerge.config.soap.beans.LoginBean;
+import com.powerge.wise.basestone.heart.network.ResultModel;
 import com.powerge.wise.powerge.config.soap.request.RequestEnvelope;
-import com.powerge.wise.powerge.config.soap.response.ResponseEnvelope;
 
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.convert.AnnotationStrategy;
 import org.simpleframework.xml.core.Persister;
 import org.simpleframework.xml.strategy.Strategy;
 
-import retrofit2.Call;
+import java.util.List;
+
+import retrofit2.Response;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.simplexml.SimpleXmlConverterFactory;
 import retrofit2.http.Body;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
+import rx.Observable;
 
 
 /**
@@ -26,12 +34,18 @@ import retrofit2.http.POST;
 
 public interface ApiService {
     @Headers({
-            "Content-Type: text/xml",
+            "Content-Type:text/xml; charset=utf-8",
             "Accept-Charset: utf-8"
     })
-    @POST("YxywService?wsdl")
-    Call<ResponseEnvelope> login(@Body RequestEnvelope requestEnvelope);
+    @POST(BaseUrl.SERVICE_Y)
+    Observable<Response<ResultModel<LoginBean>>> login(@Body RequestEnvelope requestEnvelope);
 
+    @Headers({
+            "Content-Type:text/xml; charset=utf-8",
+            "Accept-Charset: utf-8"
+    })
+    @POST(BaseUrl.SERVICE_P)
+    Observable<Response<ResultModelData<ResultModelData.ReturnValueBean<SheBeiRootBean>>>> queryDevicesData(@Body RequestEnvelope requestEnvelope);
 
 
     class Creator {
@@ -54,11 +68,11 @@ public interface ApiService {
 
         private static Retrofit getRetrofit() {
             return new Retrofit.Builder()
-                    .baseUrl(Path.BASE_URL)
-                    .client(RetrofitGenerator.getInstance().getOkHttpClient())
+                    .baseUrl(BaseUrl.Host)
+                    .client(NetConfig.getInstance().getClient())
                     .addConverterFactory(SimpleXmlConverterFactory.create(serializer))
-                    .addConverterFactory(GsonConverterFactory.create(RetrofitGenerator.getInstance().getGson()))
-                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                    .addConverterFactory(GsonConverterFactory.create(NetConfig.getInstance().getGson()))
+                    .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                     .build();
         }
     }

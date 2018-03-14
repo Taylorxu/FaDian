@@ -1,30 +1,29 @@
 package com.powerge.wise.powerge.config.soap.request;
 
+import com.powerge.wise.powerge.bean.SheBeiRootBean;
+import com.powerge.wise.powerge.config.soap.beans.LoginBean;
+
+import org.simpleframework.xml.Default;
+import org.simpleframework.xml.DefaultType;
 import org.simpleframework.xml.Element;
+import org.simpleframework.xml.ElementUnion;
 import org.simpleframework.xml.Root;
 
 /**
  * Created by xuzhiguang on 2018/2/1.
  */
 @Root(name = "v:Body")
-public class RequestBody {
-    static RequestBody requestBody;
-    @Element(name = "mobileLogin", required = false)
-    public RequestModel mobileLogin;
+@Default(DefaultType.FIELD)
+public class RequestBody<Data> {
 
-    public RequestModel getMobileLogin() {
-        return mobileLogin;
+    public RequestBody(Data requestModel) {
+        this.requestModel = requestModel;
     }
 
-    public void setMobileLogin(RequestModel mobileLogin) {
-        this.mobileLogin = mobileLogin;
-    }
+    @ElementUnion({
+            @Element(name = "n0:mobileLogin", type = LoginBean.class),
+            @Element(name = "n0:queryDevicesData", type = SheBeiRootBean.class)
+    })
+    public Data requestModel;
 
-    public static RequestBody  getRequestBody(){
-        if(null==requestBody){
-            requestBody=new RequestBody();
-        }
-        return requestBody;
-
-    }
 }

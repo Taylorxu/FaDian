@@ -1,5 +1,7 @@
 package com.powerge.wise.basestone.heart.network;
 
+import com.powerge.wise.basestone.heart.util.LogUtils;
+
 import java.io.IOException;
 
 import retrofit2.Response;

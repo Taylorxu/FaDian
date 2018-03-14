@@ -86,12 +86,17 @@
             android:background="@android:color/white"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-            <ExpandableListView
-                android:id="@+id/content_she_bei"
+            <android.support.v4.widget.SwipeRefreshLayout
+                android:id="@+id/refresh_layout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingLeft="15dp" />
+                android:layout_height="match_parent">
 
+                <ExpandableListView
+                    android:id="@+id/content_she_bei"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingLeft="15dp" />
+            </android.support.v4.widget.SwipeRefreshLayout>
         </FrameLayout>
     </android.support.design.widget.CoordinatorLayout>
 </layout>

@@ -6,7 +6,12 @@ import com.powerge.wise.basestone.heart.WApp;
 import com.powerge.wise.basestone.heart.util.LogUtils;
 import com.powerge.wise.basestone.heart.util.PhoneInfo;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
+import java.net.ConnectException;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -16,6 +21,7 @@ import okhttp3.Cookie;
 import okhttp3.CookieJar;
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
+import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -42,6 +48,7 @@ public class NetConfig implements Interceptor, CookieJar {
         }
         return instance;
     }
+
     @Override
     public void saveFromResponse(HttpUrl url, List<Cookie> cookies) {
         if (cookies != null && cookies.size() > 0) {
@@ -58,18 +65,17 @@ public class NetConfig implements Interceptor, CookieJar {
 
     @Override
     public Response intercept(Chain chain) throws IOException {
+
         Request request = chain.request();
-        long t1 = System.nanoTime();
         Request.Builder builder = request.newBuilder();
         Response response = chain.proceed(builder.build());
-        LogUtils.i("request:" + request.toString());
-        long t2 = System.nanoTime();
         okhttp3.MediaType mediaType = response.body().contentType();
-        if ("text/html; charset=UTF-8".equals(mediaType.toString())) {
+        if ("text/xml;charset=UTF-8".equals(mediaType.toString())) {
             String content = response.body().string();
-            LogUtils.i("response body:" + content);
-            return response.newBuilder()
-                    .body(okhttp3.ResponseBody.create(mediaType, content))
+            String rebuildResult = content.substring(content.indexOf(">{") + 1, content.indexOf("</return>"));
+            rebuildResult = rebuildResult.replace("\"returnValue\":\"\"", "\"returnValue\":null");
+            rebuildResult = rebuildResult.replace("&quot;", "\"");
+            return response.newBuilder().body(okhttp3.ResponseBody.create(mediaType, rebuildResult))
                     .build();
         }
         return response;
@@ -89,7 +95,6 @@ public class NetConfig implements Interceptor, CookieJar {
                     .writeTimeout(30, TimeUnit.SECONDS)
                     .connectTimeout(30, TimeUnit.SECONDS)
                     .addInterceptor(this)
-                    .cookieJar(this)
                     .build();
         return client;
     }
