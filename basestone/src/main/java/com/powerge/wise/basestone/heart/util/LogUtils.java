@@ -9,7 +9,7 @@ import android.util.Log;
 public class LogUtils {
 
     public static String customTagPrefix = "";
-    public static boolean debug = false;
+    public static boolean debug = true;
     public static LogUtils.CustomLogger customLogger;
 
     private LogUtils() {

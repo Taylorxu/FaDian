@@ -19,7 +19,8 @@ import com.powerge.wise.basestone.heart.network.NetConfig;
 import com.powerge.wise.basestone.heart.network.ResultModel;
 import com.powerge.wise.basestone.heart.network.ResultModelData;
 import com.powerge.wise.basestone.heart.ui.EndLessOnScrollListener;
-import com.powerge.wise.basestone.heart.ui.view.AbsListViewOnScrollListener;
+import com.powerge.wise.basestone.heart.ui.view.LoadMoreExpandableListView;
+import com.powerge.wise.basestone.heart.util.LogUtils;
 import com.powerge.wise.powerge.R;
 import com.powerge.wise.powerge.bean.SheBeiRootBean;
 import com.powerge.wise.powerge.bean.User;
@@ -29,6 +30,7 @@ import com.powerge.wise.powerge.config.soap.request.BaseUrl;
 import com.powerge.wise.powerge.config.soap.request.RequestBody;
 import com.powerge.wise.powerge.config.soap.request.RequestEnvelope;
 import com.powerge.wise.powerge.databinding.ActivitySheBeiInfoBinding;
+import com.wisesignsoft.OperationManagement.utils.LogUtil;
 import com.wisesignsoft.OperationManagement.utils.ToastUtil;
 
 import java.util.ArrayList;
@@ -47,6 +49,7 @@ public class SheBeiInfoActivity extends AppCompatActivity implements SwipeRefres
     ActivitySheBeiInfoBinding binding;
     ExpandableListAdapter adapter = new ExpandableListAdapter();
     List<SheBeiRootBean> list = new ArrayList<>();
+    int currentPage = 0;
 
     @SuppressLint("ResourceAsColor")
     @Override
@@ -72,18 +75,19 @@ public class SheBeiInfoActivity extends AppCompatActivity implements SwipeRefres
                 return false;
             }
         });
-        binding.contentSheBei.setOnScrollListener(new AbsListViewOnScrollListener() {
+        binding.contentSheBei.setOnLoadMoreListener(new LoadMoreExpandableListView.OnLoadMoreListener() {
             @Override
-            public void onLoadMore(int currentPage) {
-                getSheBeiData(currentPage);
+            public void onloadMore() {
+                getSheBeiData(currentPage + 1);
             }
         });
+
     }
 
     private void getSheBeiData(final int page) {
         final SheBeiRootBean sheBeiRootBean = SheBeiRootBean.newInstance();
         sheBeiRootBean.setNameSpace(BaseUrl.NAMESPACE_P);
-        sheBeiRootBean.setPage("1");
+        sheBeiRootBean.setPage(String.valueOf(page));
         sheBeiRootBean.setKeyWord("");
         sheBeiRootBean.setUserName(User.getCurrentUser().getAccount());
 
@@ -97,6 +101,7 @@ public class SheBeiInfoActivity extends AppCompatActivity implements SwipeRefres
                     @Override
                     public void onCompleted() {
                         binding.refreshLayout.setRefreshing(false);
+                        binding.contentSheBei.setLoadCompleted();
                     }
 
                     @Override
@@ -110,12 +115,13 @@ public class SheBeiInfoActivity extends AppCompatActivity implements SwipeRefres
 
                     @Override
                     public void onNext(ResultModelData.ReturnValueBean<SheBeiRootBean> returnValueBean) {
-                        if (page == 1) {
+                        if (returnValueBean.getCurrentPage().equals("1")) {
                             adapter.setList(returnValueBean.getResultList());
                         } else {
                             adapter.addItems(returnValueBean.getResultList());
                         }
                         binding.refreshLayout.setRefreshing(false);
+                        currentPage = Integer.parseInt(returnValueBean.getCurrentPage());
                     }
                 });
     }
