@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.AbsListView;
 import android.widget.ExpandableListView;
 
-import com.powerge.wise.basestone.R; 
+import com.powerge.wise.basestone.R;
 
 /**
  * Created by Administrator on 2018/3/14.

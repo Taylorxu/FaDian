@@ -4,26 +4,39 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 
-import com.powerge.wise.basestone.heart.ui.EndLessOnScrollListener;
+import com.powerge.wise.basestone.heart.network.FlatMapResponse;
+import com.powerge.wise.basestone.heart.network.FlatMapTopResList;
+import com.powerge.wise.basestone.heart.network.ResultModelData;
 import com.powerge.wise.basestone.heart.ui.XAdapter;
+import com.powerge.wise.basestone.heart.ui.view.PagingRecyclerView;
 import com.powerge.wise.powerge.BR;
 import com.powerge.wise.powerge.R;
-import com.powerge.wise.powerge.bean.SimpleListTextItem;
+import com.powerge.wise.powerge.bean.MorningMeetingBean;
+import com.powerge.wise.powerge.bean.User;
+import com.powerge.wise.powerge.config.soap.ApiService;
+import com.powerge.wise.powerge.config.soap.request.BaseUrl;
+import com.powerge.wise.powerge.config.soap.request.RequestBody;
+import com.powerge.wise.powerge.config.soap.request.RequestEnvelope;
 import com.powerge.wise.powerge.databinding.ActivityMorningMeetingBinding;
 import com.powerge.wise.powerge.databinding.ItemZhiZhangLogesBinding;
+import com.wisesignsoft.OperationManagement.utils.ToastUtil;
 
-import java.util.ArrayList;
-import java.util.List;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 public class MorningMeetingActivity extends AppCompatActivity {
 
-    List<SimpleListTextItem> listTextItems = new ArrayList<>();
+
+    private int currentPage;
 
     public static void start(Context context) {
         Intent starter = new Intent(context, MorningMeetingActivity.class);
@@ -40,48 +53,79 @@ public class MorningMeetingActivity extends AppCompatActivity {
         initView();
     }
 
-    XAdapter<SimpleListTextItem, ItemZhiZhangLogesBinding> adapter = new XAdapter.SimpleAdapter<>(BR.textItem, R.layout.item_zhi_zhang_loges);
+    XAdapter<MorningMeetingBean, ItemZhiZhangLogesBinding> adapter = new XAdapter.SimpleAdapter<>(BR.textItem, R.layout.item_zhi_zhang_loges);
 
     @SuppressLint("ResourceAsColor")
     private void initView() {
         binding.refreshLayout.setColorSchemeColors(R.color.colorPrimary);
         binding.refreshLayout.setOnRefreshListener(refreshListener);
+        binding.contentLog.setOnLoadMoreListener(onLoadMoreListener);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         binding.contentLog.setLayoutManager(layoutManager);
         binding.contentLog.setAdapter(adapter);
-        adapter.setList(listTextItems);
-        binding.contentLog.setOnScrollListener(new EndLessOnScrollListener(layoutManager) {
-            @Override
-            public void onLoadMore(int currentPage) {
-                refreshData(currentPage);
-            }
-        });
+        DividerItemDecoration divider = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
+        divider.setDrawable(ContextCompat.getDrawable(this, R.drawable.item_line));
+        binding.contentLog.addItemDecoration(divider);
     }
 
 
     SwipeRefreshLayout.OnRefreshListener refreshListener = new SwipeRefreshLayout.OnRefreshListener() {
         @Override
         public void onRefresh() {
-//TODO get data
-            refreshData(1);
+            binding.contentLog.setState(PagingRecyclerView.State.Refresh);
 
         }
     };
 
-
-    private void refreshData(int currentPage) {
-
-        for (int i = 0; i < 10; i++) {
-            SimpleListTextItem textItem = new SimpleListTextItem();
-            textItem.setTitle("值长:阿拉丁" + i);
-            textItem.setContent("今天做了" + i + "见事情");
-            textItem.setLogTitle(i + "#机组的日志");
-//                textItem.setDate("");
-            listTextItems.add(textItem);
+    PagingRecyclerView.OnLoadMoreListener onLoadMoreListener = new PagingRecyclerView.OnLoadMoreListener() {
+        @Override
+        public void onLoadMore(int page) {
+            getData(currentPage + 1);
         }
-        adapter.notifyDataSetChanged();
-        binding.refreshLayout.setRefreshing(false);
+    };
+
+    public void getData(int page) {
+        final MorningMeetingBean morningMeetingBean = MorningMeetingBean.newInstance();
+        morningMeetingBean.setNameSpace(BaseUrl.NAMESPACE_P);
+        morningMeetingBean.setPage(String.valueOf(page));
+        morningMeetingBean.setUserName(User.getCurrentUser().getAccount());
+
+        RequestEnvelope.getRequestEnvelope().setBody(new RequestBody<>(morningMeetingBean));
+        ApiService.Creator.get().queryProductionEarlyMeetingData(RequestEnvelope.getRequestEnvelope())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .flatMap(new FlatMapResponse<ResultModelData<ResultModelData.ReturnValueBean<MorningMeetingBean>>>())
+                .flatMap(new FlatMapTopResList<ResultModelData.ReturnValueBean<MorningMeetingBean>>())
+                .subscribe(new Subscriber<ResultModelData.ReturnValueBean<MorningMeetingBean>>() {
+                    @Override
+                    public void onCompleted() {
+                        binding.refreshLayout.setRefreshing(false);
+                        binding.contentLog.setState(PagingRecyclerView.State.LoadSuccess);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        e.printStackTrace();
+                        if (e.getMessage().indexOf("java.net.ConnectException: Connection refused") > 0) {
+                            ToastUtil.toast(getBaseContext(), "服务连接失败");
+                        }
+                        binding.refreshLayout.setRefreshing(false);
+                    }
+
+                    @Override
+                    public void onNext(ResultModelData.ReturnValueBean<MorningMeetingBean> returnValueBean) {
+                        if (returnValueBean.getCurrentPage().equals("1")) {
+                            adapter.setList(returnValueBean.getResultList());
+                        } else {
+                            adapter.addItems(returnValueBean.getResultList());
+                        }
+                        binding.refreshLayout.setRefreshing(false);
+                        binding.contentLog.setState(PagingRecyclerView.State.LoadSuccess);
+                        currentPage = Integer.parseInt(returnValueBean.getCurrentPage());
+                    }
+                });
     }
+
 
     public void onClick(View view) {
         finish();

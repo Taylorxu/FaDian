@@ -1,5 +1,6 @@
 package com.powerge.wise.powerge.config.soap.request;
 
+import com.powerge.wise.powerge.bean.MorningMeetingBean;
 import com.powerge.wise.powerge.bean.SheBeiRootBean;
 import com.powerge.wise.powerge.config.soap.beans.LoginBean;
 
@@ -22,6 +23,7 @@ public class RequestBody<Data> {
 
     @ElementUnion({
             @Element(name = "n0:mobileLogin", type = LoginBean.class),
+            @Element(name = "n0:queryProductionEarlyMeetingData", type = MorningMeetingBean.class),
             @Element(name = "n0:queryDevicesData", type = SheBeiRootBean.class)
     })
     public Data requestModel;

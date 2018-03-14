@@ -3,6 +3,7 @@ package com.powerge.wise.powerge.config.soap;
 
 import com.powerge.wise.basestone.heart.network.NetConfig;
 import com.powerge.wise.basestone.heart.network.ResultModelData;
+import com.powerge.wise.powerge.bean.MorningMeetingBean;
 import com.powerge.wise.powerge.bean.SheBeiRootBean;
 import com.powerge.wise.powerge.config.soap.request.BaseUrl;
 import com.powerge.wise.powerge.config.soap.beans.LoginBean;
@@ -13,8 +14,6 @@ import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.convert.AnnotationStrategy;
 import org.simpleframework.xml.core.Persister;
 import org.simpleframework.xml.strategy.Strategy;
-
-import java.util.List;
 
 import retrofit2.Response;
 import retrofit2.Retrofit;
@@ -46,6 +45,13 @@ public interface ApiService {
     })
     @POST(BaseUrl.SERVICE_P)
     Observable<Response<ResultModelData<ResultModelData.ReturnValueBean<SheBeiRootBean>>>> queryDevicesData(@Body RequestEnvelope requestEnvelope);
+
+    @Headers({
+            "Content-Type:text/xml; charset=utf-8",
+            "Accept-Charset: utf-8"
+    })
+    @POST(BaseUrl.SERVICE_P)
+    Observable<Response<ResultModelData<ResultModelData.ReturnValueBean<MorningMeetingBean>>>> queryProductionEarlyMeetingData(@Body RequestEnvelope requestEnvelope);
 
 
     class Creator {

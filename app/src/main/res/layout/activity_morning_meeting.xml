@@ -37,10 +37,10 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/bar">
 
-            <android.support.v7.widget.RecyclerView
+            <com.powerge.wise.basestone.heart.ui.view.PagingRecyclerView
                 android:id="@+id/content_log"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+                android:layout_height="wrap_content" />
 
         </android.support.v4.widget.SwipeRefreshLayout>
 
