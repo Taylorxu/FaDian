@@ -5,6 +5,7 @@ import com.powerge.wise.basestone.heart.network.NetConfig;
 import com.powerge.wise.basestone.heart.network.ResultModelData;
 import com.powerge.wise.powerge.bean.MorningMeetingBean;
 import com.powerge.wise.powerge.bean.SheBeiRootBean;
+import com.powerge.wise.powerge.bean.TongJiForm;
 import com.powerge.wise.powerge.bean.ZhiZhangLogBean;
 import com.powerge.wise.powerge.config.soap.request.BaseUrl;
 import com.powerge.wise.powerge.config.soap.beans.LoginBean;
@@ -40,6 +41,7 @@ public interface ApiService {
     @POST(BaseUrl.SERVICE_Y)
     Observable<Response<ResultModel<LoginBean>>> login(@Body RequestEnvelope requestEnvelope);
 
+    //设备信息查询
     @Headers({
             "Content-Type:text/xml; charset=utf-8",
             "Accept-Charset: utf-8"
@@ -47,6 +49,7 @@ public interface ApiService {
     @POST(BaseUrl.SERVICE_P)
     Observable<Response<ResultModelData<ResultModelData.ReturnValueBean<SheBeiRootBean>>>> queryDevicesData(@Body RequestEnvelope requestEnvelope);
 
+    //早会
     @Headers({
             "Content-Type:text/xml; charset=utf-8",
             "Accept-Charset: utf-8"
@@ -54,7 +57,16 @@ public interface ApiService {
     @POST(BaseUrl.SERVICE_P)
     Observable<Response<ResultModelData<ResultModelData.ReturnValueBean<MorningMeetingBean>>>> queryProductionEarlyMeetingData(@Body RequestEnvelope requestEnvelope);
 
-@Headers({
+    //统计报表
+    @Headers({
+            "Content-Type:text/xml; charset=utf-8",
+            "Accept-Charset: utf-8"
+    })
+    @POST(BaseUrl.SERVICE_P)
+    Observable<Response<ResultModelData<ResultModelData.ReturnValueBean<TongJiForm>>>> queryStatisticData(@Body RequestEnvelope requestEnvelope);
+
+    //值长日志
+    @Headers({
             "Content-Type:text/xml; charset=utf-8",
             "Accept-Charset: utf-8"
     })

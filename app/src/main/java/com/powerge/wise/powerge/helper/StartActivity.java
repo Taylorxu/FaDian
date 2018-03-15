@@ -9,6 +9,7 @@ import com.powerge.wise.powerge.otherPages.JingSai.JingSaiActivity;
 import com.powerge.wise.powerge.otherPages.MorningMeetingActivity;
 import com.powerge.wise.powerge.otherPages.PlanTasksMag.PlanTasksMagActivity;
 import com.powerge.wise.powerge.otherPages.SheBeiInfoActivity;
+import com.powerge.wise.powerge.otherPages.TongJiFormActivity;
 import com.powerge.wise.powerge.otherPages.ZHiZhangLogActivity;
 import com.powerge.wise.powerge.otherPages.huaBao.HuanBaoActivity;
 import com.powerge.wise.powerge.otherPages.queXian.QueXianMagActivity;
@@ -28,6 +29,8 @@ public class StartActivity {
             DianLiangManagementActivity.start(context);
         } else if (where == 2) {
             JingJiZhiBiaoActivity.start(context);
+        } else if (where == 3) {
+            TongJiFormActivity.start(context);
         } else if (where == 4) {
             SheBeiInfoActivity.start(context);
         } else if (where == 5) {
