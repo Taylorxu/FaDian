@@ -4,6 +4,7 @@ package com.powerge.wise.powerge.config.soap;
 import com.powerge.wise.basestone.heart.network.NetConfig;
 import com.powerge.wise.basestone.heart.network.ResultModelData;
 import com.powerge.wise.powerge.bean.MorningMeetingBean;
+import com.powerge.wise.powerge.bean.QueXianMagBean;
 import com.powerge.wise.powerge.bean.SheBeiRootBean;
 import com.powerge.wise.powerge.bean.TongJiForm;
 import com.powerge.wise.powerge.bean.ZhiZhangLogBean;
@@ -72,6 +73,14 @@ public interface ApiService {
     })
     @POST(BaseUrl.SERVICE_P)
     Observable<Response<ResultModelData<ResultModelData.ReturnValueBean<ZhiZhangLogBean>>>> queryMonitorLogs(@Body RequestEnvelope requestEnvelope);
+
+    //缺陷管理
+    @Headers({
+            "Content-Type:text/xml; charset=utf-8",
+            "Accept-Charset: utf-8"
+    })
+    @POST(BaseUrl.SERVICE_P)
+    Observable<Response<ResultModelData<ResultModelData.ReturnValueBean<QueXianMagBean>>>> queryIssueDetails(@Body RequestEnvelope requestEnvelope);
 
 
     class Creator {

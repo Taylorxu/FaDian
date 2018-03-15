@@ -1,6 +1,7 @@
 package com.powerge.wise.powerge.config.soap.request;
 
 import com.powerge.wise.powerge.bean.MorningMeetingBean;
+import com.powerge.wise.powerge.bean.QueXianMagBean;
 import com.powerge.wise.powerge.bean.SheBeiRootBean;
 import com.powerge.wise.powerge.bean.TongJiForm;
 import com.powerge.wise.powerge.bean.ZhiZhangLogBean;
@@ -28,6 +29,7 @@ public class RequestBody<Data> {
             @Element(name = "n0:queryProductionEarlyMeetingData", type = MorningMeetingBean.class),
             @Element(name = "n0:queryDevicesData", type = SheBeiRootBean.class),
             @Element(name = "n0:queryStatisticData", type = TongJiForm.class),
+            @Element(name = "n0:queryIssueDetails", type = QueXianMagBean.class),
             @Element(name = "n0:queryMonitorLogs", type = ZhiZhangLogBean.class)
     })
     public Data requestModel;

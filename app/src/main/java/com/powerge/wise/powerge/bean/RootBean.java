@@ -13,8 +13,6 @@ public abstract class RootBean {
     String nameSpace;
     @Element(name = "arg0")
     public String userName;
-    @Element(name = "arg1")
-    public String page;
 
     public String getNameSpace() {
         return nameSpace;
@@ -32,11 +30,4 @@ public abstract class RootBean {
         this.userName = userName;
     }
 
-    public String getPage() {
-        return page;
-    }
-
-    public void setPage(String page) {
-        this.page = page;
-    }
 }

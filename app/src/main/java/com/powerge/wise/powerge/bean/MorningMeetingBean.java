@@ -7,8 +7,11 @@ import org.simpleframework.xml.Element;
  * Created by Administrator on 2018/3/14.
  */
 
-public class MorningMeetingBean extends RootBean{
+public class MorningMeetingBean extends RootBean {
 
+
+    @Element(name = "arg1")
+    public String arg1;
 
     private String host;
     private String title;
@@ -53,6 +56,13 @@ public class MorningMeetingBean extends RootBean{
         this.detail = detail;
     }
 
+    public String getArg1() {
+        return arg1;
+    }
+
+    public void setArg1(String arg1) {
+        this.arg1 = arg1;
+    }
 
     public static class DateBean {
         private int date;

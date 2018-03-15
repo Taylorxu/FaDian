@@ -17,6 +17,9 @@ public class ZhiZhangLogBean extends RootBean {
         return fragment;
     }
 
+    @Element(name = "arg1")
+    public String arg1;
+
     private String monitor;
     private String title;
     private String detail;
@@ -52,6 +55,14 @@ public class ZhiZhangLogBean extends RootBean {
 
     public void setTime(TimeBean time) {
         this.time = time;
+    }
+
+    public String getArg1() {
+        return arg1;
+    }
+
+    public void setArg1(String arg1) {
+        this.arg1 = arg1;
     }
 
     public static class TimeBean {

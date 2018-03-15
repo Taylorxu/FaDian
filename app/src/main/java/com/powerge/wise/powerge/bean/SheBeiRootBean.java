@@ -10,18 +10,13 @@ import org.simpleframework.xml.Root;
  * Created by Administrator on 2018/3/1.
  */
 @Root
-public class SheBeiRootBean {
+public class SheBeiRootBean extends RootBean {
     public static SheBeiRootBean newInstance() {
         SheBeiRootBean fragment = new SheBeiRootBean();
         return fragment;
     }
 
 
-    @Attribute(name = "xmlns:n0")
-    String nameSpace;
-
-    @Element(name = "arg0")
-    public String userName;
     @Element(name = "arg1")
     public String keyWord;
     @Element(name = "arg2")

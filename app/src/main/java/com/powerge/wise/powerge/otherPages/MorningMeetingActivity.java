@@ -88,7 +88,7 @@ public class MorningMeetingActivity extends AppCompatActivity {
     public void getData(int page) {
         final MorningMeetingBean morningMeetingBean = MorningMeetingBean.newInstance();
         morningMeetingBean.setNameSpace(BaseUrl.NAMESPACE_P);
-        morningMeetingBean.setPage(String.valueOf(page));
+        morningMeetingBean.setArg1(String.valueOf(page));
         morningMeetingBean.setUserName(User.getCurrentUser().getAccount());
 
         RequestEnvelope.getRequestEnvelope().setBody(new RequestBody<>(morningMeetingBean));

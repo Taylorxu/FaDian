@@ -59,7 +59,7 @@ public class ZHiZhangLogActivity extends AppCompatActivity {
 
     @SuppressLint("ResourceAsColor")
     private void initView() {
-        binding.refreshLayout.setColorSchemeColors(R.color.colorPrimary);
+        binding.refreshLayout.setColorSchemeColors(getResources().getColor(R.color.colorPrimary));
         binding.refreshLayout.setOnRefreshListener(refreshListener);
         binding.contentLog.setOnLoadMoreListener(onLoadMoreListener);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
@@ -85,7 +85,7 @@ public class ZHiZhangLogActivity extends AppCompatActivity {
     private void getData(int page) {
         final ZhiZhangLogBean zhiZhangLogBean = ZhiZhangLogBean.newInstance();
         zhiZhangLogBean.setNameSpace(BaseUrl.NAMESPACE_P);
-        zhiZhangLogBean.setPage(String.valueOf(page));
+        zhiZhangLogBean.setArg1(String.valueOf(page));
         zhiZhangLogBean.setUserName(User.getCurrentUser().getAccount());
         RequestEnvelope.getRequestEnvelope().setBody(new RequestBody<>(zhiZhangLogBean));
 
