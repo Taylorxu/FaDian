@@ -8,9 +8,13 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AbsListView;
 import android.widget.ExpandableListView;
+import android.widget.TextView;
 
 import com.powerge.wise.basestone.heart.network.FlatMapResponse;
 import com.powerge.wise.basestone.heart.network.FlatMapTopResList;
@@ -24,6 +28,7 @@ import com.powerge.wise.powerge.config.soap.request.BaseUrl;
 import com.powerge.wise.powerge.config.soap.request.RequestBody;
 import com.powerge.wise.powerge.config.soap.request.RequestEnvelope;
 import com.powerge.wise.powerge.databinding.ActivitySheBeiInfoBinding;
+import com.powerge.wise.powerge.zxing.activity.CaptureActivity;
 import com.wisesignsoft.OperationManagement.utils.ToastUtil;
 
 import java.util.ArrayList;
@@ -41,8 +46,8 @@ public class SheBeiInfoActivity extends AppCompatActivity implements SwipeRefres
 
     ActivitySheBeiInfoBinding binding;
     ExpandableListAdapter adapter = new ExpandableListAdapter();
-    List<SheBeiRootBean> list = new ArrayList<>();
     int currentPage = 0;
+    private String keyWord = "";
 
     @SuppressLint("ResourceAsColor")
     @Override
@@ -74,6 +79,7 @@ public class SheBeiInfoActivity extends AppCompatActivity implements SwipeRefres
                 getSheBeiData(currentPage + 1);
             }
         });
+        binding.editSearchInfo.setOnEditorActionListener(onEditorActionListener);
 
     }
 
@@ -81,7 +87,7 @@ public class SheBeiInfoActivity extends AppCompatActivity implements SwipeRefres
         final SheBeiRootBean sheBeiRootBean = SheBeiRootBean.newInstance();
         sheBeiRootBean.setNameSpace(BaseUrl.NAMESPACE_P);
         sheBeiRootBean.setPage(String.valueOf(page));
-        sheBeiRootBean.setKeyWord("");
+        sheBeiRootBean.setKeyWord(keyWord);
         sheBeiRootBean.setUserName(User.getCurrentUser().getAccount());
 
         RequestEnvelope.getRequestEnvelope().setBody(new RequestBody<>(sheBeiRootBean));
@@ -121,13 +127,61 @@ public class SheBeiInfoActivity extends AppCompatActivity implements SwipeRefres
 
 
     public void onClick(View view) {
-        if (view.getId() == R.id.btn_back) {
-            finish();
+        switch (view.getId()) {
+            case R.id.btn_back:
+                finish();
+                break;
+            case R.id.btn_scan:
+                //调用二维码扫描
+                startActivityForResult(new Intent(this, CaptureActivity.class), 450);
+                break;
+            case R.id.btn_search:
+                startSearch();
+                break;
         }
     }
 
     @Override
     public void onRefresh() {
         getSheBeiData(1);
+    }
+
+    TextView.OnEditorActionListener onEditorActionListener = new TextView.OnEditorActionListener() {
+        @Override
+        public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                if (inputMethodManager.isActive()) {
+                    inputMethodManager.hideSoftInputFromWindow(v.getApplicationWindowToken(), 0);
+                }
+
+                startSearch();
+                return true;
+            } else {
+                return false;
+            }
+        }
+    };
+
+    /**
+     * 调用查询接口
+     */
+    public void startSearch() {
+        keyWord = binding.editSearchInfo.getText().toString();
+        getSheBeiData(1);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+         if (resultCode == RESULT_OK) {
+            if(requestCode==450){
+                Bundle bundle = data.getExtras();
+                keyWord = bundle.getString("result");
+                binding.editSearchInfo.setText(bundle.getString("result"));
+                startSearch();
+            }
+
+        }
     }
 }

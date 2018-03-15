@@ -28,15 +28,13 @@
                     style="@style/Title" />
 
                 <ImageView
-                    android:id="@+id/btn_fill_form"
+                    android:id="@+id/btn_scan"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right|center_vertical"
                     android:layout_marginRight="20dp"
                     android:background="@drawable/ic_she_bei_scan"
-                    android:onClick="onClick"
-
-                    />
+                    android:onClick="onClick" />
             </FrameLayout>
 
             <android.support.v7.widget.Toolbar
@@ -60,12 +58,17 @@
                     android:paddingTop="5dp">
 
                     <EditText
+                        android:id="@+id/edit_search_info"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:background="@color/transparent"
                         android:cursorVisible="false"
                         android:hint="@string/search_hint_text"
+                        android:imeActionId="3"
+                        android:imeOptions="actionSearch"
+                        android:maxLines="1"
+                        android:singleLine="true"
                         android:textColor="@color/color_4d"
                         android:textColorHint="@color/text_color_jizu_name"
                         android:textSize="12sp" />
@@ -74,7 +77,8 @@
                         android:id="@+id/btn_search"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/ic_search" />
+                        android:background="@drawable/ic_search"
+                        android:onClick="onClick" />
                 </LinearLayout>
 
             </android.support.v7.widget.Toolbar>

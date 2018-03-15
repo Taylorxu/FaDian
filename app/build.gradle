@@ -23,7 +23,6 @@ android {
 }
 
 dependencies {
-
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:appcompat-v7:26.1.0'
     implementation 'com.android.support:design:26.1.0'
@@ -38,29 +37,26 @@ dependencies {
     implementation project(':OperationManagement')
     //统计图
     implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3'
-/**
- *   用于图片fresco
- */
+    /**
+     *    用于图片fresco
+     */
     compile 'com.facebook.fresco:fresco:0.12.0'
     compile 'com.facebook.fresco:imagepipeline-okhttp3:0.12.0'
     compile 'com.facebook.fresco:animated-gif:0.12.0'
     compile 'me.relex:photodraweeview:1.1.2'
-
     /**
-     * 各种小红点什么的
+     *  各种小红点什么的
      */
     compile 'cn.bingoogolapple:bga-badgeview:1.1.3@aar'
-/**
- *
- */
+    /**
+     *
+     */
     compile 'com.github.Aspsine:IRecyclerView:0.0.5'
     compile 'com.mostafagazar:customshapeimageview:1.0.4'
-
     implementation('com.squareup.retrofit2:converter-simplexml:2.3.0') {
         exclude module: 'stax'
         exclude module: 'stax-api'
         exclude module: 'xpp3'
     }
-
-
+    implementation files('libs/zxing.jar')
 }
