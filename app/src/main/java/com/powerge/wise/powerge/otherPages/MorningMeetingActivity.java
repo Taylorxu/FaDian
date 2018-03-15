@@ -58,7 +58,7 @@ public class MorningMeetingActivity extends AppCompatActivity {
 
     @SuppressLint("ResourceAsColor")
     private void initView() {
-        binding.refreshLayout.setColorSchemeColors(R.color.colorPrimary);
+        binding.refreshLayout.setColorSchemeColors(getResources().getColor(R.color.colorPrimary));
         binding.refreshLayout.setOnRefreshListener(refreshListener);
         binding.contentLog.setOnLoadMoreListener(onLoadMoreListener);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);

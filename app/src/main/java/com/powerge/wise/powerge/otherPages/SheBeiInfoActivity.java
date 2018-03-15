@@ -55,7 +55,7 @@ public class SheBeiInfoActivity extends AppCompatActivity implements SwipeRefres
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_she_bei_info);
         binding.title.setText(getResources().getStringArray(R.array.item_name_array)[4]);
-        binding.refreshLayout.setColorSchemeColors(R.color.colorPrimary);
+        binding.refreshLayout.setColorSchemeColors(getResources().getColor(R.color.colorPrimary));
         binding.refreshLayout.setOnRefreshListener(this);
         initView();
     }
@@ -174,8 +174,8 @@ public class SheBeiInfoActivity extends AppCompatActivity implements SwipeRefres
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-         if (resultCode == RESULT_OK) {
-            if(requestCode==450){
+        if (resultCode == RESULT_OK) {
+            if (requestCode == 450) {
                 Bundle bundle = data.getExtras();
                 keyWord = bundle.getString("result");
                 binding.editSearchInfo.setText(bundle.getString("result"));

@@ -53,7 +53,7 @@ public class SecondFragment extends Fragment {
     private void initView() {
         binding.title.setText("公告");
         setData();
-        binding.refreshLayout.setColorSchemeColors(R.color.colorPrimary);
+        binding.refreshLayout.setColorSchemeColors(getResources().getColor(R.color.colorPrimary));
         binding.refreshLayout.setOnRefreshListener(refreshListener);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         binding.contentAnnounceList.setLayoutManager(layoutManager);
