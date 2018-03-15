@@ -6,7 +6,7 @@
 
         <variable
             name="textItem"
-            type="com.powerge.wise.powerge.bean.ZhiZhangLogBean" />
+            type="com.powerge.wise.powerge.bean.MorningMeetingBean" />
     </data>
 
     <LinearLayout
@@ -36,7 +36,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="left|center_vertical"
-                    android:text="@{textItem.monitor}"
+                    android:text="@{textItem.host}"
                     android:textColor="@color/color_4d"
                     android:textSize="16sp" />
 

@@ -26,6 +26,7 @@ import com.powerge.wise.powerge.config.soap.request.BaseUrl;
 import com.powerge.wise.powerge.config.soap.request.RequestBody;
 import com.powerge.wise.powerge.config.soap.request.RequestEnvelope;
 import com.powerge.wise.powerge.databinding.ActivityMorningMeetingBinding;
+import com.powerge.wise.powerge.databinding.ItemMorningMeetingBinding;
 import com.powerge.wise.powerge.databinding.ItemZhiZhangLogesBinding;
 import com.wisesignsoft.OperationManagement.utils.ToastUtil;
 
@@ -53,7 +54,7 @@ public class MorningMeetingActivity extends AppCompatActivity {
         initView();
     }
 
-    XAdapter<MorningMeetingBean, ItemZhiZhangLogesBinding> adapter = new XAdapter.SimpleAdapter<>(BR.textItem, R.layout.item_zhi_zhang_loges);
+    XAdapter<MorningMeetingBean, ItemMorningMeetingBinding> adapter = new XAdapter.SimpleAdapter<>(BR.textItem, R.layout.item_morning_meeting);
 
     @SuppressLint("ResourceAsColor")
     private void initView() {
@@ -63,9 +64,9 @@ public class MorningMeetingActivity extends AppCompatActivity {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         binding.contentLog.setLayoutManager(layoutManager);
         binding.contentLog.setAdapter(adapter);
-        DividerItemDecoration divider = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
+       /* DividerItemDecoration divider = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
         divider.setDrawable(ContextCompat.getDrawable(this, R.drawable.item_line));
-        binding.contentLog.addItemDecoration(divider);
+        binding.contentLog.addItemDecoration(divider);*/
     }
 
 

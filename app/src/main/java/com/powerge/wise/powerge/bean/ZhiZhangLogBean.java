@@ -1,32 +1,33 @@
 package com.powerge.wise.powerge.bean;
 
+import android.os.Bundle;
+
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;
 
 /**
- * Created by Administrator on 2018/3/14.
+ * 值长日志 bean
+ * Created by Administrator on 2018/3/15.
  */
 
-public class MorningMeetingBean extends RootBean{
+public class ZhiZhangLogBean extends RootBean {
 
-
-    private String host;
-    private String title;
-    private DateBean date;
-    private String detail;
-
-    public static MorningMeetingBean newInstance() {
-        MorningMeetingBean fragment = new MorningMeetingBean();
+    public static ZhiZhangLogBean newInstance() {
+        ZhiZhangLogBean fragment = new ZhiZhangLogBean();
         return fragment;
     }
 
+    private String monitor;
+    private String title;
+    private String detail;
+    private TimeBean time;
 
-    public String getHost() {
-        return host;
+    public String getMonitor() {
+        return monitor;
     }
 
-    public void setHost(String host) {
-        this.host = host;
+    public void setMonitor(String monitor) {
+        this.monitor = monitor;
     }
 
     public String getTitle() {
@@ -37,14 +38,6 @@ public class MorningMeetingBean extends RootBean{
         this.title = title;
     }
 
-    public DateBean getDate() {
-        return date;
-    }
-
-    public void setDate(DateBean date) {
-        this.date = date;
-    }
-
     public String getDetail() {
         return detail;
     }
@@ -53,8 +46,28 @@ public class MorningMeetingBean extends RootBean{
         this.detail = detail;
     }
 
+    public TimeBean getTime() {
+        return time;
+    }
 
-    public static class DateBean {
+    public void setTime(TimeBean time) {
+        this.time = time;
+    }
+
+    public static class TimeBean {
+        /**
+         * date : 1
+         * day : 4
+         * hours : 17
+         * minutes : 20
+         * month : 2
+         * nanos : 0
+         * seconds : 32
+         * time : 1519896032000
+         * timezoneOffset : -480
+         * year : 118
+         */
+
         private int date;
         private int day;
         private int hours;
