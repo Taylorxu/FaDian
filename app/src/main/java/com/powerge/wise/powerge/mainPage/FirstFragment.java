@@ -19,6 +19,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
+import android.widget.Switch;
 
 import com.hyphenate.util.DensityUtil;
 import com.powerge.wise.basestone.heart.ui.XAdapter;
@@ -153,7 +154,7 @@ public class FirstFragment extends Fragment {
 
     public interface OnFirstFragmentInteractionListener {
 
-        void onFragmentInteraction(Uri uri);
+        void onFragmentInteraction(int where);
     }
 
     /**
@@ -193,6 +194,8 @@ public class FirstFragment extends Fragment {
     private void showPopWindow() {
         PopWindowFirstFragmentBinding popBinding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.pop_window_first_fragment, null, false);
 //        window = new PopupWindow(popBinding.getRoot(), LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT);
+        popBinding.btnBlueToothL.setOnClickListener(new PopOnItemClick());
+        popBinding.btnScanL.setOnClickListener(new PopOnItemClick());
         window = new PopupWindow(popBinding.getRoot(), 520, 432);
         window.setAnimationStyle(R.style.popup_window_anim);
         window.setFocusable(true);
@@ -204,5 +207,20 @@ public class FirstFragment extends Fragment {
         fragmentBinding.btnOpenDoor.getLocationOnScreen(location);
         int lx = location[0] - window.getWidth() + w - 20;//20 是距离右边的距离值
         window.showAtLocation(popBinding.getRoot(), Gravity.NO_GRAVITY, lx, location[1] + h);
+    }
+
+    class PopOnItemClick implements View.OnClickListener {
+
+        @Override
+        public void onClick(View v) {
+            switch (v.getId()) {
+                case R.id.btn_scan_l:
+                    mListener.onFragmentInteraction(0);
+                    break;
+                case R.id.btn_blue_tooth_l:
+
+                    break;
+            }
+        }
     }
 }

@@ -7,12 +7,10 @@ import android.databinding.DataBindingUtil;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.AbsListView;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
 
@@ -30,9 +28,6 @@ import com.powerge.wise.powerge.config.soap.request.RequestEnvelope;
 import com.powerge.wise.powerge.databinding.ActivitySheBeiInfoBinding;
 import com.powerge.wise.powerge.zxing.activity.CaptureActivity;
 import com.wisesignsoft.OperationManagement.utils.ToastUtil;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -58,7 +53,14 @@ public class SheBeiInfoActivity extends AppCompatActivity implements SwipeRefres
         binding.refreshLayout.setColorSchemeColors(getResources().getColor(R.color.colorPrimary));
         binding.refreshLayout.setOnRefreshListener(this);
         initView();
+        if (getIntent().getExtras() != null) {
+            Bundle bundle = getIntent().getExtras();
+            keyWord = bundle.getString("result");
+            binding.editSearchInfo.setText(bundle.getString("result"));
+            startSearch();
+        }
     }
+
 
     private void initView() {
         binding.refreshLayout.setRefreshing(true);
@@ -133,7 +135,7 @@ public class SheBeiInfoActivity extends AppCompatActivity implements SwipeRefres
                 break;
             case R.id.btn_scan:
                 //调用二维码扫描
-                startActivityForResult(new Intent(this, CaptureActivity.class), 450);
+                startActivity(new Intent(this, CaptureActivity.class));
                 break;
             case R.id.btn_search:
                 startSearch();
@@ -175,13 +177,10 @@ public class SheBeiInfoActivity extends AppCompatActivity implements SwipeRefres
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
-            if (requestCode == 450) {
-                Bundle bundle = data.getExtras();
-                keyWord = bundle.getString("result");
-                binding.editSearchInfo.setText(bundle.getString("result"));
-                startSearch();
-            }
-
+            Bundle bundle = data.getExtras();
+            keyWord = bundle.getString("result");
+            binding.editSearchInfo.setText(bundle.getString("result"));
+            startSearch();
         }
     }
 }

@@ -37,6 +37,7 @@ import android.widget.RelativeLayout;
 
 import com.google.zxing.Result;
 import com.powerge.wise.powerge.R;
+import com.powerge.wise.powerge.otherPages.SheBeiInfoActivity;
 import com.powerge.wise.powerge.zxing.camera.CameraManager;
 import com.powerge.wise.powerge.zxing.decode.DecodeThread;
 import com.powerge.wise.powerge.zxing.utils.BeepManager;
@@ -189,9 +190,10 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
         bundle.putString("result", rawResult.getText());
         Intent intent = new Intent();
         intent.putExtras(bundle);
-        setResult(RESULT_OK, intent);
+      /*  setResult(RESULT_OK, intent);
+        finish();*/
+        startActivity(new Intent(CaptureActivity.this, SheBeiInfoActivity.class).putExtras(bundle));
         finish();
-//		startActivity(new Intent(CaptureActivity.this, ResultActivity.class).putExtras(bundle));
     }
 
     private void initCamera(SurfaceHolder surfaceHolder) {

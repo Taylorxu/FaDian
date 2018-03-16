@@ -37,6 +37,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:gravity="center"
+                android:id="@+id/btn_scan_l"
                 android:orientation="horizontal">
 
                 <ImageView
@@ -63,7 +64,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:gravity="center"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:id="@+id/btn_blue_tooth_l"
+                >
 
                 <ImageView
                     android:layout_width="20dp"

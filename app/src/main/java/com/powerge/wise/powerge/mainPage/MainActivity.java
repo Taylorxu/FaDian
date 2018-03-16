@@ -16,6 +16,7 @@ import android.widget.RadioGroup;
 import com.powerge.wise.powerge.R;
 import com.powerge.wise.powerge.databinding.ActivityMainBinding;
 import com.powerge.wise.powerge.helper.BottomNavigationViewHelper;
+import com.powerge.wise.powerge.zxing.activity.CaptureActivity;
 
 public class MainActivity extends AppCompatActivity implements FirstFragment.OnFirstFragmentInteractionListener {
     private MainAdapter mSectionsPagerAdapter;
@@ -83,11 +84,13 @@ public class MainActivity extends AppCompatActivity implements FirstFragment.OnF
     /**
      * 第一个fragment的接口
      *
-     * @param uri
+     * @param
      */
     @Override
-    public void onFragmentInteraction(Uri uri) {
-
+    public void onFragmentInteraction(int where) {
+        if (where == 0) {
+            startActivity(new Intent(MainActivity.this, CaptureActivity.class));
+        }
     }
 
 
