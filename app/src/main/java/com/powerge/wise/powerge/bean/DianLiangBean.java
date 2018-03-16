@@ -69,6 +69,15 @@ public class DianLiangBean extends RootBean {
         private String name;
         private String realAmount;
         private String annRatio;
+        private String surplusAvg;
+
+        public String getSurplusAvg() {
+            return surplusAvg;
+        }
+
+        public void setSurplusAvg(String surplusAvg) {
+            this.surplusAvg = surplusAvg;
+        }
 
         public String getPlanedAmount() {
             return planedAmount;
@@ -181,6 +190,15 @@ public class DianLiangBean extends RootBean {
         private String realAmount;
         private String annRatio;
         private String dailyHours;
+        private String yesterdayAmount;
+
+        public String getYesterdayAmount() {
+            return yesterdayAmount;
+        }
+
+        public void setYesterdayAmount(String yesterdayAmount) {
+            this.yesterdayAmount = yesterdayAmount;
+        }
 
         public String getPlanedAmount() {
             return planedAmount;

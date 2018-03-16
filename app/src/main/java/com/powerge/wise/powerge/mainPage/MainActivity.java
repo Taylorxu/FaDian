@@ -1,6 +1,8 @@
 package com.powerge.wise.powerge.mainPage;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.net.Uri;
@@ -17,6 +19,13 @@ import com.powerge.wise.powerge.R;
 import com.powerge.wise.powerge.databinding.ActivityMainBinding;
 import com.powerge.wise.powerge.helper.BottomNavigationViewHelper;
 import com.powerge.wise.powerge.zxing.activity.CaptureActivity;
+import com.yanzhenjie.permission.Action;
+import com.yanzhenjie.permission.AndPermission;
+import com.yanzhenjie.permission.Rationale;
+import com.yanzhenjie.permission.RequestExecutor;
+import com.yanzhenjie.permission.SettingService;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements FirstFragment.OnFirstFragmentInteractionListener {
     private MainAdapter mSectionsPagerAdapter;
@@ -34,9 +43,7 @@ public class MainActivity extends AppCompatActivity implements FirstFragment.OnF
         mSectionsPagerAdapter = new MainAdapter(getSupportFragmentManager());
         mainBinding.container.setAdapter(mSectionsPagerAdapter);
         mainBinding.container.addOnPageChangeListener(onPageChangeListener);
-
         mainBinding.navigation.setOnCheckedChangeListener(OnNISListener);
-
     }
 
     RadioGroup.OnCheckedChangeListener OnNISListener = new RadioGroup.OnCheckedChangeListener() {

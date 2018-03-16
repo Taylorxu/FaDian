@@ -42,7 +42,7 @@
         <activity
             android:name=".mainPage.MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme">
 
             <!--
             <intent-filter>
@@ -261,7 +261,9 @@
         <activity android:name=".otherPages.xunJian.XunJianMagActivity" />
         <activity android:name=".otherPages.xunJian.XunJianDianSignListActivity" />
         <activity android:name=".otherPages.PlanTasksMag.PlanTasksMagActivity" />
-        <activity android:name=".otherPages.SplashActivity">
+        <activity android:name=".otherPages.SplashActivity"
+
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

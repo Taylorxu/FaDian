@@ -67,4 +67,6 @@ dependencies {
         exclude module: 'xpp3'
     }
     implementation files('libs/zxing.jar')
+
+    implementation 'com.yanzhenjie:permission:2.0.0-rc3'
 }
