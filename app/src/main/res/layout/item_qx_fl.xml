@@ -139,7 +139,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical|right"
-                        android:text="此处有时间"
+                        android:text="2018-09-08"
                         android:textColorHint="@color/text_color_jizu_name"
                         android:textSize="15sp" />
 

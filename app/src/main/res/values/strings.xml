@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">发电企业辅助管理系统</string>
+    <string name="app_name">电厂助手</string>
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
 
@@ -55,7 +55,7 @@
     <string name="string_month">月</string>
     <string name="string_day">日</string>
 
-    <string name="first_page_app_name">发电企业移动管理辅助决策系统</string>
+    <string name="first_page_app_name">发电企业移动辅助管理系统</string>
     <string name="logo_name">发电企业移动端辅助系统</string>
     <string name="xun_jian_guan_li">巡检管理</string>
     <string name="wen_ti_pai_cha">问题排查</string>

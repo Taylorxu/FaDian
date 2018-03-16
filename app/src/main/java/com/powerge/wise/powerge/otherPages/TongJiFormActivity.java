@@ -17,6 +17,7 @@ import com.powerge.wise.basestone.heart.ui.XAdapter;
 import com.powerge.wise.basestone.heart.ui.view.PagingRecyclerView;
 import com.powerge.wise.powerge.BR;
 import com.powerge.wise.powerge.R;
+import com.powerge.wise.powerge.bean.MorningMeetingBean;
 import com.powerge.wise.powerge.bean.TongJiForm;
 import com.powerge.wise.powerge.bean.User;
 import com.powerge.wise.powerge.bean.ZhiZhangLogBean;
@@ -28,6 +29,9 @@ import com.powerge.wise.powerge.databinding.ActivityTongJiFormBinding;
 import com.powerge.wise.powerge.databinding.ItemTongJiBinding;
 import com.powerge.wise.powerge.databinding.ItemTowTextBinding;
 import com.wisesignsoft.OperationManagement.utils.ToastUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -54,14 +58,27 @@ public class TongJiFormActivity extends AppCompatActivity {
     XAdapter<TongJiForm, ItemTongJiBinding> adapter = new XAdapter.SimpleAdapter<>(BR.textItem, R.layout.item_tong_ji);
 
     private void initView() {
-        binding.refreshLayout.setColorSchemeColors(getResources().getColor(R.color.colorPrimary));
+        setDeadData();
+        adapter.setList(list);
+      /*  binding.refreshLayout.setColorSchemeColors(getResources().getColor(R.color.colorPrimary));
         binding.refreshLayout.setOnRefreshListener(refreshListener);
-        binding.contentForm.setOnLoadMoreListener(onLoadMoreListener);
+        binding.contentForm.setOnLoadMoreListener(onLoadMoreListener);*/
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         binding.contentForm.setLayoutManager(layoutManager);
         binding.contentForm.setAdapter(adapter);
     }
 
+    List<TongJiForm> list = new ArrayList<>();
+
+    public void setDeadData() {
+        for (int i = 0; i < 10; i++) {
+            TongJiForm bean = new TongJiForm();
+            bean.setName("发电量" + i);
+            bean.setUnit("万千瓦时");
+            bean.setValue(1000 + 1 + "");
+            list.add(bean);
+        }
+    }
 
     SwipeRefreshLayout.OnRefreshListener refreshListener = new SwipeRefreshLayout.OnRefreshListener() {
         @Override

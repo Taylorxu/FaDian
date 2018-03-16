@@ -59,14 +59,27 @@ public class ZHiZhangLogActivity extends AppCompatActivity {
 
     @SuppressLint("ResourceAsColor")
     private void initView() {
-        binding.refreshLayout.setColorSchemeColors(getResources().getColor(R.color.colorPrimary));
+        setDeadData();
+        adapter.setList(list);
+       /* binding.refreshLayout.setColorSchemeColors(getResources().getColor(R.color.colorPrimary));
         binding.refreshLayout.setOnRefreshListener(refreshListener);
-        binding.contentLog.setOnLoadMoreListener(onLoadMoreListener);
+        binding.contentLog.setOnLoadMoreListener(onLoadMoreListener);*/
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         binding.contentLog.setLayoutManager(layoutManager);
         binding.contentLog.setAdapter(adapter);
     }
 
+    List<ZhiZhangLogBean> list = new ArrayList<>();
+
+    public void setDeadData() {
+        for (int i = 0; i < 10; i++) {
+            ZhiZhangLogBean bean = new ZhiZhangLogBean();
+            bean.setMonitor("值长:王国华" + i);
+            bean.setTitle("今天做了" + i + "件事情");
+            bean.setDetail(i + "#机组的日志/n机组的日志");
+            list.add(bean);
+        }
+    }
 
     SwipeRefreshLayout.OnRefreshListener refreshListener = new SwipeRefreshLayout.OnRefreshListener() {
         @Override

@@ -52,20 +52,22 @@ public class SheBeiInfoActivity extends AppCompatActivity implements SwipeRefres
         binding = DataBindingUtil.setContentView(this, R.layout.activity_she_bei_info);
         binding.title.setText(getResources().getStringArray(R.array.item_name_array)[4]);
         binding.refreshLayout.setColorSchemeColors(getResources().getColor(R.color.colorPrimary));
-        binding.refreshLayout.setOnRefreshListener(this);
+//        binding.refreshLayout.setOnRefreshListener(this);
         initView();
-        if (getIntent().getExtras() != null) {
+        /*if (getIntent().getExtras() != null) {
             Bundle bundle = getIntent().getExtras();
             keyWord = bundle.getString("result");
             binding.editSearchInfo.setText(bundle.getString("result"));
             startSearch();
-        }
+        }*/
     }
 
 
     private void initView() {
-        binding.refreshLayout.setRefreshing(true);
-        getSheBeiData(1);
+      /*  binding.refreshLayout.setRefreshing(true);
+        getSheBeiData(1);*/
+        SheBeiRootBean rootBean = new SheBeiRootBean();
+        adapter.setList(rootBean.getDeadData());
         binding.contentSheBei.setAdapter(adapter);
         binding.contentSheBei.setGroupIndicator(null);
         binding.contentSheBei.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
@@ -76,14 +78,14 @@ public class SheBeiInfoActivity extends AppCompatActivity implements SwipeRefres
                 return false;
             }
         });
-        binding.contentSheBei.setOnLoadMoreListener(new LoadMoreExpandableListView.OnLoadMoreListener() {
+       /* binding.contentSheBei.setOnLoadMoreListener(new LoadMoreExpandableListView.OnLoadMoreListener() {
             @Override
             public void onloadMore() {
                 getSheBeiData(currentPage + 1);
             }
         });
         binding.editSearchInfo.setOnEditorActionListener(onEditorActionListener);
-
+*/
     }
 
     private void getSheBeiData(final int page) {
@@ -136,10 +138,10 @@ public class SheBeiInfoActivity extends AppCompatActivity implements SwipeRefres
                 break;
             case R.id.btn_scan:
                 //调用二维码扫描
-                startActivity(new Intent(this, CaptureActivity.class));
+//                startActivity(new Intent(this, CaptureActivity.class));
                 break;
             case R.id.btn_search:
-                startSearch();
+//                startSearch();
                 break;
         }
     }

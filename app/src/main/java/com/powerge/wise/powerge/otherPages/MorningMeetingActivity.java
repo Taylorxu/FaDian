@@ -21,6 +21,7 @@ import com.powerge.wise.powerge.BR;
 import com.powerge.wise.powerge.R;
 import com.powerge.wise.powerge.bean.MorningMeetingBean;
 import com.powerge.wise.powerge.bean.User;
+import com.powerge.wise.powerge.bean.ZhiZhangLogBean;
 import com.powerge.wise.powerge.config.soap.ApiService;
 import com.powerge.wise.powerge.config.soap.request.BaseUrl;
 import com.powerge.wise.powerge.config.soap.request.RequestBody;
@@ -29,6 +30,9 @@ import com.powerge.wise.powerge.databinding.ActivityMorningMeetingBinding;
 import com.powerge.wise.powerge.databinding.ItemMorningMeetingBinding;
 import com.powerge.wise.powerge.databinding.ItemZhiZhangLogesBinding;
 import com.wisesignsoft.OperationManagement.utils.ToastUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -58,9 +62,11 @@ public class MorningMeetingActivity extends AppCompatActivity {
 
     @SuppressLint("ResourceAsColor")
     private void initView() {
-        binding.refreshLayout.setColorSchemeColors(getResources().getColor(R.color.colorPrimary));
+        setDeadData();
+        adapter.setList(list);
+      /*  binding.refreshLayout.setColorSchemeColors(getResources().getColor(R.color.colorPrimary));
         binding.refreshLayout.setOnRefreshListener(refreshListener);
-        binding.contentLog.setOnLoadMoreListener(onLoadMoreListener);
+        binding.contentLog.setOnLoadMoreListener(onLoadMoreListener);*/
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         binding.contentLog.setLayoutManager(layoutManager);
         binding.contentLog.setAdapter(adapter);
@@ -69,6 +75,17 @@ public class MorningMeetingActivity extends AppCompatActivity {
         binding.contentLog.addItemDecoration(divider);*/
     }
 
+    List<MorningMeetingBean> list = new ArrayList<>();
+
+    public void setDeadData() {
+        for (int i = 0; i < 10; i++) {
+            MorningMeetingBean bean = new MorningMeetingBean();
+            bean.setHost("徐来水" + i);
+            bean.setTitle("今天做了" + i + "件事情");
+            bean.setDetail(i + "#机组的日志/n机组的日志");
+            list.add(bean);
+        }
+    }
 
     SwipeRefreshLayout.OnRefreshListener refreshListener = new SwipeRefreshLayout.OnRefreshListener() {
         @Override
