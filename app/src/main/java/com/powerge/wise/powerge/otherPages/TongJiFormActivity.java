@@ -113,7 +113,7 @@ public class TongJiFormActivity extends AppCompatActivity {
                             adapter.addItems(returnValueBean.getResultList());
                         }
                         binding.refreshLayout.setRefreshing(false);
-                        binding.contentForm.setState(PagingRecyclerView.State.LoadSuccess);
+                        binding.contentForm.setState(returnValueBean.getResultList() == null || returnValueBean.getResultList().size() < 10 ?  PagingRecyclerView.State.NoMore : PagingRecyclerView.State.LoadSuccess);
                     }
                 });
     }

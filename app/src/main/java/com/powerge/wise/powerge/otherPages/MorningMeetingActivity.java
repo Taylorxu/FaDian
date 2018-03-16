@@ -121,7 +121,7 @@ public class MorningMeetingActivity extends AppCompatActivity {
                             adapter.addItems(returnValueBean.getResultList());
                         }
                         binding.refreshLayout.setRefreshing(false);
-                        binding.contentLog.setState(PagingRecyclerView.State.LoadSuccess);
+                        binding.contentLog.setState(returnValueBean.getResultList() == null || returnValueBean.getResultList().size() < 10 ? PagingRecyclerView.State.NoMore : PagingRecyclerView.State.LoadSuccess);
                         currentPage = Integer.parseInt(returnValueBean.getCurrentPage());
                     }
                 });

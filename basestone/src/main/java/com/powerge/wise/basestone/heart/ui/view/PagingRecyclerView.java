@@ -75,7 +75,7 @@ public class PagingRecyclerView extends RecyclerView {
                     if (last < i) last = i;
                 }
             }
-            if (count == last) {
+            if (count == last) {//当最后一条 滑到位置是列表数据集合的总数 才会加载
                 loadMore(page);
             }
         }
@@ -207,6 +207,7 @@ public class PagingRecyclerView extends RecyclerView {
 
     private final int Empty = Integer.MIN_VALUE;
     private final int Bottom = Integer.MIN_VALUE + 1;
+
     class BottomAdapter extends WrapperAdapter {
 
 
@@ -246,7 +247,6 @@ public class PagingRecyclerView extends RecyclerView {
                     break;
             }
         }
-
 
 
         private void bindEmpty(ViewHolder holder) {
@@ -398,8 +398,8 @@ public class PagingRecyclerView extends RecyclerView {
 
         @Override
         public void onBindViewHolder(ViewHolder holder, int position, List payloads) {
-            if(holder.getItemViewType()==Empty||holder.getItemViewType() == Bottom){
-                super.onBindViewHolder(holder,position,payloads);
+            if (holder.getItemViewType() == Empty || holder.getItemViewType() == Bottom) {
+                super.onBindViewHolder(holder, position, payloads);
                 return;
             }
             wrapped.onBindViewHolder(holder, position, payloads);

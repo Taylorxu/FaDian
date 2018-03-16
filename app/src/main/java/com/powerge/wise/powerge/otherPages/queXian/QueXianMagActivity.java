@@ -114,7 +114,7 @@ public class QueXianMagActivity extends AppCompatActivity {
                             adapter.addItems(returnValueBean.getResultList());
                         }
                         binding.refreshLayout.setRefreshing(false);
-                        binding.contentQxList.setState(PagingRecyclerView.State.LoadSuccess);
+                        binding.contentQxList.setState(returnValueBean.getResultList() == null || returnValueBean.getResultList().size() < 10 ? PagingRecyclerView.State.NoMore : PagingRecyclerView.State.LoadSuccess);
                         currentPage = Integer.parseInt(returnValueBean.getCurrentPage());
                     }
                 });
