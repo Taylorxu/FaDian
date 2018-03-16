@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
 
+    <data>
+
+        <variable
+            name="data"
+            type="com.powerge.wise.powerge.bean.DianLiangBean" />
+    </data>
+
     <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
@@ -52,20 +59,17 @@
                     android:layout_width="match_parent"
                     android:layout_height="54dp"
                     android:background="@color/color_line"
-                    android:scrollbars="none"
-                    >
+                    android:scrollbars="none">
 
 
                     <RadioGroup
                         android:id="@+id/ji_zu_groups"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:gravity="center_vertical"
                         android:orientation="horizontal"
                         android:paddingLeft="5dp"
-                        android:paddingRight="5dp"
-                        android:gravity="center_vertical"
-                        />
-
+                        android:paddingRight="5dp" />
 
 
                 </HorizontalScrollView>
@@ -102,7 +106,7 @@
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
                             android:layout_toLeftOf="@+id/text_1"
-                            android:text="1045.22"
+                            android:text="@{data.day.planedAmount}"
                             android:textColor="@color/color_42b1"
                             android:textSize="24sp" />
 
@@ -146,7 +150,7 @@
                                     android:id="@+id/text_ri_huan_bi"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="-3.0.3%"
+                                    android:text="@{data.day.annRatio}"
                                     android:textColor="@color/color_42b1"
                                     android:textSize="15sp" />
 
@@ -198,7 +202,7 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_centerVertical="true"
-                                        android:text="1100"
+                                        android:text="@{data.day.avgLoad}"
                                         android:textColor="@color/color_42b1"
                                         android:textSize="18sp" />
 
@@ -244,7 +248,7 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_centerVertical="true"
-                                        android:text="1100"
+                                        android:text="@{data.day.planedAmount}"
                                         android:textColor="@color/color_42b1"
                                         android:textSize="18sp" />
 
@@ -290,7 +294,7 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_centerVertical="true"
-                                        android:text="1100"
+                                        android:text="@{data.day.dailyHours}"
                                         android:textColor="@color/color_42b1"
                                         android:textSize="18sp" />
 
@@ -340,7 +344,7 @@
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
                             android:layout_toLeftOf="@+id/text_2"
-                            android:text="1045.22"
+                            android:text="@{data.month.realAmount}"
                             android:textColor="@color/color_ffb72"
                             android:textSize="24sp" />
 
@@ -384,7 +388,7 @@
                                     android:id="@+id/text_yue_huan_bi"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="-3.0.3%"
+                                    android:text="@{data.month.annRatio}"
                                     android:textColor="@color/color_ffb72"
                                     android:textSize="15sp" />
 
@@ -434,7 +438,7 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_centerVertical="true"
-                                        android:text="1100"
+                                        android:text="@{data.month.realAmount}"
                                         android:textColor="@color/color_ffb72"
                                         android:textSize="18sp" />
 
@@ -480,7 +484,7 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_centerVertical="true"
-                                        android:text="1100"
+                                        android:text="@{data.month.planedAmount}"
                                         android:textColor="@color/color_ffb72"
                                         android:textSize="18sp" />
 
@@ -526,7 +530,7 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_centerVertical="true"
-                                        android:text="1100"
+                                        android:text='@{data.month.finishRate+"%"}'
                                         android:textColor="@color/color_ffb72"
                                         android:textSize="18sp" />
 
@@ -574,7 +578,7 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_centerVertical="true"
-                                        android:text="1100"
+                                        android:text="@{data.month.monthlyHours}"
                                         android:textColor="@color/color_ffb72"
                                         android:textSize="18sp" />
 
@@ -625,7 +629,7 @@
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
                             android:layout_toLeftOf="@+id/text_3"
-                            android:text="1045.22"
+                            android:text="@{data.year.realAmount}"
                             android:textColor="@color/color_e159"
                             android:textSize="24sp" />
 
@@ -669,7 +673,7 @@
                                     android:id="@+id/text_year_huan_bi"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="-3.0.3%"
+                                    android:text="@{data.year.growth}"
                                     android:textColor="@color/color_e159"
                                     android:textSize="15sp" />
 
@@ -718,7 +722,7 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_centerVertical="true"
-                                        android:text="1100"
+                                        android:text="@{data.year.planedAmount}"
                                         android:textColor="@color/color_e159"
                                         android:textSize="18sp" />
 
@@ -764,7 +768,7 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_centerVertical="true"
-                                        android:text="1100"
+                                        android:text="@{data.year.realAmount}"
                                         android:textColor="@color/color_e159"
                                         android:textSize="18sp" />
 

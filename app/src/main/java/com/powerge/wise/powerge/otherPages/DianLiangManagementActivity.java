@@ -23,11 +23,14 @@ import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.hyphenate.util.DensityUtil;
 import com.powerge.wise.basestone.heart.network.FlatMapResponse;
+import com.powerge.wise.basestone.heart.network.FlatMapTopRes;
 import com.powerge.wise.basestone.heart.network.FlatMapTopResList;
+import com.powerge.wise.basestone.heart.network.ResultModel;
 import com.powerge.wise.basestone.heart.network.ResultModelData;
 import com.powerge.wise.basestone.heart.ui.XAdapter;
 import com.powerge.wise.basestone.heart.util.LogUtils;
 import com.powerge.wise.powerge.R;
+import com.powerge.wise.powerge.bean.DianLiangBean;
 import com.powerge.wise.powerge.bean.Items;
 import com.powerge.wise.powerge.bean.JiZuBean;
 import com.powerge.wise.powerge.bean.SheBeiRootBean;
@@ -108,7 +111,44 @@ public class DianLiangManagementActivity extends AppCompatActivity implements Ra
 
     //TODO 数据
     private void getDianLiangData(String id) {
+        if (User.getCurrentUser() == null) LoginActivity.start(this);
+        final DianLiangBean dianLiangBean = DianLiangBean.newInstance();
+        dianLiangBean.setNameSpace(BaseUrl.NAMESPACE_P);
+        dianLiangBean.setUserName(User.getCurrentUser().getAccount());
+        dianLiangBean.setArg1(id);
+        RequestEnvelope.getRequestEnvelope().setBody(new RequestBody<>(dianLiangBean));
+        ApiService.Creator.get().queryPowerGenerationData(RequestEnvelope.getRequestEnvelope())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .flatMap(new FlatMapResponse<ResultModel<DianLiangBean>>())
+                .flatMap(new FlatMapTopRes<DianLiangBean>())
+                .subscribe(new Subscriber<DianLiangBean>() {
+                    @Override
+                    public void onCompleted() {
 
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        e.printStackTrace();
+                        EEMsgToastHelper.newInstance().selectWitch(e.getCause().getMessage());
+
+                    }
+
+                    @Override
+                    public void onNext(DianLiangBean returnValueBean) {
+                        setDvData(returnValueBean);
+                    }
+                });
+    }
+
+    /**
+     * 年月电量赋值
+     *
+     * @param returnValueBean
+     */
+    private void setDvData(DianLiangBean returnValueBean) {
+        binding.setData(returnValueBean);
     }
 
     @SuppressLint("ResourceType")

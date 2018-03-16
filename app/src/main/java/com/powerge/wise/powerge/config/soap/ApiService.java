@@ -3,6 +3,7 @@ package com.powerge.wise.powerge.config.soap;
 
 import com.powerge.wise.basestone.heart.network.NetConfig;
 import com.powerge.wise.basestone.heart.network.ResultModelData;
+import com.powerge.wise.powerge.bean.DianLiangBean;
 import com.powerge.wise.powerge.bean.Items;
 import com.powerge.wise.powerge.bean.JiZuBean;
 import com.powerge.wise.powerge.bean.MorningMeetingBean;
@@ -92,6 +93,14 @@ public interface ApiService {
     @POST(BaseUrl.SERVICE_P)
     Observable<Response<ResultModelData<ResultModelData.ReturnValueBean<JiZuBean>>>> queryUnits(@Body RequestEnvelope requestEnvelope);
 
+    //查询电量
+    @Headers({
+            "Content-Type:text/xml; charset=utf-8",
+            "Accept-Charset: utf-8"
+    })
+    @POST(BaseUrl.SERVICE_P)
+    Observable<Response<ResultModel<DianLiangBean>>> queryPowerGenerationData(@Body RequestEnvelope requestEnvelope);
+
 
     class Creator {
         private static Strategy strategy = new AnnotationStrategy();
@@ -113,7 +122,7 @@ public interface ApiService {
 
         private static Retrofit getRetrofit() {
             return new Retrofit.Builder()
-                    .baseUrl(BaseUrl.HOSTArray[2])
+                    .baseUrl(BaseUrl.HOSTArray[1])
                     .client(NetConfig.getInstance().getClient())
                     .addConverterFactory(SimpleXmlConverterFactory.create(serializer))
                     .addConverterFactory(GsonConverterFactory.create(NetConfig.getInstance().getGson()))
