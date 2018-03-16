@@ -17,7 +17,6 @@ import com.powerge.wise.basestone.heart.ui.view.PagingRecyclerView;
 import com.powerge.wise.powerge.BR;
 import com.powerge.wise.powerge.R;
 import com.powerge.wise.powerge.bean.Items;
-import com.powerge.wise.powerge.bean.MorningMeetingBean;
 import com.powerge.wise.powerge.bean.QueXianMagBean;
 import com.powerge.wise.powerge.bean.User;
 import com.powerge.wise.powerge.bean.ZhiZhangLogBean;
@@ -29,9 +28,6 @@ import com.powerge.wise.powerge.databinding.ActivityQueXianMagBinding;
 import com.powerge.wise.powerge.databinding.ItemQxFlBinding;
 import com.powerge.wise.powerge.helper.StartActivity;
 import com.wisesignsoft.OperationManagement.utils.ToastUtil;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -57,11 +53,9 @@ public class QueXianMagActivity extends AppCompatActivity {
     XAdapter<QueXianMagBean, ItemQxFlBinding> adapter = new XAdapter.SimpleAdapter<>(BR.item, R.layout.item_qx_fl);
 
     private void initView() {
-        setDeadData();
-        adapter.setList(list);
-       /* binding.refreshLayout.setColorSchemeColors(getResources().getColor(R.color.colorPrimary));
+        binding.refreshLayout.setColorSchemeColors(getResources().getColor(R.color.colorPrimary));
         binding.refreshLayout.setOnRefreshListener(refreshListener);
-        binding.contentQxList.setOnLoadMoreListener(onLoadMoreListener);*/
+        binding.contentQxList.setOnLoadMoreListener(onLoadMoreListener);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         binding.contentQxList.setLayoutManager(layoutManager);
         binding.contentQxList.setAdapter(adapter);
@@ -82,21 +76,6 @@ public class QueXianMagActivity extends AppCompatActivity {
         }
     };
 
-
-    List<QueXianMagBean> list = new ArrayList<>();
-
-    public void setDeadData() {
-        for (int i = 0; i < 10; i++) {
-            QueXianMagBean bean = new QueXianMagBean();
-            bean.setContent("这条缺陷内容");
-            bean.setEmergencyStatus(i + 1 + "");
-            bean.setProcessStatus(i + 1 + "");
-            bean.setHandler("张天说" + i);
-            bean.setUploader("赵立夫");
-            bean.setName("锅炉情况" + i);
-            list.add(bean);
-        }
-    }
 
     private void getData(int page) {
         final QueXianMagBean queXianMagBean = QueXianMagBean.newInstance();
