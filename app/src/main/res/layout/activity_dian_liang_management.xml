@@ -150,7 +150,7 @@
                                     android:id="@+id/text_ri_huan_bi"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="@{data.day.annRatio}"
+                                    android:text='@{data.day.annRatio+"%"}'
                                     android:textColor="@color/color_42b1"
                                     android:textSize="15sp" />
 
@@ -388,7 +388,7 @@
                                     android:id="@+id/text_yue_huan_bi"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="@{data.month.annRatio}"
+                                    android:text='@{data.month.annRatio+"%"}'
                                     android:textColor="@color/color_ffb72"
                                     android:textSize="15sp" />
 
@@ -673,7 +673,7 @@
                                     android:id="@+id/text_year_huan_bi"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="@{data.year.growth}"
+                                    android:text='@{data.year.growth+"%"}'
                                     android:textColor="@color/color_e159"
                                     android:textSize="15sp" />
 
