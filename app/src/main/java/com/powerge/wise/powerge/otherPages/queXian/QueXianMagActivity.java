@@ -104,6 +104,7 @@ public class QueXianMagActivity extends AppCompatActivity {
                             ToastUtil.toast(getBaseContext(), "服务连接失败");
                         }
                         binding.refreshLayout.setRefreshing(false);
+                        binding.contentQxList.setState(PagingRecyclerView.State.LoadFail);
                     }
 
                     @Override

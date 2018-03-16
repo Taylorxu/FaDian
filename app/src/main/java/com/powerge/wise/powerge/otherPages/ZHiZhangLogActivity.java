@@ -108,6 +108,7 @@ public class ZHiZhangLogActivity extends AppCompatActivity {
                             ToastUtil.toast(getBaseContext(), "服务连接失败");
                         }
                         binding.refreshLayout.setRefreshing(false);
+                        binding.contentLog.setState(PagingRecyclerView.State.LoadFail);
                     }
 
                     @Override

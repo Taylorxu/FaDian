@@ -1,6 +1,14 @@
 apply plugin: 'com.android.application'
 apply plugin: 'realm-android'
 android {
+    signingConfigs {
+        config {
+            keyAlias 'xuzhiguang'
+            keyPassword '123456'
+            storeFile file('fadian.jks')
+            storePassword '123456'
+        }
+    }
     compileSdkVersion 26
     defaultConfig {
         applicationId "com.powerge.wise.powerge"
