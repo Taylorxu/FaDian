@@ -23,6 +23,7 @@ import com.powerge.wise.basestone.heart.network.ResultModel;
 import com.powerge.wise.powerge.config.soap.request.RequestBody;
 import com.powerge.wise.powerge.config.soap.request.RequestEnvelope;
 import com.powerge.wise.powerge.databinding.ActivityLoginBinding;
+import com.powerge.wise.powerge.helper.EEMsgToastHelper;
 import com.wisesignsoft.OperationManagement.utils.ToastUtil;
 
 import rx.Subscriber;
@@ -98,7 +99,7 @@ public class LoginActivity extends AppCompatActivity {
 
                     @Override
                     public void onError(Throwable e) {
-                        ToastUtil.toast(getBaseContext(), e.getMessage());
+                        EEMsgToastHelper.newInstance().selectWitch(e.getCause().getMessage());
                         loginBinding.signInButton.setEnabled(true);
                         loginBinding.loginProgress.setVisibility(View.GONE);
                         e.printStackTrace();
@@ -107,7 +108,11 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onNext(LoginBean loginBean) {
                         loginBinding.signInButton.setEnabled(true);
-                        User.login(loginBean);
+                        User user = new User();
+                        user.setAccount(loginBean.getUserName());
+                        user.setId(Integer.parseInt(loginBean.getUserId()));
+                        user.setLogin(true);
+                        User.login(user);
                         finish();
                     }
                 });

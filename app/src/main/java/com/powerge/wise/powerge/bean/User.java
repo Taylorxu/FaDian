@@ -82,15 +82,10 @@ public class User extends RealmObject {
     }
 
     public static void logout() {
-        if (getCurrentUser() != null)
-            RxBus.getDefault().post(new Notification(131, getCurrentUser().getId()));
         setCurrent(null);
-
     }
 
-    public static void login(LoginBean loginBean) {
-        User user = new User();
-        user.setAccount(loginBean.getUserId());
+    public static void login(User user) {
         setCurrent(user);
     }
 }

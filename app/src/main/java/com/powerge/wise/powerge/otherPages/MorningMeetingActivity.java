@@ -28,6 +28,7 @@ import com.powerge.wise.powerge.config.soap.request.RequestEnvelope;
 import com.powerge.wise.powerge.databinding.ActivityMorningMeetingBinding;
 import com.powerge.wise.powerge.databinding.ItemMorningMeetingBinding;
 import com.powerge.wise.powerge.databinding.ItemZhiZhangLogesBinding;
+import com.powerge.wise.powerge.helper.EEMsgToastHelper;
 import com.wisesignsoft.OperationManagement.utils.ToastUtil;
 
 import rx.Subscriber;
@@ -107,9 +108,7 @@ public class MorningMeetingActivity extends AppCompatActivity {
                     @Override
                     public void onError(Throwable e) {
                         e.printStackTrace();
-                        if (e.getMessage().indexOf("java.net.ConnectException: Connection refused") > 0) {
-                            ToastUtil.toast(getBaseContext(), "服务连接失败");
-                        }
+                        EEMsgToastHelper.newInstance().selectWitch(e.getCause().getMessage());
                         binding.refreshLayout.setRefreshing(false);
                         binding.contentLog.setState(PagingRecyclerView.State.LoadFail);
                     }

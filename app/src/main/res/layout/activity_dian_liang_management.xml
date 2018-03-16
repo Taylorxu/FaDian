@@ -47,50 +47,34 @@
                 android:layout_height="match_parent"
                 android:background="@color/color_line"
                 android:orientation="vertical">
-                <!--全场 机组 button-->
-                <LinearLayout
+
+                <HorizontalScrollView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:weightSum="3">
+                    android:layout_height="54dp"
+                    android:background="@color/color_line"
+                    android:scrollbars="none"
+                    >
+
 
                     <RadioGroup
+                        android:id="@+id/ji_zu_groups"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:gravity="center_vertical"
+                        />
 
-                        <RadioButton
-                            android:id="@+id/btn_all_fh"
-                            style="@style/style_fu_he_top_radios"
-                            android:layout_width="0dp"
-                            android:layout_height="40dp"
-                            android:layout_weight="1"
-                            android:checked="true"
-                            android:text="@string/btn_all_fh_text" />
 
-                        <RadioButton
-                            android:id="@+id/btn_1_fh"
-                            style="@style/style_fu_he_top_radios"
-                            android:layout_width="0dp"
-                            android:layout_height="40dp"
-                            android:layout_weight="1"
-                            android:text="@string/btn_1_fh_text" />
 
-                        <RadioButton
-                            android:id="@+id/btn_2_fh"
-                            style="@style/style_fu_he_top_radios"
-                            android:layout_width="0dp"
-                            android:layout_height="40dp"
-                            android:layout_weight="1"
-                            android:text="@string/btn_2_fh_text" />
-                    </RadioGroup>
-
-                </LinearLayout>
+                </HorizontalScrollView>
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:background="@color/color_line" />
+
                 <!--日电量-->
                 <LinearLayout
                     android:layout_width="match_parent"

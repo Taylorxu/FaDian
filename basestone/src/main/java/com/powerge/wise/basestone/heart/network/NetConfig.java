@@ -73,8 +73,8 @@ public class NetConfig implements Interceptor, CookieJar {
         if ("text/xml;charset=UTF-8".equals(mediaType.toString())) {
             String content = response.body().string();
             String rebuildResult = content.substring(content.indexOf(">{") + 1, content.indexOf("</return>"));
-            rebuildResult = rebuildResult.replace("\"returnValue\":\"\"", "\"returnValue\":null");
             rebuildResult = rebuildResult.replace("&quot;", "\"");
+            rebuildResult = rebuildResult.replace("\"returnValue\":\"\"", "\"returnValue\":null");
             return response.newBuilder().body(okhttp3.ResponseBody.create(mediaType, rebuildResult))
                     .build();
         }

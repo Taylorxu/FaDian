@@ -3,6 +3,8 @@ package com.powerge.wise.powerge.config.soap;
 
 import com.powerge.wise.basestone.heart.network.NetConfig;
 import com.powerge.wise.basestone.heart.network.ResultModelData;
+import com.powerge.wise.powerge.bean.Items;
+import com.powerge.wise.powerge.bean.JiZuBean;
 import com.powerge.wise.powerge.bean.MorningMeetingBean;
 import com.powerge.wise.powerge.bean.QueXianMagBean;
 import com.powerge.wise.powerge.bean.SheBeiRootBean;
@@ -80,7 +82,15 @@ public interface ApiService {
             "Accept-Charset: utf-8"
     })
     @POST(BaseUrl.SERVICE_P)
-    Observable<Response<ResultModelData<ResultModelData.ReturnValueBean<QueXianMagBean>>>> queryIssueDetails(@Body RequestEnvelope requestEnvelope);
+    Observable<Response<ResultModelData<ResultModelData.ReturnValueBean<QueXianMagBean>>>> queryIssueDetails(@Body RequestEnvelope requestEnvelope);//缺陷管理
+
+    //查询机组数据
+    @Headers({
+            "Content-Type:text/xml; charset=utf-8",
+            "Accept-Charset: utf-8"
+    })
+    @POST(BaseUrl.SERVICE_P)
+    Observable<Response<ResultModelData<ResultModelData.ReturnValueBean<JiZuBean>>>> queryUnits(@Body RequestEnvelope requestEnvelope);
 
 
     class Creator {
@@ -103,7 +113,7 @@ public interface ApiService {
 
         private static Retrofit getRetrofit() {
             return new Retrofit.Builder()
-                    .baseUrl(BaseUrl.HOSTArray[1])
+                    .baseUrl(BaseUrl.HOSTArray[2])
                     .client(NetConfig.getInstance().getClient())
                     .addConverterFactory(SimpleXmlConverterFactory.create(serializer))
                     .addConverterFactory(GsonConverterFactory.create(NetConfig.getInstance().getGson()))

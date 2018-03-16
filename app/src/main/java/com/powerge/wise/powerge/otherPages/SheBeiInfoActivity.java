@@ -27,6 +27,7 @@ import com.powerge.wise.powerge.config.soap.request.BaseUrl;
 import com.powerge.wise.powerge.config.soap.request.RequestBody;
 import com.powerge.wise.powerge.config.soap.request.RequestEnvelope;
 import com.powerge.wise.powerge.databinding.ActivitySheBeiInfoBinding;
+import com.powerge.wise.powerge.helper.EEMsgToastHelper;
 import com.powerge.wise.powerge.zxing.activity.CaptureActivity;
 import com.wisesignsoft.OperationManagement.utils.ToastUtil;
 
@@ -109,9 +110,7 @@ public class SheBeiInfoActivity extends AppCompatActivity implements SwipeRefres
                     @Override
                     public void onError(Throwable e) {
                         e.printStackTrace();
-                        if (e.getMessage().indexOf("java.net.ConnectException: Connection refused") > 0) {
-                            ToastUtil.toast(getBaseContext(), "服务连接失败");
-                        }
+                        EEMsgToastHelper.newInstance().selectWitch(e.getCause().getMessage());
                         binding.refreshLayout.setRefreshing(false);
                     }
 
