@@ -4,15 +4,14 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/color_line"
         tools:context="com.powerge.wise.powerge.otherPages.xunJian.XunJianDateFragment">
 
         <HorizontalScrollView
             android:layout_width="wrap_content"
             android:layout_height="54dp"
-            android:background="@color/color_line"
-            android:scrollbars="none"
             android:layout_gravity="center"
-            >
+            android:scrollbars="none">
 
 
             <RadioGroup
