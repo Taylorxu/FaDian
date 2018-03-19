@@ -8,16 +8,13 @@ import org.simpleframework.xml.Element;
  * Created by Administrator on 2018/3/19.
  */
 
-public class FuHeYTFormDataBean {
+public class FuHeYTFormDataBean extends RootBean {
     public static FuHeYTFormDataBean newInstance() {
         FuHeYTFormDataBean fragment = new FuHeYTFormDataBean();
         return fragment;
     }
 
-    @Element
-    public String nameSpace;
-    @Element
-    public String arg0;
+
     @Element
     public String arg1;
     public String name;
@@ -26,13 +23,6 @@ public class FuHeYTFormDataBean {
     public String agc;
     public String realValue;
 
-    public String getArg0() {
-        return arg0;
-    }
-
-    public void setArg0(String arg0) {
-        this.arg0 = arg0;
-    }
 
     public String getArg1() {
         return arg1;
@@ -82,7 +72,4 @@ public class FuHeYTFormDataBean {
         this.realValue = realValue;
     }
 
-    public void setNameSpace(String nameSpace) {
-        this.nameSpace = nameSpace;
-    }
 }

@@ -170,6 +170,8 @@ public class FuHeManagementActivity extends AppCompatActivity implements RadioGr
                     @Override
                     public void onError(Throwable e) {
                         e.printStackTrace();
+                        binding.textDataEmpty0.setVisibility(View.VISIBLE);
+                        binding.textDataEmpty0.setText("数据获取失败");
                         EEMsgToastHelper.newInstance().selectWitch(e.getCause().getMessage());
 
                     }
@@ -177,16 +179,7 @@ public class FuHeManagementActivity extends AppCompatActivity implements RadioGr
                     @Override
                     public void onNext(FuHeYTChartLineBean returnValueBean) {
                         if (returnValueBean.getToday().size() == 0 || returnValueBean.getYesterday().size() == 0) {//TODO 按理来说 每个机组都应有数据
-                            Toast.makeText(getBaseContext(), "该机组无数据", Toast.LENGTH_SHORT).show();
-                            FuHeYTChartLineBean.TodayBean todayBean = new FuHeYTChartLineBean.TodayBean();
-                            todayBean.setX("00:00");
-                            todayBean.setY("0");
-                            FuHeYTChartLineBean.YesterdayBean yesterdayBean = new FuHeYTChartLineBean.YesterdayBean();
-                            yesterdayBean.setX("00:00");
-                            yesterdayBean.setY("0");
-                            returnValueBean.getToday().add(todayBean);
-                            returnValueBean.getYesterday().add(yesterdayBean);
-                            initChartView(returnValueBean);
+                            binding.textDataEmpty0.setVisibility(View.VISIBLE);
                         } else {
                             initChartView(returnValueBean);
                         }
@@ -206,12 +199,10 @@ public class FuHeManagementActivity extends AppCompatActivity implements RadioGr
     }
 
     private void getFuHeYTFormData(String checkedId) {
-        final SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-
         if (User.getCurrentUser() == null) LoginActivity.start(this);
         final FuHeYTFormDataBean ytFormDataBean = FuHeYTFormDataBean.newInstance();
         ytFormDataBean.setNameSpace(BaseUrl.NAMESPACE_P);
-        ytFormDataBean.setArg0(format.format(new Date()));//当前日期
+        ytFormDataBean.setUserName(User.getCurrentUser().getAccount());
         ytFormDataBean.setArg1(checkedId);//机组
         RequestEnvelope.getRequestEnvelope().setBody(new RequestBody<>(ytFormDataBean));
         ApiService.Creator.get().queryLoadStatisticData(RequestEnvelope.getRequestEnvelope())
@@ -231,6 +222,7 @@ public class FuHeManagementActivity extends AppCompatActivity implements RadioGr
                         if (e.getCause() != null)
                             EEMsgToastHelper.newInstance().selectWitch(e.getCause().getMessage());
                         binding.textDataEmpty.setVisibility(View.VISIBLE);
+                        binding.textDataEmpty0.setText("数据获取失败");
                     }
 
                     @Override

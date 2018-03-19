@@ -127,7 +127,15 @@
                             android:id="@+id/chart1"
                             android:layout_width="match_parent"
                             android:layout_height="200dp" />
-
+                        <TextView
+                            android:id="@+id/text_data_empty_0"
+                            android:layout_width="match_parent"
+                            android:layout_height="200dp"
+                            android:gravity="center"
+                            android:text="@string/string_data_empty"
+                            android:textSize="15dp"
+                            android:textColor="@color/text_color_jizu_name"
+                            android:visibility="gone" />
                         <RelativeLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
