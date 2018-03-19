@@ -5,7 +5,7 @@
 
         <variable
             name="textItem"
-            type="com.powerge.wise.powerge.bean.SimpleListTextItem" />
+            type="com.powerge.wise.powerge.bean.PeroidDateLineListBean" />
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="@{textItem.formtDate}"
+            android:text="@{textItem.date}"
             android:textColor="@color/color_673"
             android:textSize="14sp" />
 
@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="@{textItem.content}"
+            android:text='@{textItem.loadRatio+"%"}'
             android:textColor="@color/color_673"
             android:textSize="14sp" />
 

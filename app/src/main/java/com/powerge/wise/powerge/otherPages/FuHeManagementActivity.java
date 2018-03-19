@@ -16,10 +16,12 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.hyphenate.util.DensityUtil;
@@ -39,6 +41,7 @@ import com.powerge.wise.powerge.bean.FuHeYTFormDataBean;
 import com.powerge.wise.powerge.bean.Items;
 import com.powerge.wise.powerge.bean.JiZuBean;
 import com.powerge.wise.powerge.bean.MorningMeetingBean;
+import com.powerge.wise.powerge.bean.PeroidDateLineListBean;
 import com.powerge.wise.powerge.bean.SimpleListTextItem;
 import com.powerge.wise.powerge.bean.User;
 import com.powerge.wise.powerge.config.soap.ApiService;
@@ -53,6 +56,7 @@ import com.powerge.wise.powerge.helper.EEMsgToastHelper;
 import com.wisesignsoft.OperationManagement.utils.LogUtil;
 import com.wisesignsoft.OperationManagement.utils.ToastUtil;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -81,10 +85,29 @@ public class FuHeManagementActivity extends AppCompatActivity implements RadioGr
         binding.title.setText(getResources().getStringArray(R.array.item_name_array)[0]);
         lineCharts = new LineChart[]{binding.chart1, binding.chart2};
         binding.jiZuGroups.setOnCheckedChangeListener(this);
+        initChartView();
+        initDatePeriod();
+        initAdapters();
         getJiZuData();
-        initDatePeriod();//
-        initTableList();//机组负荷数据表
-        initPerDayList();//每日负荷率
+    }
+
+    /**
+     * 初始化 第一个列表  查询负荷日统计数据
+     */
+    XAdapter<FuHeYTFormDataBean, ItemFuheTableListBinding> tableListAdapter = new XAdapter.SimpleAdapter<>(BR.fuheData, R.layout.item_fuhe_table_list);
+
+    XAdapter<PeroidDateLineListBean, ItemTowTextBinding> perdayAdapter = new XAdapter.SimpleAdapter<>(BR.textItem, R.layout.item_tow_text);
+
+    /**
+     * 初始化 adapters  涉及到的列表
+     */
+    private void initAdapters() {
+        //  机组负荷数据表
+        binding.fuheTableList.setLayoutManager(new LinearLayoutManager(this));
+        binding.fuheTableList.setAdapter(tableListAdapter);
+        //日曲线下部分列表
+        binding.perdayFhvContent.setLayoutManager(new LinearLayoutManager(this));
+        binding.perdayFhvContent.setAdapter(perdayAdapter);
     }
 
     /**
@@ -146,9 +169,7 @@ public class FuHeManagementActivity extends AppCompatActivity implements RadioGr
         }
     }
 
-
     /**************************************************************昨日，今日***************************************************************************/
-//TODO 数据
     private void getFuHeYTData(final String checkedId) {
         if (User.getCurrentUser() == null) LoginActivity.start(this);
         final FuHeYTChartLineBean heYTChartLineBean = FuHeYTChartLineBean.newInstance();
@@ -181,21 +202,10 @@ public class FuHeManagementActivity extends AppCompatActivity implements RadioGr
                         if (returnValueBean.getToday().size() == 0 || returnValueBean.getYesterday().size() == 0) {//TODO 按理来说 每个机组都应有数据
                             binding.textDataEmpty0.setVisibility(View.VISIBLE);
                         } else {
-                            initChartView(returnValueBean);
+                            setYTChartData(returnValueBean);
                         }
                     }
                 });
-    }
-
-
-    /**
-     * 初始化 第一个列表  查询负荷日统计数据
-     */
-    XAdapter<FuHeYTFormDataBean, ItemFuheTableListBinding> tableListAdapter = new XAdapter.SimpleAdapter<>(BR.fuheData, R.layout.item_fuhe_table_list);
-
-    private void initTableList() {
-        binding.fuheTableList.setLayoutManager(new LinearLayoutManager(this));
-        binding.fuheTableList.setAdapter(tableListAdapter);
     }
 
     private void getFuHeYTFormData(String checkedId) {
@@ -221,16 +231,21 @@ public class FuHeManagementActivity extends AppCompatActivity implements RadioGr
                         e.printStackTrace();
                         if (e.getCause() != null)
                             EEMsgToastHelper.newInstance().selectWitch(e.getCause().getMessage());
-                        binding.textDataEmpty.setVisibility(View.VISIBLE);
+                        binding.textDataEmpty0.setVisibility(View.VISIBLE);
                         binding.textDataEmpty0.setText("数据获取失败");
+                        binding.chart1.setVisibility(View.GONE);
                     }
 
                     @Override
                     public void onNext(List<FuHeYTFormDataBean> fuHeYTFormDataBeans) {
-                        if (fuHeYTFormDataBeans.size() > 0)
+                        if (fuHeYTFormDataBeans.size() > 0) {
                             tableListAdapter.setList(fuHeYTFormDataBeans);
-                        else
-                            binding.textDataEmpty.setVisibility(View.VISIBLE);
+                            binding.chart1.setVisibility(View.VISIBLE);
+                            binding.textDataEmpty0.setVisibility(View.GONE);
+                        } else {
+                            binding.textDataEmpty0.setVisibility(View.VISIBLE);
+                            binding.chart1.setVisibility(View.GONE);
+                        }
                     }
                 });
     }
@@ -238,54 +253,56 @@ public class FuHeManagementActivity extends AppCompatActivity implements RadioGr
 
 /***************************************************************************end***********************************************************************/
 
-    /**************************************************************负荷率变化趋势图***************************************************************************/
+/**************************************************************负荷率变化趋势图***************************************************************************/
 
     /**
-     * 负荷率变化趋势图 区间日期
+     * 获取查询日负荷率曲线
      */
-    private void initDatePeriod() {
-        final Calendar calendar = Calendar.getInstance();
-        final SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        binding.textToday.setText(format.format(calendar.getTime()));
-        binding.textEndText.setText(format.format(calendar.getTime()));
-        int year = calendar.get(Calendar.YEAR);
-        int monthOfYear = calendar.get(Calendar.MONTH);
-        int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH) - 6;
-        calendar.set(year, monthOfYear, dayOfMonth);
-        binding.textStartText.setText(format.format(calendar.getTime()));
-        start_date = binding.textStartText.getText().toString();
-        end_date = binding.textEndText.getText().toString();
+    private void queryLoadRatioData(String checkedId) {
+        if (User.getCurrentUser() == null) LoginActivity.start(this);
+        final PeroidDateLineListBean dateLineListBean = PeroidDateLineListBean.newInstance();
+        dateLineListBean.setNameSpace(BaseUrl.NAMESPACE_P);
+        dateLineListBean.setUserName(User.getCurrentUser().getAccount());
+        dateLineListBean.setArg1(binding.textStartText.getText().toString());
+        dateLineListBean.setArg2(binding.textEndText.getText().toString());
+        dateLineListBean.setArg3(checkedId);
+        RequestEnvelope.getRequestEnvelope().setBody(new RequestBody<>(dateLineListBean));
+        ApiService.Creator.get().queryLoadRatioData(RequestEnvelope.getRequestEnvelope())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .flatMap(new FlatMapResponse<ResultModel<List<PeroidDateLineListBean>>>())
+                .flatMap(new FlatMapTopRes<List<PeroidDateLineListBean>>())
+                .subscribe(new Subscriber<List<PeroidDateLineListBean>>() {
+                    @Override
+                    public void onCompleted() {
 
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        e.printStackTrace();
+                        binding.textDataEmpty0.setVisibility(View.VISIBLE);
+                        binding.textDataEmpty0.setText("数据获取失败");
+                        EEMsgToastHelper.newInstance().selectWitch(e.getCause().getMessage());
+
+                    }
+
+                    @Override
+                    public void onNext(List<PeroidDateLineListBean> PeroidDateLineListBean) {
+                        setRatioChartData(PeroidDateLineListBean);
+                        perdayAdapter.setList(PeroidDateLineListBean);
+                    }
+                });
     }
 
 
-    XAdapter<SimpleListTextItem, ItemTowTextBinding> perdayAdapter = new XAdapter.SimpleAdapter<>(BR.textItem, R.layout.item_tow_text);
-
-    private void initPerDayList() {
-
-        createPerdayData();
-        binding.perdayFhvContent.setLayoutManager(new LinearLayoutManager(this));
-        binding.perdayFhvContent.setAdapter(perdayAdapter);
-        perdayAdapter.setList(items);
-    }
-
-    List<SimpleListTextItem> items = new ArrayList<>();
-
-    private void createPerdayData() {
-        for (int i = 0; i < 10; i++) {
-            SimpleListTextItem item = new SimpleListTextItem();
-            item.setContent(200 + i + "%");
-            items.add(item);
-        }
-    }
-
+    /****************************************************************end************************************************************************************/
     /**
      * 初始化统计图
      *
-     * @param returnValueBean
      */
 
-    private void initChartView(FuHeYTChartLineBean returnValueBean) {
+    private void initChartView() {
         for (int i = 0; i < lineCharts.length; i++) {
             lineCharts[i].setViewPortOffsets(110, 50, 20, 100);
             lineCharts[i].setDrawGridBackground(false);
@@ -302,10 +319,13 @@ public class FuHeManagementActivity extends AppCompatActivity implements RadioGr
             lineCharts[i].setDragEnabled(true);
             lineCharts[i].setScaleEnabled(true);
             lineCharts[i].setPinchZoom(false);
+            if (i == 1) {
+                lineCharts[i].getXAxis().setGranularity(1f);
+                lineCharts[i].getXAxis().setValueFormatter(new XFormatter());
+            }
         }
 
 
-        setYTChartData(returnValueBean);
     }
 
 
@@ -353,13 +373,18 @@ public class FuHeManagementActivity extends AppCompatActivity implements RadioGr
         binding.chart1.invalidate();
     }
 
-    private void setTChartData(List<FuHeYTChartLineBean.TodayBean> today) {
+    private void setRatioChartData(List<PeroidDateLineListBean> today) {
         ArrayList<ILineDataSet> dataSets = new ArrayList<ILineDataSet>();
         ArrayList<Entry> values = new ArrayList<Entry>();
-
-        for (FuHeYTChartLineBean.TodayBean todayBean : today) {
-            String x = todayBean.getX().substring(0, todayBean.getX().indexOf(":"));
-            Entry entry = new Entry(Float.parseFloat(x), Float.parseFloat(todayBean.getY()));
+        SimpleDateFormat mFormat = new SimpleDateFormat("yyyy-MM-dd");
+        for (PeroidDateLineListBean bean : today) {
+            Date date = null;
+            try {
+                date = mFormat.parse(bean.getDate());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            Entry entry = new Entry(Float.parseFloat(String.valueOf(date.getTime())), Float.parseFloat(bean.getLoadRatio()));
             values.add(entry);
         }
         LineDataSet d = new LineDataSet(values, "DataSet1");
@@ -375,6 +400,25 @@ public class FuHeManagementActivity extends AppCompatActivity implements RadioGr
         binding.chart2.animateXY(3000, 3000);
         binding.chart2.invalidate();
     }
+
+    /**
+     * 负荷率变化趋势图 区间日期
+     */
+    private void initDatePeriod() {
+        final Calendar calendar = Calendar.getInstance();
+        final SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        binding.textToday.setText(format.format(calendar.getTime()));
+        binding.textEndText.setText(format.format(calendar.getTime()));
+        int year = calendar.get(Calendar.YEAR);
+        int monthOfYear = calendar.get(Calendar.MONTH);
+        int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH) - 6;
+        calendar.set(year, monthOfYear, dayOfMonth);
+        binding.textStartText.setText(format.format(calendar.getTime()));
+        start_date = binding.textStartText.getText().toString();
+        end_date = binding.textEndText.getText().toString();
+
+    }
+
 
     public void onClick(View view) {
         int id = view.getId();
@@ -402,6 +446,15 @@ public class FuHeManagementActivity extends AppCompatActivity implements RadioGr
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
         getFuHeYTData(String.valueOf(checkedId));
+        queryLoadRatioData(String.valueOf(checkedId));
+    }
 
+    private class XFormatter implements IAxisValueFormatter {
+        private SimpleDateFormat mFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+        @Override
+        public String getFormattedValue(float value, AxisBase axis) {
+            return mFormat.format(new Date((long) value));
+        }
     }
 }
