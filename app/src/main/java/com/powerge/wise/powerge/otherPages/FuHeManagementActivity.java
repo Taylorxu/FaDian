@@ -28,12 +28,15 @@ import com.powerge.wise.powerge.databinding.ItemFirstFragmentGridListBinding;
 import com.powerge.wise.powerge.databinding.ItemFuheTableListBinding;
 import com.powerge.wise.powerge.databinding.ItemTowTextBinding;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class FuHeManagementActivity extends AppCompatActivity {
     ActivityFuHeMagmentBinding binding;
     LineChart lineCharts[];
+    private String start_date, end_date;
 
     public static void start(Context context) {
         Intent starter = new Intent(context, FuHeManagementActivity.class);
@@ -46,9 +49,26 @@ public class FuHeManagementActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_fu_he_magment);
         binding.title.setText(getResources().getStringArray(R.array.item_name_array)[0]);
         lineCharts = new LineChart[]{binding.chart1, binding.chart2};
+        initDatePeriod();
         initChartView();//2张统计图
         initTableList();//机组负荷数据表
         initPerDayList();//每日负荷率
+    }
+
+    /**
+     * 负荷率变化趋势图 区间日期
+     */
+    private void initDatePeriod() {
+        final Calendar calendar = Calendar.getInstance();
+        final SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        binding.textEndText.setText(format.format(calendar.getTime()));
+        int year = calendar.get(Calendar.YEAR);
+        int monthOfYear = calendar.get(Calendar.MONTH);
+        int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH) - 6;
+        calendar.set(year, monthOfYear, dayOfMonth);
+        binding.textStartText.setText(format.format(calendar.getTime()));
+        start_date = binding.textStartText.getText().toString();
+        end_date = binding.textEndText.getText().toString();
     }
 
 
