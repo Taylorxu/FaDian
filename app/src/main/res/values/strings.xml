@@ -107,4 +107,6 @@
     <string name="nong_du_text">出口浓度排放曲线</string>
 
     <string name="scan_title">扫描设备信息</string>
+
+    <string name="string_data_empty">暂无数据</string>
 </resources>

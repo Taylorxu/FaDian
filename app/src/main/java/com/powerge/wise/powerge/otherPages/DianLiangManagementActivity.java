@@ -157,7 +157,7 @@ public class DianLiangManagementActivity extends AppCompatActivity implements Ra
             JiZuBean jiZuBean = resultList.get(i);
             RadioButton radioButton = new RadioButton(this);
             RadioGroup.LayoutParams params = new RadioGroup.LayoutParams(DensityUtil.dip2px(this, 100), DensityUtil.dip2px(this, 40));
-//            params.setMargins(DensityUtil.dip2px(this, 5), DensityUtil.dip2px(this, 10), DensityUtil.dip2px(this, 5), DensityUtil.dip2px(this, 10));
+            params.setMargins(DensityUtil.dip2px(this, 5), DensityUtil.dip2px(this, 10), DensityUtil.dip2px(this, 5), DensityUtil.dip2px(this, 10));
             radioButton.setLayoutParams(params);
             radioButton.setGravity(Gravity.CENTER);
             radioButton.setTextColor(getResources().getColorStateList(R.drawable.selector_primary_white_text));

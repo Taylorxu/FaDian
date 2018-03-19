@@ -4,6 +4,8 @@ package com.powerge.wise.powerge.config.soap;
 import com.powerge.wise.basestone.heart.network.NetConfig;
 import com.powerge.wise.basestone.heart.network.ResultModelData;
 import com.powerge.wise.powerge.bean.DianLiangBean;
+import com.powerge.wise.powerge.bean.FuHeYTChartLineBean;
+import com.powerge.wise.powerge.bean.FuHeYTFormDataBean;
 import com.powerge.wise.powerge.bean.Items;
 import com.powerge.wise.powerge.bean.JiZuBean;
 import com.powerge.wise.powerge.bean.MorningMeetingBean;
@@ -20,6 +22,8 @@ import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.convert.AnnotationStrategy;
 import org.simpleframework.xml.core.Persister;
 import org.simpleframework.xml.strategy.Strategy;
+
+import java.util.List;
 
 import retrofit2.Response;
 import retrofit2.Retrofit;
@@ -100,6 +104,22 @@ public interface ApiService {
     })
     @POST(BaseUrl.SERVICE_P)
     Observable<Response<ResultModel<DianLiangBean>>> queryPowerGenerationData(@Body RequestEnvelope requestEnvelope);
+
+    //负荷昨日  今日
+    @Headers({
+            "Content-Type:text/xml; charset=utf-8",
+            "Accept-Charset: utf-8"
+    })
+    @POST(BaseUrl.SERVICE_P)
+    Observable<Response<ResultModel<FuHeYTChartLineBean>>> queryLoadRealtimeData(@Body RequestEnvelope requestEnvelope);
+
+    //查询负荷日统计数据
+    @Headers({
+            "Content-Type:text/xml; charset=utf-8",
+            "Accept-Charset: utf-8"
+    })
+    @POST(BaseUrl.SERVICE_P)
+    Observable<Response<ResultModel<List<FuHeYTFormDataBean>>>> queryLoadStatisticData(@Body RequestEnvelope requestEnvelope);
 
 
     class Creator {

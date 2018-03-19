@@ -5,7 +5,7 @@
 
         <variable
             name="fuheData"
-            type="com.powerge.wise.powerge.bean.FuHeAllData" />
+            type="com.powerge.wise.powerge.bean.FuHeYTFormDataBean" />
     </data>
 
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -27,7 +27,7 @@
                     android:id="@+id/fuhe_column_text"
                     style="@style/item_fuhe_listview_table_text"
                     android:textColor="@color/text_color_jizu_fuhe"
-                    android:text="@{fuheData.column}" />
+                    android:text="@{fuheData.name}" />
             </FrameLayout>
 
             <FrameLayout
@@ -38,7 +38,7 @@
                 <TextView
                     android:id="@+id/fuhe_column1_text"
                     style="@style/item_fuhe_listview_table_text"
-                    android:text="@{fuheData.column1}" />
+                    android:text="@{fuheData.loadAvg}" />
             </FrameLayout>
 
             <FrameLayout
@@ -49,7 +49,7 @@
                 <TextView
                     android:id="@+id/fuhe_column2_text"
                     style="@style/item_fuhe_listview_table_text"
-                    android:text="@{fuheData.column2}" />
+                    android:text="@{fuheData.annRatio}" />
             </FrameLayout>
 
             <FrameLayout
@@ -59,7 +59,7 @@
 
                 <TextView
                     style="@style/item_fuhe_listview_table_text"
-                    android:text="@{fuheData.column3}" />
+                    android:text="@{fuheData.agc}" />
             </FrameLayout>
 
             <FrameLayout
@@ -69,7 +69,7 @@
 
                 <TextView
                     style="@style/item_fuhe_listview_table_text"
-                    android:text="@{fuheData.column4}" />
+                    android:text="@{fuheData.realValue}" />
             </FrameLayout>
 
         </LinearLayout>
