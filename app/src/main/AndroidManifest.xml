@@ -261,9 +261,7 @@
         <activity android:name=".otherPages.xunJian.XunJianMagActivity" />
         <activity android:name=".otherPages.xunJian.XunJianDianSignListActivity" />
         <activity android:name=".otherPages.PlanTasksMag.PlanTasksMagActivity" />
-        <activity android:name=".otherPages.SplashActivity"
-
-            >
+        <activity android:name=".otherPages.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -278,7 +276,8 @@
             android:name=".zxing.activity.ResultActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Black.NoTitleBar" />
-        <activity android:name=".otherPages.TongJiFormActivity"></activity>
+        <activity android:name=".otherPages.TongJiFormActivity" />
+        <activity android:name=".otherPages.DatePeriodSelectActivity"></activity>
     </application>
 
 </manifest>

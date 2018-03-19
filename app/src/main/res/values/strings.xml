@@ -9,6 +9,8 @@
     <string name="title_notifications">消息</string>
     <string name="title_mine">我的</string>
     <string name="title_activity_login">登录</string>
+    <string name="title_left_cancel">取消</string>
+    <string name="title_right_ensure">完成</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">请输入您的账号</string>
@@ -66,6 +68,9 @@
     <string name="fuhe_table_huanbi">符合率日环比</string>
     <string name="fuhe_table_AGC">A G C 指令值</string>
     <string name="fuhe_table_fuhe">实时负荷</string>
+    <string name="select_start_date">请选择开始时间</string>
+    <string name="select_end_date">请选择结束时间</string>
+
 
     <string name="fuhelv_change">负荷率变化趋势图</string>
     <string name="wanqianwanshi">万千瓦时</string>

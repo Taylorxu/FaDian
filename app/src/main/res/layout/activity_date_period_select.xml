@@ -41,19 +41,21 @@
 
         </FrameLayout>
 
-        <LinearLayout
+        <RadioGroup
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:gravity="center"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp">
 
 
-            <TextView
+            <RadioButton
                 android:id="@+id/text_start_d"
-                android:layout_width="150dp"
+                android:layout_width="135dp"
                 android:layout_height="40dp"
                 android:background="@drawable/selector_period_date_bg"
-                android:enabled="false"
+                android:button="@null"
                 android:gravity="center_vertical"
                 android:hint="@string/select_start_date"
                 android:onClick="onClick"
@@ -76,12 +78,12 @@
                     android:textSize="12sp" />
             </FrameLayout>
 
-            <TextView
+            <RadioButton
                 android:id="@+id/text_end_d"
-                android:layout_width="150dp"
+                android:layout_width="135dp"
                 android:layout_height="40dp"
                 android:background="@drawable/selector_period_date_bg"
-                android:enabled="false"
+                android:button="@null"
                 android:gravity="center_vertical"
                 android:hint="@string/select_end_date"
                 android:onClick="onClick"
@@ -89,7 +91,7 @@
                 android:textColor="@color/text_color_jizu_name"
                 android:textColorHint="@color/text_color_jizu_name"
                 android:textSize="12sp" />
-        </LinearLayout>
+        </RadioGroup>
 
         <View
             android:layout_width="match_parent"
@@ -104,7 +106,8 @@
             android:layout_marginTop="80dp"
             android:calendarViewShown="false"
             android:datePickerMode="spinner"
-            android:theme="@style/AppTheme.AppDate" />
+            android:theme="@style/AppTheme.AppDate"
+            />
 
 
     </LinearLayout>

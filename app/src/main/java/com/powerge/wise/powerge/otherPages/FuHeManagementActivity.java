@@ -238,10 +238,24 @@ public class FuHeManagementActivity extends AppCompatActivity {
 
     public void onClick(View view) {
         int id = view.getId();
-        if (id == R.id.btn_back) {
-            finish();
+        switch (id) {
+            case R.id.btn_back:
+                finish();
+                break;
+            case R.id.icon_period_date:
+                DatePeriodSelectActivity.start(this);
+                break;
         }
     }
 
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            if (requestCode == DatePeriodSelectActivity.REQUEST_CODE_F_DATE_PER) {
+                binding.textStartText.setText(data.getStringExtra(DatePeriodSelectActivity.INTENT_STARTDATE));
+                binding.textEndText.setText(data.getStringExtra(DatePeriodSelectActivity.INTENT_ENDDATE));
+            }
+        }
+    }
 }
