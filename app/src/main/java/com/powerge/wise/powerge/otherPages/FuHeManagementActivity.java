@@ -253,7 +253,8 @@ public class FuHeManagementActivity extends AppCompatActivity implements RadioGr
 
 /***************************************************************************end***********************************************************************/
 
-/**************************************************************负荷率变化趋势图***************************************************************************/
+    /**************************************************************负荷率变化趋势图***************************************************************************/
+    String[] dateX = null;
 
     /**
      * 获取查询日负荷率曲线
@@ -288,9 +289,12 @@ public class FuHeManagementActivity extends AppCompatActivity implements RadioGr
                     }
 
                     @Override
-                    public void onNext(List<PeroidDateLineListBean> PeroidDateLineListBean) {
-                        setRatioChartData(PeroidDateLineListBean);
-                        perdayAdapter.setList(PeroidDateLineListBean);
+                    public void onNext(List<PeroidDateLineListBean> peroidDateLineListBean) {
+                        if (peroidDateLineListBean.size() > 0) {
+                            dateX = new String[peroidDateLineListBean.size()];
+                            setRatioChartData(peroidDateLineListBean);
+                            perdayAdapter.setList(peroidDateLineListBean);
+                        }
                     }
                 });
     }
@@ -299,7 +303,6 @@ public class FuHeManagementActivity extends AppCompatActivity implements RadioGr
     /****************************************************************end************************************************************************************/
     /**
      * 初始化统计图
-     *
      */
 
     private void initChartView() {
@@ -320,6 +323,7 @@ public class FuHeManagementActivity extends AppCompatActivity implements RadioGr
             lineCharts[i].setScaleEnabled(true);
             lineCharts[i].setPinchZoom(false);
             if (i == 1) {
+                lineCharts[i].setViewPortOffsets(80, 50, 60, 100);
                 lineCharts[i].getXAxis().setGranularity(1f);
                 lineCharts[i].getXAxis().setValueFormatter(new XFormatter());
             }
@@ -373,18 +377,13 @@ public class FuHeManagementActivity extends AppCompatActivity implements RadioGr
         binding.chart1.invalidate();
     }
 
-    private void setRatioChartData(List<PeroidDateLineListBean> today) {
+    private void setRatioChartData(List<PeroidDateLineListBean> peroidD) {
         ArrayList<ILineDataSet> dataSets = new ArrayList<ILineDataSet>();
         ArrayList<Entry> values = new ArrayList<Entry>();
-        SimpleDateFormat mFormat = new SimpleDateFormat("yyyy-MM-dd");
-        for (PeroidDateLineListBean bean : today) {
-            Date date = null;
-            try {
-                date = mFormat.parse(bean.getDate());
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-            Entry entry = new Entry(Float.parseFloat(String.valueOf(date.getTime())), Float.parseFloat(bean.getLoadRatio()));
+
+        for (int i = 0; i < peroidD.size(); i++) {
+            dateX[i] = peroidD.get(i).getDate();
+            Entry entry = new Entry(i, Float.parseFloat(peroidD.get(i).getLoadRatio()));
             values.add(entry);
         }
         LineDataSet d = new LineDataSet(values, "DataSet1");
@@ -450,11 +449,12 @@ public class FuHeManagementActivity extends AppCompatActivity implements RadioGr
     }
 
     private class XFormatter implements IAxisValueFormatter {
-        private SimpleDateFormat mFormat = new SimpleDateFormat("yyyy-MM-dd");
 
         @Override
         public String getFormattedValue(float value, AxisBase axis) {
-            return mFormat.format(new Date((long) value));
+            String date = dateX[(int) value];
+            return date.substring(date.indexOf("-") + 1, date.length());
         }
+
     }
 }
