@@ -199,9 +199,12 @@ public class FuHeManagementActivity extends AppCompatActivity implements RadioGr
 
                     @Override
                     public void onNext(FuHeYTChartLineBean returnValueBean) {
-                        if (returnValueBean.getToday().size() == 0 || returnValueBean.getYesterday().size() == 0) {//TODO 按理来说 每个机组都应有数据
+                        if (returnValueBean.getToday().size() == 0 && returnValueBean.getYesterday().size() == 0) {//TODO 按理来说 每个机组都应有数据
                             binding.textDataEmpty0.setVisibility(View.VISIBLE);
+                            binding.chart1.setVisibility(View.GONE);
                         } else {
+                            binding.textDataEmpty0.setVisibility(View.GONE);
+                            binding.chart1.setVisibility(View.VISIBLE);
                             setYTChartData(returnValueBean);
                         }
                     }
@@ -240,11 +243,9 @@ public class FuHeManagementActivity extends AppCompatActivity implements RadioGr
                     public void onNext(List<FuHeYTFormDataBean> fuHeYTFormDataBeans) {
                         if (fuHeYTFormDataBeans.size() > 0) {
                             tableListAdapter.setList(fuHeYTFormDataBeans);
-                            binding.chart1.setVisibility(View.VISIBLE);
-                            binding.textDataEmpty0.setVisibility(View.GONE);
+                            binding.textDataEmpty.setVisibility(View.GONE);
                         } else {
-                            binding.textDataEmpty0.setVisibility(View.VISIBLE);
-                            binding.chart1.setVisibility(View.GONE);
+                            binding.textDataEmpty.setVisibility(View.VISIBLE);
                         }
                     }
                 });
@@ -291,10 +292,21 @@ public class FuHeManagementActivity extends AppCompatActivity implements RadioGr
                     @Override
                     public void onNext(List<PeroidDateLineListBean> peroidDateLineListBean) {
                         if (peroidDateLineListBean.size() > 0) {
+                            binding.textDataEmpty2.setVisibility(View.GONE);
+                            binding.textDataEmpty3.setVisibility(View.GONE);
+                            binding.chart2.setVisibility(View.VISIBLE);
+                            binding.perdayFhvContent.setVisibility(View.VISIBLE);
                             dateX = new String[peroidDateLineListBean.size()];
                             setRatioChartData(peroidDateLineListBean);
                             perdayAdapter.setList(peroidDateLineListBean);
+                        } else {
+                            binding.chart2.setVisibility(View.GONE);
+                            binding.perdayFhvContent.setVisibility(View.GONE);
+                            perdayAdapter.setList(null);
+                            binding.textDataEmpty2.setVisibility(View.VISIBLE);
+                            binding.textDataEmpty3.setVisibility(View.VISIBLE);
                         }
+
                     }
                 });
     }
@@ -340,36 +352,44 @@ public class FuHeManagementActivity extends AppCompatActivity implements RadioGr
 
 
     private void setYTChartData(FuHeYTChartLineBean chartData) {
-        ArrayList<ILineDataSet> dataSets = new ArrayList<ILineDataSet>();
+        ArrayList<ILineDataSet> dataSets = new ArrayList<>();
         ArrayList<Entry> values = new ArrayList<>();
         ArrayList<Entry> values1 = new ArrayList<>();
-        ArrayList<Entry>[] arrayLists = new ArrayList[]{values, values1};
-        for (int z = 0; z < 2; z++) {
-            if (z == 0) {
-                for (FuHeYTChartLineBean.YesterdayBean ybean : chartData.getYesterday()) {
-                    String x = ybean.getX().substring(0, ybean.getX().indexOf(":"));
-                    Entry entry = new Entry(Float.parseFloat(x), Float.parseFloat(ybean.getY()));
-                    values.add(entry);
-                }
-            } else {
-                for (FuHeYTChartLineBean.TodayBean todayBean : chartData.getToday()) {
-                    String x = todayBean.getX().substring(0, todayBean.getX().indexOf(":"));
-                    Entry entry = new Entry(Float.parseFloat(x), Float.parseFloat(todayBean.getY()));
-                    values1.add(entry);
-                }
+
+        if (chartData.getYesterday().size() > 0) {
+            for (FuHeYTChartLineBean.YesterdayBean ybean : chartData.getYesterday()) {
+                String x = ybean.getX().substring(0, ybean.getX().indexOf(":"));
+                Entry entry = new Entry(Float.parseFloat(x), Float.parseFloat(ybean.getY()));
+                values.add(entry);
             }
 
             //每个LineDataSet 代表着一条线
-            LineDataSet d = new LineDataSet(arrayLists[z], "DataSet " + (z + 1));
+            LineDataSet d = new LineDataSet(values, "DataSet " + 0);
             d.setMode(LineDataSet.Mode.CUBIC_BEZIER);
             d.setLineWidth(2f);
-
-            int color = mColors[z];
+            int color = mColors[0];
             d.setColor(color);
             d.setHighLightColor(Color.RED);
             d.setHighlightEnabled(true);
             dataSets.add(d);
         }
+        if (chartData.getToday().size() > 0) {
+            for (FuHeYTChartLineBean.TodayBean todayBean : chartData.getToday()) {
+                String x = todayBean.getX().substring(0, todayBean.getX().indexOf(":"));
+                Entry entry = new Entry(Float.parseFloat(x), Float.parseFloat(todayBean.getY()));
+                values1.add(entry);
+            }
+            //每个LineDataSet 代表着一条线
+            LineDataSet d = new LineDataSet(values1, "DataSet " + 1);
+            d.setMode(LineDataSet.Mode.CUBIC_BEZIER);
+            d.setLineWidth(2f);
+            int color = mColors[1];
+            d.setColor(color);
+            d.setHighLightColor(Color.RED);
+            d.setHighlightEnabled(true);
+            dataSets.add(d);
+        }
+
 
         LineData data = new LineData(dataSets);
         binding.chart1.setData(data);
@@ -378,8 +398,8 @@ public class FuHeManagementActivity extends AppCompatActivity implements RadioGr
     }
 
     private void setRatioChartData(List<PeroidDateLineListBean> peroidD) {
-        ArrayList<ILineDataSet> dataSets = new ArrayList<ILineDataSet>();
-        ArrayList<Entry> values = new ArrayList<Entry>();
+        ArrayList<ILineDataSet> dataSets = new ArrayList<>();
+        ArrayList<Entry> values = new ArrayList<>();
 
         for (int i = 0; i < peroidD.size(); i++) {
             dateX[i] = peroidD.get(i).getDate();
@@ -452,8 +472,11 @@ public class FuHeManagementActivity extends AppCompatActivity implements RadioGr
 
         @Override
         public String getFormattedValue(float value, AxisBase axis) {
-            String date = dateX[(int) value];
-            return date.substring(date.indexOf("-") + 1, date.length());
+            if (dateX.length > 0) {
+                String date = dateX[(int) value];
+                return date.substring(date.indexOf("-") + 1, date.length());
+            }
+            return String.valueOf(value);
         }
 
     }

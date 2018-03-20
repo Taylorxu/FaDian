@@ -360,7 +360,15 @@
                         android:layout_width="match_parent"
                         android:layout_height="200dp"
                         android:layout_alignParentBottom="true" />
-
+                    <TextView
+                        android:id="@+id/text_data_empty_3"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:gravity="center"
+                        android:text="@string/string_data_empty"
+                        android:textSize="15dp"
+                        android:textColor="@color/text_color_jizu_name"
+                        android:visibility="gone" />
                 </LinearLayout>
 
                 <View
@@ -403,7 +411,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@android:color/white" />
-
+                <TextView
+                    android:id="@+id/text_data_empty_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:gravity="center"
+                    android:text="@string/string_data_empty"
+                    android:textColor="@color/text_color_jizu_name"
+                    android:visibility="gone" />
             </LinearLayout>
 
         </ScrollView>

@@ -72,7 +72,7 @@ public class LoginActivity extends AppCompatActivity {
             ToastUtil.toast(getBaseContext(), "请输入账号和密码");
         } else {
             loginBinding.loginProgress.setVisibility(View.VISIBLE);
-            loginBinding.signInButton.setEnabled(false);
+            setViewEnable(false);
             sing();
         }
     }
@@ -94,20 +94,20 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onCompleted() {
                         loginBinding.loginProgress.setVisibility(View.GONE);
-                        loginBinding.signInButton.setEnabled(true);
+                        setViewEnable(true);
                     }
 
                     @Override
                     public void onError(Throwable e) {
                         EEMsgToastHelper.newInstance().selectWitch(e.getCause().getMessage());
-                        loginBinding.signInButton.setEnabled(true);
+                        setViewEnable(true);
                         loginBinding.loginProgress.setVisibility(View.GONE);
                         e.printStackTrace();
                     }
 
                     @Override
                     public void onNext(LoginBean loginBean) {
-                        loginBinding.signInButton.setEnabled(true);
+                        setViewEnable(true);
                         User user = new User();
                         user.setAccount(loginBean.getUserName());
                         user.setId(Integer.parseInt(loginBean.getUserId()));
@@ -116,6 +116,12 @@ public class LoginActivity extends AppCompatActivity {
                         finish();
                     }
                 });
+    }
+
+    private void setViewEnable(boolean b) {
+        loginBinding.signInButton.setEnabled(b);
+        loginBinding.account.setEnabled(b);
+        loginBinding.password.setEnabled(b);
     }
 
 
