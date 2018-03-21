@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements FirstFragment.OnF
 
     public static void start(Context context) {
         Intent starter = new Intent(context, MainActivity.class);
+        starter.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(starter);
     }
 

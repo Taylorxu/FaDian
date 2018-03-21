@@ -66,8 +66,7 @@ public class User extends RealmObject {
         Realm.getDefaultInstance().executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
-                RealmResults<User> result = realm.where(User.class)
-                        .equalTo("isLogin", true).findAll();
+                RealmResults<User> result = realm.where(User.class).equalTo("isLogin", true).findAll();
                 for (User user : result) {
                     user.setLogin(false);
                 }
