@@ -10,6 +10,10 @@
         <variable
             name="many"
             type="String" />
+
+        <variable
+            name="time"
+            type="String" />
     </data>
 
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -17,14 +21,13 @@
         android:layout_height="50dp"
         android:orientation="horizontal"
         android:paddingLeft="13dp"
-        android:paddingRight="13dp"
-        >
+        android:paddingRight="13dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:text="@{kaohe.formtKh_time}"
+            android:text="@{time}"
             android:textColor="@color/color_64e"
             android:textSize="16sp" />
 

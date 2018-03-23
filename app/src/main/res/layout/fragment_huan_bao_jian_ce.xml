@@ -17,45 +17,24 @@
                 android:layout_height="wrap_content"
                 android:background="@color/color_line">
                 <!--全场 机组 button-->
-                <LinearLayout
+                <HorizontalScrollView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:weightSum="3">
+                    android:layout_height="54dp"
+                    android:background="@color/color_line"
+                    android:scrollbars="none">
+
 
                     <RadioGroup
+                        android:id="@+id/ji_zu_groups"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <RadioButton
-                            android:id="@+id/btn_all_fh"
-                            style="@style/style_fu_he_top_radios"
-                            android:layout_width="0dp"
-                            android:layout_height="40dp"
-                            android:layout_weight="1"
-                            android:checked="true"
-                            android:text="@string/btn_all_fh_text" />
-
-                        <RadioButton
-                            android:id="@+id/btn_1_fh"
-                            style="@style/style_fu_he_top_radios"
-                            android:layout_width="0dp"
-                            android:layout_height="40dp"
-                            android:layout_weight="1"
-                            android:text="@string/btn_1_fh_text" />
-
-                        <RadioButton
-                            android:id="@+id/btn_2_fh"
-                            style="@style/style_fu_he_top_radios"
-                            android:layout_width="0dp"
-                            android:layout_height="40dp"
-                            android:layout_weight="1"
-                            android:text="@string/btn_2_fh_text" />
-                    </RadioGroup>
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp" />
 
 
-                </LinearLayout>
+                </HorizontalScrollView>
             </android.support.design.widget.AppBarLayout>
 
             <android.support.v4.widget.NestedScrollView
@@ -185,10 +164,25 @@
                                 android:textColor="@color/text_color_jizu_name"
                                 android:textSize="10sp" />
 
-                            <com.github.mikephil.charting.charts.LineChart
-                                android:id="@+id/chart1"
+                            <FrameLayout
                                 android:layout_width="match_parent"
-                                android:layout_height="200dp" />
+                                android:layout_height="wrap_content">
+
+                                <com.github.mikephil.charting.charts.LineChart
+                                    android:id="@+id/chart1"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="200dp" />
+
+                                <ProgressBar
+                                    android:id="@+id/progress_bar"
+                                    android:layout_width="48dp"
+                                    android:layout_height="48dp"
+                                    android:layout_gravity="center"
+                                    android:visibility="visible" />
+
+
+                            </FrameLayout>
+
 
                             <RelativeLayout
                                 android:layout_width="match_parent"
@@ -204,19 +198,10 @@
                                     android:weightSum="4">
 
                                     <RadioGroup
+                                        android:id="@+id/yuan_su_group"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
                                         android:orientation="horizontal">
-
-                                        <RadioButton
-                                            android:id="@+id/btn_all_line"
-                                            style="@style/style_huan_bao_line_chart_radios"
-                                            android:layout_width="50dp"
-                                            android:layout_height="30dp"
-                                            android:layout_weight="1"
-                                            android:checked="true"
-                                            android:text="@string/btn_all_fh_text"
-                                            android:textSize="12sp" />
 
                                         <RadioButton
                                             android:id="@+id/btn_yang_line"
@@ -224,10 +209,9 @@
                                             android:layout_width="50dp"
                                             android:layout_height="30dp"
                                             android:layout_weight="1"
-                                            android:tag="0"
-                                            android:textSize="12sp"
-
-                                            />
+                                            android:checked="true"
+                                            android:tag="1"
+                                            android:textSize="12sp" />
 
                                         <RadioButton
                                             android:id="@+id/btn_liu_line"
@@ -235,7 +219,7 @@
                                             android:layout_width="50dp"
                                             android:layout_height="30dp"
                                             android:layout_weight="1"
-                                            android:tag="1"
+                                            android:tag="2"
                                             android:textSize="12sp" />
 
                                         <RadioButton
@@ -244,7 +228,7 @@
                                             android:layout_width="50dp"
                                             android:layout_height="30dp"
                                             android:layout_weight="1"
-                                            android:tag="2"
+                                            android:tag="3"
                                             android:text="烟尘"
                                             android:textSize="12sp" />
                                     </RadioGroup>
@@ -277,8 +261,8 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_gravity="center_vertical"
-                                android:text="时间"
+                                android:layout_gravity="center"
+                                android:text="采集时间"
                                 android:textColor="@color/color_420a"
                                 android:textSize="14sp"
                                 android:textStyle="bold" />
@@ -288,8 +272,7 @@
                         <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:weightSum="3">
+                            android:layout_weight="1">
 
                             <RelativeLayout
                                 android:layout_width="0dp"
@@ -301,7 +284,7 @@
                                     android:id="@+id/text_left"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="SO"
+                                    android:text="指标值"
                                     android:textColor="@color/color_420a"
                                     android:textSize="14sp"
                                     android:textStyle="bold" />
@@ -311,51 +294,12 @@
                                     android:layout_height="wrap_content"
                                     android:layout_alignBaseline="@+id/text_left"
                                     android:layout_toRightOf="@+id/text_left"
-                                    android:text="2"
+                                    android:text="(mg/Nm3)"
                                     android:textColor="@color/color_420a"
                                     android:textSize="7sp" />
                             </RelativeLayout>
 
-                            <RelativeLayout
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight="1"
-                                android:gravity="center">
 
-                                <TextView
-                                    android:id="@+id/text_left_1"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="NO"
-                                    android:textColor="@color/color_420a"
-                                    android:textSize="14sp"
-                                    android:textStyle="bold" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_alignBaseline="@+id/text_left_1"
-                                    android:layout_toRightOf="@+id/text_left_1"
-                                    android:text="x"
-                                    android:textColor="@color/color_420a"
-                                    android:textSize="7sp" />
-                            </RelativeLayout>
-
-                            <RelativeLayout
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight="1"
-                                android:gravity="center">
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="烟尘"
-                                    android:textColor="@color/color_420a"
-                                    android:textSize="14sp"
-                                    android:textStyle="bold" />
-
-                            </RelativeLayout>
                         </LinearLayout>
 
 
@@ -366,9 +310,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
-                        android:paddingRight="20dp"/>
+                        android:paddingRight="20dp" />
 
-                    
+
                 </LinearLayout>
 
 

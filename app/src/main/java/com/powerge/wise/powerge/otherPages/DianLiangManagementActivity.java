@@ -78,7 +78,7 @@ public class DianLiangManagementActivity extends AppCompatActivity implements Ra
 
     private void getJiZuData() {
         if (User.getCurrentUser() == null) LoginActivity.start(this);
-        final JiZuBean jiZuBean = JiZuBean.newInstance();
+        final JiZuBean jiZuBean = new JiZuBean();
         jiZuBean.setNameSpace(BaseUrl.NAMESPACE_P);
         jiZuBean.setUserName(User.getCurrentUser().getAccount());
 

@@ -115,7 +115,7 @@ public class FuHeManagementActivity extends AppCompatActivity implements RadioGr
      */
     private void getJiZuData() {
         if (User.getCurrentUser() == null) LoginActivity.start(this);
-        final JiZuBean jiZuBean = JiZuBean.newInstance();
+        final JiZuBean jiZuBean =new JiZuBean();
         jiZuBean.setNameSpace(BaseUrl.NAMESPACE_P);
         jiZuBean.setUserName(User.getCurrentUser().getAccount());
         RequestEnvelope.getRequestEnvelope().setBody(new RequestBody<>(jiZuBean));

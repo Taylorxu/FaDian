@@ -1,96 +1,102 @@
 package com.powerge.wise.powerge.bean;
 
-import android.text.format.DateFormat;
+import org.simpleframework.xml.Element;
 
-import java.util.Date;
 import java.util.List;
 
 /**
  * Created by Administrator on 2018/3/5.
  */
 
-public class KaoHeChildItemBean {
+public class KaoHeChildItemBean extends RootBean {
 
     /**
-     * kh_time : 2019
-     * kh_child : [{"time":"10202","zhi_biao":"OS","hour_value":"232","hb_limit":"898"}]
+     * details : [{"time":"2018-03-22 11:24:07","indicatorName":"sulfide","indicatorValue":"1200.0","maxValue":"1000.0"}]
+     * count : 0
+     * month : 2
      */
+    @Element(name = "arg1")
+    String arg1;
 
-    private String kh_time;
-    private List<KhChildBean> kh_child;
+    private String count;
+    private String month;
+    private List<DetailsBean> details;
 
-    public String getKh_time() {
-        return kh_time;
+    public String getArg1() {
+        return arg1;
     }
 
-    public String getFormtKh_time() {
-        Date date = new Date(System.currentTimeMillis());
-//        String r = (String) DateFormat.format("yyyy-MM", date);
-        java.text.DateFormat dateFormat= java.text.DateFormat.getDateTimeInstance(java.text.DateFormat.YEAR_FIELD,java.text.DateFormat.MONTH_FIELD);
-        return dateFormat.format(date);
+    public void setArg1(String arg1) {
+        this.arg1 = arg1;
     }
 
-    public void setKh_time(String kh_time) {
-        this.kh_time = kh_time;
+    public String getCount() {
+        return count;
     }
 
-    public List<KhChildBean> getKh_child() {
-        return kh_child;
+    public void setCount(String count) {
+        this.count = count;
     }
 
-    public void setKh_child(List<KhChildBean> kh_child) {
-        this.kh_child = kh_child;
+    public String getMonth() {
+        return month;
     }
 
-    public static class KhChildBean {
+    public void setMonth(String month) {
+        this.month = month;
+    }
+
+    public List<DetailsBean> getDetails() {
+        return details;
+    }
+
+    public void setDetails(List<DetailsBean> details) {
+        this.details = details;
+    }
+
+    public static class DetailsBean {
         /**
-         * time : 10202
-         * zhi_biao : OS
-         * hour_value : 232
-         * hb_limit : 898
+         * time : 2018-03-22 11:24:07
+         * indicatorName : sulfide
+         * indicatorValue : 1200.0
+         * maxValue : 1000.0
          */
 
         private String time;
-        private String zhi_biao;
-        private String hour_value;
-        private String hb_limit;
+        private String indicatorName;
+        private String indicatorValue;
+        private String maxValue;
 
         public String getTime() {
-            return time;
-        }
-
-        public String getFormTime() {
-            Date date = new Date(System.currentTimeMillis());
-            String r = (String) DateFormat.format("MM/dd hh:mm:dd", date);
-            return r;
+            return time.substring(time.indexOf("-") + 1, time.length());
         }
 
         public void setTime(String time) {
             this.time = time;
         }
 
-        public String getZhi_biao() {
-            return zhi_biao;
+        public String getIndicatorName() {
+            return indicatorName;
         }
 
-        public void setZhi_biao(String zhi_biao) {
-            this.zhi_biao = zhi_biao;
+        public void setIndicatorName(String indicatorName) {
+            this.indicatorName = indicatorName;
         }
 
-        public String getHour_value() {
-            return hour_value;
+        public String getIndicatorValue() {
+            return indicatorValue;
         }
 
-        public void setHour_value(String hour_value) {
-            this.hour_value = hour_value;
+        public void setIndicatorValue(String indicatorValue) {
+            this.indicatorValue = indicatorValue;
         }
 
-        public String getHb_limit() {
-            return hb_limit;
+        public String getMaxValue() {
+            return maxValue;
         }
 
-        public void setHb_limit(String hb_limit) {
-            this.hb_limit = hb_limit;
+        public void setMaxValue(String maxValue) {
+            this.maxValue = maxValue;
         }
     }
 }

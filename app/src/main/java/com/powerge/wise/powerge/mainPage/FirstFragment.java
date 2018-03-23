@@ -3,48 +3,45 @@ package com.powerge.wise.powerge.mainPage;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.databinding.DataBindingUtil;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
-import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.LinearLayout;
 import android.widget.PopupWindow;
-import android.widget.Switch;
 
 import com.hyphenate.util.DensityUtil;
+import com.powerge.wise.basestone.heart.network.FlatMapResponse;
+import com.powerge.wise.basestone.heart.network.FlatMapTopResList;
+import com.powerge.wise.basestone.heart.network.ResultModelData;
 import com.powerge.wise.basestone.heart.ui.XAdapter;
 import com.powerge.wise.basestone.heart.ui.XViewHolder;
-import com.powerge.wise.basestone.heart.util.DensityUtils;
 import com.powerge.wise.powerge.BR;
 import com.powerge.wise.powerge.R;
 import com.powerge.wise.powerge.bean.Items;
+import com.powerge.wise.powerge.bean.JiZuBean;
 import com.powerge.wise.powerge.bean.User;
+import com.powerge.wise.powerge.config.soap.ApiService;
+import com.powerge.wise.powerge.config.soap.request.BaseUrl;
+import com.powerge.wise.powerge.config.soap.request.RequestBody;
+import com.powerge.wise.powerge.config.soap.request.RequestEnvelope;
 import com.powerge.wise.powerge.databinding.FragmentFirstBinding;
 import com.powerge.wise.powerge.databinding.ItemFirstFragmentGridListBinding;
 import com.powerge.wise.powerge.databinding.PopWindowFirstFragmentBinding;
+import com.powerge.wise.powerge.helper.EEMsgToastHelper;
 import com.powerge.wise.powerge.helper.GridSpacingItemDecoration;
 import com.powerge.wise.powerge.helper.StartActivity;
-import com.powerge.wise.powerge.otherPages.DianLiangManagementActivity;
-import com.powerge.wise.powerge.otherPages.FuHeManagementActivity;
-import com.powerge.wise.powerge.otherPages.JingJiZhiBiaoActivity;
 import com.powerge.wise.powerge.otherPages.LoginActivity;
-import com.powerge.wise.powerge.otherPages.MorningMeetingActivity;
-import com.powerge.wise.powerge.otherPages.SheBeiInfoActivity;
-import com.powerge.wise.powerge.otherPages.ZHiZhangLogActivity;
 import com.wisesignsoft.OperationManagement.utils.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 
 public class FirstFragment extends Fragment {
@@ -52,6 +49,7 @@ public class FirstFragment extends Fragment {
     private OnFirstFragmentInteractionListener mListener;
     FragmentFirstBinding fragmentBinding;
     List<Items> items = new ArrayList<>();
+    private List<JiZuBean> jiZuList;
 
     XAdapter<Items, ItemFirstFragmentGridListBinding> adapter = new XAdapter.SimpleAdapter<Items, ItemFirstFragmentGridListBinding>(BR.item, R.layout.item_first_fragment_grid_list) {
         @Override
@@ -68,9 +66,6 @@ public class FirstFragment extends Fragment {
         }
     };
 
-
-    public FirstFragment() {
-    }
 
     public static FirstFragment newInstance() {
         FirstFragment firstFragment = new FirstFragment();
@@ -132,8 +127,9 @@ public class FirstFragment extends Fragment {
             items.setIcon(icon[i]);
             this.items.add(items);
         }
-
+        getJiZuData();
     }
+
 
     @Override
     public void onAttach(Context context) {
@@ -164,7 +160,7 @@ public class FirstFragment extends Fragment {
      */
 
     private void goToActivity(int number) {
-        StartActivity.go(number, getContext());
+        StartActivity.go(number, getContext(),jiZuList);
     }
 
 
@@ -173,13 +169,13 @@ public class FirstFragment extends Fragment {
         public void onClick(View view) {
             switch (view.getId()) {
                 case R.id.xun_jian_btn:
-                    StartActivity.go(11, getContext());
+                    StartActivity.go(11, getContext(), jiZuList);
                     break;
                 case R.id.wen_ti_pc_btn:
-                    StartActivity.go(12, getContext());
+                    StartActivity.go(12, getContext(), jiZuList);
                     break;
                 case R.id.plan_mag_btn:
-                    StartActivity.go(13, getContext());
+                    StartActivity.go(13, getContext(), jiZuList);
                     break;
                 case R.id.btn_open_door:
                     showPopWindow();
@@ -223,4 +219,36 @@ public class FirstFragment extends Fragment {
             }
         }
     }
+
+
+    private void getJiZuData() {
+        final JiZuBean jiZuBean = new JiZuBean();
+        jiZuBean.setNameSpace(BaseUrl.NAMESPACE_P);
+        jiZuBean.setUserName(User.getCurrentUser().getAccount());
+        RequestEnvelope.getRequestEnvelope().setBody(new RequestBody<>(jiZuBean));
+        ApiService.Creator.get().queryUnits(RequestEnvelope.getRequestEnvelope())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .flatMap(new FlatMapResponse<ResultModelData<ResultModelData.ReturnValueBean<JiZuBean>>>())
+                .flatMap(new FlatMapTopResList<ResultModelData.ReturnValueBean<JiZuBean>>())
+                .subscribe(new Subscriber<ResultModelData.ReturnValueBean<JiZuBean>>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        e.printStackTrace();
+                        EEMsgToastHelper.newInstance().selectWitch(e.getCause().getMessage());
+
+                    }
+
+                    @Override
+                    public void onNext(ResultModelData.ReturnValueBean<JiZuBean> returnValueBean) {
+                        jiZuList = returnValueBean.getResultList();
+                    }
+                });
+    }
+
 }

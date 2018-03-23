@@ -1,6 +1,9 @@
 package com.powerge.wise.powerge.bean;
 
+import android.os.Bundle;
 import android.text.format.DateFormat;
+
+import org.simpleframework.xml.Element;
 
 import java.util.Date;
 
@@ -8,138 +11,52 @@ import java.util.Date;
  * Created by Administrator on 2018/3/2.
  */
 
-public class HuanBaoBean {
-
+public class HuanBaoBean extends RootBean {
+    public static HuanBaoBean newInstance() {
+        HuanBaoBean fragment = new HuanBaoBean();
+        return fragment;
+    }
 
     /**
-     * time : 9:00
-     * jizu : {"name":"1#机组","SO":"100","NO":"300","yanchen":"600"}
-     * huanBaoJu : {"name":"1#机组","SO":"100","NO":"300","yanchen":"600"}
+     * { value = "指标值1";
+     * time = "采集时间1";}
      */
+    public String value;
+    public String time;
+    @Element(name = "arg1")
+    String arg1;//机组名
+    @Element(name = "arg2")
+    String arg2;//指标名称
 
-    private String time;
-    private JizuBean jizu;
-    private HuanBaoJuBean huanBaoJu;
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
 
     public String getTime() {
         return time;
-    }
-
-    public String getFormTime() {
-        Date date = new Date(System.currentTimeMillis());
-        String r = (String) DateFormat.format("hh:mm:ss ", date);
-        return r;
     }
 
     public void setTime(String time) {
         this.time = time;
     }
 
-    public JizuBean getJizu() {
-        return jizu;
+    public String getArg1() {
+        return arg1;
     }
 
-    public void setJizu(JizuBean jizu) {
-        this.jizu = jizu;
+    public void setArg1(String arg1) {
+        this.arg1 = arg1;
     }
 
-    public HuanBaoJuBean getHuanBaoJu() {
-        return huanBaoJu;
+    public String getArg2() {
+        return arg2;
     }
 
-    public void setHuanBaoJu(HuanBaoJuBean huanBaoJu) {
-        this.huanBaoJu = huanBaoJu;
-    }
-
-    public static class JizuBean {
-        /**
-         * name : 1#机组
-         * SO : 100
-         * NO : 300
-         * yanchen : 600
-         */
-
-        private String name;
-        private String SO;
-        private String NO;
-        private String yanchen;
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public String getSO() {
-            return SO;
-        }
-
-        public void setSO(String SO) {
-            this.SO = SO;
-        }
-
-        public String getNO() {
-            return NO;
-        }
-
-        public void setNO(String NO) {
-            this.NO = NO;
-        }
-
-        public String getYanchen() {
-            return yanchen;
-        }
-
-        public void setYanchen(String yanchen) {
-            this.yanchen = yanchen;
-        }
-    }
-
-    public static class HuanBaoJuBean {
-        /**
-         * name : 1#机组
-         * SO : 100
-         * NO : 300
-         * yanchen : 600
-         */
-
-        private String name;
-        private String SO;
-        private String NO;
-        private String yanchen;
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public String getSO() {
-            return SO;
-        }
-
-        public void setSO(String SO) {
-            this.SO = SO;
-        }
-
-        public String getNO() {
-            return NO;
-        }
-
-        public void setNO(String NO) {
-            this.NO = NO;
-        }
-
-        public String getYanchen() {
-            return yanchen;
-        }
-
-        public void setYanchen(String yanchen) {
-            this.yanchen = yanchen;
-        }
+    public void setArg2(String arg2) {
+        this.arg2 = arg2;
     }
 }

@@ -5,7 +5,7 @@
 
         <variable
             name="khChild"
-            type="com.powerge.wise.powerge.bean.KaoHeChildItemBean.KhChildBean" />
+            type="com.powerge.wise.powerge.bean.KaoHeChildItemBean.DetailsBean" />
     </data>
 
     <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -28,7 +28,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:includeFontPadding="false"
-                    android:text="@{khChild.formTime}"
+                    android:text="@{khChild.time}"
                     android:textColor="@color/color_673"
                     android:textSize="14sp" />
             </FrameLayout>
@@ -48,7 +48,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:includeFontPadding="false"
-                        android:text="@{khChild.zhi_biao}"
+                        android:text="@{khChild.indicatorName}"
                         android:textColor="@color/color_673"
                         android:textSize="14sp" />
                 </FrameLayout>
@@ -63,7 +63,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:includeFontPadding="false"
-                        android:text="@{khChild.hour_value}"
+                        android:text="@{khChild.indicatorValue}"
                         android:textColor="@color/color_673"
                         android:textSize="14sp" />
                 </FrameLayout>
@@ -78,7 +78,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:includeFontPadding="false"
-                        android:text="@{khChild.hb_limit}"
+                        android:text="@{khChild.maxValue}"
                         android:textColor="@color/color_673"
                         android:textSize="14sp" />
                 </FrameLayout>

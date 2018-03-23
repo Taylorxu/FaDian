@@ -45,10 +45,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right|center_vertical"
+                    android:text="@{textItem.time}"
                     android:textColor="@color/text_color_jizu_name"
-                    android:textSize="13sp"
-
-                    />
+                    android:textSize="13sp" />
 
 
             </FrameLayout>

@@ -17,18 +17,28 @@ import com.powerge.wise.powerge.databinding.ItemKaoHeListExpandChildBinding;
 import com.powerge.wise.powerge.databinding.ItemKaoheChildListBinding;
 import com.powerge.wise.powerge.databinding.ItemTextKaoHeExpandRootBinding;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.logging.SimpleFormatter;
 
 /**
  * Created by Administrator on 2018/3/5.
  */
 
 public class KaoHeExpandAdapter extends BaseExpandableListAdapter {
-    List<KaoHeChildItemBean> list;
+    List<KaoHeChildItemBean> list = new ArrayList<>();
     private SparseArray<ImageView> mIndicators;
 
-    public KaoHeExpandAdapter(List<KaoHeChildItemBean> listp) {
+    public void setList(List<KaoHeChildItemBean> listp) {
         this.list = listp;
+        notifyDataSetChanged();
+    }
+
+    public KaoHeExpandAdapter() {
         mIndicators = new SparseArray<>();
     }
 
@@ -49,7 +59,7 @@ public class KaoHeExpandAdapter extends BaseExpandableListAdapter {
 
     @Override
     public Object getChild(int groupPosition, int childPosition) {
-        return list.get(groupPosition).getKh_child().get(childPosition);
+        return list.get(groupPosition).getDetails().get(childPosition);
     }
 
     @Override
@@ -80,7 +90,8 @@ public class KaoHeExpandAdapter extends BaseExpandableListAdapter {
 
         }
         expandRootBinding.setKaohe(list.get(groupPosition));
-        expandRootBinding.setMany("考核" + list.get(groupPosition).getKh_child().size() + "次");
+        expandRootBinding.setMany("考核" + list.get(groupPosition).getCount() + "次");
+        expandRootBinding.setTime(Calendar.getInstance().get(Calendar.YEAR)+"年"+list.get(groupPosition).getMonth());
         mIndicators.put(groupPosition, expandRootBinding.btnRootExpand);
         setIndicatorState(groupPosition, isExpanded);
         return convertView;
@@ -98,9 +109,9 @@ public class KaoHeExpandAdapter extends BaseExpandableListAdapter {
             expandChildBinding = (ItemKaoHeListExpandChildBinding) convertView.getTag();
         }
         expandChildBinding.contentKaoheChildList.setLayoutManager(new LinearLayoutManager(parent.getContext()));
-        XAdapter<KaoHeChildItemBean.KhChildBean, ItemKaoheChildListBinding> adapter = new XAdapter.SimpleAdapter<>(BR.khChild, R.layout.item_kaohe_child_list);
+        XAdapter<KaoHeChildItemBean.DetailsBean, ItemKaoheChildListBinding> adapter = new XAdapter.SimpleAdapter<>(BR.khChild, R.layout.item_kaohe_child_list);
         expandChildBinding.contentKaoheChildList.setAdapter(adapter);
-        adapter.setList(list.get(groupPosition).getKh_child());
+        adapter.setList(list.get(groupPosition).getDetails());
         return convertView;
     }
 

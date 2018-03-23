@@ -16,10 +16,8 @@ import com.powerge.wise.basestone.heart.ui.XAdapter;
 import com.powerge.wise.basestone.heart.ui.view.PagingRecyclerView;
 import com.powerge.wise.powerge.BR;
 import com.powerge.wise.powerge.R;
-import com.powerge.wise.powerge.bean.Items;
 import com.powerge.wise.powerge.bean.QueXianMagBean;
 import com.powerge.wise.powerge.bean.User;
-import com.powerge.wise.powerge.bean.ZhiZhangLogBean;
 import com.powerge.wise.powerge.config.soap.ApiService;
 import com.powerge.wise.powerge.config.soap.request.BaseUrl;
 import com.powerge.wise.powerge.config.soap.request.RequestBody;
@@ -28,7 +26,6 @@ import com.powerge.wise.powerge.databinding.ActivityQueXianMagBinding;
 import com.powerge.wise.powerge.databinding.ItemQxFlBinding;
 import com.powerge.wise.powerge.helper.EEMsgToastHelper;
 import com.powerge.wise.powerge.helper.StartActivity;
-import com.wisesignsoft.OperationManagement.utils.ToastUtil;
 
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -126,10 +123,10 @@ public class QueXianMagActivity extends AppCompatActivity {
                 finish();
                 break;
             case R.id.ic_bao_biao:
-                StartActivity.go(10, this);
+                StartActivity.go(10, this, null);
                 break;
             case R.id.text_1:
-                StartActivity.go(10, this);
+                StartActivity.go(10, this, null);
                 break;
         }
     }

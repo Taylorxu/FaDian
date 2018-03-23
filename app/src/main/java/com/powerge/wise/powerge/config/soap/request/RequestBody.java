@@ -3,7 +3,9 @@ package com.powerge.wise.powerge.config.soap.request;
 import com.powerge.wise.powerge.bean.DianLiangBean;
 import com.powerge.wise.powerge.bean.FuHeYTChartLineBean;
 import com.powerge.wise.powerge.bean.FuHeYTFormDataBean;
+import com.powerge.wise.powerge.bean.HuanBaoBean;
 import com.powerge.wise.powerge.bean.JiZuBean;
+import com.powerge.wise.powerge.bean.KaoHeChildItemBean;
 import com.powerge.wise.powerge.bean.MorningMeetingBean;
 import com.powerge.wise.powerge.bean.PeroidDateLineListBean;
 import com.powerge.wise.powerge.bean.QueXianMagBean;
@@ -40,6 +42,8 @@ public class RequestBody<Data> {
             @Element(name = "n0:queryLoadRealtimeData", type = FuHeYTChartLineBean.class),
             @Element(name = "n0:queryLoadStatisticData", type = FuHeYTFormDataBean.class),
             @Element(name = "n0:queryLoadRatioData", type = PeroidDateLineListBean.class),
+            @Element(name = "n0:queryEnvironmentalIndicators", type = HuanBaoBean.class),
+            @Element(name = "n0:queryEnvAssessmentMonthly", type = KaoHeChildItemBean.class),
             @Element(name = "n0:queryMonitorLogs", type = ZhiZhangLogBean.class)
     })
     public Data requestModel;
