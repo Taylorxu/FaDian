@@ -1,6 +1,7 @@
 package com.powerge.wise.powerge.otherPages.huaBao;
 
 import android.databinding.DataBindingUtil;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.SparseArray;
 import android.view.LayoutInflater;

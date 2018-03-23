@@ -9,8 +9,10 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.ExpandableListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -86,7 +88,6 @@ public class HuanBaoKaoHeFragment extends Fragment implements RadioGroup.OnCheck
         });
     }
 
-    List<KaoHeChildItemBean> dataAll = new ArrayList<>();
 
     private void getData() {
         KaoHeChildItemBean kaoHe = new KaoHeChildItemBean();
