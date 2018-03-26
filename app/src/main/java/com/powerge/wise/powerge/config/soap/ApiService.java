@@ -16,6 +16,8 @@ import com.powerge.wise.powerge.bean.QueXianFormBean;
 import com.powerge.wise.powerge.bean.QueXianMagBean;
 import com.powerge.wise.powerge.bean.SheBeiRootBean;
 import com.powerge.wise.powerge.bean.TongJiForm;
+import com.powerge.wise.powerge.bean.ZhiBIaoValueBean;
+import com.powerge.wise.powerge.bean.ZhiBaioNameBean;
 import com.powerge.wise.powerge.bean.ZhiZhangLogBean;
 import com.powerge.wise.powerge.config.soap.request.BaseUrl;
 import com.powerge.wise.powerge.config.soap.beans.LoginBean;
@@ -92,7 +94,8 @@ public interface ApiService {
     })
     @POST(BaseUrl.SERVICE_P)
     Observable<Response<ResultModelData<ResultModelData.ReturnValueBean<QueXianMagBean>>>> queryIssueDetails(@Body RequestEnvelope requestEnvelope);//缺陷管理
-//缺陷管理
+
+    //缺陷管理
     @Headers({
             "Content-Type:text/xml; charset=utf-8",
             "Accept-Charset: utf-8"
@@ -140,7 +143,7 @@ public interface ApiService {
     @POST(BaseUrl.SERVICE_P)
     Observable<Response<ResultModel<List<PeroidDateLineListBean>>>> queryLoadRatioData(@Body RequestEnvelope requestEnvelope);
 
-//查询当日环保指标
+    //查询当日环保指标
     @Headers({
             "Content-Type:text/xml; charset=utf-8",
             "Accept-Charset: utf-8"
@@ -149,13 +152,28 @@ public interface ApiService {
     Observable<Response<ResultModel<List<HuanBaoBean>>>> queryEnvironmentalIndicators(@Body RequestEnvelope requestEnvelope);
 
 
-//查询当日环保指标
+    //查询当日环保指标
     @Headers({
             "Content-Type:text/xml; charset=utf-8",
             "Accept-Charset: utf-8"
     })
     @POST(BaseUrl.SERVICE_P)
     Observable<Response<ResultModel<List<KaoHeChildItemBean>>>> queryEnvAssessmentMonthly(@Body RequestEnvelope requestEnvelope);
+
+    // 获取指标名称列表
+    @Headers({
+            "Content-Type:text/xml; charset=utf-8",
+            "Accept-Charset: utf-8"
+    })
+    @POST(BaseUrl.SERVICE_P)
+    Observable<Response<ResultModel<List<ZhiBaioNameBean>>>> queryEconomicIndicatorsList(@Body RequestEnvelope requestEnvelope);
+ // 获取各机组指标值列表
+    @Headers({
+            "Content-Type:text/xml; charset=utf-8",
+            "Accept-Charset: utf-8"
+    })
+    @POST(BaseUrl.SERVICE_P)
+    Observable<Response<ResultModel<List<ZhiBIaoValueBean>>>> queryEconomicIndicators(@Body RequestEnvelope requestEnvelope);
 
 
     class Creator {

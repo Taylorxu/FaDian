@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="data"
+            type="com.powerge.wise.powerge.bean.ZhiBIaoValueBean.DetailsBean" />
+
+        <variable
+            name="view"
+            type="android.view.View" />
+    </data>
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/zb_name_frame"
+        >
+
+        <TextView
+            style="@style/jin_ji_table_text"
+            android:text="@{data.value}"
+            android:textColor="@color/text_color_jizu_name" />
+    </FrameLayout>
+</layout>

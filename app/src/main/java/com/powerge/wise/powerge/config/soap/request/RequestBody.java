@@ -12,6 +12,8 @@ import com.powerge.wise.powerge.bean.QueXianFormBean;
 import com.powerge.wise.powerge.bean.QueXianMagBean;
 import com.powerge.wise.powerge.bean.SheBeiRootBean;
 import com.powerge.wise.powerge.bean.TongJiForm;
+import com.powerge.wise.powerge.bean.ZhiBIaoValueBean;
+import com.powerge.wise.powerge.bean.ZhiBaioNameBean;
 import com.powerge.wise.powerge.bean.ZhiZhangLogBean;
 import com.powerge.wise.powerge.config.soap.beans.LoginBean;
 
@@ -45,6 +47,8 @@ public class RequestBody<Data> {
             @Element(name = "n0:queryLoadStatisticData", type = FuHeYTFormDataBean.class),
             @Element(name = "n0:queryLoadRatioData", type = PeroidDateLineListBean.class),
             @Element(name = "n0:queryEnvironmentalIndicators", type = HuanBaoBean.class),
+            @Element(name = "n0:queryEconomicIndicatorsList", type = ZhiBaioNameBean.class),
+            @Element(name = "n0:queryEconomicIndicators", type = ZhiBIaoValueBean.class),
             @Element(name = "n0:queryEnvAssessmentMonthly", type = KaoHeChildItemBean.class),
             @Element(name = "n0:queryMonitorLogs", type = ZhiZhangLogBean.class)
     })

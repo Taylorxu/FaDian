@@ -45,18 +45,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
-            <!--左边 列 不滑动-->
+            <!--左边 列 不滑动 上下 一起，出了 头部-->
             <LinearLayout
                 android:layout_width="100dp"
-                android:layout_height="300dp"
+                android:layout_height="wrap_content"
                 android:background="@android:color/white"
                 android:orientation="vertical">
 
 
                 <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1">
+                    android:layout_height="50dp">
 
                     <TextView
                         style="@style/fuhe_listview_table_text"
@@ -70,55 +69,10 @@
                     android:layout_gravity="bottom"
                     android:background="@color/color_line" />
 
-                <FrameLayout
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/zhi_biao_list_id"
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1">
-
-                    <TextView
-                        style="@style/jin_ji_table_text"
-                        android:text="@string/kong_qi_shi_du" />
-                </FrameLayout>
-
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1">
-
-                    <TextView
-                        style="@style/jin_ji_table_text"
-                        android:text="@string/kong_qi_ya_li" />
-                </FrameLayout>
-
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1">
-
-                    <TextView
-                        style="@style/jin_ji_table_text"
-                        android:text="@string/you_gong_fu" />
-                </FrameLayout>
-
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1">
-
-                    <TextView
-                        style="@style/jin_ji_table_text"
-                        android:text="@string/qi_ta" />
-                </FrameLayout>
-
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1">
-
-                    <TextView
-                        style="@style/jin_ji_table_text"
-                        android:text="@string/xian_e_zhi" />
-                </FrameLayout>
+                    android:layout_height="wrap_content" />
 
             </LinearLayout>
 

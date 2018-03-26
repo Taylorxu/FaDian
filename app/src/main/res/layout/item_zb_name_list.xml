@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="data"
+            type="com.powerge.wise.powerge.bean.ZhiBaioNameBean" />
+
+        <variable
+            name="view"
+            type="android.view.View" />
+    </data>
+
+    <FrameLayout
+        android:id="@+id/zb_name_frame"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:visibility="@{data.visibility?view.VISIBLE:view.GONE}">
+
+        <TextView
+            style="@style/jin_ji_table_text"
+            android:text="@{data.name}" />
+    </FrameLayout>
+
+</layout>
