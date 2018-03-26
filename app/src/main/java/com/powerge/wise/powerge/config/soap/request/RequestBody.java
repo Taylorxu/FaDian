@@ -8,6 +8,7 @@ import com.powerge.wise.powerge.bean.JiZuBean;
 import com.powerge.wise.powerge.bean.KaoHeChildItemBean;
 import com.powerge.wise.powerge.bean.MorningMeetingBean;
 import com.powerge.wise.powerge.bean.PeroidDateLineListBean;
+import com.powerge.wise.powerge.bean.QueXianFormBean;
 import com.powerge.wise.powerge.bean.QueXianMagBean;
 import com.powerge.wise.powerge.bean.SheBeiRootBean;
 import com.powerge.wise.powerge.bean.TongJiForm;
@@ -37,6 +38,7 @@ public class RequestBody<Data> {
             @Element(name = "n0:queryDevicesData", type = SheBeiRootBean.class),
             @Element(name = "n0:queryStatisticData", type = TongJiForm.class),
             @Element(name = "n0:queryIssueDetails", type = QueXianMagBean.class),
+            @Element(name = "n0:queryIssueStatisticsMonthly", type = QueXianFormBean.class),
             @Element(name = "n0:queryUnits", type = JiZuBean.class),
             @Element(name = "n0:queryPowerGenerationData", type = DianLiangBean.class),
             @Element(name = "n0:queryLoadRealtimeData", type = FuHeYTChartLineBean.class),

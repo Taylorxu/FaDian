@@ -13,16 +13,36 @@ import android.text.style.ForegroundColorSpan;
 import android.text.style.RelativeSizeSpan;
 import android.text.style.StyleSpan;
 import android.view.View;
+import android.widget.Toast;
 
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
+import com.powerge.wise.basestone.heart.network.FlatMapResponse;
+import com.powerge.wise.basestone.heart.network.FlatMapTopRes;
+import com.powerge.wise.basestone.heart.network.FlatMapTopResList;
+import com.powerge.wise.basestone.heart.network.ResultModel;
+import com.powerge.wise.basestone.heart.network.ResultModelData;
+import com.powerge.wise.basestone.heart.ui.view.PagingRecyclerView;
 import com.powerge.wise.powerge.R;
+import com.powerge.wise.powerge.bean.QueXianFormBean;
+import com.powerge.wise.powerge.bean.QueXianMagBean;
+import com.powerge.wise.powerge.bean.User;
+import com.powerge.wise.powerge.config.soap.ApiService;
+import com.powerge.wise.powerge.config.soap.request.BaseUrl;
+import com.powerge.wise.powerge.config.soap.request.RequestBody;
+import com.powerge.wise.powerge.config.soap.request.RequestEnvelope;
 import com.powerge.wise.powerge.databinding.ActivityQueXianPieChartBinding;
+import com.powerge.wise.powerge.helper.EEMsgToastHelper;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 public class QueXianPieChartActivity extends AppCompatActivity {
     ActivityQueXianPieChartBinding binding;
@@ -40,9 +60,11 @@ public class QueXianPieChartActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_que_xian_pie_chart);
         pieCharts = new PieChart[]{binding.pieChartJiShi, binding.pieChartEmergency, binding.pieChartUrgency, binding.pieChartNormal};
         binding.title.setText("缺陷报表");
+        getPieCHartData();
         initView();
 
     }
+
 
     private void initView() {
         for (int i = 0; i < pieCharts.length; i++) {
@@ -71,7 +93,6 @@ public class QueXianPieChartActivity extends AppCompatActivity {
             pieCharts[i].setHighlightPerTapEnabled(true);
             pieCharts[i].animateY(1400, Easing.EasingOption.EaseInOutQuad);
 
-            setData(2, 100, i);
         }
     }
 
@@ -91,26 +112,62 @@ public class QueXianPieChartActivity extends AppCompatActivity {
             {Color.rgb(38, 222, 138), Color.rgb(229, 229, 229)}
     };
 
-    private void setData(int count, float range, int p) {
-        float mult = range;
+    /**
+     * 获取 环形图数据
+     */
+    private void getPieCHartData() {
+        final QueXianFormBean formBean = new QueXianFormBean();
+        formBean.setNameSpace(BaseUrl.NAMESPACE_P);
+        formBean.setUserName(User.getCurrentUser().getAccount());
+        formBean.setArg1("03-01");
+        RequestEnvelope.getRequestEnvelope().setBody(new RequestBody<>(formBean));
 
-        ArrayList<PieEntry> entries = new ArrayList<PieEntry>();
+        ApiService.Creator.get().queryIssueStatisticsMonthly(RequestEnvelope.getRequestEnvelope())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .flatMap(new FlatMapResponse<ResultModel<QueXianFormBean>>())
+                .flatMap(new FlatMapTopRes<QueXianFormBean>())
+                .subscribe(new Subscriber<QueXianFormBean>() {
+                    @Override
+                    public void onCompleted() {
 
-        for (int i = 0; i < count; i++) {
-            entries.add(new PieEntry((float) ((Math.random() * mult) + mult / 5)));
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        e.printStackTrace();
+                        EEMsgToastHelper.newInstance().selectWitch(e.getCause().getMessage());
+                    }
+
+                    @Override
+                    public void onNext(QueXianFormBean queXianFormBeans) {
+                        if(queXianFormBeans!=null){
+                            setData(queXianFormBeans);
+                        }else{
+                            Toast.makeText(getBaseContext(),"暂无数据",Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+    }
+
+    private void setData(QueXianFormBean data) {
+
+        for (int i = 0; i < pieCharts.length; i++) {
+            ArrayList<PieEntry> entries = new ArrayList<>();
+            entries.add(new PieEntry(QueXianFormBean.getPieChartData(i)));
+
+            PieDataSet dataSet = new PieDataSet(entries, "PieData" + i);
+            dataSet.setDrawIcons(false);
+            dataSet.setSliceSpace(1f);
+            dataSet.setSelectionShift(5f);
+            dataSet.setColors(mColors[i]);
+
+            PieData pieData = new PieData(dataSet);
+            pieData.setDrawValues(false);//不在环形上显示数据
+
+            pieCharts[i].setData(pieData);
+            pieCharts[i].invalidate();
         }
-
-        PieDataSet dataSet = new PieDataSet(entries, "");
-        dataSet.setDrawIcons(false);
-        dataSet.setSliceSpace(1f);
-        dataSet.setSelectionShift(5f);
-        dataSet.setColors(mColors[p]);
-
-        PieData data = new PieData(dataSet);
-        data.setDrawValues(false);//不在环形上显示数据
-
-        pieCharts[p].setData(data);
-        pieCharts[p].invalidate();
     }
 
     @SuppressLint("ResourceAsColor")

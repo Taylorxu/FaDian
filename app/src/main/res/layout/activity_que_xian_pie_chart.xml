@@ -27,16 +27,6 @@
                     android:id="@+id/title"
                     style="@style/Title" />
 
-                <ImageView
-                    android:id="@+id/btn_slect_date"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right|center_vertical"
-                    android:layout_marginRight="20dp"
-                    android:background="@drawable/ic_calander_qx"
-                    android:onClick="onClick"
-
-                    />
             </FrameLayout>
 
 
@@ -44,92 +34,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="10dp"
                 android:background="@color/color_line" />
-
-            <android.support.design.widget.TabLayout
-                android:id="@+id/que_xian_tab_l"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@android:color/white"
-                app:tabIndicatorColor="@color/colorPrimary"
-                app:tabIndicatorHeight="2dp"
-                app:tabMode="fixed"
-                app:tabSelectedTextColor="@color/colorPrimary"
-                app:tabTextColor="@color/text_color_jizu_name">
-
-            </android.support.design.widget.TabLayout>
-
-            <HorizontalScrollView
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@color/color_line"
-                android:scrollbars="none">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <RadioGroup
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <RadioButton
-                            android:id="@+id/btn_all_line"
-                            style="@style/style_huan_bao_line_chart_radios"
-                            android:layout_width="60dp"
-                            android:layout_height="34dp"
-                            android:layout_weight="1"
-                            android:checked="true"
-                            android:text="全部"
-                            android:textSize="12sp" />
-
-                        <RadioButton
-                            android:id="@+id/btn_yang_line"
-                            style="@style/style_huan_bao_line_chart_radios"
-                            android:layout_width="60dp"
-                            android:layout_height="34dp"
-                            android:layout_weight="1"
-                            android:tag="0"
-                            android:text="机组"
-                            android:textSize="12sp"
-
-                            />
-
-                        <RadioButton
-                            android:id="@+id/btn_liu_line"
-                            style="@style/style_huan_bao_line_chart_radios"
-                            android:layout_width="60dp"
-                            android:layout_height="34dp"
-                            android:layout_weight="1"
-                            android:tag="1"
-                            android:text="汽机"
-                            android:textSize="12sp" />
-
-                        <RadioButton
-                            android:id="@+id/btn_yan_chen_line"
-                            style="@style/style_huan_bao_line_chart_radios"
-                            android:layout_width="60dp"
-                            android:layout_height="34dp"
-                            android:layout_weight="1"
-                            android:tag="2"
-                            android:text="锅炉"
-                            android:textSize="12sp" />
-
-                        <RadioButton
-                            style="@style/style_huan_bao_line_chart_radios"
-                            android:layout_width="60dp"
-                            android:layout_height="34dp"
-                            android:layout_weight="1"
-                            android:tag="2"
-                            android:text="电气"
-                            android:textSize="12sp" />
-                    </RadioGroup>
-
-
-                </LinearLayout>
-            </HorizontalScrollView>
 
 
         </android.support.design.widget.AppBarLayout>

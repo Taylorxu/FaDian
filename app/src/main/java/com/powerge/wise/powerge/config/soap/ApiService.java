@@ -12,6 +12,7 @@ import com.powerge.wise.powerge.bean.JiZuBean;
 import com.powerge.wise.powerge.bean.KaoHeChildItemBean;
 import com.powerge.wise.powerge.bean.MorningMeetingBean;
 import com.powerge.wise.powerge.bean.PeroidDateLineListBean;
+import com.powerge.wise.powerge.bean.QueXianFormBean;
 import com.powerge.wise.powerge.bean.QueXianMagBean;
 import com.powerge.wise.powerge.bean.SheBeiRootBean;
 import com.powerge.wise.powerge.bean.TongJiForm;
@@ -91,6 +92,13 @@ public interface ApiService {
     })
     @POST(BaseUrl.SERVICE_P)
     Observable<Response<ResultModelData<ResultModelData.ReturnValueBean<QueXianMagBean>>>> queryIssueDetails(@Body RequestEnvelope requestEnvelope);//缺陷管理
+//缺陷管理
+    @Headers({
+            "Content-Type:text/xml; charset=utf-8",
+            "Accept-Charset: utf-8"
+    })
+    @POST(BaseUrl.SERVICE_P)
+    Observable<Response<ResultModel<QueXianFormBean>>> queryIssueStatisticsMonthly(@Body RequestEnvelope requestEnvelope);//缺陷管理统计
 
     //查询机组数据
     @Headers({
