@@ -49,8 +49,4 @@ public class Detail implements Parcelable {
         dest.writeString(detail);
     }
 
-    public String getIndex() {
-        int i = 0;
-        return String.valueOf(i++);
-    }
 }

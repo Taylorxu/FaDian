@@ -236,13 +236,13 @@ public class XunJianMagActivity extends AppCompatActivity implements XunJianDate
         AndPermission.with(this)
                 .permission(android.Manifest.permission.ACCESS_COARSE_LOCATION
                 )
-                .onGranted(new Action() {
+               /* .onGranted(new Action() {
                     @SuppressLint("NewApi")
                     @Override
                     public void onAction(List<String> permissions) {
                         Toast.makeText(getBaseContext(), "授权成功", Toast.LENGTH_SHORT).show();
                     }
-                })
+                })*/
                 .rationale(rationaleListener)
                 .onDenied(action)
                 .start();

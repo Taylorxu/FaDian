@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 
 import com.powerge.wise.basestone.heart.ui.XAdapter;
+import com.powerge.wise.basestone.heart.ui.XViewHolder;
 import com.powerge.wise.powerge.BR;
 import com.powerge.wise.powerge.R;
 import com.powerge.wise.powerge.bean.Detail;
@@ -34,6 +35,15 @@ public class XunJianDianSignListActivity extends AppCompatActivity {
         context.startActivity(starter);
     }
 
+    XAdapter<Detail, ItemSignTimeListBinding> adapter = new XAdapter.SimpleAdapter<Detail, ItemSignTimeListBinding>(0, R.layout.item_sign_time_list) {
+        @Override
+        public void onBindViewHolder(XViewHolder<Detail, ItemSignTimeListBinding> holder, int position) {
+            super.onBindViewHolder(holder, position);
+            holder.getBinding().setSignTime(getItemData(position));
+            holder.getBinding().setIndex(String.valueOf(position));
+
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +51,6 @@ public class XunJianDianSignListActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_xun_jian_dian_sign_list);
         binding.title.setText(getIntent().getStringExtra(titleKey));
         list = getIntent().getParcelableArrayListExtra(listKey);
-        XAdapter<Detail, ItemSignTimeListBinding> adapter = new XAdapter.SimpleAdapter<>(BR.signTime, R.layout.item_sign_time_list);
         binding.contentSignTime.setLayoutManager(new LinearLayoutManager(this));
         binding.contentSignTime.setAdapter(adapter);
         adapter.setList(list);
