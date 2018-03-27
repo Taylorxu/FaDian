@@ -58,6 +58,10 @@ public abstract class XAdapter<Data, Binding extends ViewDataBinding> extends Re
         notifyDataSetChanged();
     }
 
+    public List<Data> getList() {
+        return list;
+    }
+
     public Data getItemData(int position) {
         return list.get(position);
     }
@@ -130,6 +134,7 @@ public abstract class XAdapter<Data, Binding extends ViewDataBinding> extends Re
         this.list.addAll(position, datas);
         notifyItemRangeChanged(position, datas.size());
     }
+ 
 
     public void remove(int position) {
         if (getItemCount() == 0 || position < 0 || position > getItemCount() - 1) return;
