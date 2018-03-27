@@ -87,7 +87,7 @@ public class ZHiZhangLogActivity extends AppCompatActivity {
         final ZhiZhangLogBean zhiZhangLogBean = ZhiZhangLogBean.newInstance();
         zhiZhangLogBean.setNameSpace(BaseUrl.NAMESPACE_P);
         zhiZhangLogBean.setArg1(String.valueOf(page));
-        zhiZhangLogBean.setUserName(User.getCurrentUser().getAccount());
+        zhiZhangLogBean.setUserName(User.getCurrentUser().getName());
         RequestEnvelope.getRequestEnvelope().setBody(new RequestBody<>(zhiZhangLogBean));
 
         ApiService.Creator.get().queryMonitorLogs(RequestEnvelope.getRequestEnvelope())

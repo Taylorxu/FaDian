@@ -5,7 +5,7 @@
 
         <variable
             name="signTime"
-            type="com.powerge.wise.powerge.bean.SimpleListTextItem" />
+            type="com.powerge.wise.powerge.bean.Detail" />
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -22,7 +22,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="@{signTime.title}"
+                android:text="@{signTime.index}"
                 android:textColor="@color/color_4d"
                 android:textSize="14sp" />
 
@@ -37,7 +37,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="@{signTime.formtDate}"
+                android:text="@{signTime.detail}"
                 android:textColor="@color/color_4d"
                 android:textSize="14sp" />
 

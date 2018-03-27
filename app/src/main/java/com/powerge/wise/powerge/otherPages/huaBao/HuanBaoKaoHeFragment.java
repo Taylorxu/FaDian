@@ -92,7 +92,7 @@ public class HuanBaoKaoHeFragment extends Fragment implements RadioGroup.OnCheck
     private void getData() {
         KaoHeChildItemBean kaoHe = new KaoHeChildItemBean();
         kaoHe.setNameSpace(BaseUrl.NAMESPACE_P);
-        kaoHe.setUserName(User.getCurrentUser().getAccount());
+        kaoHe.setUserName(User.getCurrentUser().getName());
         kaoHe.setArg1(String.valueOf(ji_zu_checked));
         RequestEnvelope.getRequestEnvelope().setBody(new RequestBody<>(kaoHe));
         ApiService.Creator.get().queryEnvAssessmentMonthly(RequestEnvelope.getRequestEnvelope())

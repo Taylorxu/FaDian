@@ -118,7 +118,7 @@ public class QueXianPieChartActivity extends AppCompatActivity {
     private void getPieCHartData() {
         final QueXianFormBean formBean = new QueXianFormBean();
         formBean.setNameSpace(BaseUrl.NAMESPACE_P);
-        formBean.setUserName(User.getCurrentUser().getAccount());
+        formBean.setUserName(User.getCurrentUser().getName());
         formBean.setArg1("03-01");
         RequestEnvelope.getRequestEnvelope().setBody(new RequestBody<>(formBean));
 

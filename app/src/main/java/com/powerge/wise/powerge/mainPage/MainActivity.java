@@ -16,9 +16,12 @@ import android.view.MenuItem;
 import android.widget.RadioGroup;
 
 import com.powerge.wise.powerge.R;
+import com.powerge.wise.powerge.bean.User;
 import com.powerge.wise.powerge.databinding.ActivityMainBinding;
 import com.powerge.wise.powerge.helper.BottomNavigationViewHelper;
+import com.powerge.wise.powerge.otherPages.LoginActivity;
 import com.powerge.wise.powerge.zxing.activity.CaptureActivity;
+import com.wisesignsoft.OperationManagement.utils.ToastUtil;
 import com.yanzhenjie.permission.Action;
 import com.yanzhenjie.permission.AndPermission;
 import com.yanzhenjie.permission.Rationale;
@@ -35,6 +38,16 @@ public class MainActivity extends AppCompatActivity implements FirstFragment.OnF
         Intent starter = new Intent(context, MainActivity.class);
         starter.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(starter);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (User.getCurrentUser() == null || !User.getCurrentUser().isLogin()) {
+            ToastUtil.toast(this, getResources().getString(R.string.error_login_login_need));
+            LoginActivity.start(this);
+            return;
+        }
     }
 
     @Override

@@ -20,11 +20,17 @@ import com.powerge.wise.powerge.R;
 import com.powerge.wise.powerge.databinding.FragmentXunJianDateBinding;
 import com.wisesignsoft.OperationManagement.utils.LogUtil;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -32,10 +38,12 @@ import java.util.List;
  * {@link XunJianDateFragment.OnDateCehckedListener} interface
  * to handle interaction events.
  */
-public class XunJianDateFragment extends Fragment {
+public class XunJianDateFragment extends Fragment implements RadioGroup.OnCheckedChangeListener {
     private static final String ARG_SECTION_NUMBER = "section_number";
     private OnDateCehckedListener mListener;
     private int dateType;
+    private int termType;
+    private String datep;
 
     public XunJianDateFragment() {
 
@@ -57,6 +65,7 @@ public class XunJianDateFragment extends Fragment {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_xun_jian_date, container, false);
         dateType = getArguments().getInt(ARG_SECTION_NUMBER, 0);
+        binding.monthGroup.setOnCheckedChangeListener(this);
         createMonthGroup();
         return binding.getRoot();
     }
@@ -146,13 +155,16 @@ public class XunJianDateFragment extends Fragment {
             if (dateType == 2) dateList.add(mMonth + "月" + mDay + "日");
 
         }
-        LogUtil.log(dateList.toString());
+
     }
 
 
-    public void onButtonPressed(Uri uri) {
+    public void onButtonPressed() {
         if (mListener != null) {
-            mListener.onDateCehckedListener(uri);
+            Map<String, String> p = new HashMap<>();
+            p.put("termType", String.valueOf(termType));
+            p.put("date", datep);
+            mListener.onDateCehckedListener(p);
         }
     }
 
@@ -173,8 +185,30 @@ public class XunJianDateFragment extends Fragment {
         mListener = null;
     }
 
+    @Override
+    public void onCheckedChanged(RadioGroup group, int checkedId) {
+        if (dateType == 0 || dateType == 2) {
+            String dateChecked = dateList.get(checkedId);
+            if (dateChecked.indexOf("年") < 0) {//日
+                dateChecked = Calendar.getInstance().get(Calendar.YEAR) + "年" + dateChecked;
+            } else if (dateChecked.indexOf("日") < 0) {
+                dateChecked += Calendar.getInstance().get(Calendar.DATE) + "日";
+            }
+            dateChecked = dateChecked.replace("年", "-").replace("月", "-").replace("日", "");
+            datep = dateChecked;
+            if (dateType == 0) {
+                termType = 3;
+            } else if (dateType == 1) {
+                termType = 2;
+            } else if (dateType == 0) {
+                termType = 1;
+            }
+            onButtonPressed();
+        }
+    }
+
     public interface OnDateCehckedListener {
         // TODO: Update argument type and name
-        void onDateCehckedListener(Uri uri);
+        void onDateCehckedListener(Map<String, String> p);
     }
 }

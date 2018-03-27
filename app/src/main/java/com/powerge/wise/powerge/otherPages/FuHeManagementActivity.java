@@ -72,6 +72,7 @@ public class FuHeManagementActivity extends AppCompatActivity implements RadioGr
     ActivityFuHeMagmentBinding binding;
     LineChart lineCharts[];
     private String start_date, end_date;
+    private int checkedIdp;
 
     public static void start(Context context) {
         Intent starter = new Intent(context, FuHeManagementActivity.class);
@@ -115,9 +116,9 @@ public class FuHeManagementActivity extends AppCompatActivity implements RadioGr
      */
     private void getJiZuData() {
         if (User.getCurrentUser() == null) LoginActivity.start(this);
-        final JiZuBean jiZuBean =new JiZuBean();
+        final JiZuBean jiZuBean = new JiZuBean();
         jiZuBean.setNameSpace(BaseUrl.NAMESPACE_P);
-        jiZuBean.setUserName(User.getCurrentUser().getAccount());
+        jiZuBean.setUserName(User.getCurrentUser().getName());
         RequestEnvelope.getRequestEnvelope().setBody(new RequestBody<>(jiZuBean));
         ApiService.Creator.get().queryUnits(RequestEnvelope.getRequestEnvelope())
                 .subscribeOn(Schedulers.io())
@@ -174,7 +175,7 @@ public class FuHeManagementActivity extends AppCompatActivity implements RadioGr
         if (User.getCurrentUser() == null) LoginActivity.start(this);
         final FuHeYTChartLineBean heYTChartLineBean = FuHeYTChartLineBean.newInstance();
         heYTChartLineBean.setNameSpace(BaseUrl.NAMESPACE_P);
-        heYTChartLineBean.setUserName(User.getCurrentUser().getAccount());
+        heYTChartLineBean.setUserName(User.getCurrentUser().getName());
         heYTChartLineBean.setArg1(checkedId);
         RequestEnvelope.getRequestEnvelope().setBody(new RequestBody<>(heYTChartLineBean));
         ApiService.Creator.get().queryLoadRealtimeData(RequestEnvelope.getRequestEnvelope())
@@ -215,7 +216,7 @@ public class FuHeManagementActivity extends AppCompatActivity implements RadioGr
         if (User.getCurrentUser() == null) LoginActivity.start(this);
         final FuHeYTFormDataBean ytFormDataBean = FuHeYTFormDataBean.newInstance();
         ytFormDataBean.setNameSpace(BaseUrl.NAMESPACE_P);
-        ytFormDataBean.setUserName(User.getCurrentUser().getAccount());
+        ytFormDataBean.setUserName(User.getCurrentUser().getName());
         ytFormDataBean.setArg1(checkedId);//机组
         RequestEnvelope.getRequestEnvelope().setBody(new RequestBody<>(ytFormDataBean));
         ApiService.Creator.get().queryLoadStatisticData(RequestEnvelope.getRequestEnvelope())
@@ -264,7 +265,7 @@ public class FuHeManagementActivity extends AppCompatActivity implements RadioGr
         if (User.getCurrentUser() == null) LoginActivity.start(this);
         final PeroidDateLineListBean dateLineListBean = PeroidDateLineListBean.newInstance();
         dateLineListBean.setNameSpace(BaseUrl.NAMESPACE_P);
-        dateLineListBean.setUserName(User.getCurrentUser().getAccount());
+        dateLineListBean.setUserName(User.getCurrentUser().getName());
         dateLineListBean.setArg1(binding.textStartText.getText().toString());
         dateLineListBean.setArg2(binding.textEndText.getText().toString());
         dateLineListBean.setArg3(checkedId);
@@ -448,6 +449,9 @@ public class FuHeManagementActivity extends AppCompatActivity implements RadioGr
             case R.id.icon_period_date:
                 DatePeriodSelectActivity.start(this);
                 break;
+            case R.id.btn_hour_data:
+                FuHeOneHourDataActivity.start(this, String.valueOf(checkedIdp));
+                break;
         }
     }
 
@@ -464,6 +468,7 @@ public class FuHeManagementActivity extends AppCompatActivity implements RadioGr
 
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
+        checkedIdp=checkedId;
         getFuHeYTData(String.valueOf(checkedId));
         queryLoadRatioData(String.valueOf(checkedId));
     }

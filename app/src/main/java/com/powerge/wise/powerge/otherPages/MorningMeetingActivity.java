@@ -90,7 +90,7 @@ public class MorningMeetingActivity extends AppCompatActivity {
         final MorningMeetingBean morningMeetingBean = MorningMeetingBean.newInstance();
         morningMeetingBean.setNameSpace(BaseUrl.NAMESPACE_P);
         morningMeetingBean.setArg1(String.valueOf(page));
-        morningMeetingBean.setUserName(User.getCurrentUser().getAccount());
+        morningMeetingBean.setUserName(User.getCurrentUser().getName());
 
         RequestEnvelope.getRequestEnvelope().setBody(new RequestBody<>(morningMeetingBean));
         ApiService.Creator.get().queryProductionEarlyMeetingData(RequestEnvelope.getRequestEnvelope())

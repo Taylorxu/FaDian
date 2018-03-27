@@ -80,7 +80,7 @@ public class QueXianMagActivity extends AppCompatActivity {
         queXianMagBean.setNameSpace(BaseUrl.NAMESPACE_P);
         queXianMagBean.setArg1("2018-03-01");
         queXianMagBean.setArg2(String.valueOf(page));
-        queXianMagBean.setUserName(User.getCurrentUser().getAccount());
+        queXianMagBean.setUserName(User.getCurrentUser().getName());
         RequestEnvelope.getRequestEnvelope().setBody(new RequestBody<>(queXianMagBean));
 
         ApiService.Creator.get().queryIssueDetails(RequestEnvelope.getRequestEnvelope())

@@ -4,10 +4,10 @@ package com.powerge.wise.powerge.config.soap;
 import com.powerge.wise.basestone.heart.network.NetConfig;
 import com.powerge.wise.basestone.heart.network.ResultModelData;
 import com.powerge.wise.powerge.bean.DianLiangBean;
+import com.powerge.wise.powerge.bean.FuHeHourDataBean;
 import com.powerge.wise.powerge.bean.FuHeYTChartLineBean;
 import com.powerge.wise.powerge.bean.FuHeYTFormDataBean;
 import com.powerge.wise.powerge.bean.HuanBaoBean;
-import com.powerge.wise.powerge.bean.Items;
 import com.powerge.wise.powerge.bean.JiZuBean;
 import com.powerge.wise.powerge.bean.KaoHeChildItemBean;
 import com.powerge.wise.powerge.bean.MorningMeetingBean;
@@ -16,6 +16,7 @@ import com.powerge.wise.powerge.bean.QueXianFormBean;
 import com.powerge.wise.powerge.bean.QueXianMagBean;
 import com.powerge.wise.powerge.bean.SheBeiRootBean;
 import com.powerge.wise.powerge.bean.TongJiForm;
+import com.powerge.wise.powerge.bean.XunJianSignBean;
 import com.powerge.wise.powerge.bean.ZhiBIaoValueBean;
 import com.powerge.wise.powerge.bean.ZhiBaioNameBean;
 import com.powerge.wise.powerge.bean.ZhiZhangLogBean;
@@ -23,6 +24,7 @@ import com.powerge.wise.powerge.config.soap.request.BaseUrl;
 import com.powerge.wise.powerge.config.soap.beans.LoginBean;
 import com.powerge.wise.basestone.heart.network.ResultModel;
 import com.powerge.wise.powerge.config.soap.request.RequestEnvelope;
+import com.powerge.wise.powerge.otherPages.xunJian.SignSoapRequest;
 
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.convert.AnnotationStrategy;
@@ -167,13 +169,47 @@ public interface ApiService {
     })
     @POST(BaseUrl.SERVICE_P)
     Observable<Response<ResultModel<List<ZhiBaioNameBean>>>> queryEconomicIndicatorsList(@Body RequestEnvelope requestEnvelope);
- // 获取各机组指标值列表
+
+    // 获取各机组指标值列表
     @Headers({
             "Content-Type:text/xml; charset=utf-8",
             "Accept-Charset: utf-8"
     })
     @POST(BaseUrl.SERVICE_P)
-    Observable<Response<ResultModel<List<ZhiBIaoValueBean>>>> queryEconomicIndicators(@Body RequestEnvelope requestEnvelope);
+    Observable<Response<ResultModel<List<ZhiBIaoValueBean>>>> queryEconomicIndicators(@Body RequestEnvelope requestEnvelope);// 获取各机组指标值列表
+
+    @Headers({
+            "Content-Type:text/xml; charset=utf-8",
+            "Accept-Charset: utf-8"
+    })
+    @POST(BaseUrl.SERVICE_P)
+    Observable<Response<ResultModel<List<FuHeHourDataBean>>>> queryLoadDetailsInHour(@Body RequestEnvelope requestEnvelope);
+
+    /**
+     * 巡检管理
+     *
+     * @param requestEnvelope
+     * @return
+     */
+    @Headers({
+            "Content-Type:text/xml; charset=utf-8",
+            "Accept-Charset: utf-8"
+    })
+    @POST(BaseUrl.SERVICE_P)
+    Observable<Response<ResultModel<List<XunJianSignBean>>>> queryInspectionResultData(@Body RequestEnvelope requestEnvelope);
+
+/**
+     * 巡检管理
+     *
+     * @param requestEnvelope
+     * @return
+     */
+    @Headers({
+            "Content-Type:text/xml; charset=utf-8",
+            "Accept-Charset: utf-8"
+    })
+    @POST(BaseUrl.SERVICE_P)
+    Observable<Response<ResultModel<SignSoapRequest>>> inspectPoint(@Body RequestEnvelope requestEnvelope);
 
 
     class Creator {

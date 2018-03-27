@@ -1,6 +1,7 @@
 package com.powerge.wise.powerge.config.soap.request;
 
 import com.powerge.wise.powerge.bean.DianLiangBean;
+import com.powerge.wise.powerge.bean.FuHeHourDataBean;
 import com.powerge.wise.powerge.bean.FuHeYTChartLineBean;
 import com.powerge.wise.powerge.bean.FuHeYTFormDataBean;
 import com.powerge.wise.powerge.bean.HuanBaoBean;
@@ -12,10 +13,12 @@ import com.powerge.wise.powerge.bean.QueXianFormBean;
 import com.powerge.wise.powerge.bean.QueXianMagBean;
 import com.powerge.wise.powerge.bean.SheBeiRootBean;
 import com.powerge.wise.powerge.bean.TongJiForm;
+import com.powerge.wise.powerge.bean.XunJianSignBean;
 import com.powerge.wise.powerge.bean.ZhiBIaoValueBean;
 import com.powerge.wise.powerge.bean.ZhiBaioNameBean;
 import com.powerge.wise.powerge.bean.ZhiZhangLogBean;
 import com.powerge.wise.powerge.config.soap.beans.LoginBean;
+import com.powerge.wise.powerge.otherPages.xunJian.SignSoapRequest;
 
 import org.simpleframework.xml.Default;
 import org.simpleframework.xml.DefaultType;
@@ -49,6 +52,9 @@ public class RequestBody<Data> {
             @Element(name = "n0:queryEnvironmentalIndicators", type = HuanBaoBean.class),
             @Element(name = "n0:queryEconomicIndicatorsList", type = ZhiBaioNameBean.class),
             @Element(name = "n0:queryEconomicIndicators", type = ZhiBIaoValueBean.class),
+            @Element(name = "n0:queryLoadDetailsInHour", type = FuHeHourDataBean.class),
+            @Element(name = "n0:queryInspectionResultData", type = XunJianSignBean.class),
+            @Element(name = "n0:inspectPoint", type = SignSoapRequest.class),
             @Element(name = "n0:queryEnvAssessmentMonthly", type = KaoHeChildItemBean.class),
             @Element(name = "n0:queryMonitorLogs", type = ZhiZhangLogBean.class)
     })

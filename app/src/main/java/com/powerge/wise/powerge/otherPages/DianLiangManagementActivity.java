@@ -80,7 +80,7 @@ public class DianLiangManagementActivity extends AppCompatActivity implements Ra
         if (User.getCurrentUser() == null) LoginActivity.start(this);
         final JiZuBean jiZuBean = new JiZuBean();
         jiZuBean.setNameSpace(BaseUrl.NAMESPACE_P);
-        jiZuBean.setUserName(User.getCurrentUser().getAccount());
+        jiZuBean.setUserName(User.getCurrentUser().getName());
 
 
         RequestEnvelope.getRequestEnvelope().setBody(new RequestBody<>(jiZuBean));
@@ -114,7 +114,7 @@ public class DianLiangManagementActivity extends AppCompatActivity implements Ra
         if (User.getCurrentUser() == null) LoginActivity.start(this);
         final DianLiangBean dianLiangBean = DianLiangBean.newInstance();
         dianLiangBean.setNameSpace(BaseUrl.NAMESPACE_P);
-        dianLiangBean.setUserName(User.getCurrentUser().getAccount());
+        dianLiangBean.setUserName(User.getCurrentUser().getName());
         dianLiangBean.setArg1(id);
         RequestEnvelope.getRequestEnvelope().setBody(new RequestBody<>(dianLiangBean));
         ApiService.Creator.get().queryPowerGenerationData(RequestEnvelope.getRequestEnvelope())

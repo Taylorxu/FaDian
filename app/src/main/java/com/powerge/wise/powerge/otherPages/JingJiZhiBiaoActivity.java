@@ -132,7 +132,7 @@ public class JingJiZhiBiaoActivity extends AppCompatActivity {
     private void getZBNameList() {
         ZhiBaioNameBean nameBean = new ZhiBaioNameBean();
         nameBean.setNameSpace(BaseUrl.NAMESPACE_P);
-        nameBean.setUserName(User.getCurrentUser().getAccount());
+        nameBean.setUserName(User.getCurrentUser().getName());
         RequestEnvelope.getRequestEnvelope().setBody(new RequestBody<>(nameBean));
         ApiService.Creator.get().queryEconomicIndicatorsList(RequestEnvelope.getRequestEnvelope())
                 .subscribeOn(Schedulers.io())
@@ -164,7 +164,7 @@ public class JingJiZhiBiaoActivity extends AppCompatActivity {
     private void getZBValueList() {
         ZhiBIaoValueBean valueBean = new ZhiBIaoValueBean();
         valueBean.setNameSpace(BaseUrl.NAMESPACE_P);
-        valueBean.setUserName(User.getCurrentUser().getAccount());
+        valueBean.setUserName(User.getCurrentUser().getName());
         RequestEnvelope.getRequestEnvelope().setBody(new RequestBody<>(valueBean));
         ApiService.Creator.get().queryEconomicIndicators(RequestEnvelope.getRequestEnvelope())
                 .subscribeOn(Schedulers.io())

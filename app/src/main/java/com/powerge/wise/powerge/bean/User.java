@@ -18,6 +18,7 @@ public class User extends RealmObject {
     @PrimaryKey
     public int id;
     public String account;
+    public String name;
     public boolean isLogin;
 
     public int getId() {
@@ -42,6 +43,14 @@ public class User extends RealmObject {
 
     public void setAccount(String account) {
         this.account = account;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public static User getCurrentUser() {

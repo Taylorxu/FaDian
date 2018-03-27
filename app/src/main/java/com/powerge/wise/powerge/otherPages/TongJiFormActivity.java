@@ -82,7 +82,7 @@ public class TongJiFormActivity extends AppCompatActivity {
     private void getData() {
         final TongJiForm tongJiFormBean = TongJiForm.newInstance();
         tongJiFormBean.setNameSpace(BaseUrl.NAMESPACE_P);
-        tongJiFormBean.setUserName(User.getCurrentUser().getAccount());
+        tongJiFormBean.setUserName(User.getCurrentUser().getName());
         RequestEnvelope.getRequestEnvelope().setBody(new RequestBody<>(tongJiFormBean));
 
         ApiService.Creator.get().queryStatisticData(RequestEnvelope.getRequestEnvelope())

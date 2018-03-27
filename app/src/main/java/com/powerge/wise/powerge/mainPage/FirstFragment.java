@@ -72,15 +72,6 @@ public class FirstFragment extends Fragment {
         return firstFragment;
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        if (User.getCurrentUser() == null || !User.getCurrentUser().isLogin()) {
-            ToastUtil.toast(getContext(), getResources().getString(R.string.error_login_login_need));
-            LoginActivity.start(getContext());
-            return;
-        }
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -224,7 +215,7 @@ public class FirstFragment extends Fragment {
     private void getJiZuData() {
         final JiZuBean jiZuBean = new JiZuBean();
         jiZuBean.setNameSpace(BaseUrl.NAMESPACE_P);
-        jiZuBean.setUserName(User.getCurrentUser().getAccount());
+        jiZuBean.setUserName(User.getCurrentUser().getName());
         RequestEnvelope.getRequestEnvelope().setBody(new RequestBody<>(jiZuBean));
         ApiService.Creator.get().queryUnits(RequestEnvelope.getRequestEnvelope())
                 .subscribeOn(Schedulers.io())

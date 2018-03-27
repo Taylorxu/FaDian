@@ -102,7 +102,7 @@ public class SheBeiInfoActivity extends AppCompatActivity implements SwipeRefres
         sheBeiRootBean.setNameSpace(BaseUrl.NAMESPACE_P);
         sheBeiRootBean.setPage(String.valueOf(page));
         sheBeiRootBean.setKeyWord(keyWord);
-        sheBeiRootBean.setUserName(User.getCurrentUser().getAccount());
+        sheBeiRootBean.setUserName(User.getCurrentUser().getName());
 
         RequestEnvelope.getRequestEnvelope().setBody(new RequestBody<>(sheBeiRootBean));
         ApiService.Creator.get().queryDevicesData(RequestEnvelope.getRequestEnvelope())

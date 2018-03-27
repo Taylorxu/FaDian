@@ -120,7 +120,7 @@ public class HuanBaoJianCeFragment extends Fragment implements RadioGroup.OnChec
     private void getData() {
         HuanBaoBean huanBaoBean = HuanBaoBean.newInstance();
         huanBaoBean.setNameSpace(BaseUrl.NAMESPACE_P);
-        huanBaoBean.setUserName(User.getCurrentUser().getAccount());
+        huanBaoBean.setUserName(User.getCurrentUser().getName());
         huanBaoBean.setArg1(String.valueOf(ji_zu_checked));
         huanBaoBean.setArg2(indicator);
         RequestEnvelope.getRequestEnvelope().setBody(new RequestBody<>(huanBaoBean));
