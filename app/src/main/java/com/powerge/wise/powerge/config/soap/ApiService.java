@@ -13,6 +13,8 @@ import com.powerge.wise.powerge.bean.JiZuBean;
 import com.powerge.wise.powerge.bean.KaoHeChildItemBean;
 import com.powerge.wise.powerge.bean.MorningMeetingBean;
 import com.powerge.wise.powerge.bean.PeroidDateLineListBean;
+import com.powerge.wise.powerge.bean.PlanTaskBean;
+import com.powerge.wise.powerge.bean.PlanTaskDetailBean;
 import com.powerge.wise.powerge.bean.QueXianFormBean;
 import com.powerge.wise.powerge.bean.QueXianMagBean;
 import com.powerge.wise.powerge.bean.SheBeiRootBean;
@@ -199,7 +201,7 @@ public interface ApiService {
     @POST(BaseUrl.SERVICE_P)
     Observable<Response<ResultModel<List<XunJianSignBean>>>> queryInspectionResultData(@Body RequestEnvelope requestEnvelope);
 
-/**
+    /**
      * 巡检管理
      *
      * @param requestEnvelope
@@ -212,7 +214,7 @@ public interface ApiService {
     @POST(BaseUrl.SERVICE_P)
     Observable<Response<ResultModel<SignSoapRequest>>> inspectPoint(@Body RequestEnvelope requestEnvelope);
 
-    //早会
+    //公告
     @Headers({
             "Content-Type:text/xml; charset=utf-8",
             "Accept-Charset: utf-8"
@@ -220,13 +222,30 @@ public interface ApiService {
     @POST(BaseUrl.SERVICE_P)
     Observable<Response<ResultModelData<ResultModelData.ReturnValueBean<GonGaoBean>>>> queryNotice(@Body RequestEnvelope requestEnvelope);
 
+    /**
+     * 计划任务
+     *
+     * @param requestEnvelope
+     * @return
+     */
+    @Headers({
+            "Content-Type:text/xml; charset=utf-8",
+            "Accept-Charset: utf-8"
+    })
+    @POST(BaseUrl.SERVICE_P)
+    Observable<Response<ResultModelData<ResultModelData.ReturnValueBean<PlanTaskBean>>>> queryWorkPlan(@Body RequestEnvelope requestEnvelope);
 
-
-
-
-
-
-
+    /**
+     * 计划详情
+     * @param requestEnvelope
+     * @return
+     */
+    @Headers({
+            "Content-Type:text/xml; charset=utf-8",
+            "Accept-Charset: utf-8"
+    })
+    @POST(BaseUrl.SERVICE_P)
+    Observable<Response<ResultModelData<ResultModelData.ReturnValueBean<PlanTaskDetailBean>>>> queryWorkTask(@Body RequestEnvelope requestEnvelope);
 
 
     class Creator {

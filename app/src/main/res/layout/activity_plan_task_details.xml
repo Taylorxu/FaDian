@@ -6,8 +6,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.powerge.wise.powerge.otherPages.PlanTasksMag.PlanTasksMagActivity">
-
+        tools:context="com.powerge.wise.powerge.otherPages.PlanTasksMag.PlanTaskDetailsActivity">
 
         <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
@@ -41,5 +40,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </android.support.v4.widget.SwipeRefreshLayout>
+
     </android.support.design.widget.CoordinatorLayout>
 </layout>

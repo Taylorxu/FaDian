@@ -13,52 +13,52 @@ import com.powerge.wise.basestone.heart.network.FlatMapResponse;
 import com.powerge.wise.basestone.heart.network.FlatMapTopResList;
 import com.powerge.wise.basestone.heart.network.ResultModelData;
 import com.powerge.wise.basestone.heart.ui.XAdapter;
-import com.powerge.wise.basestone.heart.ui.XViewHolder;
 import com.powerge.wise.basestone.heart.ui.view.PagingRecyclerView;
 import com.powerge.wise.powerge.BR;
 import com.powerge.wise.powerge.R;
-import com.powerge.wise.powerge.bean.GonGaoBean;
 import com.powerge.wise.powerge.bean.PlanTaskBean;
+import com.powerge.wise.powerge.bean.PlanTaskDetailBean;
 import com.powerge.wise.powerge.bean.User;
 import com.powerge.wise.powerge.config.soap.ApiService;
 import com.powerge.wise.powerge.config.soap.request.BaseUrl;
 import com.powerge.wise.powerge.config.soap.request.RequestBody;
 import com.powerge.wise.powerge.config.soap.request.RequestEnvelope;
-import com.powerge.wise.powerge.databinding.ActivityPlanTasksMagBinding;
-import com.powerge.wise.powerge.databinding.ItemPlanTasksListBinding;
+import com.powerge.wise.powerge.databinding.ActivityPlanTaskDetailsBinding;
+import com.powerge.wise.powerge.databinding.ItemPlanTaskDetailListBinding;
 import com.powerge.wise.powerge.helper.EEMsgToastHelper;
 
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-public class PlanTasksMagActivity extends AppCompatActivity {
-    ActivityPlanTasksMagBinding binding;
+public class PlanTaskDetailsActivity extends AppCompatActivity {
+    private String taskId;
     private int currentPage;
 
-    public static void start(Context context) {
-        Intent starter = new Intent(context, PlanTasksMagActivity.class);
+    public static void start(Context context, String title, String id) {
+        Intent starter = new Intent(context, PlanTaskDetailsActivity.class);
+        starter.putExtra(TITLE, title);
+        starter.putExtra(ID, id);
         context.startActivity(starter);
     }
 
-    XAdapter<PlanTaskBean, ItemPlanTasksListBinding> adapter = new XAdapter.SimpleAdapter<>(BR.data, R.layout.item_plan_tasks_list);
+    public static String TITLE = "TITLEKEY", ID = "IDKEY";
+    ActivityPlanTaskDetailsBinding binding;
+
+    XAdapter<PlanTaskDetailBean, ItemPlanTaskDetailListBinding> adapter = new XAdapter.SimpleAdapter<>(BR.data, R.layout.item_plan_task_detail_list);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_plan_tasks_mag);
-        binding.title.setText("计划任务管理");
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_plan_task_details);
+        binding.title.setText(getIntent().getStringExtra(TITLE));
+        taskId = getIntent().getStringExtra(ID);
         binding.contentPlan.setLayoutManager(new LinearLayoutManager(this));
         binding.refreshLayout.setOnRefreshListener(refreshListener);
         binding.contentPlan.setOnLoadMoreListener(onLoadMoreListener);
         binding.contentPlan.setAdapter(adapter);
-        adapter.setItemClickListener(new XAdapter.OnItemClickListener<PlanTaskBean, ItemPlanTasksListBinding>() {
-            @Override
-            public void onItemClick(XViewHolder<PlanTaskBean, ItemPlanTasksListBinding> holder) {
-                PlanTaskDetailsActivity.start(getBaseContext(), holder.getBinding().getData().getName(), holder.getBinding().getData().getObjID());
-            }
-        });
     }
+
 
     SwipeRefreshLayout.OnRefreshListener refreshListener = new SwipeRefreshLayout.OnRefreshListener() {
         @Override
@@ -78,18 +78,19 @@ public class PlanTasksMagActivity extends AppCompatActivity {
      * @param page
      */
     private void getData(int page) {
-        PlanTaskBean planTaskBean = new PlanTaskBean();
+        PlanTaskDetailBean planTaskBean = new PlanTaskDetailBean();
         planTaskBean.setNameSpace(BaseUrl.NAMESPACE_P);
-        planTaskBean.setArg1(String.valueOf(page));
+        planTaskBean.setArg1(taskId);
+        planTaskBean.setArg2(String.valueOf(page));
         planTaskBean.setUserName(User.getCurrentUser().getName());
         RequestEnvelope.getRequestEnvelope().setBody(new RequestBody<>(planTaskBean));
 
-        ApiService.Creator.get().queryWorkPlan(RequestEnvelope.getRequestEnvelope())
+        ApiService.Creator.get().queryWorkTask(RequestEnvelope.getRequestEnvelope())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .flatMap(new FlatMapResponse<ResultModelData<ResultModelData.ReturnValueBean<PlanTaskBean>>>())
-                .flatMap(new FlatMapTopResList<ResultModelData.ReturnValueBean<PlanTaskBean>>())
-                .subscribe(new Subscriber<ResultModelData.ReturnValueBean<PlanTaskBean>>() {
+                .flatMap(new FlatMapResponse<ResultModelData<ResultModelData.ReturnValueBean<PlanTaskDetailBean>>>())
+                .flatMap(new FlatMapTopResList<ResultModelData.ReturnValueBean<PlanTaskDetailBean>>())
+                .subscribe(new Subscriber<ResultModelData.ReturnValueBean<PlanTaskDetailBean>>() {
                     @Override
                     public void onCompleted() {
 
@@ -102,7 +103,7 @@ public class PlanTasksMagActivity extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onNext(ResultModelData.ReturnValueBean<PlanTaskBean> returnValueBean) {
+                    public void onNext(ResultModelData.ReturnValueBean<PlanTaskDetailBean> returnValueBean) {
                         if (returnValueBean.getCurrentPage().equals("1")) {
                             adapter.setList(returnValueBean.getResultList());
                         } else {
@@ -122,4 +123,6 @@ public class PlanTasksMagActivity extends AppCompatActivity {
                 break;
         }
     }
+
+
 }

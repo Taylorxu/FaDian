@@ -4,8 +4,8 @@
     <data>
 
         <variable
-            name="item"
-            type="com.powerge.wise.powerge.bean.Items" />
+            name="data"
+            type="com.powerge.wise.powerge.bean.PlanTaskBean" />
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -30,7 +30,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:text="@{item.text1}"
+                    android:text="@{data.name}"
                     android:textColor="@color/color_4d"
                     android:textSize="15sp" />
 
@@ -48,7 +48,6 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="20dp"
-                    android:text="@{item.formState}"
                     android:textColor="@color/text_color_jizu_name"
                     android:textSize="15sp" />
 
@@ -68,89 +67,6 @@
             android:layout_marginLeft="15dp"
             android:background="@color/color_line" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp">
-
-            <FrameLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
-
-                <TextView
-                    android:id="@+id/text_upload_time"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:text="责任部门:"
-                    android:textColor="@color/color_4d"
-                    android:textSize="15sp" />
-
-            </FrameLayout>
-
-            <FrameLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
-
-                <TextView
-                    android:id="@+id/text_upload_time_value"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical|right"
-                    android:text="@{item.text3}"
-                    android:textColorHint="@color/text_color_jizu_name"
-                    android:textSize="15sp" />
-
-            </FrameLayout>
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginLeft="15dp"
-            android:background="@color/color_line" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp">
-
-            <FrameLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
-
-                <TextView
-                    android:id="@+id/text_who_load"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:text="监督部门:"
-                    android:textColor="@color/color_4d"
-                    android:textSize="15sp" />
-
-            </FrameLayout>
-
-            <FrameLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
-
-                <TextView
-                    android:id="@+id/text_who_value"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical|right"
-                    android:text="@{item.text3}"
-                    android:textColorHint="@color/text_color_jizu_name"
-                    android:textSize="15sp" />
-
-            </FrameLayout>
-        </LinearLayout>
 
         <View
             android:layout_width="match_parent"
@@ -174,7 +90,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:text="开始时间:"
+                    android:text="创建时间:"
                     android:textColor="@color/color_4d"
                     android:textSize="15sp" />
 
@@ -190,7 +106,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical|right"
-                    android:text="@{item.text4}"
+                    android:text="@{data.createTime}"
                     android:textColorHint="@color/text_color_jizu_name"
                     android:textSize="15sp" />
 
@@ -218,7 +134,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:text="计划完成时间:"
+                    android:text=" 开始时间:"
                     android:textColor="@color/color_4d"
                     android:textSize="15sp" />
 
@@ -233,7 +149,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical|right"
-                    android:text="@{item.text5}"
+                    android:text="@{data.beginTime}"
                     android:textColorHint="@color/text_color_jizu_name"
                     android:textSize="15sp" />
 
@@ -261,7 +177,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:text="实际完成时间:"
+                    android:text="结束时间:"
                     android:textColor="@color/color_4d"
                     android:textSize="15sp" />
 
@@ -276,7 +192,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical|right"
-                    android:text="@{item.text5}"
+                    android:text="@{data.endTime}"
                     android:textColorHint="@color/text_color_jizu_name"
                     android:textSize="15sp" />
 
@@ -319,7 +235,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical|right"
-                    android:text="@{item.text6}"
+                    android:ellipsize="marquee"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:scrollHorizontally="true"
+                    android:singleLine="true"
+                    android:text="@{data.planDesc}"
                     android:textColorHint="@color/text_color_jizu_name"
                     android:textSize="15sp" />
 

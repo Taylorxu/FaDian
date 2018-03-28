@@ -10,6 +10,8 @@ import com.powerge.wise.powerge.bean.JiZuBean;
 import com.powerge.wise.powerge.bean.KaoHeChildItemBean;
 import com.powerge.wise.powerge.bean.MorningMeetingBean;
 import com.powerge.wise.powerge.bean.PeroidDateLineListBean;
+import com.powerge.wise.powerge.bean.PlanTaskBean;
+import com.powerge.wise.powerge.bean.PlanTaskDetailBean;
 import com.powerge.wise.powerge.bean.QueXianFormBean;
 import com.powerge.wise.powerge.bean.QueXianMagBean;
 import com.powerge.wise.powerge.bean.SheBeiRootBean;
@@ -58,6 +60,8 @@ public class RequestBody<Data> {
             @Element(name = "n0:inspectPoint", type = SignSoapRequest.class),
             @Element(name = "n0:queryNotice", type = GonGaoBean.class),
             @Element(name = "n0:queryEnvAssessmentMonthly", type = KaoHeChildItemBean.class),
+            @Element(name = "n0:queryWorkPlan", type = PlanTaskBean.class),
+            @Element(name = "n0:queryWorkTask", type = PlanTaskDetailBean.class),
             @Element(name = "n0:queryMonitorLogs", type = ZhiZhangLogBean.class)
     })
     public Data requestModel;
