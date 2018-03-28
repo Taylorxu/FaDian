@@ -41,7 +41,7 @@ public class StartActivity {
         } else if (where == 6) {
             MorningMeetingActivity.start(context);
         } else if (where == 7) {
-            JingSaiActivity.start(context);
+            JingSaiActivity.start(context,jiZuList);
         } else if (where == 8) {
             HuanBaoActivity.start(context,jiZuList);
         } else if (where == 9) {

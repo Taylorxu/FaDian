@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
 
+    <data>
+
+        <variable
+            name="data"
+            type="com.powerge.wise.powerge.bean.JiZuBean" />
+    </data>
+
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="45dp"
@@ -12,16 +19,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:text="指标"
+            android:text="@{data.name}"
             android:textColor="@color/color_4d"
             android:textSize="14sp" />
 
-        <CheckBox
+        <RadioButton
+            android:id="@+id/radio_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/check_btn"
-            android:focusable="false"
             android:layout_gravity="right|center_vertical"
-             />
+            android:focusable="false"
+            android:tag="@{data.id}" />
     </FrameLayout>
 </layout>
