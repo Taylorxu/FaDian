@@ -13,21 +13,37 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.powerge.wise.basestone.heart.network.FlatMapResponse;
+import com.powerge.wise.basestone.heart.network.FlatMapTopResList;
+import com.powerge.wise.basestone.heart.network.ResultModelData;
 import com.powerge.wise.basestone.heart.ui.EndLessOnScrollListener;
 import com.powerge.wise.basestone.heart.ui.XAdapter;
+import com.powerge.wise.basestone.heart.ui.view.PagingRecyclerView;
 import com.powerge.wise.powerge.BR;
 import com.powerge.wise.powerge.R;
+import com.powerge.wise.powerge.bean.GonGaoBean;
 import com.powerge.wise.powerge.bean.SimpleListTextItem;
+import com.powerge.wise.powerge.bean.User;
+import com.powerge.wise.powerge.bean.ZhiZhangLogBean;
+import com.powerge.wise.powerge.config.soap.ApiService;
+import com.powerge.wise.powerge.config.soap.request.BaseUrl;
+import com.powerge.wise.powerge.config.soap.request.RequestBody;
+import com.powerge.wise.powerge.config.soap.request.RequestEnvelope;
 import com.powerge.wise.powerge.databinding.FragmentSecondBinding;
 import com.powerge.wise.powerge.databinding.ItemAnnouncesBinding;
+import com.powerge.wise.powerge.helper.EEMsgToastHelper;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
-public class SecondFragment extends Fragment {
+
+public class SecondFragment extends Fragment implements View.OnClickListener {
     FragmentSecondBinding binding;
-    List<SimpleListTextItem> listTextItems = new ArrayList<>();
+    private int currentPage;
 
     public SecondFragment() {
 
@@ -38,7 +54,7 @@ public class SecondFragment extends Fragment {
         return secondFragment;
     }
 
-    XAdapter<SimpleListTextItem, ItemAnnouncesBinding> adapter = new XAdapter.SimpleAdapter<>(BR.textItem, R.layout.item_announces);
+    XAdapter<GonGaoBean, ItemAnnouncesBinding> adapter = new XAdapter.SimpleAdapter<>(BR.data, R.layout.item_announces);
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -52,66 +68,74 @@ public class SecondFragment extends Fragment {
     @SuppressLint("ResourceAsColor")
     private void initView() {
         binding.title.setText("公告");
-        setData();
+        binding.btnBack.setOnClickListener(this);
         binding.refreshLayout.setColorSchemeColors(getResources().getColor(R.color.colorPrimary));
         binding.refreshLayout.setOnRefreshListener(refreshListener);
+        binding.contentAnnounceList.setOnLoadMoreListener(onLoadMoreListener);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         binding.contentAnnounceList.setLayoutManager(layoutManager);
         binding.contentAnnounceList.setAdapter(adapter);
-        adapter.setList(listTextItems);
-        binding.contentAnnounceList.setOnScrollListener(new EndLessOnScrollListener(layoutManager) {
-            @Override
-            public void onLoadMore(int currentPage) {
-                loadMore(currentPage);
-            }
-        });
 
     }
 
     SwipeRefreshLayout.OnRefreshListener refreshListener = new SwipeRefreshLayout.OnRefreshListener() {
         @Override
         public void onRefresh() {
-//TODO get data
-            refreshData();
-
+            binding.contentAnnounceList.setState(PagingRecyclerView.State.Refresh);
         }
     };
 
-    private void setData() {
-
-        for (int i = 0; i < 10; i++) {
-            SimpleListTextItem textItem = new SimpleListTextItem();
-            textItem.setTitle("title" + i);
-            textItem.setContent("这条公告讲的是" + i);
-//                textItem.setDate("");
-            listTextItems.add(textItem);
+    PagingRecyclerView.OnLoadMoreListener onLoadMoreListener = new PagingRecyclerView.OnLoadMoreListener() {
+        @Override
+        public void onLoadMore(int page) {
+            getData(1);
         }
-        binding.refreshLayout.setRefreshing(false);
+    };
+
+    private void getData(int page) {
+        GonGaoBean gonGaoBean = new GonGaoBean();
+        gonGaoBean.setNameSpace(BaseUrl.NAMESPACE_P);
+        gonGaoBean.setArg1(String.valueOf(page));
+        gonGaoBean.setUserName(User.getCurrentUser().getName());
+        RequestEnvelope.getRequestEnvelope().setBody(new RequestBody<>(gonGaoBean));
+
+        ApiService.Creator.get().queryNotice(RequestEnvelope.getRequestEnvelope())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .flatMap(new FlatMapResponse<ResultModelData<ResultModelData.ReturnValueBean<GonGaoBean>>>())
+                .flatMap(new FlatMapTopResList<ResultModelData.ReturnValueBean<GonGaoBean>>())
+                .subscribe(new Subscriber<ResultModelData.ReturnValueBean<GonGaoBean>>() {
+                    @Override
+                    public void onCompleted() {
+                        binding.refreshLayout.setRefreshing(false);
+                        binding.contentAnnounceList.setState(PagingRecyclerView.State.LoadSuccess);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        e.printStackTrace();
+                        EEMsgToastHelper.newInstance().selectWitch(e.getCause().getMessage());
+                        binding.refreshLayout.setRefreshing(false);
+                        binding.contentAnnounceList.setState(PagingRecyclerView.State.LoadFail);
+                    }
+
+                    @Override
+                    public void onNext(ResultModelData.ReturnValueBean<GonGaoBean> returnValueBean) {
+                        if (returnValueBean.getCurrentPage().equals("1")) {
+                            adapter.setList(returnValueBean.getResultList());
+                        } else {
+                            adapter.addItems(returnValueBean.getResultList());
+                        }
+                        binding.refreshLayout.setRefreshing(false);
+                        binding.contentAnnounceList.setState(returnValueBean.getResultList() == null || returnValueBean.getResultList().size() < 10 ? PagingRecyclerView.State.NoMore : PagingRecyclerView.State.LoadSuccess);
+                        currentPage = Integer.parseInt(returnValueBean.getCurrentPage());
+                    }
+                });
     }
 
-    private void refreshData() {
 
-        for (int i = 0; i < 10; i++) {
-            SimpleListTextItem textItem = new SimpleListTextItem();
-            textItem.setTitle("title" + i);
-            textItem.setContent("这条公告讲刷新出来的" + i);
-//                textItem.setDate("");
-            listTextItems.add(textItem);
-        }
-        adapter.notifyDataSetChanged();
-        binding.refreshLayout.setRefreshing(false);
-    }
-
-    private void loadMore(int currentPage) {
-
-        for (int i = 0; i < 10; i++) {
-            SimpleListTextItem textItem = new SimpleListTextItem();
-            textItem.setTitle("title" + i);
-            textItem.setContent("这条公告讲加载出来的" + i);
-//                textItem.setDate("");
-            listTextItems.add(textItem);
-        }
-        adapter.notifyDataSetChanged();
-
+    @Override
+    public void onClick(View v) {
+        getActivity().finish();
     }
 }

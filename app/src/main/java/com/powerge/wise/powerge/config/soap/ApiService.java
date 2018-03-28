@@ -7,6 +7,7 @@ import com.powerge.wise.powerge.bean.DianLiangBean;
 import com.powerge.wise.powerge.bean.FuHeHourDataBean;
 import com.powerge.wise.powerge.bean.FuHeYTChartLineBean;
 import com.powerge.wise.powerge.bean.FuHeYTFormDataBean;
+import com.powerge.wise.powerge.bean.GonGaoBean;
 import com.powerge.wise.powerge.bean.HuanBaoBean;
 import com.powerge.wise.powerge.bean.JiZuBean;
 import com.powerge.wise.powerge.bean.KaoHeChildItemBean;
@@ -210,6 +211,22 @@ public interface ApiService {
     })
     @POST(BaseUrl.SERVICE_P)
     Observable<Response<ResultModel<SignSoapRequest>>> inspectPoint(@Body RequestEnvelope requestEnvelope);
+
+    //早会
+    @Headers({
+            "Content-Type:text/xml; charset=utf-8",
+            "Accept-Charset: utf-8"
+    })
+    @POST(BaseUrl.SERVICE_P)
+    Observable<Response<ResultModelData<ResultModelData.ReturnValueBean<GonGaoBean>>>> queryNotice(@Body RequestEnvelope requestEnvelope);
+
+
+
+
+
+
+
+
 
 
     class Creator {

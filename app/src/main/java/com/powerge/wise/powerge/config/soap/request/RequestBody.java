@@ -4,6 +4,7 @@ import com.powerge.wise.powerge.bean.DianLiangBean;
 import com.powerge.wise.powerge.bean.FuHeHourDataBean;
 import com.powerge.wise.powerge.bean.FuHeYTChartLineBean;
 import com.powerge.wise.powerge.bean.FuHeYTFormDataBean;
+import com.powerge.wise.powerge.bean.GonGaoBean;
 import com.powerge.wise.powerge.bean.HuanBaoBean;
 import com.powerge.wise.powerge.bean.JiZuBean;
 import com.powerge.wise.powerge.bean.KaoHeChildItemBean;
@@ -55,6 +56,7 @@ public class RequestBody<Data> {
             @Element(name = "n0:queryLoadDetailsInHour", type = FuHeHourDataBean.class),
             @Element(name = "n0:queryInspectionResultData", type = XunJianSignBean.class),
             @Element(name = "n0:inspectPoint", type = SignSoapRequest.class),
+            @Element(name = "n0:queryNotice", type = GonGaoBean.class),
             @Element(name = "n0:queryEnvAssessmentMonthly", type = KaoHeChildItemBean.class),
             @Element(name = "n0:queryMonitorLogs", type = ZhiZhangLogBean.class)
     })

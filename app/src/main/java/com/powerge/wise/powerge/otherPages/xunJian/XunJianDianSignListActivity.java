@@ -7,6 +7,7 @@ import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
+import android.view.View;
 
 import com.powerge.wise.basestone.heart.ui.XAdapter;
 import com.powerge.wise.basestone.heart.ui.XViewHolder;
@@ -54,6 +55,10 @@ public class XunJianDianSignListActivity extends AppCompatActivity {
         binding.contentSignTime.setLayoutManager(new LinearLayoutManager(this));
         binding.contentSignTime.setAdapter(adapter);
         adapter.setList(list);
+    }
+
+    public void onClick(View view) {
+        finish();
     }
 
 }
