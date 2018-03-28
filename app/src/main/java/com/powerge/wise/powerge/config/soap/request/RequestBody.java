@@ -7,6 +7,7 @@ import com.powerge.wise.powerge.bean.FuHeYTFormDataBean;
 import com.powerge.wise.powerge.bean.GonGaoBean;
 import com.powerge.wise.powerge.bean.HuanBaoBean;
 import com.powerge.wise.powerge.bean.JiZuBean;
+import com.powerge.wise.powerge.bean.JingSaiDeFenBean;
 import com.powerge.wise.powerge.bean.KaoHeChildItemBean;
 import com.powerge.wise.powerge.bean.MorningMeetingBean;
 import com.powerge.wise.powerge.bean.PeroidDateLineListBean;
@@ -62,6 +63,7 @@ public class RequestBody<Data> {
             @Element(name = "n0:queryEnvAssessmentMonthly", type = KaoHeChildItemBean.class),
             @Element(name = "n0:queryWorkPlan", type = PlanTaskBean.class),
             @Element(name = "n0:queryWorkTask", type = PlanTaskDetailBean.class),
+            @Element(name = "n0:queryGroupScore", type = JingSaiDeFenBean.class),
             @Element(name = "n0:queryMonitorLogs", type = ZhiZhangLogBean.class)
     })
     public Data requestModel;

@@ -80,24 +80,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:text="当班得分"
+                    android:text="当日得分"
                     android:textColor="@color/color_4d"
                     android:textSize="15sp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="60dp"
-                    android:text="（汽机班） "
-                    android:textColor="@color/color_420a"
-                    android:textSize="12sp" />
 
                 <TextView
+                    android:id="@+id/text_day_score"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical|right"
-                    android:text="100"
                     android:textColor="@color/color_4d"
                     android:textSize="16sp" />
 
@@ -124,10 +116,10 @@
 
 
                 <TextView
+                    android:id="@+id/text_month_score"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical|right"
-                    android:text="100"
                     android:textColor="@color/color_4d"
                     android:textSize="16sp" />
 
@@ -217,10 +209,26 @@
 
             </LinearLayout>
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/content_de_fen_list"
+            <FrameLayout
+
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+                android:layout_height="match_parent"
+                android:layout_gravity="center">
+
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/content_de_fen_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <ProgressBar
+                    android:id="@+id/progress_bar"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center" />
+            </FrameLayout>
+
+
         </LinearLayout>
 
     </FrameLayout>

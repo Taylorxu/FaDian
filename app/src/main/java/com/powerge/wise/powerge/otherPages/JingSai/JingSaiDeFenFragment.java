@@ -1,52 +1,60 @@
 package com.powerge.wise.powerge.otherPages.JingSai;
 
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import com.powerge.wise.basestone.heart.network.FlatMapResponse;
+import com.powerge.wise.basestone.heart.network.FlatMapTopRes;
 import com.powerge.wise.basestone.heart.network.Notification;
+import com.powerge.wise.basestone.heart.network.ResultModel;
 import com.powerge.wise.basestone.heart.ui.WFragment;
 import com.powerge.wise.basestone.heart.ui.XAdapter;
 import com.powerge.wise.basestone.heart.ui.XViewHolder;
 import com.powerge.wise.basestone.heart.util.RxBus;
+import com.powerge.wise.powerge.BR;
 import com.powerge.wise.powerge.R;
 import com.powerge.wise.powerge.bean.Items;
+import com.powerge.wise.powerge.bean.JingSaiDeFenBean;
 import com.powerge.wise.powerge.bean.SimpleListTextItem;
+import com.powerge.wise.powerge.bean.User;
+import com.powerge.wise.powerge.bean.ZhiBaioNameBean;
+import com.powerge.wise.powerge.config.soap.ApiService;
+import com.powerge.wise.powerge.config.soap.request.BaseUrl;
+import com.powerge.wise.powerge.config.soap.request.RequestBody;
+import com.powerge.wise.powerge.config.soap.request.RequestEnvelope;
 import com.powerge.wise.powerge.databinding.FragmentJingSaiDeFenBinding;
 import com.powerge.wise.powerge.databinding.ItemJingSaiDeFenBinding;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
+import rx.schedulers.Schedulers;
+
+
 public class JingSaiDeFenFragment extends WFragment<FragmentJingSaiDeFenBinding> implements View.OnClickListener {
-//    FragmentJingSaiDeFenBinding binding = getBinding();
+    String unitName = "9999", indicator = "9999";
 
     public JingSaiDeFenFragment() {
     }
 
     public static JingSaiDeFenFragment newInstance() {
-
-        Bundle args = new Bundle();
-
         JingSaiDeFenFragment fragment = new JingSaiDeFenFragment();
-        fragment.setArguments(args);
         return fragment;
     }
-
-   /* @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_jing_sai_de_fen, container, false);
-        getData();
-        initView();
-        return binding.getRoot();
-    }*/
 
     @Override
     protected void onCreateView(Bundle savedInstanceState) {
@@ -58,70 +66,109 @@ public class JingSaiDeFenFragment extends WFragment<FragmentJingSaiDeFenBinding>
     protected int layoutId() {
         return R.layout.fragment_jing_sai_de_fen;
     }
+    XAdapter<JingSaiDeFenBean.ResultListBean, ItemJingSaiDeFenBinding> adapter = new XAdapter.SimpleAdapter(BR.data,R.layout.item_jing_sai_de_fen);
 
-
-    XAdapter<Items, ItemJingSaiDeFenBinding> adapter = new XAdapter.SimpleAdapter
-            <Items, ItemJingSaiDeFenBinding>(0, R.layout.item_jing_sai_de_fen) {
+    /*XAdapter<JingSaiDeFenBean.ResultListBean, ItemJingSaiDeFenBinding> adapter = new XAdapter.SimpleAdapter
+            <JingSaiDeFenBean.ResultListBean, ItemJingSaiDeFenBinding>(0, R.layout.item_jing_sai_de_fen) {
         @Override
-        protected void initHolder(XViewHolder<Items, ItemJingSaiDeFenBinding> holder, int viewType) {
+        protected void initHolder(XViewHolder<JingSaiDeFenBean.ResultListBean, ItemJingSaiDeFenBinding> holder, int viewType) {
             super.initHolder(holder, viewType);
+            holder.getBinding().zuiYou.setEllipsize(TextUtils.TruncateAt.MARQUEE);
+            holder.getBinding().zuiYou.setFocusable(true);
+            holder.getBinding().zuiYou.setFocusable(true);
+            holder.getBinding().zuiYou.setSingleLine(true);
+            holder.getBinding().zuiYou.setMarqueeRepeatLimit(-1);
 
         }
 
         @Override
-        public void onBindViewHolder(XViewHolder<Items, ItemJingSaiDeFenBinding> holder, int position) {
+        public void onBindViewHolder(XViewHolder<JingSaiDeFenBean.ResultListBean, ItemJingSaiDeFenBinding> holder, int position) {
             super.onBindViewHolder(holder, position);
-            Items data = getItemData(position);
-            holder.getBinding().zhiBiaoName.setText(data.getText1());
-            holder.getBinding().zhiBiaoValue.setText(data.getText3());
-            holder.getBinding().zuiYou.setText(data.getText4());
-            holder.getBinding().shiYing.setText(data.getText5());
-            holder.getBinding().junZhi.setText(data.getText6());
-            if (position < 3) {
-                holder.getBinding().zhiBiaoName.setTextColor(textColor[position]);
-                holder.getBinding().zhiBiaoValue.setTextColor(textColor[position]);
-                holder.getBinding().zuiYou.setTextColor(textColor[position]);
-                holder.getBinding().shiYing.setTextColor(textColor[position]);
-                holder.getBinding().junZhi.setTextColor(textColor[position]);
+            JingSaiDeFenBean.ResultListBean data = getItemData(position);
+            holder.getBinding().zhiBiaoName.setText(data.getUNIT_NAME() + data.getINDICATOR_NAME());
+            holder.getBinding().zhiBiaoValue.setText(data.getINDICATOR_VALUE());
+            holder.getBinding().zuiYou.setText(data.getRULE_OPTIMAL());
+            holder.getBinding().shiYing.setText(data.getREAL_SCORE() + "/" + data.getSHOULD_SCORE());
+            holder.getBinding().junZhi.setText(data.getAvgRealScore());
 
-            } else {
-                holder.getBinding().zhiBiaoName.setTextColor(textColor[position - 1]);
-                holder.getBinding().zhiBiaoValue.setTextColor(textColor[position - 1]);
-                holder.getBinding().zuiYou.setTextColor(textColor[position - 1]);
-                holder.getBinding().shiYing.setTextColor(textColor[position - 1]);
-                holder.getBinding().junZhi.setTextColor(textColor[position - 1]);
-            }
 
         }
-    };
+    };*/
 
     private void initView() {
         getBinding().btnAllZb.setOnClickListener(this);
         getBinding().btnAllJz.setOnClickListener(this);
-
         getBinding().contentDeFenList.setLayoutManager(new LinearLayoutManager(getContext()));
         getBinding().contentDeFenList.setAdapter(adapter);
-        adapter.setList(list);
+
     }
 
-    List<Items> list = new ArrayList<>();
-    String zhi[] = new String[]{"1#机组煤耗", "机组烟尘排放", "机组SO2排放", "机组NOx 排放"};
-    int textColor[] = new int[]{
-            Color.rgb(227, 30, 77),
-            Color.rgb(17, 189, 98),
-            Color.rgb(155, 155, 155)};
 
-    private void getData() {
-        for (int i = 0; i < 4; i++) {
-            Items item = new Items();
-            item.setText1(zhi[i]);
-            item.setText3("220");
-            item.setText4("220-300");
-            item.setText5("12.00/13.89");
-            item.setText6("899");
-            list.add(item);
+    public void getData() {
+
+        if (getArguments() != null) {
+            unitName = getArguments().getString("unitName");
+            indicator = getArguments().getString("indicator");
         }
+        JingSaiDeFenBean nameBean = new JingSaiDeFenBean();
+        nameBean.setNameSpace(BaseUrl.NAMESPACE_P);
+        nameBean.setUserName(User.getCurrentUser().getName());
+        nameBean.setArg1(unitName);
+        nameBean.setArg2(indicator);
 
+        RequestEnvelope.getRequestEnvelope().setBody(new RequestBody<>(nameBean));
+        ApiService.Creator.get().queryGroupScore(RequestEnvelope.getRequestEnvelope())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .flatMap(new FlatMapResponse<ResultModel<JingSaiDeFenBean>>())
+                .flatMap(new FlatMapTopRes<JingSaiDeFenBean>())
+                .subscribe(new Subscriber<JingSaiDeFenBean>() {
+                    @Override
+                    public void onCompleted() {
+                        crossfade();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        e.printStackTrace();
+                    }
+
+                    @Override
+                    public void onNext(JingSaiDeFenBean deFenBean) {
+                        if (deFenBean != null) {
+                            getBinding().textDayScore.setText(deFenBean.getDayAVGScore());
+                            getBinding().textMonthScore.setText(deFenBean.getMonthAVGScore());
+                            adapter.setList(deFenBean.getResultList());
+                        }
+                    }
+                });
+
+    }
+
+    public void crossfade() {
+        getBinding().contentDeFenList.setAlpha(0f);
+        getBinding().contentDeFenList.setVisibility(View.VISIBLE);
+        getBinding().contentDeFenList.animate().alpha(1f)
+                .setDuration(1500)
+                .setListener(null);
+
+        getBinding().progressBar.animate()
+                .alpha(0f)
+                .setDuration(1500)
+                .setListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        getBinding().progressBar.setVisibility(View.GONE);
+                    }
+                });
+
+    }
+
+    @Override
+    public void call(Notification notification) {
+        if (notification.getCode() == 003) {
+            getData();
+        }
     }
 
     @Override
@@ -135,5 +182,6 @@ public class JingSaiDeFenFragment extends WFragment<FragmentJingSaiDeFenBinding>
                 break;
         }
     }
+
 
 }

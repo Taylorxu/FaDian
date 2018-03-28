@@ -26,6 +26,7 @@ import com.powerge.wise.basestone.heart.network.FlatMapTopRes;
 import com.powerge.wise.basestone.heart.network.ResultModel;
 import com.powerge.wise.basestone.heart.ui.XAdapter;
 import com.powerge.wise.basestone.heart.ui.XViewHolder;
+import com.powerge.wise.basestone.heart.util.RxBus;
 import com.powerge.wise.powerge.BR;
 import com.powerge.wise.powerge.R;
 import com.powerge.wise.powerge.bean.JiZuBean;
@@ -62,6 +63,8 @@ public class JingSaiActivity extends AppCompatActivity implements View.OnClickLi
     ActivityJingSaiBinding binding;
     PopupWindow window = null;
     RadioButton oldRadioBtn = null, oldRadioBtn1 = null;
+    private JingSaiFragmentAdapter fragmentAdapter;
+
 
     public static void start(Context context, List<JiZuBean> jiZuList) {
         Intent starter = new Intent(context, JingSaiActivity.class);
@@ -78,7 +81,8 @@ public class JingSaiActivity extends AppCompatActivity implements View.OnClickLi
         binding = DataBindingUtil.setContentView(this, R.layout.activity_jing_sai);
         jiZuList = getIntent().getParcelableArrayListExtra(JiZuBean.INTENTKEY);
         binding.title.setText(getResources().getStringArray(R.array.item_name_array)[7]);
-        binding.jingSaiMainPage.setAdapter(new JingSaiFragmentAdapter(getSupportFragmentManager()));
+        fragmentAdapter = new JingSaiFragmentAdapter(getSupportFragmentManager());
+        binding.jingSaiMainPage.setAdapter(fragmentAdapter);
         binding.jingSaiTabL.setupWithViewPager(binding.jingSaiMainPage);
         getZBNameList();
     }
@@ -191,6 +195,11 @@ public class JingSaiActivity extends AppCompatActivity implements View.OnClickLi
         switch (v.getId()) {
             case R.id.btn_sure:
                 ToastUtil.toast(this, "sure");
+                RxBus.getDefault().post(new Notification(003, 0));
+                Bundle bundle = new Bundle();
+                bundle.putString("unitName", "1");
+                bundle.putString("indicator", "1");
+                fragmentAdapter.getItem(1).setArguments(bundle);
                 break;
             case R.id.btn_cancel:
                 window.dismiss();

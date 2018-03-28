@@ -10,6 +10,7 @@ import com.powerge.wise.powerge.bean.FuHeYTFormDataBean;
 import com.powerge.wise.powerge.bean.GonGaoBean;
 import com.powerge.wise.powerge.bean.HuanBaoBean;
 import com.powerge.wise.powerge.bean.JiZuBean;
+import com.powerge.wise.powerge.bean.JingSaiDeFenBean;
 import com.powerge.wise.powerge.bean.KaoHeChildItemBean;
 import com.powerge.wise.powerge.bean.MorningMeetingBean;
 import com.powerge.wise.powerge.bean.PeroidDateLineListBean;
@@ -237,6 +238,7 @@ public interface ApiService {
 
     /**
      * 计划详情
+     *
      * @param requestEnvelope
      * @return
      */
@@ -246,6 +248,19 @@ public interface ApiService {
     })
     @POST(BaseUrl.SERVICE_P)
     Observable<Response<ResultModelData<ResultModelData.ReturnValueBean<PlanTaskDetailBean>>>> queryWorkTask(@Body RequestEnvelope requestEnvelope);
+
+    /**
+     * 竞赛得分
+     *
+     * @param requestEnvelope
+     * @return
+     */
+    @Headers({
+            "Content-Type:text/xml; charset=utf-8",
+            "Accept-Charset: utf-8"
+    })
+    @POST(BaseUrl.SERVICE_P)
+    Observable<Response<ResultModel<JingSaiDeFenBean>>> queryGroupScore(@Body RequestEnvelope requestEnvelope);
 
 
     class Creator {

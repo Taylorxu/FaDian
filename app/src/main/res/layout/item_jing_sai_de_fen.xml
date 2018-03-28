@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
 
+    <data>
+
+        <variable
+            name="data"
+            type="com.powerge.wise.powerge.bean.JingSaiDeFenBean.ResultListBean" />
+    </data>
+
     <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -22,6 +29,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:text='@{data.UNIT_NAME+data.INDICATOR_NAME}'
                     android:textSize="14sp" />
             </FrameLayout>
 
@@ -35,8 +43,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text=" "
-
+                    android:text="@{data.INDICATOR_VALUE}"
                     android:textSize="14sp" />
             </FrameLayout>
 
@@ -50,7 +57,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:textSize="14sp" />
+                    android:text="@{data.RULE_OPTIMAL}"
+                    android:textSize="14sp"
+                    android:ellipsize="marquee"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:scrollHorizontally="true"
+                    android:singleLine="true"
+                    />
             </FrameLayout>
 
             <FrameLayout
@@ -63,6 +78,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:ellipsize="marquee"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:scrollHorizontally="true"
+                    android:singleLine="true"
+                    android:text='@{data.REAL_SCORE+"-"+data.SHOULD_SCORE}'
                     android:textSize="14sp" />
             </FrameLayout>
 
@@ -76,6 +98,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:text="@{data.avgRealScore}"
                     android:textSize="14sp" />
             </FrameLayout>
 
