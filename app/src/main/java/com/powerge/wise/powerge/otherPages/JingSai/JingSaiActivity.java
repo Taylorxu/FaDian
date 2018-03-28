@@ -233,6 +233,9 @@ public class JingSaiActivity extends AppCompatActivity implements View.OnClickLi
             case R.id.btn_cancel:
                 window.dismiss();
                 break;
+            case R.id.btn_back:
+                finish();
+                break;
         }
     }
 
