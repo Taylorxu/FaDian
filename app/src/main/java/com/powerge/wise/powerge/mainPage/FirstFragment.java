@@ -34,6 +34,7 @@ import com.powerge.wise.powerge.helper.EEMsgToastHelper;
 import com.powerge.wise.powerge.helper.GridSpacingItemDecoration;
 import com.powerge.wise.powerge.helper.StartActivity;
 import com.powerge.wise.powerge.otherPages.LoginActivity;
+import com.powerge.wise.powerge.otherPages.xunJian.XunJianMagActivity;
 import com.wisesignsoft.OperationManagement.utils.ToastUtil;
 
 import java.util.ArrayList;
@@ -151,7 +152,7 @@ public class FirstFragment extends Fragment {
      */
 
     private void goToActivity(int number) {
-        StartActivity.go(number, getContext(),jiZuList);
+        StartActivity.go(number, getContext(), jiZuList);
     }
 
 
@@ -205,7 +206,7 @@ public class FirstFragment extends Fragment {
                     mListener.onFragmentInteraction(0);
                     break;
                 case R.id.btn_blue_tooth_l:
-
+                    XunJianMagActivity.start(getContext());
                     break;
             }
         }
