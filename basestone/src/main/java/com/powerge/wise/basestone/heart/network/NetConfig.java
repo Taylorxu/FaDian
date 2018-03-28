@@ -1,5 +1,7 @@
 package com.powerge.wise.basestone.heart.network;
 
+import android.util.Log;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.powerge.wise.basestone.heart.WApp;
@@ -72,9 +74,14 @@ public class NetConfig implements Interceptor, CookieJar {
         okhttp3.MediaType mediaType = response.body().contentType();
         if ("text/xml;charset=UTF-8".equals(mediaType.toString())) {
             String content = response.body().string();
+            Log.e("response.body()---", content);
+            if (content.indexOf("<soap:Fault>") > -1) {
+                return response;
+            }
             String rebuildResult = content.substring(content.indexOf(">{") + 1, content.indexOf("</return>"));
             rebuildResult = rebuildResult.replace("&quot;", "\"");
             rebuildResult = rebuildResult.replace("\"returnValue\":\"\"", "\"returnValue\":null");
+
             return response.newBuilder().body(okhttp3.ResponseBody.create(mediaType, rebuildResult))
                     .build();
         }

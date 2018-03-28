@@ -27,7 +27,7 @@ import java.util.List;
 public class StartActivity {
     public static void go(int where, Context context, List<JiZuBean> jiZuList) {
         if (where == 0) {
-            FuHeManagementActivity.start(context);
+            FuHeManagementActivity.start(context,jiZuList);
         } else if (where == 1) {
             DianLiangManagementActivity.start(context);
         } else if (where == 2) {

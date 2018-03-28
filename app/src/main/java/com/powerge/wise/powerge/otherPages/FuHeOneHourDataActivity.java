@@ -6,6 +6,7 @@ import android.databinding.DataBindingUtil;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
+import android.view.View;
 
 import com.powerge.wise.basestone.heart.network.FlatMapResponse;
 import com.powerge.wise.basestone.heart.network.FlatMapTopRes;
@@ -81,5 +82,9 @@ public class FuHeOneHourDataActivity extends AppCompatActivity {
                         if (fuHeHourDataBeans.size() > 0) adapter.setList(fuHeHourDataBeans);
                     }
                 });
+    }
+
+    public void onClick(View view) {
+        finish();
     }
 }

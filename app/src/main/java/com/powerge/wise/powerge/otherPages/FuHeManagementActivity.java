@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
 import android.graphics.DashPathEffect;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -73,9 +74,11 @@ public class FuHeManagementActivity extends AppCompatActivity implements RadioGr
     LineChart lineCharts[];
     private String start_date, end_date;
     private int checkedIdp;
+    private ArrayList<JiZuBean> jiZuList;
 
-    public static void start(Context context) {
+    public static void start(Context context, List<JiZuBean> jiZuList) {
         Intent starter = new Intent(context, FuHeManagementActivity.class);
+        starter.putParcelableArrayListExtra(JiZuBean.INTENTKEY, (ArrayList<? extends Parcelable>) jiZuList);
         context.startActivity(starter);
     }
 
@@ -84,12 +87,13 @@ public class FuHeManagementActivity extends AppCompatActivity implements RadioGr
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_fu_he_magment);
         binding.title.setText(getResources().getStringArray(R.array.item_name_array)[0]);
+        jiZuList = getIntent().getParcelableArrayListExtra(JiZuBean.INTENTKEY);
         lineCharts = new LineChart[]{binding.chart1, binding.chart2};
         binding.jiZuGroups.setOnCheckedChangeListener(this);
         initChartView();
         initDatePeriod();
         initAdapters();
-        getJiZuData();
+        createRadioBtnGroup(jiZuList);
     }
 
     /**
@@ -111,39 +115,6 @@ public class FuHeManagementActivity extends AppCompatActivity implements RadioGr
         binding.perdayFhvContent.setAdapter(perdayAdapter);
     }
 
-    /**
-     * 获取机组数据
-     */
-    private void getJiZuData() {
-        if (User.getCurrentUser() == null) LoginActivity.start(this);
-        final JiZuBean jiZuBean = new JiZuBean();
-        jiZuBean.setNameSpace(BaseUrl.NAMESPACE_P);
-        jiZuBean.setUserName(User.getCurrentUser().getName());
-        RequestEnvelope.getRequestEnvelope().setBody(new RequestBody<>(jiZuBean));
-        ApiService.Creator.get().queryUnits(RequestEnvelope.getRequestEnvelope())
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .flatMap(new FlatMapResponse<ResultModelData<ResultModelData.ReturnValueBean<JiZuBean>>>())
-                .flatMap(new FlatMapTopResList<ResultModelData.ReturnValueBean<JiZuBean>>())
-                .subscribe(new Subscriber<ResultModelData.ReturnValueBean<JiZuBean>>() {
-                    @Override
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        e.printStackTrace();
-                        EEMsgToastHelper.newInstance().selectWitch(e.getCause().getMessage());
-
-                    }
-
-                    @Override
-                    public void onNext(ResultModelData.ReturnValueBean<JiZuBean> returnValueBean) {
-                        createRadioBtnGroup(returnValueBean.getResultList());
-                    }
-                });
-    }
 
     /**
      * 动态创建机组radiobutton
@@ -468,7 +439,7 @@ public class FuHeManagementActivity extends AppCompatActivity implements RadioGr
 
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
-        checkedIdp=checkedId;
+        checkedIdp = checkedId;
         getFuHeYTData(String.valueOf(checkedId));
         queryLoadRatioData(String.valueOf(checkedId));
     }
