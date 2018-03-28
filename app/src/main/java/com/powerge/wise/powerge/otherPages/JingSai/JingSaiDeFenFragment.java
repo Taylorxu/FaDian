@@ -66,34 +66,9 @@ public class JingSaiDeFenFragment extends WFragment<FragmentJingSaiDeFenBinding>
     protected int layoutId() {
         return R.layout.fragment_jing_sai_de_fen;
     }
-    XAdapter<JingSaiDeFenBean.ResultListBean, ItemJingSaiDeFenBinding> adapter = new XAdapter.SimpleAdapter(BR.data,R.layout.item_jing_sai_de_fen);
 
-    /*XAdapter<JingSaiDeFenBean.ResultListBean, ItemJingSaiDeFenBinding> adapter = new XAdapter.SimpleAdapter
-            <JingSaiDeFenBean.ResultListBean, ItemJingSaiDeFenBinding>(0, R.layout.item_jing_sai_de_fen) {
-        @Override
-        protected void initHolder(XViewHolder<JingSaiDeFenBean.ResultListBean, ItemJingSaiDeFenBinding> holder, int viewType) {
-            super.initHolder(holder, viewType);
-            holder.getBinding().zuiYou.setEllipsize(TextUtils.TruncateAt.MARQUEE);
-            holder.getBinding().zuiYou.setFocusable(true);
-            holder.getBinding().zuiYou.setFocusable(true);
-            holder.getBinding().zuiYou.setSingleLine(true);
-            holder.getBinding().zuiYou.setMarqueeRepeatLimit(-1);
+    XAdapter<JingSaiDeFenBean.ResultListBean, ItemJingSaiDeFenBinding> adapter = new XAdapter.SimpleAdapter(BR.data, R.layout.item_jing_sai_de_fen);
 
-        }
-
-        @Override
-        public void onBindViewHolder(XViewHolder<JingSaiDeFenBean.ResultListBean, ItemJingSaiDeFenBinding> holder, int position) {
-            super.onBindViewHolder(holder, position);
-            JingSaiDeFenBean.ResultListBean data = getItemData(position);
-            holder.getBinding().zhiBiaoName.setText(data.getUNIT_NAME() + data.getINDICATOR_NAME());
-            holder.getBinding().zhiBiaoValue.setText(data.getINDICATOR_VALUE());
-            holder.getBinding().zuiYou.setText(data.getRULE_OPTIMAL());
-            holder.getBinding().shiYing.setText(data.getREAL_SCORE() + "/" + data.getSHOULD_SCORE());
-            holder.getBinding().junZhi.setText(data.getAvgRealScore());
-
-
-        }
-    };*/
 
     private void initView() {
         getBinding().btnAllZb.setOnClickListener(this);
@@ -109,6 +84,17 @@ public class JingSaiDeFenFragment extends WFragment<FragmentJingSaiDeFenBinding>
         if (getArguments() != null) {
             unitName = getArguments().getString("unitName");
             indicator = getArguments().getString("indicator");
+            if (!indicator.equals("9999")) {
+                getBinding().textAlign.setText(indicator + "指标");
+            } else {
+                getBinding().textAlign.setText("全部指标");
+            }
+
+            if (!unitName.equals("9999")) {
+                getBinding().textAlign1.setText(unitName + "机组");
+            } else {
+                getBinding().textAlign1.setText("全部机组");
+            }
         }
         JingSaiDeFenBean nameBean = new JingSaiDeFenBean();
         nameBean.setNameSpace(BaseUrl.NAMESPACE_P);

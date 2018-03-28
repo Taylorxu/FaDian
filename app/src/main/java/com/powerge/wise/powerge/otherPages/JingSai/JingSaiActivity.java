@@ -59,6 +59,7 @@ import rx.schedulers.Schedulers;
 
 public class JingSaiActivity extends AppCompatActivity implements View.OnClickListener {
     public Subscription notification;
+    String unitName = "9999", indicator = "9999";
     private ArrayList<JiZuBean> jiZuList;
     ActivityJingSaiBinding binding;
     PopupWindow window = null;
@@ -122,8 +123,34 @@ public class JingSaiActivity extends AppCompatActivity implements View.OnClickLi
 
     }
 
-    XAdapter<ZhiBaioNameBean, ItemJingSaiRadioPopBinding> zhibiaoAdapter = new XAdapter.SimpleAdapter<>(BR.data, R.layout.item_jing_sai_radio_pop);
-    XAdapter<JiZuBean, ItemJingSaiPopBinding> jiZuAdapter = new XAdapter.SimpleAdapter<>(BR.data, R.layout.item_jing_sai_pop);
+    XAdapter<ZhiBaioNameBean, ItemJingSaiRadioPopBinding> zhibiaoAdapter = new XAdapter.SimpleAdapter<ZhiBaioNameBean, ItemJingSaiRadioPopBinding>(BR.data, R.layout.item_jing_sai_radio_pop) {
+        @Override
+        protected void initHolder(XViewHolder<ZhiBaioNameBean, ItemJingSaiRadioPopBinding> holder, int viewType) {
+            super.initHolder(holder, viewType);
+            holder.getBinding().radioBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    indicator = v.getTag().toString();
+                    if (oldRadioBtn != null) oldRadioBtn.setChecked(false);
+                    oldRadioBtn = (RadioButton) v;
+                }
+            });
+        }
+    };
+    XAdapter<JiZuBean, ItemJingSaiPopBinding> jiZuAdapter = new XAdapter.SimpleAdapter<JiZuBean, ItemJingSaiPopBinding>(BR.data, R.layout.item_jing_sai_pop) {
+        @Override
+        protected void initHolder(XViewHolder<JiZuBean, ItemJingSaiPopBinding> holder, int viewType) {
+            super.initHolder(holder, viewType);
+            holder.getBinding().radioBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    unitName = v.getTag().toString();
+                    if (oldRadioBtn1 != null) oldRadioBtn1.setChecked(false);
+                    oldRadioBtn1 = (RadioButton) v;
+                }
+            });
+        }
+    };
 
     private void showPop(int type) {
         JingSaiPopListBinding popBinding = DataBindingUtil.inflate(LayoutInflater.from(this), R.layout.jing_sai_pop_list, null, false);
@@ -136,6 +163,7 @@ public class JingSaiActivity extends AppCompatActivity implements View.OnClickLi
             zhibiaoAdapter.setItemClickListener(new XAdapter.OnItemClickListener<ZhiBaioNameBean, ItemJingSaiRadioPopBinding>() {
                 @Override
                 public void onItemClick(XViewHolder<ZhiBaioNameBean, ItemJingSaiRadioPopBinding> holder) {
+                    indicator = holder.getBinding().radioBtn.getTag().toString();
                     holder.getBinding().radioBtn.setChecked(true);
                     if (oldRadioBtn != null) oldRadioBtn.setChecked(false);
                     oldRadioBtn = holder.getBinding().radioBtn;
@@ -147,6 +175,7 @@ public class JingSaiActivity extends AppCompatActivity implements View.OnClickLi
             zhibiaoAdapter.setItemClickListener(new XAdapter.OnItemClickListener<JiZuBean, ItemJingSaiPopBinding>() {
                 @Override
                 public void onItemClick(XViewHolder<JiZuBean, ItemJingSaiPopBinding> holder) {
+                    unitName = holder.getBinding().radioBtn.getTag().toString();
                     holder.getBinding().radioBtn.setChecked(true);
                     if (oldRadioBtn1 != null) oldRadioBtn1.setChecked(false);
                     oldRadioBtn1 = holder.getBinding().radioBtn;
@@ -194,12 +223,12 @@ public class JingSaiActivity extends AppCompatActivity implements View.OnClickLi
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_sure:
-                ToastUtil.toast(this, "sure");
-                RxBus.getDefault().post(new Notification(003, 0));
                 Bundle bundle = new Bundle();
-                bundle.putString("unitName", "1");
-                bundle.putString("indicator", "1");
+                bundle.putString("unitName", unitName);
+                bundle.putString("indicator", indicator);
                 fragmentAdapter.getItem(1).setArguments(bundle);
+                window.dismiss();
+                RxBus.getDefault().post(new Notification(003, 0));
                 break;
             case R.id.btn_cancel:
                 window.dismiss();
