@@ -162,7 +162,7 @@ public class HuanBaoJianCeFragment extends Fragment implements RadioGroup.OnChec
 
     private void drawLinChart() {
 
-        binding.chart1.setViewPortOffsets(100, 50, 20, 100);
+        binding.chart1.setViewPortOffsets(DensityUtil.dip2px(getContext(), 25), DensityUtil.dip2px(getContext(), 9), DensityUtil.dip2px(getContext(), 5), DensityUtil.dip2px(getContext(), 25));
         binding.chart1.setDrawGridBackground(false);
         binding.chart1.getDescription().setEnabled(false);
         binding.chart1.setDrawBorders(false);//去掉边框

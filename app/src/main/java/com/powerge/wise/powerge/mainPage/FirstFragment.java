@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.view.Gravity;
@@ -90,8 +91,12 @@ public class FirstFragment extends Fragment {
     private void init() {
         getJiZuData();
         createdData();
-        getWeather();
-        getHeaderData();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                getHeaderData();
+            }
+        }, 1000);
         fragmentBinding.content.setLayoutManager(new GridLayoutManager(getContext(), 4));
         fragmentBinding.content.addItemDecoration(new GridSpacingItemDecoration(4, DensityUtil.px2dip(getContext(), 10), true));
         fragmentBinding.content.setHasFixedSize(true);
@@ -178,7 +183,11 @@ public class FirstFragment extends Fragment {
                     StartActivity.go(13, getContext(), jiZuList);
                     break;
                 case R.id.btn_open_door:
-                    showPopWindow();
+                    if (null != window && window.isShowing()) {
+                        window.dismiss();
+                    } else {
+                        showPopWindow();
+                    }
                     break;
             }
         }
@@ -192,16 +201,15 @@ public class FirstFragment extends Fragment {
 //        window = new PopupWindow(popBinding.getRoot(), LinearLayout.LayoutParams.WRAP_CONTENT,LinearLayout.LayoutParams.WRAP_CONTENT);
         popBinding.btnBlueToothL.setOnClickListener(new PopOnItemClick());
         popBinding.btnScanL.setOnClickListener(new PopOnItemClick());
-        window = new PopupWindow(popBinding.getRoot(), 520, 432);
+        window = new PopupWindow(popBinding.getRoot(), DensityUtil.dip2px(getContext(), 130), DensityUtil.dip2px(getContext(), 108));
         window.setAnimationStyle(R.style.popup_window_anim);
-        window.setFocusable(true);
+        window.setTouchable(true);
         window.setOutsideTouchable(true);
-        window.update();
         int w = fragmentBinding.btnOpenDoor.getWidth();
         int h = fragmentBinding.btnOpenDoor.getHeight();
         int[] location = new int[2];
         fragmentBinding.btnOpenDoor.getLocationOnScreen(location);
-        int lx = location[0] - window.getWidth() + w - 20;//20 是距离右边的距离值
+        int lx = location[0] - window.getWidth() + w - DensityUtil.dip2px(getContext(), 5);//20 是距离右边的距离值
         window.showAtLocation(popBinding.getRoot(), Gravity.NO_GRAVITY, lx, location[1] + h);
     }
 
@@ -225,6 +233,7 @@ public class FirstFragment extends Fragment {
         final JiZuBean jiZuBean = new JiZuBean();
         jiZuBean.setNameSpace(BaseUrl.NAMESPACE_P);
         jiZuBean.setUserName(User.getCurrentUser().getName());
+        jiZuBean.setArg1("");
         RequestEnvelope.getRequestEnvelope().setBody(new RequestBody<>(jiZuBean));
         ApiService.Creator.get().queryUnits(RequestEnvelope.getRequestEnvelope())
                 .subscribeOn(Schedulers.io())
@@ -234,14 +243,13 @@ public class FirstFragment extends Fragment {
                 .subscribe(new Subscriber<ResultModelData.ReturnValueBean<JiZuBean>>() {
                     @Override
                     public void onCompleted() {
-
+                        getWeather();
                     }
 
                     @Override
                     public void onError(Throwable e) {
                         e.printStackTrace();
                         EEMsgToastHelper.newInstance().selectWitch(e.getMessage());
-
                     }
 
                     @Override
@@ -298,7 +306,7 @@ public class FirstFragment extends Fragment {
 
                     @Override
                     public void onError(Throwable e) {
-
+                        e.printStackTrace();
                     }
 
                     @Override

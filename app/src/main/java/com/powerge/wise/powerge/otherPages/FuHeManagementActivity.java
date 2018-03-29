@@ -291,7 +291,7 @@ public class FuHeManagementActivity extends AppCompatActivity implements RadioGr
 
     private void initChartView() {
         for (int i = 0; i < lineCharts.length; i++) {
-            lineCharts[i].setViewPortOffsets(DensityUtil.dip2px(getBaseContext(), 110), DensityUtil.dip2px(getBaseContext(), 50), DensityUtil.dip2px(getBaseContext(), 20), DensityUtil.dip2px(getBaseContext(), 100));
+            lineCharts[i].setViewPortOffsets(DensityUtil.dip2px(getBaseContext(), 28), DensityUtil.dip2px(getBaseContext(), 13), DensityUtil.dip2px(getBaseContext(), 5), DensityUtil.dip2px(getBaseContext(), 25));
             lineCharts[i].setDrawGridBackground(false);
             lineCharts[i].getDescription().setEnabled(false);
             lineCharts[i].setDrawBorders(false);//去掉边框
@@ -307,7 +307,7 @@ public class FuHeManagementActivity extends AppCompatActivity implements RadioGr
             lineCharts[i].setScaleEnabled(true);
             lineCharts[i].setPinchZoom(false);
             if (i == 1) {
-                lineCharts[i].setViewPortOffsets(80, 50, 60, 100);
+                lineCharts[i].setViewPortOffsets(DensityUtil.dip2px(getBaseContext(), 20), DensityUtil.dip2px(getBaseContext(), 18), DensityUtil.dip2px(getBaseContext(), 15), DensityUtil.dip2px(getBaseContext(), 25));
                 lineCharts[i].getXAxis().setGranularity(1f);
                 lineCharts[i].getXAxis().setValueFormatter(new XFormatter());
             }
