@@ -12,6 +12,7 @@ import com.powerge.wise.powerge.bean.HuanBaoBean;
 import com.powerge.wise.powerge.bean.JiZuBean;
 import com.powerge.wise.powerge.bean.JingSaiDeFenBean;
 import com.powerge.wise.powerge.bean.KaoHeChildItemBean;
+import com.powerge.wise.powerge.bean.MainPageBean;
 import com.powerge.wise.powerge.bean.MorningMeetingBean;
 import com.powerge.wise.powerge.bean.PeroidDateLineListBean;
 import com.powerge.wise.powerge.bean.PlanTaskBean;
@@ -269,6 +270,14 @@ public interface ApiService {
     })
     @POST(BaseUrl.SERVICE_P)
     Observable<Response<ResultModel<Weather>>> queryWeatherInfo(@Body RequestEnvelope requestEnvelope);
+
+
+    @Headers({
+            "Content-Type:text/xml; charset=utf-8",
+            "Accept-Charset: utf-8"
+    })
+    @POST(BaseUrl.SERVICE_P)
+    Observable<Response<ResultModel<MainPageBean>>> queryMainPageData(@Body RequestEnvelope requestEnvelope);
 
 
     class Creator {

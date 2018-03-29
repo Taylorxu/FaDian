@@ -1,6 +1,7 @@
 package com.powerge.wise.powerge.mainPage;
 
 import android.databinding.DataBindingUtil;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -32,8 +33,12 @@ public class FourthFragment extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
 
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_fourth, container, false);
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {//<21
+            binding.btnLogOut.setBackgroundResource(R.drawable.shape_corners_2_primary);
+        }else{
+            binding.btnLogOut.setBackgroundResource(R.drawable.selector_ripple);
+        }
         binding.title.setText(getResources().getString(R.string.title_mine));
-        binding.btnBack.setOnClickListener(this);
         binding.btnLogOut.setOnClickListener(this);
         return binding.getRoot();
     }

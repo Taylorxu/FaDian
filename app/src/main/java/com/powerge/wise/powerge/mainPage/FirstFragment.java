@@ -24,6 +24,7 @@ import com.powerge.wise.powerge.BR;
 import com.powerge.wise.powerge.R;
 import com.powerge.wise.powerge.bean.Items;
 import com.powerge.wise.powerge.bean.JiZuBean;
+import com.powerge.wise.powerge.bean.MainPageBean;
 import com.powerge.wise.powerge.bean.User;
 import com.powerge.wise.powerge.bean.Weather;
 import com.powerge.wise.powerge.config.soap.ApiService;
@@ -32,6 +33,7 @@ import com.powerge.wise.powerge.config.soap.request.RequestBody;
 import com.powerge.wise.powerge.config.soap.request.RequestEnvelope;
 import com.powerge.wise.powerge.databinding.FragmentFirstBinding;
 import com.powerge.wise.powerge.databinding.ItemFirstFragmentGridListBinding;
+import com.powerge.wise.powerge.databinding.ItemMainPageJiZuBinding;
 import com.powerge.wise.powerge.databinding.PopWindowFirstFragmentBinding;
 import com.powerge.wise.powerge.helper.EEMsgToastHelper;
 import com.powerge.wise.powerge.helper.GridSpacingItemDecoration;
@@ -54,7 +56,7 @@ public class FirstFragment extends Fragment {
     FragmentFirstBinding fragmentBinding;
     List<Items> items = new ArrayList<>();
     private List<JiZuBean> jiZuList;
-
+    private List<MainPageBean.UnitsLoadDataListBean> unitsLoadList;
     XAdapter<Items, ItemFirstFragmentGridListBinding> adapter = new XAdapter.SimpleAdapter<Items, ItemFirstFragmentGridListBinding>(BR.item, R.layout.item_first_fragment_grid_list) {
         @Override
         public void onBindViewHolder(XViewHolder<Items, ItemFirstFragmentGridListBinding> holder, int position) {
@@ -86,8 +88,10 @@ public class FirstFragment extends Fragment {
 
 
     private void init() {
-        getWeather();
+        getJiZuData();
         createdData();
+        getWeather();
+        getHeaderData();
         fragmentBinding.content.setLayoutManager(new GridLayoutManager(getContext(), 4));
         fragmentBinding.content.addItemDecoration(new GridSpacingItemDecoration(4, DensityUtil.px2dip(getContext(), 10), true));
         fragmentBinding.content.setHasFixedSize(true);
@@ -123,7 +127,7 @@ public class FirstFragment extends Fragment {
             items.setIcon(icon[i]);
             this.items.add(items);
         }
-        getJiZuData();
+
     }
 
 
@@ -274,6 +278,46 @@ public class FirstFragment extends Fragment {
                         fragmentBinding.weatherCase.setText(weather.getWeather());
                     }
                 });
+    }
+
+    public void getHeaderData() {
+        final MainPageBean bean = new MainPageBean();
+        bean.setNameSpace(BaseUrl.NAMESPACE_P);
+        bean.setUserName(User.getCurrentUser().getName());
+        RequestEnvelope.getRequestEnvelope().setBody(new RequestBody<>(bean));
+        ApiService.Creator.get().queryMainPageData(RequestEnvelope.getRequestEnvelope())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .flatMap(new FlatMapResponse<ResultModel<MainPageBean>>())
+                .flatMap(new FlatMapTopRes<MainPageBean>())
+                .subscribe(new Subscriber<MainPageBean>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(MainPageBean mainPageBean) {
+                        fragmentBinding.setData(mainPageBean);
+                        unitsLoadList = mainPageBean.getUnitsLoadDataList();
+                        createHeaderJiZu();
+                    }
+                });
+
+    }
+
+    private void createHeaderJiZu() {
+        for (int i = 0; i < unitsLoadList.size(); i++) {
+            ItemMainPageJiZuBinding itemJiZuBd = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.item_main_page_ji_zu, fragmentBinding.headerJiZuLl, false);
+            itemJiZuBd.setData(unitsLoadList.get(i));
+            fragmentBinding.headerJiZuLl.addView(itemJiZuBd.getRoot());
+        }
+
     }
 
 }

@@ -41,7 +41,7 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 
-public class SecondFragment extends Fragment implements View.OnClickListener {
+public class SecondFragment extends Fragment {
     FragmentSecondBinding binding;
     private int currentPage;
 
@@ -68,7 +68,6 @@ public class SecondFragment extends Fragment implements View.OnClickListener {
     @SuppressLint("ResourceAsColor")
     private void initView() {
         binding.title.setText("公告");
-        binding.btnBack.setOnClickListener(this);
         binding.refreshLayout.setColorSchemeColors(getResources().getColor(R.color.colorPrimary));
         binding.refreshLayout.setOnRefreshListener(refreshListener);
         binding.contentAnnounceList.setOnLoadMoreListener(onLoadMoreListener);
@@ -134,8 +133,4 @@ public class SecondFragment extends Fragment implements View.OnClickListener {
     }
 
 
-    @Override
-    public void onClick(View v) {
-        getActivity().finish();
-    }
 }

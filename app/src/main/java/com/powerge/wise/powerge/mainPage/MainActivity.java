@@ -43,16 +43,15 @@ public class MainActivity extends AppCompatActivity implements FirstFragment.OnF
     @Override
     protected void onStart() {
         super.onStart();
-        if (User.getCurrentUser() == null || !User.getCurrentUser().isLogin()) {
-            ToastUtil.toast(this, getResources().getString(R.string.error_login_login_need));
-            LoginActivity.start(this);
-            return;
-        }
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (User.getCurrentUser() == null || !User.getCurrentUser().isLogin()) {
+            LoginActivity.start(this);
+            return;
+        }
         mainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
         mSectionsPagerAdapter = new MainAdapter(getSupportFragmentManager());
         mainBinding.container.setAdapter(mSectionsPagerAdapter);

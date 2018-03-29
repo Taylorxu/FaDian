@@ -1,6 +1,13 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+
+        <variable
+            name="data"
+            type="com.powerge.wise.powerge.bean.MainPageBean" />
+    </data>
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -97,9 +104,9 @@
                                         android:background="@drawable/shape_circle_white" />
 
                                     <TextView
+                                        android:id="@+id/weather_case"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:id="@+id/weather_case"
                                         android:layout_gravity="bottom"
                                         android:layout_marginLeft="20dp"
                                         android:includeFontPadding="false"
@@ -124,7 +131,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:gravity="center"
-                                android:text="99999"
+                                android:text="@{data.allPowerGene}"
                                 android:textColor="@color/text_color_fe4f"
                                 android:textSize="24sp" />
 
@@ -133,7 +140,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:gravity="center"
-                                android:text="99999"
+                                android:text="@{data.allLoad}"
                                 android:textColor="@color/text_color_fe4f"
                                 android:textSize="24sp" />
 
@@ -142,7 +149,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:gravity="center"
-                                android:text="98%"
+                                android:text='@{data.allLoadRatio+"%"}'
                                 android:textColor="@color/text_color_fe4f"
                                 android:textSize="24sp" />
                         </LinearLayout>
@@ -226,31 +233,10 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:id="@+id/header_ji_zu_ll"
                         android:orientation="horizontal">
 
-                        <LinearLayout
-                            android:layout_width="80dp"
-                            android:layout_height="match_parent"
-                            android:background="?android:attr/selectableItemBackground"
-                            android:gravity="center"
-                            android:orientation="vertical">
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="999"
-                                android:textColor="@color/text_color_jizu_fuhe"
-                                android:textSize="20sp"
-
-                                />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="1#机组"
-                                android:textColor="@color/text_color_jizu_name"
-                                android:textSize="12sp" />
-                        </LinearLayout>
 
                     </LinearLayout>
                 </HorizontalScrollView>

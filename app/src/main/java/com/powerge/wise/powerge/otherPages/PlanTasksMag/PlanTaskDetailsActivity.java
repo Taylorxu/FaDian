@@ -31,6 +31,8 @@ import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
+import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
+
 public class PlanTaskDetailsActivity extends AppCompatActivity {
     private String taskId;
     private int currentPage;
@@ -39,6 +41,7 @@ public class PlanTaskDetailsActivity extends AppCompatActivity {
         Intent starter = new Intent(context, PlanTaskDetailsActivity.class);
         starter.putExtra(TITLE, title);
         starter.putExtra(ID, id);
+        starter.setFlags(FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(starter);
     }
 

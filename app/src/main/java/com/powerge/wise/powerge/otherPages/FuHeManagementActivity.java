@@ -291,7 +291,7 @@ public class FuHeManagementActivity extends AppCompatActivity implements RadioGr
 
     private void initChartView() {
         for (int i = 0; i < lineCharts.length; i++) {
-            lineCharts[i].setViewPortOffsets(110, 50, 20, 100);
+            lineCharts[i].setViewPortOffsets(DensityUtil.dip2px(getBaseContext(), 110), DensityUtil.dip2px(getBaseContext(), 50), DensityUtil.dip2px(getBaseContext(), 20), DensityUtil.dip2px(getBaseContext(), 100));
             lineCharts[i].setDrawGridBackground(false);
             lineCharts[i].getDescription().setEnabled(false);
             lineCharts[i].setDrawBorders(false);//去掉边框

@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class ThirdFragment extends Fragment implements View.OnClickListener {
+public class ThirdFragment extends Fragment {
     FragmentThirdBinding binding;
 
 
@@ -48,7 +48,6 @@ public class ThirdFragment extends Fragment implements View.OnClickListener {
 
     private void initView() {
         binding.title.setText("消息");
-        binding.btnBack.setOnClickListener(this);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
         binding.contentView.setLayoutManager(layoutManager);
@@ -92,8 +91,5 @@ public class ThirdFragment extends Fragment implements View.OnClickListener {
         binding.refreshLayout.setRefreshing(false);
     }
 
-    public void onClick(View view) {
-        getActivity().finish();
-    }
 
 }

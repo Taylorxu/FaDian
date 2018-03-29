@@ -36,9 +36,10 @@
     <style name="BackButton" parent="BaseButton">
         <item name="android:layout_width">48dp</item>
         <item name="android:layout_height">48dp</item>
-        <item name="android:src">@mipmap/back</item>
+        <item name="android:src">@drawable/ic_back_drawable</item>
         <item name="android:scaleType">fitXY</item>
         <item name="android:onClick">back</item>
+        <item name="android:padding">15dp</item>
     </style>
 
     <style name="Title">
