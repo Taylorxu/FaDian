@@ -184,6 +184,7 @@ public class XunJianMagActivity extends AppCompatActivity implements XunJianDate
                     @SuppressLint("NewApi")
                     @Override
                     public void onCompleted() {
+                        showLoading(false);
                     }
 
                     @Override
@@ -192,6 +193,7 @@ public class XunJianMagActivity extends AppCompatActivity implements XunJianDate
                         if (e != null) {
                             EEMsgToastHelper.newInstance().selectWitch(e.getMessage());
                         }
+                        showLoading(false);
                     }
 
                     @Override
@@ -304,9 +306,15 @@ public class XunJianMagActivity extends AppCompatActivity implements XunJianDate
         }
     };
 
+    public void showLoading(boolean should) {
+        binding.loadingRLayout.setVisibility(should ? View.VISIBLE : View.GONE);
+        binding.loadingCenterText.setText("正在扫描中...");
+        binding.contentSingList.setAlpha(should ? 0.5f : 1f);
+    }
+
     @SuppressLint("NewApi")
     private void scanLeDevice() {
-
+        showLoading(true);
         if (!mScanning) {//不在扫描中
             mHandler.postDelayed(new Runnable() {
                 @Override
@@ -333,7 +341,7 @@ public class XunJianMagActivity extends AppCompatActivity implements XunJianDate
             if (ibeacon != null && uuidChecked != null) {
                 Log.e(TAG, ibeacon.proximityUuid);
                 if (ibeacon.proximityUuid.equals(uuidChecked.toLowerCase())) {
-                    Toast.makeText(getBaseContext(), "已搜索到巡检点，开始签到", Toast.LENGTH_SHORT).show();
+                    binding.loadingCenterText.setText("开始签到");
                     signAction();
                 }
             }
