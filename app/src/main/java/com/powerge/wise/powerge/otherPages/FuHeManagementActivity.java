@@ -165,7 +165,7 @@ public class FuHeManagementActivity extends AppCompatActivity implements RadioGr
                         e.printStackTrace();
                         binding.textDataEmpty0.setVisibility(View.VISIBLE);
                         binding.textDataEmpty0.setText("数据获取失败");
-                        EEMsgToastHelper.newInstance().selectWitch(e.getCause().getMessage());
+                        EEMsgToastHelper.newInstance().selectWitch(e.getMessage());
 
                     }
 
@@ -205,7 +205,7 @@ public class FuHeManagementActivity extends AppCompatActivity implements RadioGr
                     public void onError(Throwable e) {
                         e.printStackTrace();
                         if (e.getCause() != null)
-                            EEMsgToastHelper.newInstance().selectWitch(e.getCause().getMessage());
+                            EEMsgToastHelper.newInstance().selectWitch(e.getMessage());
                         binding.textDataEmpty0.setVisibility(View.VISIBLE);
                         binding.textDataEmpty0.setText("数据获取失败");
                         binding.chart1.setVisibility(View.GONE);
@@ -257,7 +257,7 @@ public class FuHeManagementActivity extends AppCompatActivity implements RadioGr
                         e.printStackTrace();
                         binding.textDataEmpty0.setVisibility(View.VISIBLE);
                         binding.textDataEmpty0.setText("数据获取失败");
-                        EEMsgToastHelper.newInstance().selectWitch(e.getCause().getMessage());
+                        EEMsgToastHelper.newInstance().selectWitch(e.getMessage());
 
                     }
 

@@ -100,7 +100,7 @@ public class TongJiFormActivity extends AppCompatActivity {
                     @Override
                     public void onError(Throwable e) {
                         e.printStackTrace();
-                        EEMsgToastHelper.newInstance().selectWitch(e.getCause().getMessage());
+                        EEMsgToastHelper.newInstance().selectWitch(e.getMessage());
                         binding.refreshLayout.setRefreshing(false);
                         binding.contentForm.setState(PagingRecyclerView.State.LoadFail);
                     }

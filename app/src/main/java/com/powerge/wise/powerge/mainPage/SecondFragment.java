@@ -114,7 +114,7 @@ public class SecondFragment extends Fragment implements View.OnClickListener {
                     @Override
                     public void onError(Throwable e) {
                         e.printStackTrace();
-                        EEMsgToastHelper.newInstance().selectWitch(e.getCause().getMessage());
+                        EEMsgToastHelper.newInstance().selectWitch(e.getMessage());
                         binding.refreshLayout.setRefreshing(false);
                         binding.contentAnnounceList.setState(PagingRecyclerView.State.LoadFail);
                     }

@@ -108,7 +108,7 @@ public class MorningMeetingActivity extends AppCompatActivity {
                     @Override
                     public void onError(Throwable e) {
                         e.printStackTrace();
-                        EEMsgToastHelper.newInstance().selectWitch(e.getCause().getMessage());
+                        EEMsgToastHelper.newInstance().selectWitch(e.getMessage());
                         binding.refreshLayout.setRefreshing(false);
                         binding.contentLog.setState(PagingRecyclerView.State.LoadFail);
                     }

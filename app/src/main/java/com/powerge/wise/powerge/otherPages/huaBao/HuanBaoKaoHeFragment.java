@@ -109,7 +109,7 @@ public class HuanBaoKaoHeFragment extends Fragment implements RadioGroup.OnCheck
                     @Override
                     public void onError(Throwable e) {
                         e.printStackTrace();
-                        EEMsgToastHelper.newInstance().selectWitch(e.getCause().getMessage());
+                        EEMsgToastHelper.newInstance().selectWitch(e.getMessage());
 
                     }
 

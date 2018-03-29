@@ -99,7 +99,7 @@ public class LoginActivity extends AppCompatActivity {
 
                     @Override
                     public void onError(Throwable e) {
-                        EEMsgToastHelper.newInstance().selectWitch(e.getCause().getMessage());
+                        EEMsgToastHelper.newInstance().selectWitch(e.getMessage());
                         setViewEnable(true);
                         loginBinding.loginProgress.setVisibility(View.GONE);
                         e.printStackTrace();

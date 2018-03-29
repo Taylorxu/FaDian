@@ -102,7 +102,7 @@ public class DianLiangManagementActivity extends AppCompatActivity implements Ra
                     @Override
                     public void onError(Throwable e) {
                         e.printStackTrace();
-                        EEMsgToastHelper.newInstance().selectWitch(e.getCause().getMessage());
+                        EEMsgToastHelper.newInstance().selectWitch(e.getMessage());
 
                     }
 
