@@ -138,7 +138,7 @@ public class DianLiangManagementActivity extends AppCompatActivity implements Ra
             radioButton.setText(jiZuBean.getName());
             radioButton.setTag(jiZuBean.getId());
             if (i == 0) radioButton.setChecked(true);
-            radioButton.setId(i + 1);
+            radioButton.setId(i);
             binding.jiZuGroups.addView(radioButton);
         }
     }
@@ -152,6 +152,8 @@ public class DianLiangManagementActivity extends AppCompatActivity implements Ra
 
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
-        getDianLiangData(String.valueOf(checkedId));
+        getDianLiangData(findViewById(checkedId).getTag().toString());
+
+
     }
 }
