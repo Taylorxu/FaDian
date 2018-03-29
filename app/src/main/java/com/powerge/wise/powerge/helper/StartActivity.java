@@ -29,7 +29,7 @@ public class StartActivity {
         if (where == 0) {
             FuHeManagementActivity.start(context,jiZuList);
         } else if (where == 1) {
-            DianLiangManagementActivity.start(context);
+            DianLiangManagementActivity.start(context,jiZuList);
         } else if (where == 2) {
             JingJiZhiBiaoActivity.start(context);
         } else if (where == 3) {

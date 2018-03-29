@@ -14,7 +14,9 @@ import android.widget.PopupWindow;
 
 import com.hyphenate.util.DensityUtil;
 import com.powerge.wise.basestone.heart.network.FlatMapResponse;
+import com.powerge.wise.basestone.heart.network.FlatMapTopRes;
 import com.powerge.wise.basestone.heart.network.FlatMapTopResList;
+import com.powerge.wise.basestone.heart.network.ResultModel;
 import com.powerge.wise.basestone.heart.network.ResultModelData;
 import com.powerge.wise.basestone.heart.ui.XAdapter;
 import com.powerge.wise.basestone.heart.ui.XViewHolder;
@@ -23,6 +25,7 @@ import com.powerge.wise.powerge.R;
 import com.powerge.wise.powerge.bean.Items;
 import com.powerge.wise.powerge.bean.JiZuBean;
 import com.powerge.wise.powerge.bean.User;
+import com.powerge.wise.powerge.bean.Weather;
 import com.powerge.wise.powerge.config.soap.ApiService;
 import com.powerge.wise.powerge.config.soap.request.BaseUrl;
 import com.powerge.wise.powerge.config.soap.request.RequestBody;
@@ -83,6 +86,7 @@ public class FirstFragment extends Fragment {
 
 
     private void init() {
+        getWeather();
         createdData();
         fragmentBinding.content.setLayoutManager(new GridLayoutManager(getContext(), 4));
         fragmentBinding.content.addItemDecoration(new GridSpacingItemDecoration(4, DensityUtil.px2dip(getContext(), 10), true));
@@ -239,6 +243,35 @@ public class FirstFragment extends Fragment {
                     @Override
                     public void onNext(ResultModelData.ReturnValueBean<JiZuBean> returnValueBean) {
                         jiZuList = returnValueBean.getResultList();
+                    }
+                });
+    }
+
+    public void getWeather() {
+        final Weather weather = new Weather();
+        weather.setNameSpace(BaseUrl.NAMESPACE_P);
+        weather.setUserName(User.getCurrentUser().getName());
+        RequestEnvelope.getRequestEnvelope().setBody(new RequestBody<>(weather));
+        ApiService.Creator.get().queryWeatherInfo(RequestEnvelope.getRequestEnvelope())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .flatMap(new FlatMapResponse<ResultModel<Weather>>())
+                .flatMap(new FlatMapTopRes<Weather>())
+                .subscribe(new Subscriber<Weather>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        e.printStackTrace();
+                    }
+
+                    @Override
+                    public void onNext(Weather weather) {
+                        fragmentBinding.textTempter.setText(weather.getTemperature());
+                        fragmentBinding.weatherCase.setText(weather.getWeather());
                     }
                 });
     }

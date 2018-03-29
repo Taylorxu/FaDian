@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.SpannableString;
@@ -53,9 +54,11 @@ import rx.schedulers.Schedulers;
 public class DianLiangManagementActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener {
 
     ActivityDianLiangManagementBinding binding;
+    private ArrayList<JiZuBean> jiZuList;
 
-    public static void start(Context context) {
+    public static void start(Context context, List<JiZuBean> jiZuList) {
         Intent starter = new Intent(context, DianLiangManagementActivity.class);
+        starter.putParcelableArrayListExtra(JiZuBean.INTENTKEY, (ArrayList<? extends Parcelable>) jiZuList);
         context.startActivity(starter);
     }
 
@@ -71,43 +74,11 @@ public class DianLiangManagementActivity extends AppCompatActivity implements Ra
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_dian_liang_management);
         binding.title.setText(getResources().getStringArray(R.array.item_name_array)[1]);
-        getJiZuData();
+        jiZuList = getIntent().getParcelableArrayListExtra(JiZuBean.INTENTKEY);
+        createRadioBtnGroup(jiZuList);
         binding.jiZuGroups.setOnCheckedChangeListener(this);
     }
 
-
-    private void getJiZuData() {
-        if (User.getCurrentUser() == null) LoginActivity.start(this);
-        final JiZuBean jiZuBean = new JiZuBean();
-        jiZuBean.setNameSpace(BaseUrl.NAMESPACE_P);
-        jiZuBean.setUserName(User.getCurrentUser().getName());
-
-
-        RequestEnvelope.getRequestEnvelope().setBody(new RequestBody<>(jiZuBean));
-        ApiService.Creator.get().queryUnits(RequestEnvelope.getRequestEnvelope())
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .flatMap(new FlatMapResponse<ResultModelData<ResultModelData.ReturnValueBean<JiZuBean>>>())
-                .flatMap(new FlatMapTopResList<ResultModelData.ReturnValueBean<JiZuBean>>())
-                .subscribe(new Subscriber<ResultModelData.ReturnValueBean<JiZuBean>>() {
-                    @Override
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        e.printStackTrace();
-                        EEMsgToastHelper.newInstance().selectWitch(e.getCause().getMessage());
-
-                    }
-
-                    @Override
-                    public void onNext(ResultModelData.ReturnValueBean<JiZuBean> returnValueBean) {
-                        createRadioBtnGroup(returnValueBean.getResultList());
-                    }
-                });
-    }
 
     //TODO 数据
     private void getDianLiangData(String id) {

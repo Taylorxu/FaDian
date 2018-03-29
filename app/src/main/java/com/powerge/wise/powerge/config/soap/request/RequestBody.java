@@ -17,6 +17,7 @@ import com.powerge.wise.powerge.bean.QueXianFormBean;
 import com.powerge.wise.powerge.bean.QueXianMagBean;
 import com.powerge.wise.powerge.bean.SheBeiRootBean;
 import com.powerge.wise.powerge.bean.TongJiForm;
+import com.powerge.wise.powerge.bean.Weather;
 import com.powerge.wise.powerge.bean.XunJianSignBean;
 import com.powerge.wise.powerge.bean.ZhiBIaoValueBean;
 import com.powerge.wise.powerge.bean.ZhiBaioNameBean;
@@ -64,6 +65,7 @@ public class RequestBody<Data> {
             @Element(name = "n0:queryWorkPlan", type = PlanTaskBean.class),
             @Element(name = "n0:queryWorkTask", type = PlanTaskDetailBean.class),
             @Element(name = "n0:queryGroupScore", type = JingSaiDeFenBean.class),
+            @Element(name = "n0:queryWeatherInfo", type = Weather.class),
             @Element(name = "n0:queryMonitorLogs", type = ZhiZhangLogBean.class)
     })
     public Data requestModel;

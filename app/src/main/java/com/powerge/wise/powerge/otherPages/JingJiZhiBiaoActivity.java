@@ -66,7 +66,7 @@ public class JingJiZhiBiaoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_jing_ji_zhi_biao);
         binding.title.setText(getResources().getStringArray(R.array.item_name_array)[2]);
-        getZBNameList();
+//        getZBNameList();
         getZBValueList();
 
     }
@@ -99,7 +99,7 @@ public class JingJiZhiBiaoActivity extends AppCompatActivity {
                         ListView listview = (ListView) view1.getChildAt(2);
                         listview.setSelectionFromTop(position, top);
                     }
-                    binding.zhiBiaoListId.setSelectionFromTop(position,top);
+                    binding.zhiBiaoListId.setSelectionFromTop(position, top);
                 }
             }
         }
@@ -115,7 +115,7 @@ public class JingJiZhiBiaoActivity extends AppCompatActivity {
                     ListView listview = (ListView) view1.getChildAt(2);
                     listview.setSelectionFromTop(firstVisibleItem, top);
                 }
-                binding.zhiBiaoListId.setSelectionFromTop(firstVisibleItem,top);
+                binding.zhiBiaoListId.setSelectionFromTop(firstVisibleItem, top);
             }
         }
     }
@@ -184,19 +184,38 @@ public class JingJiZhiBiaoActivity extends AppCompatActivity {
 
                     @Override
                     public void onNext(List<ZhiBIaoValueBean> list) {
-                        if (list.size() > 0) createZBValueView(list);
+                        if (list.size() > 0) {
+                            createZBValueView(list);
+                            createZBNameList(list.get(0).getDetails());
+                        }
                     }
                 });
     }
 
+    /**
+     * 自己组织指标列表集合
+     *
+     * @param list
+     */
+    public void createZBNameList(List<ZhiBIaoValueBean.DetailsBean> list) {
+        List<ZhiBaioNameBean> zbListAdapter = new ArrayList<>();
+        for (ZhiBIaoValueBean.DetailsBean bean : list) {
+            ZhiBaioNameBean baioNameBean = new ZhiBaioNameBean();
+            baioNameBean.setName(bean.getName());
+            zbListAdapter.add(baioNameBean);
+        }
+
+        Adapter adapter = new Adapter(zbListAdapter);
+        binding.zhiBiaoListId.setAdapter(adapter);
+    }
 
     private void createZBValueView(List<ZhiBIaoValueBean> list) {
         WindowManager wm1 = this.getWindowManager();
         int width1 = wm1.getDefaultDisplay().getWidth() / 2 - 200;
         for (int i = 0; i < list.size(); i++) {
             LinearLayout view = (LinearLayout) LayoutInflater.from(this).inflate(R.layout.item_ji_zu_zhi_biao, binding.contentJiZu, false);
-          /*  LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(width1, LinearLayout.LayoutParams.WRAP_CONTENT );
-            view.setLayoutParams(param);*/
+            LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(width1, LinearLayout.LayoutParams.WRAP_CONTENT);
+            view.setLayoutParams(param);
             ItemJiZuZhiBiaoBinding itemBiaoBinding = DataBindingUtil.bind(view.getRootView());
             itemBiaoBinding.zbValueList.setAdapter(new Adapter1(list.get(i).getDetails()));
             itemBiaoBinding.setItemZhiBiao(list.get(i));
