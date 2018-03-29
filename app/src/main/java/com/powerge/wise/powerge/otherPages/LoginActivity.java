@@ -24,6 +24,7 @@ import com.powerge.wise.powerge.config.soap.request.RequestBody;
 import com.powerge.wise.powerge.config.soap.request.RequestEnvelope;
 import com.powerge.wise.powerge.databinding.ActivityLoginBinding;
 import com.powerge.wise.powerge.helper.EEMsgToastHelper;
+import com.powerge.wise.powerge.mainPage.MainActivity;
 import com.wisesignsoft.OperationManagement.utils.ToastUtil;
 
 import rx.Subscriber;
@@ -113,6 +114,7 @@ public class LoginActivity extends AppCompatActivity {
                         user.setName(loginBinding.account.getText().toString());
                         user.setLogin(true);
                         User.login(user);
+                        MainActivity.start(getBaseContext());
                         finish();
                     }
                 });

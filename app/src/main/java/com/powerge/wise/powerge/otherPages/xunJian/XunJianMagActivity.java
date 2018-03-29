@@ -312,23 +312,23 @@ public class XunJianMagActivity extends AppCompatActivity implements XunJianDate
         binding.contentSingList.setAlpha(should ? 0.5f : 1f);
     }
 
+    Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            mScanning = false;
+            mBluetoothAdapter.stopLeScan(callback);
+            showLoading(false);
+            Toast.makeText(getBaseContext(), "扫描结束", Toast.LENGTH_SHORT).show();
+        }
+    };
+
     @SuppressLint("NewApi")
     private void scanLeDevice() {
         showLoading(true);
         if (!mScanning) {//不在扫描中
-            mHandler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    mScanning = false;
-                    mBluetoothAdapter.stopLeScan(callback);
-
-                }
-            }, 10000);
+            mHandler.postDelayed(runnable, 10000);
 
             mScanning = mBluetoothAdapter.startLeScan(callback);
-
-        } else {
-            Toast.makeText(getBaseContext(), "正在扫描中", Toast.LENGTH_SHORT).show();
 
         }
     }
@@ -341,6 +341,8 @@ public class XunJianMagActivity extends AppCompatActivity implements XunJianDate
             if (ibeacon != null && uuidChecked != null) {
                 Log.e(TAG, ibeacon.proximityUuid);
                 if (ibeacon.proximityUuid.equals(uuidChecked.toLowerCase())) {
+                    mBluetoothAdapter.stopLeScan(callback);
+                    mHandler.removeCallbacks(runnable);
                     binding.loadingCenterText.setText("开始签到");
                     signAction();
                 }
