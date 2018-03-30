@@ -37,7 +37,7 @@ public class Notification {
     /**
      * 001 竞赛 全部指标
      * 002 竞赛 全部机组
-     *
+     *003 竞赛 查询
      * @return
      */
     public int getCode() {

@@ -211,7 +211,7 @@ public class JingJiZhiBiaoActivity extends AppCompatActivity {
 
     private void createZBValueView(List<ZhiBIaoValueBean> list) {
         WindowManager wm1 = this.getWindowManager();
-        int width1 = wm1.getDefaultDisplay().getWidth() / 2 - 200;
+        int width1 = wm1.getDefaultDisplay().getWidth() / 2 - DensityUtil.dip2px(this,50);
         for (int i = 0; i < list.size(); i++) {
             LinearLayout view = (LinearLayout) LayoutInflater.from(this).inflate(R.layout.item_ji_zu_zhi_biao, binding.contentJiZu, false);
             LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(width1, LinearLayout.LayoutParams.WRAP_CONTENT);
