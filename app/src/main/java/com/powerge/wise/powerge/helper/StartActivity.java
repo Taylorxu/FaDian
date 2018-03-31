@@ -19,6 +19,7 @@ import com.powerge.wise.powerge.otherPages.queXian.QueXianMagActivity;
 import com.powerge.wise.powerge.otherPages.queXian.QueXianPieChartActivity;
 import com.powerge.wise.powerge.otherPages.xunJian.XunJianMagActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -27,6 +28,8 @@ import java.util.List;
  */
 
 public class StartActivity {
+    static List<JiZuBean> list = new ArrayList<>();
+
     public static void go(int where, Context context, List<JiZuBean> jiZuList) {
         if (where == 0) {
             FuHeManagementActivity.start(context, jiZuList);
@@ -45,8 +48,11 @@ public class StartActivity {
         } else if (where == 7) {
             JingSaiActivity.start(context, jiZuList);
         } else if (where == 8) {
-            jiZuList.remove(0);
-            HuanBaoActivity.start(context, jiZuList);
+            if ("9999".equals(jiZuList.get(0).getId())) {
+                list .addAll(jiZuList);
+                list.remove(0);
+            }
+            HuanBaoActivity.start(context, list);
         } else if (where == 9) {
             QueXianMagActivity.start(context);
         } else if (where == 10) {
