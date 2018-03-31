@@ -18,7 +18,6 @@ import com.powerge.wise.powerge.R;
 import com.powerge.wise.powerge.bean.User;
 import com.powerge.wise.powerge.databinding.ActivityMainBinding;
 import com.powerge.wise.powerge.otherPages.LoginActivity;
-import com.powerge.wise.powerge.otherPages.SheBeiInfoActivity;
 import com.powerge.wise.powerge.zxing.activity.CaptureActivity;
 import com.yanzhenjie.permission.Action;
 import com.yanzhenjie.permission.AndPermission;
@@ -126,15 +125,7 @@ public class MainActivity extends AppCompatActivity implements FirstFragment.OnF
     }
 
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK) {
-            Bundle bundle = data.getExtras();
 
-            SheBeiInfoActivity.start(this, bundle.getString("result"));
-        }
-    }
 
 
     private void requestPermissions() {

@@ -49,6 +49,7 @@ public class StartActivity {
             JingSaiActivity.start(context, jiZuList);
         } else if (where == 8) {
             if ("9999".equals(jiZuList.get(0).getId())) {
+                if(list.size()>0)list.clear();
                 list .addAll(jiZuList);
                 list.remove(0);
             }

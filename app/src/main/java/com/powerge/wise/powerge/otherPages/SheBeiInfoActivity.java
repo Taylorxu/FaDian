@@ -45,7 +45,6 @@ import rx.schedulers.Schedulers;
 public class SheBeiInfoActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
     public static void start(Context context, String result) {
         Intent starter = new Intent(context, SheBeiInfoActivity.class);
-        keyWord = starter.getStringExtra("result");
         context.startActivity(starter);
     }
 
@@ -63,16 +62,16 @@ public class SheBeiInfoActivity extends AppCompatActivity implements SwipeRefres
         binding.refreshLayout.setColorSchemeColors(getResources().getColor(R.color.colorPrimary));
         binding.refreshLayout.setOnRefreshListener(this);
         initView();
-        if (getIntent().getExtras() != null) {
-            Bundle bundle = getIntent().getExtras();
-            keyWord = bundle.getString("result");
-            binding.editSearchInfo.setText(bundle.getString("result"));
-            startSearch();
-        }
+
     }
 
 
     private void initView() {
+        if (getIntent().getExtras() != null) {
+            Bundle bundle = getIntent().getExtras();
+            keyWord = bundle.getString("result");
+            binding.editSearchInfo.setText(bundle.getString("result"));
+        }
         binding.refreshLayout.setRefreshing(true);
         getSheBeiData(1);
         binding.contentSheBei.setAdapter(adapter);
@@ -139,6 +138,7 @@ public class SheBeiInfoActivity extends AppCompatActivity implements SwipeRefres
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_back:
+                keyWord = "";
                 finish();
                 break;
             case R.id.btn_scan:
@@ -202,6 +202,7 @@ public class SheBeiInfoActivity extends AppCompatActivity implements SwipeRefres
                     @Override
                     public void onAction(List<String> permissions) {
                         startActivity(new Intent(SheBeiInfoActivity.this, CaptureActivity.class));
+                        finish();
                     }
                 })
                 .rationale(rationaleListener)
@@ -267,5 +268,15 @@ public class SheBeiInfoActivity extends AppCompatActivity implements SwipeRefres
         }
     };
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        keyWord = "";
+    }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        keyWord = "";
+    }
 }
