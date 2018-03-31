@@ -13,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.PopupWindow;
 
-import com.hyphenate.util.DensityUtil;
 import com.powerge.wise.basestone.heart.network.FlatMapResponse;
 import com.powerge.wise.basestone.heart.network.FlatMapTopRes;
 import com.powerge.wise.basestone.heart.network.FlatMapTopResList;
@@ -21,6 +20,7 @@ import com.powerge.wise.basestone.heart.network.ResultModel;
 import com.powerge.wise.basestone.heart.network.ResultModelData;
 import com.powerge.wise.basestone.heart.ui.XAdapter;
 import com.powerge.wise.basestone.heart.ui.XViewHolder;
+import com.powerge.wise.basestone.heart.util.DensityUtil;
 import com.powerge.wise.powerge.BR;
 import com.powerge.wise.powerge.R;
 import com.powerge.wise.powerge.bean.Items;
@@ -39,9 +39,7 @@ import com.powerge.wise.powerge.databinding.PopWindowFirstFragmentBinding;
 import com.powerge.wise.powerge.helper.EEMsgToastHelper;
 import com.powerge.wise.powerge.helper.GridSpacingItemDecoration;
 import com.powerge.wise.powerge.helper.StartActivity;
-import com.powerge.wise.powerge.otherPages.LoginActivity;
 import com.powerge.wise.powerge.otherPages.xunJian.XunJianMagActivity;
-import com.wisesignsoft.OperationManagement.utils.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.List;

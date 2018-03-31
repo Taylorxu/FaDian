@@ -6,9 +6,7 @@
       <module fileurl="file://$PROJECT_DIR$/OperationManagement/OperationManagement.iml" filepath="$PROJECT_DIR$/OperationManagement/OperationManagement.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/basestone/basestone.iml" filepath="$PROJECT_DIR$/basestone/basestone.iml" />
-      <module fileurl="file://$PROJECT_DIR$/easeui/easeui.iml" filepath="$PROJECT_DIR$/easeui/easeui.iml" />
       <module fileurl="file://$PROJECT_DIR$/imagepicker/imagepicker.iml" filepath="$PROJECT_DIR$/imagepicker/imagepicker.iml" />
-      <module fileurl="file://$PROJECT_DIR$/push/push.iml" filepath="$PROJECT_DIR$/push/push.iml" />
     </modules>
   </component>
 </project>

@@ -60,64 +60,61 @@
         <!-- 产品项目operation -->
 
         <activity
-            android:name="com.wisesignsoft.OperationManagement.ui.login.BootActivity"
+            android:name=".operationProjo.net.ui.login.BootActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.wisesignsoft.OperationManagement.ui.activity.NewWorkOrderActivity"
+            android:name=".operationProjo.net.ui.activity.NewWorkOrderActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.wisesignsoft.OperationManagement.ui.activity.ServiceReportActivity"
+            android:name=".operationProjo.net.ui.activity.ServiceReportActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.wisesignsoft.OperationManagement.ui.activity.ContractInfoActivity"
+            android:name=".operationProjo.net.ui.activity.ContractInfoActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.wisesignsoft.OperationManagement.ui.activity.SovledActivity"
+            android:name=".operationProjo.net.ui.activity.SovledActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.wisesignsoft.OperationManagement.ui.activity.NewTemplateActivity"
+            android:name=".operationProjo.net.ui.activity.NewTemplateActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.wisesignsoft.OperationManagement.ui.activity.SelectPersonnelActivity"
+            android:name=".operationProjo.net.ui.activity.SelectPersonnelActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.wisesignsoft.OperationManagement.ui.activity.TestActivity"
+            android:name=".operationProjo.net.ui.activity.TestActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.wisesignsoft.OperationManagement.ui.activity.SolvingActivity"
-            android:screenOrientation="portrait" />
-
-        <service android:name="com.wisesignsoft.OperationManagement.MyService" />
-
-        <activity
-            android:name="com.wisesignsoft.OperationManagement.ui.activity.EventClassificationActivity"
+            android:name=".operationProjo.net.ui.activity.SolvingActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.wisesignsoft.OperationManagement.ui.activity.OrderSolvedActivity"
+            android:name=".operationProjo.net.ui.activity.EventClassificationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".operationProjo.net.ui.activity.OrderSolvedActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
-            android:name="com.wisesignsoft.OperationManagement.ui.activity.NewWorkOrderActivity2"
+            android:name=".operationProjo.net.ui.activity.NewWorkOrderActivity2"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
-            android:name="com.wisesignsoft.OperationManagement.ui.activity.NewTemplateActivity2"
+            android:name=".operationProjo.net.ui.activity.NewTemplateActivity2"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
-            android:name="com.wisesignsoft.OperationManagement.ui.activity.MyTemplateActivity"
+            android:name=".operationProjo.net.ui.activity.MyTemplateActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.wisesignsoft.OperationManagement.ui.activity.TemplateDetailActivity"
+            android:name=".operationProjo.net.ui.activity.TemplateDetailActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.wisesignsoft.OperationManagement.ui.activity.ContractDetailActivity"
+            android:name=".operationProjo.net.ui.activity.ContractDetailActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.wisesignsoft.OperationManagement.ui.activity.KnowSearchActivity"
+            android:name=".operationProjo.net.ui.activity.KnowSearchActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.wisesignsoft.OperationManagement.ui.activity.ChatActivity"
+            android:name=".operationProjo.net.ui.activity.ChatActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.hyphenate.easeui.ui.EaseBaiduMapActivity"
@@ -129,75 +126,78 @@
             android:name="com.wisesignsoft.OperationManagement.chat.VoiceCallActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.wisesignsoft.OperationManagement.ui.activity.MessageActivity"
+            android:name=".operationProjo.net.ui.activity.MessageActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.wisesignsoft.OperationManagement.ui.activity.MessageDetailActivity"
+            android:name=".operationProjo.net.ui.activity.MessageDetailActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.wisesignsoft.OperationManagement.ui.activity.SingleRoleChooseActivity"
+            android:name=".operationProjo.net.ui.activity.SingleRoleChooseActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.wisesignsoft.OperationManagement.ui.activity.MultUserChooseActivity"
+            android:name=".operationProjo.net.ui.activity.MultUserChooseActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.wisesignsoft.OperationManagement.ui.activity.AllDeptTreeActivity"
+            android:name=".operationProjo.net.ui.activity.AllDeptTreeActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.wisesignsoft.OperationManagement.ui.activity.SingleUserChooseActivity"
+            android:name=".operationProjo.net.ui.activity.SingleUserChooseActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.wisesignsoft.OperationManagement.ui.activity.SelectDeptActivity"
+            android:name=".operationProjo.net.ui.activity.SelectDeptActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.wisesignsoft.OperationManagement.ui.activity.SelectUserActivity"
+            android:name=".operationProjo.net.ui.activity.SelectUserActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.wisesignsoft.OperationManagement.ui.activity.WorkOrderDetailActivity"
+            android:name=".operationProjo.net.ui.activity.WorkOrderDetailActivity"
             android:screenOrientation="portrait" />
-        <activity android:name="com.wisesignsoft.OperationManagement.ui.activity.MultSelectResModelActivity" />
+        <activity android:name=".operationProjo.net.ui.activity.MultSelectResModelActivity" />
         <activity
-            android:name="com.wisesignsoft.OperationManagement.ui.activity.MultRoleChooseActivity"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name="com.wisesignsoft.OperationManagement.ui.activity.SelectAccountActivity"
+            android:name=".operationProjo.net.ui.activity.MultRoleChooseActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.wisesignsoft.OperationManagement.ui.activity.KnowDetailActivity"
+            android:name=".operationProjo.net.ui.activity.SelectAccountActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.wisesignsoft.OperationManagement.ui.activity.ServiceDetailActivity"
+            android:name=".operationProjo.net.ui.activity.KnowDetailActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.wisesignsoft.OperationManagement.ui.activity.CreateServiceActivity"
+            android:name=".operationProjo.net.ui.activity.ServiceDetailActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.wisesignsoft.OperationManagement.ui.activity.ListActivity"
+            android:name=".operationProjo.net.ui.activity.CreateServiceActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.wisesignsoft.OperationManagement.ui.activity.ConfigureListActivity"
+            android:name=".operationProjo.net.ui.activity.ListActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.wisesignsoft.OperationManagement.ui.activity.SelectAccountActivity2"
+            android:name=".operationProjo.net.ui.activity.ConfigureListActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.wisesignsoft.OperationManagement.ui.activity.NewTemplateActivity3"
+            android:name=".operationProjo.net.ui.activity.SelectAccountActivity2"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".operationProjo.net.ui.activity.NewTemplateActivity3"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
-            android:name="com.wisesignsoft.OperationManagement.ui.activity.SelectAccountActivity4"
+            android:name=".operationProjo.net.ui.activity.SelectAccountActivity4"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.wisesignsoft.OperationManagement.ui.activity.WonhInfoActivity"
+            android:name=".operationProjo.net.ui.activity.WonhInfoActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.wisesignsoft.OperationManagement.ui.activity.WorkOrderSolvedUserActivity"
+            android:name=".operationProjo.net.ui.activity.WorkOrderSolvedUserActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.wisesignsoft.OperationManagement.ui.activity.WorkOrderSolvedUserActivity2"
+            android:name=".operationProjo.net.ui.activity.WorkOrderSolvedUserActivity2"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.wisesignsoft.OperationManagement.runtimepermissions.PermissionActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".operationProjo.net.ui.login.ServerAddressActivity"
             android:screenOrientation="portrait" />
 
         <!-- 百度地图的AK -->
@@ -283,8 +283,8 @@
         <activity
             android:name=".helper.LoadingWindowActivity"
             android:launchMode="singleTop"
-            android:theme="@android:style/Theme.Translucent"
-            ></activity>
+            android:theme="@android:style/Theme.Translucent" />
+        <activity android:name=".otherPages.issues.IssuesManagerActivity"></activity>
     </application>
 
 </manifest>

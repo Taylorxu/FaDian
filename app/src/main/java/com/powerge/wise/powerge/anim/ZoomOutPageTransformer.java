@@ -3,8 +3,6 @@ package com.powerge.wise.powerge.anim;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 
-import com.powerge.wise.basestone.heart.util.LogUtils;
-import com.wisesignsoft.OperationManagement.utils.LogUtil;
 
 /**
  * Created by Administrator on 2018/2/22.

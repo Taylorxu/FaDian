@@ -3,33 +3,23 @@ package com.powerge.wise.powerge.otherPages.xunJian;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.databinding.DataBindingUtil;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
-import com.hyphenate.util.DensityUtil;
+import com.powerge.wise.basestone.heart.util.DensityUtil;
 import com.powerge.wise.powerge.R;
 import com.powerge.wise.powerge.databinding.FragmentXunJianDateBinding;
-import com.wisesignsoft.OperationManagement.utils.LogUtil;
 
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 
 /**

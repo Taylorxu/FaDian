@@ -14,7 +14,6 @@
         android:drawableLeft="@mipmap/back"
         android:drawablePadding="10dp"
         android:gravity="center_vertical"
-        android:text="@string/re"
         android:textColor="@color/c2"
         android:textSize="13sp"
         android:visibility="gone" />

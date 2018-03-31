@@ -54,7 +54,4 @@ dependencies {
         maven { url 'https://oss.sonatype.org/content/repositories/ksoap2-android-releases/' }
     }
     //    compile 'com.google.code.ksoap2-android:ksoap2-android:3.6.1'
-    implementation project(':imagepicker')
-    implementation project(':push')
-    implementation project(':easeui')
 }

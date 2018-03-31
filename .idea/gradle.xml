@@ -11,9 +11,7 @@
             <option value="$PROJECT_DIR$/OperationManagement" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/basestone" />
-            <option value="$PROJECT_DIR$/easeui" />
             <option value="$PROJECT_DIR$/imagepicker" />
-            <option value="$PROJECT_DIR$/push" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

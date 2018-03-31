@@ -300,7 +300,7 @@ public interface ApiService {
 
         private static Retrofit getRetrofit() {
             return new Retrofit.Builder()
-                    .baseUrl(BaseUrl.HOSTArray[1])
+                    .baseUrl(BaseUrl.Host)
                     .client(NetConfig.getInstance().getClient())
                     .addConverterFactory(SimpleXmlConverterFactory.create(serializer))
                     .addConverterFactory(GsonConverterFactory.create(NetConfig.getInstance().getGson()))

@@ -1,11 +1,8 @@
 package com.powerge.wise.powerge.helper;
 
-import android.app.Application;
-import android.os.Bundle;
 import android.widget.Toast;
 
 import com.powerge.wise.powerge.MyApplication;
-import com.wisesignsoft.OperationManagement.utils.ToastUtil;
 
 /**
  * Created by Administrator on 2018/3/16.
@@ -22,7 +19,7 @@ public class EEMsgToastHelper {
     }
 
     public void selectWitch(String exception) {
-        if (exception.equals("Connection refused")) {
+        if (exception.indexOf("Failed to connect") > -1) {
             toastMesg("服务连接失败");
         } else {
             toastMesg(exception);

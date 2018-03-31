@@ -1,34 +1,18 @@
 package com.powerge.wise.powerge.mainPage;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
-import android.net.Uri;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
-import android.support.v7.app.AppCompatActivity;
-
-import android.support.v4.view.ViewPager;
 import android.os.Bundle;
-import android.view.MenuItem;
+import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.RadioGroup;
 
 import com.powerge.wise.powerge.R;
 import com.powerge.wise.powerge.bean.User;
 import com.powerge.wise.powerge.databinding.ActivityMainBinding;
-import com.powerge.wise.powerge.helper.BottomNavigationViewHelper;
 import com.powerge.wise.powerge.otherPages.LoginActivity;
 import com.powerge.wise.powerge.zxing.activity.CaptureActivity;
-import com.wisesignsoft.OperationManagement.utils.ToastUtil;
-import com.yanzhenjie.permission.Action;
-import com.yanzhenjie.permission.AndPermission;
-import com.yanzhenjie.permission.Rationale;
-import com.yanzhenjie.permission.RequestExecutor;
-import com.yanzhenjie.permission.SettingService;
-
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements FirstFragment.OnFirstFragmentInteractionListener {
     private MainAdapter mSectionsPagerAdapter;

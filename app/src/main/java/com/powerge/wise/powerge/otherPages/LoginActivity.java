@@ -3,9 +3,8 @@ package com.powerge.wise.powerge.otherPages;
 import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
-import android.support.v7.app.AppCompatActivity;
-
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -14,22 +13,25 @@ import android.widget.TextView;
 
 import com.powerge.wise.basestone.heart.network.FlatMapResponse;
 import com.powerge.wise.basestone.heart.network.FlatMapTopRes;
+import com.powerge.wise.basestone.heart.network.ResultModel;
 import com.powerge.wise.powerge.R;
 import com.powerge.wise.powerge.bean.User;
-import com.powerge.wise.powerge.config.soap.request.BaseUrl;
 import com.powerge.wise.powerge.config.soap.ApiService;
 import com.powerge.wise.powerge.config.soap.beans.LoginBean;
-import com.powerge.wise.basestone.heart.network.ResultModel;
+import com.powerge.wise.powerge.config.soap.request.BaseUrl;
 import com.powerge.wise.powerge.config.soap.request.RequestBody;
 import com.powerge.wise.powerge.config.soap.request.RequestEnvelope;
 import com.powerge.wise.powerge.databinding.ActivityLoginBinding;
 import com.powerge.wise.powerge.helper.EEMsgToastHelper;
 import com.powerge.wise.powerge.mainPage.MainActivity;
-import com.wisesignsoft.OperationManagement.utils.ToastUtil;
+import com.powerge.wise.powerge.operationProjo.net.db.MySharedpreferences;
+import com.powerge.wise.powerge.operationProjo.net.ui.login.ServerAddressActivity;
+import com.powerge.wise.powerge.operationProjo.net.utils.ToastUtil;
 
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
+
 
 public class LoginActivity extends AppCompatActivity {
     String password_value, account_value;
@@ -114,6 +116,7 @@ public class LoginActivity extends AppCompatActivity {
                         user.setName(loginBinding.account.getText().toString());
                         user.setLogin(true);
                         User.login(user);
+                        MySharedpreferences.putUser(user);
                         MainActivity.start(getBaseContext());
                         finish();
                     }
@@ -136,5 +139,21 @@ public class LoginActivity extends AppCompatActivity {
         }
 
     }
+
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.tv_net_url:
+                toServer();
+                break;
+        }
+    }
+
+    //去服务器地址设置页
+    private void toServer() {
+        Intent intent = new Intent(this,  ServerAddressActivity.class);
+        startActivity(intent);
+    }
+
+
 }
 

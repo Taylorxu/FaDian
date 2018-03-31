@@ -4,22 +4,19 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 
 import com.powerge.wise.basestone.heart.network.FlatMapResponse;
 import com.powerge.wise.basestone.heart.network.FlatMapTopResList;
 import com.powerge.wise.basestone.heart.network.ResultModelData;
-import com.powerge.wise.basestone.heart.ui.EndLessOnScrollListener;
 import com.powerge.wise.basestone.heart.ui.XAdapter;
 import com.powerge.wise.basestone.heart.ui.view.PagingRecyclerView;
 import com.powerge.wise.powerge.BR;
 import com.powerge.wise.powerge.R;
-import com.powerge.wise.powerge.bean.MorningMeetingBean;
-import com.powerge.wise.powerge.bean.SimpleListTextItem;
 import com.powerge.wise.powerge.bean.User;
 import com.powerge.wise.powerge.bean.ZhiZhangLogBean;
 import com.powerge.wise.powerge.config.soap.ApiService;
@@ -29,10 +26,6 @@ import com.powerge.wise.powerge.config.soap.request.RequestEnvelope;
 import com.powerge.wise.powerge.databinding.ActivityZhiZhangLogBinding;
 import com.powerge.wise.powerge.databinding.ItemZhiZhangLogesBinding;
 import com.powerge.wise.powerge.helper.EEMsgToastHelper;
-import com.wisesignsoft.OperationManagement.utils.ToastUtil;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;

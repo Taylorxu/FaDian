@@ -5,10 +5,6 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,18 +13,14 @@ import android.widget.AbsListView;
 import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 
-import com.hyphenate.util.DensityUtil;
 import com.powerge.wise.basestone.heart.network.FlatMapResponse;
 import com.powerge.wise.basestone.heart.network.FlatMapTopRes;
 import com.powerge.wise.basestone.heart.network.ResultModel;
 import com.powerge.wise.basestone.heart.ui.XAdapter;
-import com.powerge.wise.basestone.heart.util.DensityUtils;
+import com.powerge.wise.basestone.heart.util.DensityUtil;
 import com.powerge.wise.powerge.BR;
 import com.powerge.wise.powerge.R;
-import com.powerge.wise.powerge.bean.KaoHeChildItemBean;
-import com.powerge.wise.powerge.bean.SimpleListTextItem;
 import com.powerge.wise.powerge.bean.User;
 import com.powerge.wise.powerge.bean.ZhiBIaoValueBean;
 import com.powerge.wise.powerge.bean.ZhiBaioNameBean;
@@ -47,8 +39,6 @@ import java.util.List;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
-
-import static android.support.v7.widget.RecyclerView.SCROLL_STATE_IDLE;
 
 public class JingJiZhiBiaoActivity extends AppCompatActivity {
     public static void start(Context context) {

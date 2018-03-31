@@ -1,12 +1,11 @@
 package com.powerge.wise.powerge.otherPages;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 
@@ -19,16 +18,13 @@ import com.powerge.wise.powerge.BR;
 import com.powerge.wise.powerge.R;
 import com.powerge.wise.powerge.bean.TongJiForm;
 import com.powerge.wise.powerge.bean.User;
-import com.powerge.wise.powerge.bean.ZhiZhangLogBean;
 import com.powerge.wise.powerge.config.soap.ApiService;
 import com.powerge.wise.powerge.config.soap.request.BaseUrl;
 import com.powerge.wise.powerge.config.soap.request.RequestBody;
 import com.powerge.wise.powerge.config.soap.request.RequestEnvelope;
 import com.powerge.wise.powerge.databinding.ActivityTongJiFormBinding;
 import com.powerge.wise.powerge.databinding.ItemTongJiBinding;
-import com.powerge.wise.powerge.databinding.ItemTowTextBinding;
 import com.powerge.wise.powerge.helper.EEMsgToastHelper;
-import com.wisesignsoft.OperationManagement.utils.ToastUtil;
 
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
