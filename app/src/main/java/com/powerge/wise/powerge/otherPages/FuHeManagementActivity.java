@@ -247,7 +247,7 @@ public class FuHeManagementActivity extends AppCompatActivity implements RadioGr
 
                     @Override
                     public void onNext(List<PeroidDateLineListBean> peroidDateLineListBean) {
-                        if (peroidDateLineListBean.size() > 0) {
+                        if (peroidDateLineListBean.size() > 1) {
                             binding.textDataEmpty2.setVisibility(View.GONE);
                             binding.textDataEmpty3.setVisibility(View.GONE);
                             binding.chart2.setVisibility(View.VISIBLE);
@@ -433,7 +433,7 @@ public class FuHeManagementActivity extends AppCompatActivity implements RadioGr
         @Override
         public String getFormattedValue(float value, AxisBase axis) {
             if (dateX.length > 0) {
-                String date = dateX[(int) value];
+                String date = dateX[(int) Math.abs(value)];
                 return date.substring(date.indexOf("-") + 1, date.length());
             }
             return String.valueOf(value);

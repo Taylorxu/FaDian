@@ -16,6 +16,7 @@ import android.widget.PopupWindow;
 import com.powerge.wise.basestone.heart.network.FlatMapResponse;
 import com.powerge.wise.basestone.heart.network.FlatMapTopRes;
 import com.powerge.wise.basestone.heart.network.FlatMapTopResList;
+import com.powerge.wise.basestone.heart.network.Notification;
 import com.powerge.wise.basestone.heart.network.ResultModel;
 import com.powerge.wise.basestone.heart.network.ResultModelData;
 import com.powerge.wise.basestone.heart.ui.XAdapter;
@@ -45,7 +46,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import rx.Subscriber;
+import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 
 
@@ -70,6 +73,7 @@ public class FirstFragment extends Fragment {
             goToActivity(holder.getBinding().getItem().getNumber());
         }
     };
+    private Subscription notification;
 
 
     public static FirstFragment newInstance() {
@@ -87,14 +91,8 @@ public class FirstFragment extends Fragment {
 
 
     private void init() {
-        getJiZuData();
         createdData();
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                getHeaderData();
-            }
-        }, 1000);
+        notification = Notification.register(action1);
         fragmentBinding.content.setLayoutManager(new GridLayoutManager(getContext(), 4));
         fragmentBinding.content.addItemDecoration(new GridSpacingItemDecoration(4, DensityUtil.px2dip(getContext(), 10), true));
         fragmentBinding.content.setHasFixedSize(true);
@@ -106,6 +104,25 @@ public class FirstFragment extends Fragment {
         fragmentBinding.wenTiPcBtn.setOnClickListener(new BtnOnClick());
         fragmentBinding.planMagBtn.setOnClickListener(new BtnOnClick());
         fragmentBinding.btnOpenDoor.setOnClickListener(new BtnOnClick());
+    }
+
+    Action1<Notification> action1 = new Action1<Notification>() {
+        @Override
+        public void call(Notification o) {
+            if (o.getCode() == 004) {
+                refreshData();
+            }
+        }
+    };
+
+    private void refreshData() {
+        getJiZuData();
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                getHeaderData();
+            }
+        }, 500);
     }
 
     int[] icon = new int[]{R.drawable.ic_fuhe_mangment,
@@ -143,6 +160,8 @@ public class FirstFragment extends Fragment {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
         }
+
+        refreshData();
     }
 
     @Override
@@ -318,12 +337,27 @@ public class FirstFragment extends Fragment {
     }
 
     private void createHeaderJiZu() {
-        for (int i = 0; i < unitsLoadList.size(); i++) {
-            ItemMainPageJiZuBinding itemJiZuBd = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.item_main_page_ji_zu, fragmentBinding.headerJiZuLl, false);
-            itemJiZuBd.setData(unitsLoadList.get(i));
-            fragmentBinding.headerJiZuLl.addView(itemJiZuBd.getRoot());
+        if (unitsLoadList.size() > 0) {
+            if (fragmentBinding.headerJiZuLl.getChildCount() > 0)
+                fragmentBinding.headerJiZuLl.removeAllViews();
+            for (int i = 0; i < unitsLoadList.size(); i++) {
+                ItemMainPageJiZuBinding itemJiZuBd = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.item_main_page_ji_zu, fragmentBinding.headerJiZuLl, false);
+                itemJiZuBd.setData(unitsLoadList.get(i));
+                fragmentBinding.headerJiZuLl.addView(itemJiZuBd.getRoot());
+            }
         }
 
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        if (notification != null) notification.unsubscribe();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (notification != null) notification.unsubscribe();
+    }
 }

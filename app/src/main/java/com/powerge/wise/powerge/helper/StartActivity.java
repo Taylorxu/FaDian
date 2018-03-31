@@ -37,7 +37,7 @@ public class StartActivity {
         } else if (where == 3) {
             TongJiFormActivity.start(context);
         } else if (where == 4) {
-            SheBeiInfoActivity.start(context);
+            SheBeiInfoActivity.start(context, "");
         } else if (where == 5) {
             ZHiZhangLogActivity.start(context);
         } else if (where == 6) {

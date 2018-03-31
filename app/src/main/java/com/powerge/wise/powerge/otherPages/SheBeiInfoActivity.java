@@ -43,15 +43,16 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 public class SheBeiInfoActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
-    public static void start(Context context) {
+    public static void start(Context context, String result) {
         Intent starter = new Intent(context, SheBeiInfoActivity.class);
+        keyWord = starter.getStringExtra("result");
         context.startActivity(starter);
     }
 
     ActivitySheBeiInfoBinding binding;
     ExpandableListAdapter adapter = new ExpandableListAdapter();
     int currentPage = 0;
-    private String keyWord = "";
+    private static String keyWord = "";
 
     @SuppressLint("ResourceAsColor")
     @Override
