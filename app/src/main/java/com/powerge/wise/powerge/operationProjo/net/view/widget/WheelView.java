@@ -33,8 +33,8 @@ import android.view.ViewGroup.LayoutParams;
 import android.view.animation.Interpolator;
 import android.widget.LinearLayout;
 
+import com.powerge.wise.powerge.R;
 import com.powerge.wise.powerge.operationProjo.net.view.widget.adapters.WheelViewAdapter;
-import com.wisesignsoft.OperationManagement.R;
 
 import java.util.LinkedList;
 import java.util.List;

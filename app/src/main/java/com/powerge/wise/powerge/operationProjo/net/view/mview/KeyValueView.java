@@ -10,7 +10,8 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.wisesignsoft.OperationManagement.R;
+import com.powerge.wise.powerge.R;
+
 
 /**
  * Created by ycs on 2016/11/24.
@@ -60,8 +61,8 @@ public class KeyValueView extends LinearLayout {
         }
         a.recycle();
         View view = LayoutInflater.from(context).inflate(R.layout.key_value_view, this, true);
-        tv_key = (TextView) view.findViewById(R.id.tv_key);
-        tv_value = (TextView) view.findViewById(R.id.tv_value);
+        tv_key = view.findViewById(R.id.tv_key);
+        tv_value = view.findViewById(R.id.tv_value);
 
         tv_key.setText(keyText);
         tv_key.setTextSize(TypedValue.COMPLEX_UNIT_PX, keySize);

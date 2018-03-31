@@ -7,12 +7,12 @@ import android.util.Log;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.powerge.wise.powerge.R;
 import com.powerge.wise.powerge.operationProjo.net.BaseActivity;
 import com.powerge.wise.powerge.operationProjo.net.bean.ContractBean;
 import com.powerge.wise.powerge.operationProjo.net.net.response.QueryModelByBmModelNameResponse;
 import com.powerge.wise.powerge.operationProjo.net.view.mview.KeyValueView2;
 import com.powerge.wise.powerge.operationProjo.net.view.mview.MyTitle;
-import com.wisesignsoft.OperationManagement.R;
 
 import java.io.Serializable;
 import java.util.ArrayList;

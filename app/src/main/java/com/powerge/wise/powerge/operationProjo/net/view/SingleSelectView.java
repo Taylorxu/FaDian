@@ -10,13 +10,13 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.powerge.wise.powerge.R;
 import com.powerge.wise.powerge.operationProjo.net.adapter.NewWorkOrderAdapter;
 import com.powerge.wise.powerge.operationProjo.net.adapter.SingleSelectViewAdapter;
 import com.powerge.wise.powerge.operationProjo.net.bean.WorkOrder;
 import com.powerge.wise.powerge.operationProjo.net.net.response.FindCanCreateProcessResponse;
 import com.powerge.wise.powerge.operationProjo.net.net.response.QueryAllValidDictDateResponse;
 import com.powerge.wise.powerge.operationProjo.net.view.mview.WorkOrderDataManager;
-import com.wisesignsoft.OperationManagement.R;
 
 import java.util.ArrayList;
 import java.util.List;

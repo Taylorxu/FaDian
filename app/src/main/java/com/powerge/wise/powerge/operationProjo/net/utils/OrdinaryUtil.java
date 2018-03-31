@@ -1,9 +1,9 @@
 package com.powerge.wise.powerge.operationProjo.net.utils;
 
+import com.powerge.wise.powerge.R;
 import com.powerge.wise.powerge.operationProjo.net.bean.OrdinaryModel;
 import com.powerge.wise.powerge.operationProjo.net.db.MySharedpreferences;
 import com.powerge.wise.powerge.operationProjo.net.net.response.QueryUserResourceResponse;
-import com.wisesignsoft.OperationManagement.R;
 
 import java.util.ArrayList;
 import java.util.List;

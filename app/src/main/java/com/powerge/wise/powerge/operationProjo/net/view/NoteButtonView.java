@@ -7,7 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 
-import com.wisesignsoft.OperationManagement.R;
+import com.powerge.wise.powerge.R;
+
 
 /**
  * Created by ycs on 2017/1/4.

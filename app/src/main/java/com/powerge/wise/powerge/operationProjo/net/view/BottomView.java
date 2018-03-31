@@ -6,12 +6,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.RelativeLayout;
 
+import com.powerge.wise.powerge.R;
 import com.powerge.wise.powerge.operationProjo.net.bean.WorkOrder;
 import com.powerge.wise.powerge.operationProjo.net.net.response.QueryAllValidDictDateResponse;
 import com.powerge.wise.powerge.operationProjo.net.view.mview.BaseView;
 import com.powerge.wise.powerge.operationProjo.net.view.mview.BottomDialog;
 import com.powerge.wise.powerge.operationProjo.net.view.mview.WorkOrderDataManager;
-import com.wisesignsoft.OperationManagement.R;
 
 import java.util.List;
 

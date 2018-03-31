@@ -6,7 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import com.wisesignsoft.OperationManagement.R;
+import com.powerge.wise.powerge.R;
+
 
 /**
  * Created by ycs on 2016/12/17.
@@ -23,7 +24,7 @@ public class ListItemView extends LinearLayout {
 
     private void init(Context context) {
         View view = LayoutInflater.from(context).inflate(R.layout.list_item_view, this, true);
-        kvv_item = (KeyValueView) view.findViewById(R.id.kvv_list_item);
+        kvv_item = view.findViewById(R.id.kvv_list_item);
     }
 
     public void setDate(String key, String value) {

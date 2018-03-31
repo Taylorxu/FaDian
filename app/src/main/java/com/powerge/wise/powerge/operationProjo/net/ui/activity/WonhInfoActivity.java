@@ -6,13 +6,13 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import com.powerge.wise.powerge.R;
 import com.powerge.wise.powerge.operationProjo.net.BaseActivity;
 import com.powerge.wise.powerge.operationProjo.net.adapter.WonhInfoAdapter;
 import com.powerge.wise.powerge.operationProjo.net.net.RequestTask;
 import com.powerge.wise.powerge.operationProjo.net.net.request.RequestProcess;
 import com.powerge.wise.powerge.operationProjo.net.net.response.FindWonhInfoResponse;
 import com.powerge.wise.powerge.operationProjo.net.view.mview.MyTitle;
-import com.wisesignsoft.OperationManagement.R;
 
 import java.util.ArrayList;
 import java.util.List;

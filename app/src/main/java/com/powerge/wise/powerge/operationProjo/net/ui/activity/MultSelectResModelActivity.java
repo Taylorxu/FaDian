@@ -7,12 +7,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.powerge.wise.powerge.R;
 import com.powerge.wise.powerge.operationProjo.net.BaseActivity;
 import com.powerge.wise.powerge.operationProjo.net.adapter.MultResModelAdapter;
 import com.powerge.wise.powerge.operationProjo.net.view.mview.EmptyView;
 import com.powerge.wise.powerge.operationProjo.net.view.mview.MyTitle;
 import com.powerge.wise.powerge.operationProjo.net.view.mview.SeachView;
-import com.wisesignsoft.OperationManagement.R;
 
 import java.util.ArrayList;
 import java.util.List;

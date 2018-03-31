@@ -7,13 +7,13 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 import com.google.gson.Gson;
+import com.powerge.wise.powerge.R;
 import com.powerge.wise.powerge.operationProjo.net.bean.ResModeValue;
 import com.powerge.wise.powerge.operationProjo.net.bean.ResModeValue2;
 import com.powerge.wise.powerge.operationProjo.net.bean.WorkOrder;
 import com.powerge.wise.powerge.operationProjo.net.ui.activity.SelectAccountActivity;
 import com.powerge.wise.powerge.operationProjo.net.ui.activity.SelectAccountActivity3;
 import com.powerge.wise.powerge.operationProjo.net.view.mview.BaseView;
-import com.wisesignsoft.OperationManagement.R;
 
 import java.util.List;
 

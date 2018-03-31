@@ -5,10 +5,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import com.powerge.wise.powerge.R;
 import com.powerge.wise.powerge.operationProjo.net.BaseActivity;
 import com.powerge.wise.powerge.operationProjo.net.net.response.FindUnReadedMsgResponse;
 import com.powerge.wise.powerge.operationProjo.net.view.mview.MyTitle;
-import com.wisesignsoft.OperationManagement.R;
+
 
 
 

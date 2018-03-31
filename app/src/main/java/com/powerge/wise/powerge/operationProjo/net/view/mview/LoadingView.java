@@ -8,7 +8,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
-import com.wisesignsoft.OperationManagement.R;
+import com.powerge.wise.powerge.R;
 
 
 /**
@@ -35,7 +35,7 @@ public class LoadingView extends Dialog {
 
     private void initView(Context context) {
         View view = LayoutInflater.from(context).inflate(R.layout.loadingview, null);
-        ImageView iv_loading = (ImageView) view.findViewById(R.id.iv_loading);
+        ImageView iv_loading = view.findViewById(R.id.iv_loading);
         Animation animation = AnimationUtils.loadAnimation(context, R.anim.anim_loading);
         iv_loading.startAnimation(animation);
         setContentView(view);

@@ -12,7 +12,7 @@ import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.wisesignsoft.OperationManagement.R;
+import com.powerge.wise.powerge.R;
 
 import java.util.List;
 
@@ -33,9 +33,9 @@ public class DownBoxView extends RelativeLayout {
 
     private void init(final Context context, final List<String> list) {
         View view = LayoutInflater.from(context).inflate(R.layout.down_box_view, this, true);
-        rl_down = (RelativeLayout) view.findViewById(R.id.rl_down_box_view);
-        tv_down = (TextView) view.findViewById(R.id.tv_down_box_view);
-        iv_down = (ImageView) view.findViewById(R.id.iv_down_box_view);
+        rl_down = view.findViewById(R.id.rl_down_box_view);
+        tv_down = view.findViewById(R.id.tv_down_box_view);
+        iv_down = view.findViewById(R.id.iv_down_box_view);
         rl_down.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -46,7 +46,7 @@ public class DownBoxView extends RelativeLayout {
 
     private void showPopupwindow(Context context, View view, final List<String> list) {
         View converview = LayoutInflater.from(context).inflate(R.layout.down_box_popup_view, null);
-        ListView lv = (ListView) converview.findViewById(R.id.lv_down_box_view);
+        ListView lv = converview.findViewById(R.id.lv_down_box_view);
         final PopupWindow popupWindow = new PopupWindow(context);
         popupWindow.setContentView(converview);
         MyAdapter myAdapter = new MyAdapter(context, list);
@@ -96,7 +96,7 @@ public class DownBoxView extends RelativeLayout {
             if (view == null) {
                 holder = new MyHolder();
                 view = LayoutInflater.from(context).inflate(R.layout.item_popup_tv, viewGroup, false);
-                holder.tv = (TextView) view.findViewById(R.id.tv);
+                holder.tv = view.findViewById(R.id.tv);
                 view.setTag(holder);
             } else {
                 holder = (MyHolder) view.getTag();

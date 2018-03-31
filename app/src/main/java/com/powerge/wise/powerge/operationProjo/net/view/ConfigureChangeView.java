@@ -10,10 +10,10 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.powerge.wise.powerge.R;
 import com.powerge.wise.powerge.operationProjo.net.bean.ConfigureBean;
 import com.powerge.wise.powerge.operationProjo.net.bean.WorkOrder;
 import com.powerge.wise.powerge.operationProjo.net.ui.activity.SelectAccountActivity4;
-import com.wisesignsoft.OperationManagement.R;
 
 import java.util.Map;
 

@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 
+import com.powerge.wise.powerge.R;
 import com.powerge.wise.powerge.operationProjo.net.BaseActivity;
 import com.powerge.wise.powerge.operationProjo.net.adapter.UnReadedMsgAdapter;
 import com.powerge.wise.powerge.operationProjo.net.db.MySharedpreferences;
@@ -17,7 +18,6 @@ import com.powerge.wise.powerge.operationProjo.net.net.response.FindUnReadedMsgR
 import com.powerge.wise.powerge.operationProjo.net.utils.DividerItemDecoration;
 import com.powerge.wise.powerge.operationProjo.net.view.mview.EmptyView;
 import com.powerge.wise.powerge.operationProjo.net.view.mview.MyTitle;
-import com.wisesignsoft.OperationManagement.R;
 
 import java.util.ArrayList;
 import java.util.List;

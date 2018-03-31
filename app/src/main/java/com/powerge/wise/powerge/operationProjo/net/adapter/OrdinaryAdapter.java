@@ -10,9 +10,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.powerge.wise.powerge.R;
 import com.powerge.wise.powerge.operationProjo.net.bean.OrdinaryModel;
 import com.powerge.wise.powerge.operationProjo.net.utils.GlideUtils;
-import com.wisesignsoft.OperationManagement.R;
 
 import java.util.List;
 

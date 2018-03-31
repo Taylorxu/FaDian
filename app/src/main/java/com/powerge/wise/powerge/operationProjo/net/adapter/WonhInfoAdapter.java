@@ -8,8 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.powerge.wise.powerge.R;
 import com.powerge.wise.powerge.operationProjo.net.net.response.FindWonhInfoResponse;
-import com.wisesignsoft.OperationManagement.R;
 
 import java.util.List;
 

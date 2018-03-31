@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.powerge.wise.powerge.R;
 import com.powerge.wise.powerge.operationProjo.net.BaseActivity;
 import com.powerge.wise.powerge.operationProjo.net.bean.Section;
 import com.powerge.wise.powerge.operationProjo.net.bean.WorkOrder;
@@ -30,7 +31,6 @@ import com.powerge.wise.powerge.operationProjo.net.view.MultSelectResModelView;
 import com.powerge.wise.powerge.operationProjo.net.view.MultUserChooseView;
 import com.powerge.wise.powerge.operationProjo.net.view.NoteButtonView;
 import com.powerge.wise.powerge.operationProjo.net.view.NumberView;
-import com.powerge.wise.powerge.operationProjo.net.view.PositionView;
 import com.powerge.wise.powerge.operationProjo.net.view.ResModelSelectView;
 import com.powerge.wise.powerge.operationProjo.net.view.SingleRoleChooseView;
 import com.powerge.wise.powerge.operationProjo.net.view.SingleSelectView;
@@ -39,7 +39,6 @@ import com.powerge.wise.powerge.operationProjo.net.view.SingleUserChooseView;
 import com.powerge.wise.powerge.operationProjo.net.view.TextFieldView;
 import com.powerge.wise.powerge.operationProjo.net.view.TimeView;
 import com.powerge.wise.powerge.operationProjo.net.view.TreeSelectionView;
-import com.wisesignsoft.OperationManagement.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -69,7 +68,7 @@ public class WorkOrderDetailView extends LinearLayout {
 
     private void init(Context context) {
         View view = LayoutInflater.from(context).inflate(R.layout.work_order_detail, this, true);
-        ll_work_order_detail = (LinearLayout) view.findViewById(R.id.ll_work_order_detail);
+        ll_work_order_detail = view.findViewById(R.id.ll_work_order_detail);
         request();
     }
 
@@ -247,12 +246,7 @@ public class WorkOrderDetailView extends LinearLayout {
                                         sectionView.getLl_section_view().addView(multSelectListView);
                                         multSelectListView.setData(wo);
                                         break;
-                                    case "Position"://顯示地圖
-                                        PositionView positionView = new PositionView(context);
-                                        views.put(wo.getID(), positionView);
-                                        sectionView.getLl_section_view().addView(positionView);
-                                        positionView.setData(wo);
-                                        break;
+
                                     case "ResDynamicDataGrid":       //模型数据列表组件，台賬
                                         MultSelectResModelView multSelectResModelView = new MultSelectResModelView(context);
                                         views.put(wo.getID(), multSelectResModelView);
@@ -372,8 +366,6 @@ public class WorkOrderDetailView extends LinearLayout {
             ((MultSelectConfigureChangeView) o).setData(wo);
         } else if (o instanceof ConfigureChangeView) {
             ((ConfigureChangeView) o).setData(wo);
-        } else if (o instanceof PositionView) {
-            ((PositionView) o).setData(wo);
         }
     }
 

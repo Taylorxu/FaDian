@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.google.gson.Gson;
+import com.powerge.wise.powerge.R;
 import com.powerge.wise.powerge.operationProjo.net.BaseActivity;
 import com.powerge.wise.powerge.operationProjo.net.db.MySharedpreferences;
 import com.powerge.wise.powerge.operationProjo.net.net.RequestTask;
@@ -18,7 +19,6 @@ import com.powerge.wise.powerge.operationProjo.net.view.mview.LoadingView;
 import com.powerge.wise.powerge.operationProjo.net.view.mview.MyTitle;
 import com.powerge.wise.powerge.operationProjo.net.view.mview.WorkOrderDataManager;
 import com.powerge.wise.powerge.operationProjo.net.view.mview.WorkOrderDetailView;
-import com.wisesignsoft.OperationManagement.R;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;

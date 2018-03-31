@@ -7,12 +7,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
+import com.powerge.wise.powerge.R;
 import com.powerge.wise.powerge.operationProjo.net.BaseActivity;
 import com.powerge.wise.powerge.operationProjo.net.bean.ResModelConfigure;
 import com.powerge.wise.powerge.operationProjo.net.view.SingleTextView;
 import com.powerge.wise.powerge.operationProjo.net.view.TextFieldView;
 import com.powerge.wise.powerge.operationProjo.net.view.mview.MyTitle;
-import com.wisesignsoft.OperationManagement.R;
 
 import java.io.Serializable;
 import java.util.List;

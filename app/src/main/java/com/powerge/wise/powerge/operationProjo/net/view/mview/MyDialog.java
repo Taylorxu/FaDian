@@ -7,7 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
-import com.wisesignsoft.OperationManagement.R;
+import com.powerge.wise.powerge.R;
+
 
 /**
  * Created by ycs on 2016/12/5.
@@ -29,9 +30,9 @@ public class MyDialog extends Dialog implements View.OnClickListener {
 
     private void init(Context context) {
         View view = LayoutInflater.from(context).inflate(R.layout.my_dialog,null);
-        tv_title = (TextView) view.findViewById(R.id.tv_my_dialog_title);
-        tv_cancel = (TextView) view.findViewById(R.id.tv_my_dialog_cancel);
-        tv_sure = (TextView) view.findViewById(R.id.tv_my_dialog_sure);
+        tv_title = view.findViewById(R.id.tv_my_dialog_title);
+        tv_cancel = view.findViewById(R.id.tv_my_dialog_cancel);
+        tv_sure = view.findViewById(R.id.tv_my_dialog_sure);
         setContentView(view);
 
     }

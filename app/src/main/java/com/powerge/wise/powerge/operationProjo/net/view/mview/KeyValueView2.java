@@ -7,8 +7,9 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.powerge.wise.powerge.R;
 import com.powerge.wise.powerge.operationProjo.net.bean.ContractBean;
-import com.wisesignsoft.OperationManagement.R;
+
 
 /**
  * Created by ycs on 2016/12/19.
@@ -31,8 +32,8 @@ public class KeyValueView2 extends LinearLayout {
 
     private void init(Context context) {
         View view = LayoutInflater.from(context).inflate(R.layout.key_value_view2, this, true);
-        key = (TextView) view.findViewById(R.id.key);
-        value = (TextView) view.findViewById(R.id.value);
+        key = view.findViewById(R.id.key);
+        value = view.findViewById(R.id.value);
     }
 
     public void setData(ContractBean b) {

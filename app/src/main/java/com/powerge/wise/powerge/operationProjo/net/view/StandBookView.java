@@ -6,13 +6,13 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.powerge.wise.powerge.R;
 import com.powerge.wise.powerge.operationProjo.net.bean.ColumnsJsonBean;
 import com.powerge.wise.powerge.operationProjo.net.bean.Dict;
 import com.powerge.wise.powerge.operationProjo.net.bean.ResColumnsJsonBean;
 import com.powerge.wise.powerge.operationProjo.net.bean.ResModelConfigure;
 import com.powerge.wise.powerge.operationProjo.net.ui.activity.ListActivity;
 import com.powerge.wise.powerge.operationProjo.net.view.mview.ListItemView;
-import com.wisesignsoft.OperationManagement.R;
 
 import java.util.ArrayList;
 import java.util.List;

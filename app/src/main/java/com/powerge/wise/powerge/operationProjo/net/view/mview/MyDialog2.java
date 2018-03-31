@@ -6,7 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
-import com.wisesignsoft.OperationManagement.R;
+import com.powerge.wise.powerge.R;
+
 
 /**
  * Created by ycs on 2016/12/5.
@@ -25,8 +26,8 @@ public class MyDialog2 extends Dialog implements View.OnClickListener {
 
     private void init(Context context) {
         View view = LayoutInflater.from(context).inflate(R.layout.my_dialog2,null);
-        tv_delete1 = (TextView) view.findViewById(R.id.tv_delete1);
-        tv_delete2 = (TextView) view.findViewById(R.id.tv_delete2);
+        tv_delete1 = view.findViewById(R.id.tv_delete1);
+        tv_delete2 = view.findViewById(R.id.tv_delete2);
         setContentView(view);
         tv_delete1.setOnClickListener(this);
         tv_delete2.setOnClickListener(this);

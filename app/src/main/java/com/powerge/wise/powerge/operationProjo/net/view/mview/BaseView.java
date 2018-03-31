@@ -8,7 +8,8 @@ import android.view.View;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.wisesignsoft.OperationManagement.R;
+import com.powerge.wise.powerge.R;
+
 
 /**
  * Created by ycs on 2016/12/15.
@@ -25,8 +26,8 @@ public class BaseView extends RelativeLayout {
     }
     private void init(Context context){
         View view = LayoutInflater.from(context).inflate(R.layout.base_view,this,true);
-        tv_left = (TextView) view.findViewById(R.id.tv_base_left);
-        tv_right = (TextView) view.findViewById(R.id.tv_base_right);
+        tv_left = view.findViewById(R.id.tv_base_left);
+        tv_right = view.findViewById(R.id.tv_base_right);
     }
     public void setTv_left(String title){
         if(!TextUtils.isEmpty(title)){

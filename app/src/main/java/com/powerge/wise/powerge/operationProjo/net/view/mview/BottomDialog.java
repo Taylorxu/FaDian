@@ -8,10 +8,10 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 
+import com.powerge.wise.powerge.R;
 import com.powerge.wise.powerge.operationProjo.net.net.response.QueryAllValidDictDateResponse;
 import com.powerge.wise.powerge.operationProjo.net.view.widget.WheelView;
 import com.powerge.wise.powerge.operationProjo.net.view.widget.adapters.ArrayWheelAdapter;
-import com.wisesignsoft.OperationManagement.R;
 
 import java.util.List;
 
@@ -83,9 +83,9 @@ public class BottomDialog extends Dialog implements View.OnClickListener {
     }
 
     private void setUpViews() {
-        wv_address = (WheelView) findViewById(R.id.wv_address);
-        title_cancel = (TextView) findViewById(R.id.title_left);
-        title_sure = (TextView) findViewById(R.id.title_right);
+        wv_address = findViewById(R.id.wv_address);
+        title_cancel = findViewById(R.id.title_left);
+        title_sure = findViewById(R.id.title_right);
     }
 
     private void setUpListener() {

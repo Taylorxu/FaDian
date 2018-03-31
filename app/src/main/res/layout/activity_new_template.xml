@@ -3,11 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.wisesignsoft.OperationManagement.view.mview.MyTitle
+    <com.powerge.wise.powerge.operationProjo.net.view.mview.MyTitle
         android:id="@+id/mt_new_template"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
-    <com.wisesignsoft.OperationManagement.view.SingleSelectView
+    <com.powerge.wise.powerge.operationProjo.net.view.SingleSelectView
         android:layout_margin="20dp"
         android:layout_below="@id/mt_new_template"
         android:id="@+id/ssv_new_template"

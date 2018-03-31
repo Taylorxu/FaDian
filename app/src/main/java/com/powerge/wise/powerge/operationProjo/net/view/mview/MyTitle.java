@@ -10,7 +10,8 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.wisesignsoft.OperationManagement.R;
+import com.powerge.wise.powerge.R;
+
 
 /**
  * Created by ycs on 2016/11/18.
@@ -30,10 +31,10 @@ public class MyTitle extends RelativeLayout {
 
     private void init(Context context) {
         View view = LayoutInflater.from(context).inflate(R.layout.my_title_view, this, true);
-        tv_back = (TextView) view.findViewById(R.id.tv_title_back);
-        tv_title = (TextView) view.findViewById(R.id.tv_title_title);
-        iv_right = (ImageView) view.findViewById(R.id.iv_title_right);
-        tv_title_right = (TextView) view.findViewById(R.id.tv_title_right);
+        tv_back = view.findViewById(R.id.tv_title_back);
+        tv_title = view.findViewById(R.id.tv_title_title);
+        iv_right = view.findViewById(R.id.iv_title_right);
+        tv_title_right = view.findViewById(R.id.tv_title_right);
     }
 
     /**

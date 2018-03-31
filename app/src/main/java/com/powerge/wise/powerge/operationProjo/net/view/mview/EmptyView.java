@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.wisesignsoft.OperationManagement.R;
+import com.powerge.wise.powerge.R;
 
 
 /**
@@ -28,9 +28,9 @@ public class EmptyView extends RelativeLayout {
 
     private void init(Context context) {
         View view = LayoutInflater.from(context).inflate(R.layout.message_empty, this, true);
-        mRefresh = (SwipeRefreshLayout) view.findViewById(R.id.srl_empty);
-        mImageView = (ImageView) view.findViewById(R.id.iv_empty);
-        mTextView = (TextView) view.findViewById(R.id.tv_empty);
+        mRefresh = view.findViewById(R.id.srl_empty);
+        mImageView = view.findViewById(R.id.iv_empty);
+        mTextView = view.findViewById(R.id.tv_empty);
         mRefresh.setColorSchemeResources(R.color.colorAccent, R.color.colorPrimary, R.color.colorPrimaryDark);
     }
 

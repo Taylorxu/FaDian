@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.powerge.wise.powerge.R;
 import com.powerge.wise.powerge.operationProjo.net.BaseActivity;
 import com.powerge.wise.powerge.operationProjo.net.db.MySharedpreferences;
 import com.powerge.wise.powerge.operationProjo.net.net.RequestTask;
@@ -13,7 +14,6 @@ import com.powerge.wise.powerge.operationProjo.net.utils.PullPaseXmlUtil;
 import com.powerge.wise.powerge.operationProjo.net.view.mview.LoadingView;
 import com.powerge.wise.powerge.operationProjo.net.view.mview.MyTitle;
 import com.powerge.wise.powerge.operationProjo.net.view.mview.WorkOrderDetailView;
-import com.wisesignsoft.OperationManagement.R;
 
 import java.util.ArrayList;
 import java.util.List;

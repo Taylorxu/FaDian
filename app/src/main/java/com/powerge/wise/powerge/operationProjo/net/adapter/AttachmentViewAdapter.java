@@ -13,9 +13,9 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.lzy.imagepicker.bean.ImageItem;
+import com.powerge.wise.powerge.R;
 import com.powerge.wise.powerge.operationProjo.net.bean.WorkOrder;
 import com.powerge.wise.powerge.operationProjo.net.view.mview.WorkOrderDataManager;
-import com.wisesignsoft.OperationManagement.R;
 
 import java.util.List;
 

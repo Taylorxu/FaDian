@@ -111,7 +111,7 @@ public class IssuesWaittingFragment extends Fragment implements SwipeRefreshLayo
         SwipeRefreshUtil.setConfig(binding.srlSolving, this);
         SwipeRefreshUtil.setRecyclerConfig(binding.rrvSolving, getContext(), this);
         /*设置空页面*/
-        binding.evSolving.setData(com.wisesignsoft.OperationManagement.R.mipmap.home, getResources().getString(com.wisesignsoft.OperationManagement.R.string.empty_text));
+        binding.evSolving.setData(R.mipmap.home, getResources().getString(R.string.empty_text));
         binding.evSolving.setOnRefreshListener(listener);
         /*设置适配器*/
         SolvingAdapter adapter = new SolvingAdapter(getContext(), datas);

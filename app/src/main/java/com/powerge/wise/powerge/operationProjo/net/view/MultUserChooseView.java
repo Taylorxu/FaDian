@@ -9,13 +9,13 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.powerge.wise.powerge.R;
 import com.powerge.wise.powerge.operationProjo.net.adapter.MultUserChooseViewAdapter;
 import com.powerge.wise.powerge.operationProjo.net.bean.WorkOrder;
 import com.powerge.wise.powerge.operationProjo.net.net.RequestTask;
 import com.powerge.wise.powerge.operationProjo.net.net.request.RequestYxyw;
 import com.powerge.wise.powerge.operationProjo.net.net.response.QueryValidUsersByIdsResponse;
 import com.powerge.wise.powerge.operationProjo.net.ui.activity.MultUserChooseActivity;
-import com.wisesignsoft.OperationManagement.R;
 
 import java.util.ArrayList;
 import java.util.Arrays;

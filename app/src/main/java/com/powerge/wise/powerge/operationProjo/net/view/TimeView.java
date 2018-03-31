@@ -11,9 +11,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+import com.powerge.wise.powerge.R;
 import com.powerge.wise.powerge.operationProjo.net.bean.WorkOrder;
 import com.powerge.wise.powerge.operationProjo.net.view.mview.WorkOrderDataManager;
-import com.wisesignsoft.OperationManagement.R;
 
 import java.util.Calendar;
 

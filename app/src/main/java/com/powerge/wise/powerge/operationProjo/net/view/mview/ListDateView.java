@@ -9,9 +9,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.powerge.wise.powerge.R;
 import com.powerge.wise.powerge.operationProjo.net.utils.DisplayUtils;
 import com.powerge.wise.powerge.operationProjo.net.view.StandBookView;
-import com.wisesignsoft.OperationManagement.R;
+
 
 /**
  * Created by ycs on 2016/12/17.
@@ -32,11 +33,11 @@ public class ListDateView extends LinearLayout{
     }
     private void init(final Context context){
         View view = LayoutInflater.from(context).inflate(R.layout.list_date_view,this,true);
-        tv_list_date_title = (TextView) view.findViewById(R.id.tv_list_date_title);
-        iv_list_date_view = (ImageView) view.findViewById(R.id.iv_list_date_view);
-        ll_list_date = (LinearLayout) view.findViewById(R.id.ll_list_date);
-        ll_date_list = (LinearLayout) view.findViewById(R.id.ll_date_list);
-        tv_list_date = (TextView) view.findViewById(R.id.tv_list_date);
+        tv_list_date_title = view.findViewById(R.id.tv_list_date_title);
+        iv_list_date_view = view.findViewById(R.id.iv_list_date_view);
+        ll_list_date = view.findViewById(R.id.ll_list_date);
+        ll_date_list = view.findViewById(R.id.ll_date_list);
+        tv_list_date = view.findViewById(R.id.tv_list_date);
         ll_list_date.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 
+import com.powerge.wise.powerge.R;
 import com.powerge.wise.powerge.operationProjo.net.BaseActivity;
 import com.powerge.wise.powerge.operationProjo.net.adapter.SingleRoleAdapter;
 import com.powerge.wise.powerge.operationProjo.net.net.RequestTask;
@@ -17,7 +18,6 @@ import com.powerge.wise.powerge.operationProjo.net.view.mview.LoadingView;
 import com.powerge.wise.powerge.operationProjo.net.view.mview.MyTitle;
 import com.powerge.wise.powerge.operationProjo.net.view.mview.SeachView;
 import com.powerge.wise.powerge.operationProjo.net.view.mview.WorkOrderDataManager;
-import com.wisesignsoft.OperationManagement.R;
 
 import java.util.ArrayList;
 import java.util.List;

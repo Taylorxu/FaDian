@@ -8,9 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.powerge.wise.powerge.R;
 import com.powerge.wise.powerge.operationProjo.net.ui.activity.SelectAccountActivity;
 import com.powerge.wise.powerge.operationProjo.net.ui.activity.SelectAccountActivity4;
-import com.wisesignsoft.OperationManagement.R;
 
 import java.util.List;
 import java.util.Map;

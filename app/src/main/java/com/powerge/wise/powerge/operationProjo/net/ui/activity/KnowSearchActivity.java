@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.powerge.wise.powerge.R;
 import com.powerge.wise.powerge.operationProjo.net.BaseActivity;
 import com.powerge.wise.powerge.operationProjo.net.adapter.KnowSearchAdapter;
 import com.powerge.wise.powerge.operationProjo.net.db.MySharedpreferences;
@@ -22,7 +23,6 @@ import com.powerge.wise.powerge.operationProjo.net.view.mview.LoadingView;
 import com.powerge.wise.powerge.operationProjo.net.view.mview.MyTitle;
 import com.powerge.wise.powerge.operationProjo.net.view.mview.RefreshRecyclerView;
 import com.powerge.wise.powerge.operationProjo.net.view.mview.SeachView;
-import com.wisesignsoft.OperationManagement.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -122,7 +122,7 @@ public class KnowSearchActivity extends BaseActivity implements SwipeRefreshLayo
         SwipeRefreshUtil.setConfig(srl_know_search, this);
         SwipeRefreshUtil.setRecyclerConfig(rrv_know_search, this, this);
         /*设置空页面*/
-        ev_know_search.setData(R.mipmap.home, getResources().getString(R.string.empty_text));
+        ev_know_search.setData(R.mipmap.gap, getResources().getString(R.string.empty_text));
         ev_know_search.setOnRefreshListener(listener);
         /*设置适配器*/
         KnowSearchAdapter adapter = new KnowSearchAdapter(this, datas);

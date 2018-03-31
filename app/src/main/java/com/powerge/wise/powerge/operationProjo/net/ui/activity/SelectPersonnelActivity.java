@@ -2,10 +2,12 @@ package com.powerge.wise.powerge.operationProjo.net.ui.activity;
 
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+
+import com.powerge.wise.powerge.R;
 import com.powerge.wise.powerge.operationProjo.net.BaseActivity;
 import com.powerge.wise.powerge.operationProjo.net.view.mview.MyTitle;
 import com.powerge.wise.powerge.operationProjo.net.view.mview.SeachView;
-import com.wisesignsoft.OperationManagement.R;
+
 
 
 

@@ -6,11 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.powerge.wise.powerge.R;
 import com.powerge.wise.powerge.operationProjo.net.net.response.FindAllDeptTreeResponse;
 import com.powerge.wise.powerge.operationProjo.net.ui.activity.AllDeptTreeActivity;
 import com.powerge.wise.powerge.operationProjo.net.view.TempTreeSelectionDataManager;
 import com.powerge.wise.powerge.operationProjo.net.view.mview.NextView;
-import com.wisesignsoft.OperationManagement.R;
 
 import java.util.List;
 

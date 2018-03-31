@@ -14,7 +14,8 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.wisesignsoft.OperationManagement.R;
+import com.powerge.wise.powerge.R;
+
 
 /**
  * Created by ycs on 2016/11/24.
@@ -37,12 +38,12 @@ public class SeachView extends RelativeLayout implements View.OnClickListener, T
 
     private void init(Context context) {
         View view = LayoutInflater.from(context).inflate(R.layout.seach_view, this, true);
-        ll_search_view_all = (RelativeLayout) view.findViewById(R.id.ll_search_view_all);
-        rl_search = (RelativeLayout) view.findViewById(R.id.rl_search_view);
-        ll_search = (LinearLayout) view.findViewById(R.id.ll_search_view);
-        et_search = (EditText) view.findViewById(R.id.et_search_view);
-        tv_cancel = (TextView) view.findViewById(R.id.tv_cancel);
-        tv_test = (TextView) view.findViewById(R.id.tv_test);
+        ll_search_view_all = view.findViewById(R.id.ll_search_view_all);
+        rl_search = view.findViewById(R.id.rl_search_view);
+        ll_search = view.findViewById(R.id.ll_search_view);
+        et_search = view.findViewById(R.id.et_search_view);
+        tv_cancel = view.findViewById(R.id.tv_cancel);
+        tv_test = view.findViewById(R.id.tv_test);
 
         rl_search.setVisibility(VISIBLE);
         ll_search.setVisibility(GONE);

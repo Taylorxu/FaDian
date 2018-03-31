@@ -95,7 +95,7 @@ public class IssuseWorkingFragment extends Fragment implements SwipeRefreshLayou
         SwipeRefreshUtil.setConfig(binding.srlSolved, this);
         SwipeRefreshUtil.setRecyclerConfig(binding.rvSolved, getContext(), this);
          /*设置空页面*/
-        binding.evSolved.setData(com.wisesignsoft.OperationManagement.R.mipmap.home, getResources().getString(com.wisesignsoft.OperationManagement.R.string.empty_text));
+        binding.evSolved.setData( R.mipmap.home, getResources().getString(R.string.empty_text));
         binding.evSolved.setOnRefreshListener(listener);
         /*设置适配器*/
         SovledAdapter adapter = new SovledAdapter(getContext(), datas);

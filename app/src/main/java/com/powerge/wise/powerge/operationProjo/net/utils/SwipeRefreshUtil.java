@@ -4,8 +4,9 @@ import android.content.Context;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 
+import com.powerge.wise.powerge.R;
 import com.powerge.wise.powerge.operationProjo.net.view.mview.RefreshRecyclerView;
-import com.wisesignsoft.OperationManagement.R;
+
 
 
 

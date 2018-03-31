@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.powerge.wise.powerge.R;
 import com.powerge.wise.powerge.operationProjo.net.adapter.MultRoleChooseViewAdapter;
 import com.powerge.wise.powerge.operationProjo.net.bean.GroupBean;
 import com.powerge.wise.powerge.operationProjo.net.bean.WorkOrder;
@@ -17,7 +18,6 @@ import com.powerge.wise.powerge.operationProjo.net.net.request.RequestRole;
 import com.powerge.wise.powerge.operationProjo.net.net.response.FindRoleByGroupIdResponse;
 import com.powerge.wise.powerge.operationProjo.net.ui.activity.MultRoleChooseActivity;
 import com.powerge.wise.powerge.operationProjo.net.view.mview.WorkOrderDataManager;
-import com.wisesignsoft.OperationManagement.R;
 
 import java.util.ArrayList;
 import java.util.List;

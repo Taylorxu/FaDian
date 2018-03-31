@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.powerge.wise.powerge.R;
 import com.powerge.wise.powerge.operationProjo.net.BaseActivity;
 import com.powerge.wise.powerge.operationProjo.net.adapter.SelectAccountAdapter2;
 import com.powerge.wise.powerge.operationProjo.net.bean.ContractInfoFindParamBean;
@@ -28,7 +29,6 @@ import com.powerge.wise.powerge.operationProjo.net.view.mview.MyTitle;
 import com.powerge.wise.powerge.operationProjo.net.view.mview.RefreshRecyclerView;
 import com.powerge.wise.powerge.operationProjo.net.view.mview.SeachView;
 import com.powerge.wise.powerge.operationProjo.net.view.mview.WorkOrderDataManager;
-import com.wisesignsoft.OperationManagement.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -143,7 +143,7 @@ public class SelectAccountActivity2 extends BaseActivity implements RefreshRecyc
         SwipeRefreshUtil.setConfig(srl_select_account, this);
         SwipeRefreshUtil.setRecyclerConfig(rrv_select_account, this, this);
         /*设置空页面*/
-        ev_select_account.setData(R.mipmap.home, getResources().getString(R.string.empty_text));
+        ev_select_account.setData(R.mipmap.gap, getResources().getString(R.string.empty_text));
         ev_select_account.setOnRefreshListener(listener);
         /*设置适配器*/
         SelectAccountAdapter2 adapter = new SelectAccountAdapter2(this, datas);

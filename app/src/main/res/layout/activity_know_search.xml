@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_know_search"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+    <com.powerge.wise.powerge.operationProjo.net.view.mview.MyTitle
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/mt_know_search"/>
+    <com.powerge.wise.powerge.operationProjo.net.view.mview.SeachView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/sv_know_search"/>
+    <RelativeLayout
+        android:paddingLeft="12dp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/home_line"/>
+        <TextView
+            android:layout_centerVertical="true"
+            android:id="@+id/tv_know_search"
+            android:textColor="@color/c5"
+            android:textSize="14sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_alignParentBottom="true"
+            android:background="@color/home_line"/>
+    </RelativeLayout>
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/srl_know_search"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <com.powerge.wise.powerge.operationProjo.net.view.mview.RefreshRecyclerView
+            android:id="@+id/rrv_know_search"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </android.support.v4.widget.SwipeRefreshLayout>
+    <com.powerge.wise.powerge.operationProjo.net.view.mview.EmptyView
+        android:id="@+id/ev_know_search"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</LinearLayout>

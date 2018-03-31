@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.google.gson.Gson;
+import com.powerge.wise.powerge.R;
 import com.powerge.wise.powerge.operationProjo.net.bean.ButtonModel;
 import com.powerge.wise.powerge.operationProjo.net.bean.Section;
 import com.powerge.wise.powerge.operationProjo.net.bean.StractgyBean;
@@ -20,7 +21,6 @@ import com.powerge.wise.powerge.operationProjo.net.ui.activity.WorkOrderSolvedUs
 import com.powerge.wise.powerge.operationProjo.net.ui.activity.WorkOrderSolvedUserActivity2;
 import com.powerge.wise.powerge.operationProjo.net.utils.ToastUtil;
 import com.powerge.wise.powerge.operationProjo.net.view.mview.WorkOrderDataManager;
-import com.wisesignsoft.OperationManagement.R;
 
 import java.util.ArrayList;
 import java.util.List;

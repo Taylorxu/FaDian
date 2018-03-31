@@ -9,7 +9,8 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.wisesignsoft.OperationManagement.R;
+import com.powerge.wise.powerge.R;
+
 
 /**
  * Created by ycs on 2016/11/30.
@@ -28,9 +29,9 @@ public class NextView extends RelativeLayout {
 
     private void init(Context context) {
         View view = LayoutInflater.from(context).inflate(R.layout.next_view, this, true);
-        rl_next_view = (RelativeLayout) view.findViewById(R.id.rl_next_view);
-        tv_next_view = (TextView) view.findViewById(R.id.tv_next_view);
-        iv_next_view = (ImageView) view.findViewById(R.id.iv_next_view);
+        rl_next_view = view.findViewById(R.id.rl_next_view);
+        tv_next_view = view.findViewById(R.id.tv_next_view);
+        iv_next_view = view.findViewById(R.id.iv_next_view);
     }
 
     public void setData(String title) {

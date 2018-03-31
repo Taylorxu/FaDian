@@ -60,9 +60,6 @@
         <!-- 产品项目operation -->
 
         <activity
-            android:name=".operationProjo.net.ui.login.BootActivity"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".operationProjo.net.ui.activity.NewWorkOrderActivity"
             android:screenOrientation="portrait" />
         <activity

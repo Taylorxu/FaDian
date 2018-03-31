@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <com.wisesignsoft.OperationManagement.view.mview.MyTitle
+    <com.powerge.wise.powerge.operationProjo.net.view.mview.MyTitle
         android:id="@+id/mt_new_template2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
@@ -14,7 +14,7 @@
         <!--android:layout_width="match_parent"-->
         <!--android:layout_height="60dp">-->
 
-        <!--<com.wisesignsoft.OperationManagement.view.mview.KeyValueView-->
+        <!--<com.powerge.wise.powerge.operationProjo.net.view.mview.KeyValueView-->
             <!--android:id="@+id/kvv_new_template2"-->
             <!--android:layout_width="wrap_content"-->
             <!--android:layout_height="wrap_content"-->
@@ -41,7 +41,7 @@
         <!--android:layout_width="match_parent"-->
         <!--android:layout_height="20dp"-->
         <!--android:background="@color/c9"/>-->
-    <com.wisesignsoft.OperationManagement.view.mview.WorkOrderDetailView
+    <com.powerge.wise.powerge.operationProjo.net.view.mview.WorkOrderDetailView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"

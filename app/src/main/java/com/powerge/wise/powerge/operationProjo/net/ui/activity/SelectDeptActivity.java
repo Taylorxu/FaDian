@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
+import com.powerge.wise.powerge.R;
 import com.powerge.wise.powerge.operationProjo.net.BaseActivity;
 import com.powerge.wise.powerge.operationProjo.net.adapter.ContractFragmentAdapter;
 import com.powerge.wise.powerge.operationProjo.net.net.response.FindAllDeptTreeResponse;
@@ -14,7 +15,6 @@ import com.powerge.wise.powerge.operationProjo.net.utils.DividerItemDecoration;
 import com.powerge.wise.powerge.operationProjo.net.view.mview.EmptyView;
 import com.powerge.wise.powerge.operationProjo.net.view.mview.MyTitle;
 import com.powerge.wise.powerge.operationProjo.net.view.mview.SeachView;
-import com.wisesignsoft.OperationManagement.R;
 
 import java.io.Serializable;
 import java.util.List;

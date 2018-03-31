@@ -109,4 +109,37 @@
     <string name="scan_title">扫描设备信息</string>
 
     <string name="string_data_empty">暂无数据</string>
+
+
+    //itil part
+    <string name="net_url">设置服务器地址</string>
+    <string name="solving">待处理</string>
+    <string name="my_solving">我的待处理</string>
+    <string name="solved">已处理</string>
+    <string name="re">返回</string>
+    <string name="server">请输入服务器地址</string>
+    <string name="save">保存</string>
+    <string name="server_title">设置服务器地址</string>
+    <string name="toast_server">服务器地址不能为空</string>
+    <string name="toast_server_save">保存成功</string>
+    <string name="exit_main">再按一次后退键退出程序</string>
+    <string name="order_type">类型</string>
+    <string name="template">从模板中选择</string>
+    <string name="next">下一步</string>
+    <string name="search_view">请输入服务报告、项目或客户的名称</string>
+    <string name="service_report">服务报告</string>
+    <string name="doing">进行中</string>
+    <string name="finished">已完成</string>
+    <string name="select_person">选择人员</string>
+    <string name="loading">正在加载中...</string>
+    <string name="cancel">取消</string>
+    <string name="empty_text">没有相关结果</string>
+    <string name="event_classification">事件分类</string>
+    <string name="order_solved_title">工单处理</string>
+    <string name="sure">确定</string>
+    <string name="contract_info">合同信息</string>
+    <string name="network_unstable">网络不稳定</string>
+    <string name="switch_camera">切换摄像头</string>
+    <string name="capture_image">抓取图片</string>
+
 </resources>

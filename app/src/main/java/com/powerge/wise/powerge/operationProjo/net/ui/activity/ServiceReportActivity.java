@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.powerge.wise.powerge.R;
 import com.powerge.wise.powerge.operationProjo.net.BaseActivity;
 import com.powerge.wise.powerge.operationProjo.net.adapter.ServiceReportAdapter;
 import com.powerge.wise.powerge.operationProjo.net.bean.ContractInfoFindParamBean;
@@ -26,7 +27,6 @@ import com.powerge.wise.powerge.operationProjo.net.view.mview.LoadingView;
 import com.powerge.wise.powerge.operationProjo.net.view.mview.MyTitle;
 import com.powerge.wise.powerge.operationProjo.net.view.mview.RefreshRecyclerView;
 import com.powerge.wise.powerge.operationProjo.net.view.mview.SeachView;
-import com.wisesignsoft.OperationManagement.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -113,7 +113,7 @@ public class ServiceReportActivity extends BaseActivity implements SwipeRefreshL
         SwipeRefreshUtil.setConfig(srl_service_report, this);
         SwipeRefreshUtil.setRecyclerConfig(rrv_service_report, this, this);
         /*设置空页面*/
-        ev_service_report.setData(R.mipmap.home, getResources().getString(R.string.empty_text));
+        ev_service_report.setData(R.mipmap.gap, getResources().getString(R.string.empty_text));
         ev_service_report.setOnRefreshListener(listener);
         /*设置适配器*/
         ServiceReportAdapter adapter = new ServiceReportAdapter(this, datas);

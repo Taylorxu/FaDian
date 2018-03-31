@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
 
+import com.powerge.wise.powerge.R;
 import com.powerge.wise.powerge.operationProjo.net.bean.WorkOrder;
 import com.powerge.wise.powerge.operationProjo.net.net.RequestTask;
 import com.powerge.wise.powerge.operationProjo.net.net.request.RequestDept;
@@ -13,7 +14,6 @@ import com.powerge.wise.powerge.operationProjo.net.net.response.FindAllDeptTreeR
 import com.powerge.wise.powerge.operationProjo.net.net.response.FindDeptByIdsResponse;
 import com.powerge.wise.powerge.operationProjo.net.ui.activity.AllDeptTreeActivity;
 import com.powerge.wise.powerge.operationProjo.net.view.mview.BaseView;
-import com.wisesignsoft.OperationManagement.R;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
+import com.powerge.wise.powerge.R;
 import com.powerge.wise.powerge.operationProjo.net.BaseActivity;
 import com.powerge.wise.powerge.operationProjo.net.bean.ColumnsJsonBean;
 import com.powerge.wise.powerge.operationProjo.net.utils.ToastUtil;
@@ -18,7 +19,6 @@ import com.powerge.wise.powerge.operationProjo.net.view.TextFieldView;
 import com.powerge.wise.powerge.operationProjo.net.view.TimeView;
 import com.powerge.wise.powerge.operationProjo.net.view.mview.MyTitle;
 import com.powerge.wise.powerge.operationProjo.net.view.mview.WorkOrderDataManager;
-import com.wisesignsoft.OperationManagement.R;
 
 import java.io.Serializable;
 import java.util.ArrayList;

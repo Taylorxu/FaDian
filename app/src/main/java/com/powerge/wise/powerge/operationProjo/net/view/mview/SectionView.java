@@ -8,7 +8,8 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.wisesignsoft.OperationManagement.R;
+import com.powerge.wise.powerge.R;
+
 
 /**
  * Created by ycs on 2016/12/1.
@@ -29,9 +30,9 @@ public class SectionView extends RelativeLayout implements View.OnClickListener 
 
     private void init(Context context) {
         View view = LayoutInflater.from(context).inflate(R.layout.section_view, this, true);
-        rl_section_view = (RelativeLayout) view.findViewById(R.id.rl_top);
-        tv_section_view = (TextView) view.findViewById(R.id.tv_section_view);
-        ll_section_view = (LinearLayout) view.findViewById(R.id.ll_section_view);
+        rl_section_view = view.findViewById(R.id.rl_top);
+        tv_section_view = view.findViewById(R.id.tv_section_view);
+        ll_section_view = view.findViewById(R.id.ll_section_view);
 
         rl_section_view.setOnClickListener(this);
     }

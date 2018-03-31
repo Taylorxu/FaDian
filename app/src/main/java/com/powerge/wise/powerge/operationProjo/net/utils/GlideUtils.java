@@ -17,7 +17,6 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
 import com.bumptech.glide.load.resource.bitmap.BitmapTransformation;
 import com.bumptech.glide.request.target.BitmapImageViewTarget;
-import com.wisesignsoft.OperationManagement.R;
 
 
 /**
@@ -61,8 +60,7 @@ public class GlideUtils {
      */
     public static void loadNetPicture(RequestManager manager, ImageView imageView, String url) {
         manager.load(url)
-                .placeholder(R.mipmap.contact)
-                .error(R.mipmap.contact)
+
                 .crossFade()
                 .skipMemoryCache(true)
                 .diskCacheStrategy(DiskCacheStrategy.SOURCE)

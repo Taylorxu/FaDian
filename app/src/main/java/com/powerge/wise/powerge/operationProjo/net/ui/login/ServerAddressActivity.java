@@ -6,12 +6,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.powerge.wise.powerge.R;
 import com.powerge.wise.powerge.operationProjo.net.BaseActivity;
 import com.powerge.wise.powerge.operationProjo.net.Protocol;
 import com.powerge.wise.powerge.operationProjo.net.db.MySharedpreferences;
 import com.powerge.wise.powerge.operationProjo.net.utils.ToastUtil;
 import com.powerge.wise.powerge.operationProjo.net.view.mview.MyTitle;
-import com.wisesignsoft.OperationManagement.R;
+
 
 
 

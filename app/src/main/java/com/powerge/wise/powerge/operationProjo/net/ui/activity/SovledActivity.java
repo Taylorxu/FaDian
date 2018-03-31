@@ -7,6 +7,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.powerge.wise.powerge.R;
 import com.powerge.wise.powerge.operationProjo.net.BaseActivity;
 import com.powerge.wise.powerge.operationProjo.net.adapter.SovledAdapter;
 import com.powerge.wise.powerge.operationProjo.net.db.MySharedpreferences;
@@ -19,7 +20,6 @@ import com.powerge.wise.powerge.operationProjo.net.view.mview.LoadingView;
 import com.powerge.wise.powerge.operationProjo.net.view.mview.MyTitle;
 import com.powerge.wise.powerge.operationProjo.net.view.mview.RefreshRecyclerView;
 import com.powerge.wise.powerge.operationProjo.net.view.mview.SeachView;
-import com.wisesignsoft.OperationManagement.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -98,7 +98,7 @@ public class SovledActivity extends BaseActivity implements View.OnClickListener
         SwipeRefreshUtil.setConfig(srl_solved, this);
         SwipeRefreshUtil.setRecyclerConfig(rv_solved, this, this);
          /*设置空页面*/
-        ev_solved.setData(R.mipmap.home, getResources().getString(R.string.empty_text));
+        ev_solved.setData(R.mipmap.gap, getResources().getString(R.string.empty_text));
         ev_solved.setOnRefreshListener(listener);
         /*设置适配器*/
         SovledAdapter adapter = new SovledAdapter(this, datas);

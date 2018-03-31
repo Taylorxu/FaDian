@@ -8,13 +8,13 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.powerge.wise.powerge.R;
 import com.powerge.wise.powerge.operationProjo.net.bean.GroupBean;
 import com.powerge.wise.powerge.operationProjo.net.bean.WorkOrder;
 import com.powerge.wise.powerge.operationProjo.net.net.RequestTask;
 import com.powerge.wise.powerge.operationProjo.net.net.request.RequestRole;
 import com.powerge.wise.powerge.operationProjo.net.net.response.FindRoleByGroupIdResponse;
 import com.powerge.wise.powerge.operationProjo.net.ui.activity.SingleRoleChooseActivity;
-import com.wisesignsoft.OperationManagement.R;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -141,7 +141,7 @@ public class MyTemplateActivity extends BaseActivity implements SwipeRefreshLayo
         SwipeRefreshUtil.setConfig(srl_my_template, this);
         SwipeRefreshUtil.setRecyclerConfig(rrv_my_template, this, this);
         /*设置空页面*/
-        ev_my_template.setData(R.mipmap.home, getResources().getString(R.string.empty_text));
+        ev_my_template.setData(R.mipmap.gap, getResources().getString(R.string.empty_text));
         ev_my_template.setOnRefreshListener(listener);
         /*设置适配器*/
         MyTemplateAdapter adapter = new MyTemplateAdapter(this, datas);
