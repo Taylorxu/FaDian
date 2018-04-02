@@ -3,6 +3,7 @@ package com.powerge.wise.powerge.config.soap;
 
 import com.powerge.wise.basestone.heart.network.NetConfig;
 import com.powerge.wise.basestone.heart.network.ResultModelData;
+import com.powerge.wise.basestone.heart.util.LogUtils;
 import com.powerge.wise.powerge.bean.DianLiangBean;
 import com.powerge.wise.powerge.bean.FuHeHourDataBean;
 import com.powerge.wise.powerge.bean.FuHeYTChartLineBean;
@@ -299,6 +300,7 @@ public interface ApiService {
         }
 
         private static Retrofit getRetrofit() {
+            LogUtils.e("BaseUrl.getHost()" + BaseUrl.getHost());
             return new Retrofit.Builder()
                     .baseUrl(BaseUrl.getHost())
                     .client(NetConfig.getInstance().getClient())

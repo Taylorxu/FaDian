@@ -81,6 +81,12 @@ public class XunJianMagActivity extends AppCompatActivity implements XunJianDate
     private void initView() {
         binding.dateContent.setAdapter(new XunJianDatePagerAdapter(getSupportFragmentManager()));
         binding.xunJianTabL.setupWithViewPager(binding.dateContent);
+        binding.xunJianTabL.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+
+            }
+        });
         requestPermissions();
         initContentSign();
     }
@@ -148,7 +154,7 @@ public class XunJianMagActivity extends AppCompatActivity implements XunJianDate
 
                     @Override
                     public void onNext(List<XunJianSignBean> xunJianSignBeans) {
-                        if (xunJianSignBeans.size() > 0) adapter.setList(xunJianSignBeans);
+                         adapter.setList(xunJianSignBeans);
                     }
                 });
 

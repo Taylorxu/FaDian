@@ -13,13 +13,16 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.powerge.wise.basestone.heart.util.DensityUtil;
+import com.powerge.wise.basestone.heart.util.LogUtils;
 import com.powerge.wise.powerge.R;
 import com.powerge.wise.powerge.databinding.FragmentXunJianDateBinding;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -34,9 +37,22 @@ public class XunJianDateFragment extends Fragment implements RadioGroup.OnChecke
     private int dateType;
     private int termType;
     private String datep;
+    private boolean shouldCheck;
+    List<Integer> possition = new ArrayList<>();//记录被渲染fragment的位置
 
     public XunJianDateFragment() {
 
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser) {
+            shouldCheck = true;
+            checkRadioBtn();
+        } else {
+            shouldCheck = false;
+        }
     }
 
     public static XunJianDateFragment newInstance(int sectionNumber) {
@@ -56,15 +72,31 @@ public class XunJianDateFragment extends Fragment implements RadioGroup.OnChecke
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_xun_jian_date, container, false);
         dateType = getArguments().getInt(ARG_SECTION_NUMBER, 0);
         binding.monthGroup.setOnCheckedChangeListener(this);
-        createMonthGroup();
+        checkRadioBtn();
         return binding.getRoot();
     }
 
-    String week[] = new String[]{"上一周", "本周", "下一周"};
+    public void checkRadioBtn() {
+        LogUtils.e("type=" + dateType + "--------should" + shouldCheck);
+        if (shouldCheck && null != binding) {
+            createMonthGroup();
+
+            for (int l = 0; l < binding.monthGroup.getChildCount(); l++) {
+                if (l == (binding.monthGroup.getChildCount() - 1) / 2) {
+                    RadioButton radioButton = (RadioButton) binding.monthGroup.getChildAt(l);
+                    radioButton.setChecked(true);
+                }
+            }
+        }
+    }
+
+
 
     //初始化 月,周，日份 buttion 列表
     @SuppressLint("ResourceType")
     private void createMonthGroup() {
+        if(binding.monthGroup.getChildCount()>0)binding.monthGroup.removeAllViews();
+        String [] week = new String[]{"上一周", "本周", "下一周"};
         int leng = 7, radioBtWidth = 60;
         if (dateType == 0) {
             radioBtWidth = 90;
@@ -87,9 +119,7 @@ public class XunJianDateFragment extends Fragment implements RadioGroup.OnChecke
             radioButton.setBackgroundResource(R.drawable.selector_primary_white_btn_bg_border);
             radioButton.setButtonDrawable(android.R.color.transparent);//隐藏单选圆形按钮
             radioButton.setTextSize(14f);
-            if (i == 3 || i == 1) {
-                radioButton.setChecked(true);
-            }
+
             if (leng > 3) {
                 radioButton.setText(dateList.get(i));
                 radioButton.setTag(dateList.get(i));
@@ -136,6 +166,9 @@ public class XunJianDateFragment extends Fragment implements RadioGroup.OnChecke
     }
 
     public void createDay(int dateType) {
+        if (dateList.size() > 0) {
+            dateList.clear();
+        }
         Calendar c = Calendar.getInstance();
         int current_day, current_month, current_year;
         String mYear, mMonth, mDay;
@@ -206,25 +239,27 @@ public class XunJianDateFragment extends Fragment implements RadioGroup.OnChecke
 
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
-        if (dateType == 1) {//周期 为周
-            termType = 2;
-            datep = getfirstDayOfWeek(checkedId);
-        } else if (dateType == 0 || dateType == 2) {
-            String dateChecked = dateList.get(checkedId);
-            if (dateChecked.indexOf("年") < 0) {//日
-                dateChecked = Calendar.getInstance().get(Calendar.YEAR) + "年" + dateChecked;
-            } else if (dateChecked.indexOf("日") < 0) {
-                dateChecked += Calendar.getInstance().get(Calendar.DATE) + "日";
+        if (shouldCheck) {//可见的dateType 作为参数
+            if (dateType == 1) {//周期 为周
+                termType = 2;
+                datep = getfirstDayOfWeek(checkedId);
+            } else if (dateType == 0 || dateType == 2) {
+                String dateChecked = dateList.get(checkedId);
+                if (dateChecked.indexOf("年") < 0) {//日
+                    dateChecked = Calendar.getInstance().get(Calendar.YEAR) + "年" + dateChecked;
+                } else if (dateChecked.indexOf("日") < 0) {
+                    dateChecked += Calendar.getInstance().get(Calendar.DATE) + "日";
+                }
+                dateChecked = dateChecked.replace("年", "-").replace("月", "-").replace("日", "");
+                datep = dateChecked;
+                if (dateType == 0) {
+                    termType = 3;//月份
+                } else if (dateType == 2) {
+                    termType = 1;//日
+                }
             }
-            dateChecked = dateChecked.replace("年", "-").replace("月", "-").replace("日", "");
-            datep = dateChecked;
-            if (dateType == 0) {
-                termType = 3;
-            } else if (dateType == 0) {
-                termType = 1;
-            }
+            onButtonPressed();
         }
-        onButtonPressed();
     }
 
     public interface OnDateCehckedListener {
