@@ -123,11 +123,18 @@ public class SheBeiInfoActivity extends AppCompatActivity implements SwipeRefres
 
                     @Override
                     public void onNext(ResultModelData.ReturnValueBean<SheBeiRootBean> returnValueBean) {
+                        if (returnValueBean.getResultList().size() == 0) return;
                         if (returnValueBean.getCurrentPage().equals("1")) {
                             adapter.setList(returnValueBean.getResultList());
                         } else {
                             adapter.addItems(returnValueBean.getResultList());
                         }
+                        if (returnValueBean.getResultList().size() < 10) {
+                            binding.contentSheBei.setLoadNoMore();
+                        } else {
+                            binding.contentSheBei.setLoadCompleted();
+                        }
+
                         binding.refreshLayout.setRefreshing(false);
                         currentPage = Integer.parseInt(returnValueBean.getCurrentPage());
                     }

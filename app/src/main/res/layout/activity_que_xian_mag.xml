@@ -51,7 +51,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:text="四月第三周"
+                    android:text=""
                     android:textColor="@color/color_673"
                     android:textSize="15sp" />
 

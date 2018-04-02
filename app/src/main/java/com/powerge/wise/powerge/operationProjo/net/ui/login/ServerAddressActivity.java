@@ -12,8 +12,7 @@ import com.powerge.wise.powerge.operationProjo.net.Protocol;
 import com.powerge.wise.powerge.operationProjo.net.db.MySharedpreferences;
 import com.powerge.wise.powerge.operationProjo.net.utils.ToastUtil;
 import com.powerge.wise.powerge.operationProjo.net.view.mview.MyTitle;
-
-
+import com.powerge.wise.powerge.otherPages.LoginActivity;
 
 
 public class ServerAddressActivity extends BaseActivity implements View.OnClickListener {
@@ -53,6 +52,7 @@ public class ServerAddressActivity extends BaseActivity implements View.OnClickL
         }
         MySharedpreferences.putServerString(server_url);
         ToastUtil.toast(this, getResources().getString(R.string.toast_server_save));
+        LoginActivity.start(this);
         finish();
     }
 }

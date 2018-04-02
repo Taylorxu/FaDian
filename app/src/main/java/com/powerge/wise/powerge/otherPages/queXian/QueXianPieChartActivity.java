@@ -6,8 +6,8 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.RelativeSizeSpan;
@@ -22,13 +22,9 @@ import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.powerge.wise.basestone.heart.network.FlatMapResponse;
 import com.powerge.wise.basestone.heart.network.FlatMapTopRes;
-import com.powerge.wise.basestone.heart.network.FlatMapTopResList;
 import com.powerge.wise.basestone.heart.network.ResultModel;
-import com.powerge.wise.basestone.heart.network.ResultModelData;
-import com.powerge.wise.basestone.heart.ui.view.PagingRecyclerView;
 import com.powerge.wise.powerge.R;
 import com.powerge.wise.powerge.bean.QueXianFormBean;
-import com.powerge.wise.powerge.bean.QueXianMagBean;
 import com.powerge.wise.powerge.bean.User;
 import com.powerge.wise.powerge.config.soap.ApiService;
 import com.powerge.wise.powerge.config.soap.request.BaseUrl;
@@ -37,8 +33,9 @@ import com.powerge.wise.powerge.config.soap.request.RequestEnvelope;
 import com.powerge.wise.powerge.databinding.ActivityQueXianPieChartBinding;
 import com.powerge.wise.powerge.helper.EEMsgToastHelper;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Calendar;
 
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -47,9 +44,12 @@ import rx.schedulers.Schedulers;
 public class QueXianPieChartActivity extends AppCompatActivity {
     ActivityQueXianPieChartBinding binding;
     PieChart[] pieCharts;
+    private int[] dateArray;
+    private String dateParam = "";
 
-    public static void start(Context context) {
+    public static void start(Context context, int[] dateParam) {
         Intent starter = new Intent(context, QueXianPieChartActivity.class);
+        starter.putExtra("dateParam", dateParam);
         context.startActivity(starter);
     }
 
@@ -60,11 +60,20 @@ public class QueXianPieChartActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_que_xian_pie_chart);
         pieCharts = new PieChart[]{binding.pieChartJiShi, binding.pieChartEmergency, binding.pieChartUrgency, binding.pieChartNormal};
         binding.title.setText("缺陷报表");
+        dateArray = getIntent().getIntArrayExtra("dateParam");
+        getWeekOfMonth();
         getPieCHartData();
         initView();
 
     }
 
+    public void getWeekOfMonth() {
+        final Calendar calendar = Calendar.getInstance();
+        final SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+        calendar.set(dateArray[0], dateArray[1], dateArray[2]);
+        dateParam = format.format(calendar.getTime());
+        binding.weekOfMonth.setText(dateArray[1]+1 + "月");//calendar.get(WEEK_OF_MONTH)
+    }
 
     private void initView() {
         for (int i = 0; i < pieCharts.length; i++) {
@@ -119,7 +128,7 @@ public class QueXianPieChartActivity extends AppCompatActivity {
         final QueXianFormBean formBean = new QueXianFormBean();
         formBean.setNameSpace(BaseUrl.NAMESPACE_P);
         formBean.setUserName(User.getCurrentUser().getName());
-        formBean.setArg1("03-01");
+        formBean.setArg1(dateParam);
         RequestEnvelope.getRequestEnvelope().setBody(new RequestBody<>(formBean));
 
         ApiService.Creator.get().queryIssueStatisticsMonthly(RequestEnvelope.getRequestEnvelope())
@@ -141,10 +150,10 @@ public class QueXianPieChartActivity extends AppCompatActivity {
 
                     @Override
                     public void onNext(QueXianFormBean queXianFormBeans) {
-                        if(queXianFormBeans!=null){
+                        if (queXianFormBeans != null) {
                             setData(queXianFormBeans);
-                        }else{
-                            Toast.makeText(getBaseContext(),"暂无数据",Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(getBaseContext(), "暂无数据", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });

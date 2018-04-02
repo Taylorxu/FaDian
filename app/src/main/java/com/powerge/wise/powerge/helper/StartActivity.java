@@ -16,7 +16,6 @@ import com.powerge.wise.powerge.otherPages.ZHiZhangLogActivity;
 import com.powerge.wise.powerge.otherPages.huaBao.HuanBaoActivity;
 import com.powerge.wise.powerge.otherPages.issues.IssuesManagerActivity;
 import com.powerge.wise.powerge.otherPages.queXian.QueXianMagActivity;
-import com.powerge.wise.powerge.otherPages.queXian.QueXianPieChartActivity;
 import com.powerge.wise.powerge.otherPages.xunJian.XunJianMagActivity;
 
 import java.util.ArrayList;
@@ -57,7 +56,7 @@ public class StartActivity {
         } else if (where == 9) {
             QueXianMagActivity.start(context);
         } else if (where == 10) {
-            QueXianPieChartActivity.start(context);
+//            QueXianPieChartActivity.start(context);
         } else if (where == 11) {
             XunJianMagActivity.start(context);
         } else if (where == 12) {

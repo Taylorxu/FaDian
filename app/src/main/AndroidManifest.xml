@@ -281,7 +281,8 @@
             android:name=".helper.LoadingWindowActivity"
             android:launchMode="singleTop"
             android:theme="@android:style/Theme.Translucent" />
-        <activity android:name=".otherPages.issues.IssuesManagerActivity"></activity>
+        <activity android:name=".otherPages.issues.IssuesManagerActivity" />
+        <activity android:name=".otherPages.DateSelectActivity"></activity>
     </application>
 
 </manifest>
