@@ -1,6 +1,5 @@
 package com.powerge.wise.powerge.otherPages.xunJian;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.bluetooth.BluetoothAdapter;
@@ -11,13 +10,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.databinding.DataBindingUtil;
-import android.net.Uri;
 import android.os.Build;
-import android.os.Handler;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.view.View;
@@ -28,7 +24,6 @@ import com.powerge.wise.basestone.heart.network.FlatMapTopRes;
 import com.powerge.wise.basestone.heart.network.ResultModel;
 import com.powerge.wise.basestone.heart.ui.XAdapter;
 import com.powerge.wise.basestone.heart.ui.XViewHolder;
-import com.powerge.wise.powerge.BR;
 import com.powerge.wise.powerge.R;
 import com.powerge.wise.powerge.bean.User;
 import com.powerge.wise.powerge.bean.XunJianSignBean;
@@ -39,16 +34,12 @@ import com.powerge.wise.powerge.config.soap.request.RequestEnvelope;
 import com.powerge.wise.powerge.databinding.ActivityXunJianMagBinding;
 import com.powerge.wise.powerge.databinding.ItemXunJianSingListBinding;
 import com.powerge.wise.powerge.helper.EEMsgToastHelper;
-import com.powerge.wise.powerge.helper.LoadingWindowActivity;
-import com.powerge.wise.powerge.otherPages.SheBeiInfoActivity;
-import com.powerge.wise.powerge.zxing.activity.CaptureActivity;
 import com.yanzhenjie.permission.Action;
 import com.yanzhenjie.permission.AndPermission;
 import com.yanzhenjie.permission.Rationale;
 import com.yanzhenjie.permission.RequestExecutor;
 import com.yanzhenjie.permission.SettingService;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -313,6 +304,7 @@ public class XunJianMagActivity extends AppCompatActivity implements XunJianDate
     }
 
     Runnable runnable = new Runnable() {
+        @SuppressLint("NewApi")
         @Override
         public void run() {
             mScanning = false;

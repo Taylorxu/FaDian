@@ -11,7 +11,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 public class JingSaiFragmentAdapter extends FragmentPagerAdapter {
 
     Fragment fragments[] = new Fragment[]{JingSaiPaiMingFragment.newInstance(), new JingSaiDeFenFragment().newInstance()};
-    String title[] = new String[]{"得分排名", "事实得分"};
+    String title[] = new String[]{"得分排名", "实时得分"};
 
     public JingSaiFragmentAdapter(FragmentManager fragmentManager) {
         super(fragmentManager);

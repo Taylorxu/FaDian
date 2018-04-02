@@ -106,10 +106,39 @@ public class XunJianDateFragment extends Fragment implements RadioGroup.OnChecke
 
     LinkedList<String> dateList = new LinkedList<>();
 
+    @SuppressLint("WrongConstant")
+    public String getfirstDayOfWeek(int type) {
+        Calendar c = Calendar.getInstance();
+        c.setFirstDayOfWeek(Calendar.MONDAY);
+        int current_day, current_month, current_year;
+        String mYear, mMonth, mDay;
+        current_year = c.get(Calendar.YEAR);
+        current_day = c.get(Calendar.DAY_OF_WEEK);
+        current_month = c.get(Calendar.MONTH);
+        c.clear();
+        c.set(Calendar.MONTH, current_month);
+        c.set(Calendar.DAY_OF_MONTH, current_day);
+        c.set(Calendar.YEAR, current_year);
+
+        if (type == 2) {//获取下周第一天
+            c.add(Calendar.DATE, +7);
+        } else if (type == 0) {// 上周 的一天
+            c.add(Calendar.DATE, -7);
+        } else {//本周，获取本周第一天
+
+        }
+        mMonth = String.valueOf(c.get(Calendar.MONTH) + 1);// 获取当前月份
+        mDay = String.valueOf(c.get(Calendar.DAY_OF_MONTH));// 获取当前日份的日期号码
+        mYear = String.valueOf(c.get(Calendar.YEAR));// 获取当前年份
+        return mYear + "-" + mMonth + "-" + mDay;
+
+
+    }
+
     public void createDay(int dateType) {
         Calendar c = Calendar.getInstance();
         int current_day, current_month, current_year;
-        String mYear, mMonth, mDay = null;
+        String mYear, mMonth, mDay;
         current_year = c.get(Calendar.YEAR);
         current_day = c.get(Calendar.DATE);
         current_month = c.get(Calendar.MONTH);
@@ -177,7 +206,10 @@ public class XunJianDateFragment extends Fragment implements RadioGroup.OnChecke
 
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
-        if (dateType == 0 || dateType == 2) {
+        if (dateType == 1) {//周期 为周
+            termType = 2;
+            datep = getfirstDayOfWeek(checkedId);
+        } else if (dateType == 0 || dateType == 2) {
             String dateChecked = dateList.get(checkedId);
             if (dateChecked.indexOf("年") < 0) {//日
                 dateChecked = Calendar.getInstance().get(Calendar.YEAR) + "年" + dateChecked;
@@ -188,13 +220,11 @@ public class XunJianDateFragment extends Fragment implements RadioGroup.OnChecke
             datep = dateChecked;
             if (dateType == 0) {
                 termType = 3;
-            } else if (dateType == 1) {
-                termType = 2;
             } else if (dateType == 0) {
                 termType = 1;
             }
-            onButtonPressed();
         }
+        onButtonPressed();
     }
 
     public interface OnDateCehckedListener {
