@@ -69,10 +69,10 @@ public class QueXianPieChartActivity extends AppCompatActivity {
 
     public void getWeekOfMonth() {
         final Calendar calendar = Calendar.getInstance();
-        final SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd");
+        final SimpleDateFormat format = new SimpleDateFormat("yyyyMM");
         calendar.set(dateArray[0], dateArray[1], dateArray[2]);
         dateParam = format.format(calendar.getTime());
-        binding.weekOfMonth.setText(dateArray[1]+1 + "月");//calendar.get(WEEK_OF_MONTH)
+        binding.weekOfMonth.setText(dateArray[1] + 1 + "月");//calendar.get(WEEK_OF_MONTH)
     }
 
     private void initView() {
@@ -163,7 +163,7 @@ public class QueXianPieChartActivity extends AppCompatActivity {
 
         for (int i = 0; i < pieCharts.length; i++) {
             ArrayList<PieEntry> entries = new ArrayList<>();
-            entries.add(new PieEntry(QueXianFormBean.getPieChartData(i)));
+            entries.add(new PieEntry(data.getPieChartData(i)));
 
             PieDataSet dataSet = new PieDataSet(entries, "PieData" + i);
             dataSet.setDrawIcons(false);
