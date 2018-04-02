@@ -21,6 +21,10 @@ public class EEMsgToastHelper {
     public void selectWitch(String exception) {
         if (exception.indexOf("Failed to connect") > -1) {
             toastMesg("服务连接失败");
+        } else if (exception.indexOf("timeout") > -1) {
+            toastMesg("连接超时");
+        }else if (exception.indexOf("Unable to resolve host")>-1){
+            toastMesg("未发现网络地址");
         } else {
             toastMesg(exception);
         }

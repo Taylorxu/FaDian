@@ -1,9 +1,5 @@
 package com.powerge.wise.powerge.bean;
 
-import com.powerge.wise.basestone.heart.network.Notification;
-import com.powerge.wise.basestone.heart.util.RxBus;
-import com.powerge.wise.powerge.config.soap.beans.LoginBean;
-
 import io.realm.Realm;
 import io.realm.RealmObject;
 import io.realm.RealmResults;
@@ -19,7 +15,9 @@ public class User extends RealmObject {
     public int id;
     public String account;
     public String name;
+    public String userName;
     public boolean isLogin;
+    public String position;
 
     public int getId() {
         return id;
@@ -51,6 +49,22 @@ public class User extends RealmObject {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
     }
 
     public static User getCurrentUser() {

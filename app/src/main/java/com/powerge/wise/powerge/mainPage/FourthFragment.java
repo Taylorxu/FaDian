@@ -40,6 +40,7 @@ public class FourthFragment extends Fragment implements View.OnClickListener {
         }
         binding.title.setText(getResources().getString(R.string.title_mine));
         binding.btnLogOut.setOnClickListener(this);
+        if(null!=User.getCurrentUser())binding.setUser(User.getCurrentUser());
         return binding.getRoot();
     }
 

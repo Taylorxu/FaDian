@@ -175,6 +175,7 @@ public class QueXianMagActivity extends AppCompatActivity implements View.OnClic
         popBinding.btnBack.setOnClickListener(new PopClick());
         popBinding.btnDone.setOnClickListener(new PopClick());
 
+        window = new PopupWindow(popBinding.getRoot(), LinearLayout.LayoutParams.MATCH_PARENT, 900);
     }
 
     /**
@@ -196,17 +197,13 @@ public class QueXianMagActivity extends AppCompatActivity implements View.OnClic
      */
     private void showPopDateSelector() {
 
-        window = new PopupWindow(popBinding.getRoot(), LinearLayout.LayoutParams.MATCH_PARENT, 900);
         window.setAnimationStyle(R.style.popup_window_anim);
         window.setTouchable(true);
         window.setOutsideTouchable(true);
-
-
         window.setAnimationStyle(R.style.popup_window_anim);
         window.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#F8F8F8")));
         window.setFocusable(false);
         window.setOutsideTouchable(false);
-        window.update();
         window.showAtLocation(popBinding.getRoot(), Gravity.BOTTOM, 0, 0);
 
     }

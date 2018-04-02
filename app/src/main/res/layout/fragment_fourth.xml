@@ -1,5 +1,12 @@
 <layout>
 
+    <data>
+
+        <variable
+            name="user"
+            type="com.powerge.wise.powerge.bean.User" />
+    </data>
+
     <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
@@ -55,7 +62,9 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical|right"
                         android:textColorHint="@color/text_color_jizu_name"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"
+                        android:text="@{user.userName}"
+                        />
 
                 </FrameLayout>
             </LinearLayout>
@@ -139,7 +148,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical|right"
                         android:textColorHint="@color/text_color_jizu_name"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"
+                        android:text="@{user.position}"/>
 
                 </FrameLayout>
             </LinearLayout>
@@ -152,9 +162,9 @@
         </LinearLayout>
 
         <Button
+            android:id="@+id/btn_log_out"
             android:layout_width="290dp"
             android:layout_height="45dp"
-            android:id="@+id/btn_log_out"
             android:layout_gravity="bottom|center_horizontal"
             android:layout_marginBottom="122dp"
             android:text="退出登录"

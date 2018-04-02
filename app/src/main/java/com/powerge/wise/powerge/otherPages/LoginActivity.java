@@ -114,6 +114,8 @@ public class LoginActivity extends AppCompatActivity {
                         User user = new User();
                         user.setAccount(loginBean.getUserId());//返回的userID {"total":0,"userId":"2967e352-8749-4c3a-b377-008ae1f0395d"}
                         user.setName(loginBinding.account.getText().toString());
+                        user.setUserName(loginBean.getUserName());
+                        user.setPosition(loginBean.getPosition());
                         user.setLogin(true);
                         User.login(user);
                         MySharedpreferences.putUser(user);
