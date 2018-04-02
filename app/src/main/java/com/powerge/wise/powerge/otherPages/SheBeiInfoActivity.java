@@ -43,7 +43,7 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 public class SheBeiInfoActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
-    public static void start(Context context, String result) {
+    public static void start(Context context ) {
         Intent starter = new Intent(context, SheBeiInfoActivity.class);
         context.startActivity(starter);
     }
@@ -70,7 +70,7 @@ public class SheBeiInfoActivity extends AppCompatActivity implements SwipeRefres
         if (getIntent().getExtras() != null) {
             Bundle bundle = getIntent().getExtras();
             keyWord = bundle.getString("result");
-            binding.editSearchInfo.setText(bundle.getString("result"));
+            binding.editSearchInfo.setText(keyWord);
         }
         binding.refreshLayout.setRefreshing(true);
         getSheBeiData(1);
@@ -123,7 +123,10 @@ public class SheBeiInfoActivity extends AppCompatActivity implements SwipeRefres
 
                     @Override
                     public void onNext(ResultModelData.ReturnValueBean<SheBeiRootBean> returnValueBean) {
-                        if (returnValueBean.getResultList().size() == 0) return;
+                        if (returnValueBean.getResultList().size() == 0) {
+                            adapter.setList(returnValueBean.getResultList());
+                            return;
+                        }
                         if (returnValueBean.getCurrentPage().equals("1")) {
                             adapter.setList(returnValueBean.getResultList());
                         } else {

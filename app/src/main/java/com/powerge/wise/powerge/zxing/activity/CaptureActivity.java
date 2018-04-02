@@ -15,9 +15,6 @@
  */
 package com.powerge.wise.powerge.zxing.activity;
 
-import java.io.IOException;
-import java.lang.reflect.Field;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -43,6 +40,9 @@ import com.powerge.wise.powerge.zxing.decode.DecodeThread;
 import com.powerge.wise.powerge.zxing.utils.BeepManager;
 import com.powerge.wise.powerge.zxing.utils.CaptureActivityHandler;
 import com.powerge.wise.powerge.zxing.utils.InactivityTimer;
+
+import java.io.IOException;
+import java.lang.reflect.Field;
 
 /**
  * This activity opens the camera and does the actual scanning on a background
@@ -303,5 +303,11 @@ public final class CaptureActivity extends Activity implements SurfaceHolder.Cal
             e.printStackTrace();
         }
         return 0;
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        SheBeiInfoActivity.start(this);
     }
 }
