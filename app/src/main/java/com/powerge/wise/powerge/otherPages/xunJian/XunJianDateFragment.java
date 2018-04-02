@@ -81,12 +81,12 @@ public class XunJianDateFragment extends Fragment implements RadioGroup.OnChecke
         if (shouldCheck && null != binding) {
             createMonthGroup();
 
-            for (int l = 0; l < binding.monthGroup.getChildCount(); l++) {
+          /*  for (int l = 0; l < binding.monthGroup.getChildCount(); l++) {
                 if (l == (binding.monthGroup.getChildCount() - 1) / 2) {
                     RadioButton radioButton = (RadioButton) binding.monthGroup.getChildAt(l);
                     radioButton.setChecked(true);
                 }
-            }
+            }*/
         }
     }
 
@@ -121,9 +121,11 @@ public class XunJianDateFragment extends Fragment implements RadioGroup.OnChecke
             radioButton.setTextSize(14f);
 
             if (leng > 3) {
+                if(i==3)radioButton.setChecked(true);
                 radioButton.setText(dateList.get(i));
                 radioButton.setTag(dateList.get(i));
             } else {
+                if(i==1)radioButton.setChecked(true);
                 radioButton.setText(week[i]);
                 radioButton.setTag(week[i]);
             }
