@@ -10,10 +10,10 @@ public class QueXianFormBean extends RootBean {
     @Element(name = "arg1")
     String arg1;
 
-    static String passingRate;
-    static String normal;
-    static String urgent;
-    static String critical;
+    public String passingRate;
+    public String normal;
+    public String urgent;
+    public String critical;
 
     public String getArg1() {
         return arg1;
@@ -55,8 +55,8 @@ public class QueXianFormBean extends RootBean {
         this.critical = critical;
     }
 
-    public static float getPieChartData(int index) {
-        String[] array = new String[]{passingRate, critical, urgent, normal};
+    public  float getPieChartData(int index) {
+        String[] array = new String[]{getPassingRate(), getCritical(), getUrgent(), getNormal()};
         return Float.parseFloat(array[index]);
     }
 }

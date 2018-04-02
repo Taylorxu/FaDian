@@ -16,10 +16,12 @@ import com.powerge.wise.basestone.R;
 public class LoadMoreExpandableListView extends ExpandableListView implements AbsListView.OnScrollListener {
 
     private Context mContext;
+    private View footNoMore;
     private View mFootView;
     private int mTotalItemCount;
     private OnLoadMoreListener mLoadMoreListener;
-    private boolean mIsLoading=false;
+    private boolean mIsLoading = false;
+    private boolean stateNoMore = false;
 
     public LoadMoreExpandableListView(Context context) {
         super(context);
@@ -39,12 +41,12 @@ public class LoadMoreExpandableListView extends ExpandableListView implements Ab
     @Override
     public void onScrollStateChanged(AbsListView view, int scrollState) {
         // 滑到底部后自动加载，判断listview已经停止滚动并且最后可视的条目等于adapter的条目
-        int lastVisibleIndex=view.getLastVisiblePosition();
-        if (!mIsLoading&&scrollState == OnScrollListener.SCROLL_STATE_IDLE
-                && lastVisibleIndex ==mTotalItemCount-1) {
-            mIsLoading=true;
+        int lastVisibleIndex = view.getLastVisiblePosition();
+        if (!mIsLoading && scrollState == OnScrollListener.SCROLL_STATE_TOUCH_SCROLL
+                && lastVisibleIndex == mTotalItemCount - 1 && !stateNoMore) {
+            mIsLoading = true;
             addFooterView(mFootView);
-            if (mLoadMoreListener!=null) {
+            if (mLoadMoreListener != null) {
                 mLoadMoreListener.onloadMore();
             }
         }
@@ -52,26 +54,35 @@ public class LoadMoreExpandableListView extends ExpandableListView implements Ab
 
     @Override
     public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
-        mTotalItemCount=totalItemCount;
+        mTotalItemCount = totalItemCount;
     }
 
 
-    private void init(Context context){
-        this.mContext=context;
-        mFootView= LayoutInflater.from(context).inflate(R.layout.foot_view,null);
+    private void init(Context context) {
+        this.mContext = context;
+        mFootView = LayoutInflater.from(context).inflate(R.layout.foot_view, null);
+        footNoMore = LayoutInflater.from(context).inflate(R.layout.foot_no_more_view, null);
         setOnScrollListener(this);
     }
 
 
-    public void setOnLoadMoreListener(OnLoadMoreListener listener){
-        mLoadMoreListener=listener;
+    public void setOnLoadMoreListener(OnLoadMoreListener listener) {
+        mLoadMoreListener = listener;
     }
 
-    public interface OnLoadMoreListener{
+    public interface OnLoadMoreListener {
         void onloadMore();
     }
-    public void setLoadCompleted(){
-        mIsLoading=false;
+
+    public void setLoadCompleted() {
+        mIsLoading = false;
         removeFooterView(mFootView);
     }
+
+    public void setLoadNoMore() {
+        mIsLoading = false;
+        stateNoMore = true;
+        addFooterView(footNoMore);
+    }
+
 }
