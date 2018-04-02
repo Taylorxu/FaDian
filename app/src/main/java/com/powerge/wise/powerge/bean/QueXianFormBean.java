@@ -10,10 +10,42 @@ public class QueXianFormBean extends RootBean {
     @Element(name = "arg1")
     String arg1;
 
-    public String passingRate;
-    public String normal;
-    public String urgent;
-    public String critical;
+    public int passingRate;
+    public int normal;
+    public int urgent;
+    public int critical;
+
+    public int getPassingRate() {
+        return passingRate;
+    }
+
+    public void setPassingRate(int passingRate) {
+        this.passingRate = passingRate;
+    }
+
+    public int getNormal() {
+        return normal;
+    }
+
+    public void setNormal(int normal) {
+        this.normal = normal;
+    }
+
+    public int getUrgent() {
+        return urgent;
+    }
+
+    public void setUrgent(int urgent) {
+        this.urgent = urgent;
+    }
+
+    public int getCritical() {
+        return critical;
+    }
+
+    public void setCritical(int critical) {
+        this.critical = critical;
+    }
 
     public String getArg1() {
         return arg1;
@@ -23,40 +55,8 @@ public class QueXianFormBean extends RootBean {
         this.arg1 = arg1;
     }
 
-    public String getPassingRate() {
-        return passingRate;
-    }
-
-    public void setPassingRate(String passingRate) {
-        this.passingRate = passingRate;
-    }
-
-    public String getNormal() {
-        return normal;
-    }
-
-    public void setNormal(String normal) {
-        this.normal = normal;
-    }
-
-    public String getUrgent() {
-        return urgent;
-    }
-
-    public void setUrgent(String urgent) {
-        this.urgent = urgent;
-    }
-
-    public String getCritical() {
-        return critical;
-    }
-
-    public void setCritical(String critical) {
-        this.critical = critical;
-    }
-
     public  float getPieChartData(int index) {
-        String[] array = new String[]{getPassingRate(), getCritical(), getUrgent(), getNormal()};
-        return Float.parseFloat(array[index]);
+        int [] array = new int[]{getPassingRate(), getCritical(), getUrgent(), getNormal()};
+        return Float.parseFloat(String.valueOf(array[index]));
     }
 }

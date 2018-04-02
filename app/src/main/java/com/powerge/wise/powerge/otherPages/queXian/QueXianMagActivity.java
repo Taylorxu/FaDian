@@ -169,6 +169,7 @@ public class QueXianMagActivity extends AppCompatActivity implements View.OnClic
                 calendar.set(year, monthOfYear, dayOfMonth);
                 dateParam = format.format(calendar.getTime());
                 setCalendarArray(year, monthOfYear, dayOfMonth);
+                binding.textDate.setText(dateParam);
             }
         });
         popBinding.btnBack.setOnClickListener(new PopClick());
