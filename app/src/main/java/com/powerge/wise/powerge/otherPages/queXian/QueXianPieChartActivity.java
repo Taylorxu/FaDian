@@ -87,8 +87,7 @@ public class QueXianPieChartActivity extends AppCompatActivity {
             pieCharts[i].setHoleColor(Color.WHITE);
             pieCharts[i].setDrawCenterText(true);
             pieCharts[i].setCenterTextSize(12f);
-//            //先获取数据，将数据作为参数传过去
-            pieCharts[i].setCenterText(generateCenterSpannableText(i));
+
 
             pieCharts[i].setTransparentCircleColor(Color.WHITE);
             pieCharts[i].setTransparentCircleAlpha(110);
@@ -164,7 +163,8 @@ public class QueXianPieChartActivity extends AppCompatActivity {
         for (int i = 0; i < pieCharts.length; i++) {
             ArrayList<PieEntry> entries = new ArrayList<>();
             entries.add(new PieEntry(data.getPieChartData(i)));
-
+            entries.add(new PieEntry(100 - data.getPieChartData(i)));
+            pieCharts[i].setCenterText(generateCenterSpannableText(i, data.getPieChartData(i)));
             PieDataSet dataSet = new PieDataSet(entries, "PieData" + i);
             dataSet.setDrawIcons(false);
             dataSet.setSliceSpace(1f);
@@ -180,24 +180,24 @@ public class QueXianPieChartActivity extends AppCompatActivity {
     }
 
     @SuppressLint("ResourceAsColor")
-    private SpannableString generateCenterSpannableText(int p) {
+    private SpannableString generateCenterSpannableText(int p, float pieChartData) {
         SpannableString s = null;
         if (p == 0) {
-            s = new SpannableString("及时率\n75.3%");
+            s = new SpannableString("及时率\n"+pieChartData+"%");
             s.setSpan(new RelativeSizeSpan(1.2f), 3, 7, 0);
             s.setSpan(new StyleSpan(Typeface.NORMAL), 0, s.length(), 0);
             s.setSpan(new ForegroundColorSpan(mtextColors[0]), 0, s.length(), 0);
 
         } else if (p == 1) {
-            s = new SpannableString("75.3%");
+            s = new SpannableString(pieChartData+"%");
             s.setSpan(new StyleSpan(Typeface.NORMAL), 0, s.length(), 0);
             s.setSpan(new ForegroundColorSpan(mtextColors[1]), 0, s.length(), 0);
         } else if (p == 2) {
-            s = new SpannableString("75.3%");
+            s = new SpannableString(pieChartData+"%");
             s.setSpan(new StyleSpan(Typeface.NORMAL), 0, s.length(), 0);
             s.setSpan(new ForegroundColorSpan(mtextColors[2]), 0, s.length(), 0);
         } else if (p == 3) {
-            s = new SpannableString("5.3%");
+            s = new SpannableString(pieChartData+"%");
             s.setSpan(new StyleSpan(Typeface.NORMAL), 0, s.length(), 0);
             s.setSpan(new ForegroundColorSpan(mtextColors[3]), 0, s.length(), 0);
         }
