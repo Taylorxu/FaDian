@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.powerge.wise.powerge.R;
+import com.powerge.wise.powerge.config.soap.ApiService;
 import com.powerge.wise.powerge.operationProjo.net.BaseActivity;
 import com.powerge.wise.powerge.operationProjo.net.Protocol;
 import com.powerge.wise.powerge.operationProjo.net.db.MySharedpreferences;
@@ -54,8 +55,14 @@ public class ServerAddressActivity extends BaseActivity implements View.OnClickL
             @Override
             public void onStartLogin() {
                 ToastUtil.toast(ServerAddressActivity.this, getResources().getString(R.string.toast_server_save));
+                ApiService.Creator.setNull();
                 LoginActivity.start(ServerAddressActivity.this);
                 finish();
+            }
+
+            @Override
+            public void onFail() {
+                ToastUtil.toast(ServerAddressActivity.this, getResources().getString(R.string.toast_server_save));
             }
         });
 
@@ -63,6 +70,7 @@ public class ServerAddressActivity extends BaseActivity implements View.OnClickL
 
     public interface Callback {
         void onStartLogin();
+        void onFail();
     }
 
 }

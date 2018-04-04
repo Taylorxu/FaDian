@@ -25,12 +25,14 @@ public class MySharedpreferences {
     static SharedPreferences serverSp = context.getSharedPreferences(Constant.SERVERURL, Activity.MODE_PRIVATE);
     /*所有用户信息的sp*/
     static SharedPreferences userSp = context.getSharedPreferences(Constant.USERINFOSPLIST, Activity.MODE_PRIVATE);
+
     /*除了服务器地址，其他都清空了*/
-    public static void clear(){
+    public static void clear() {
         mySp.edit().clear().commit();
         statusSp.edit().clear().commit();
         userSp.edit().clear().commit();
     }
+
     /**
      * 保存自己信息
      *
@@ -62,6 +64,7 @@ public class MySharedpreferences {
         boolean status = statusSp.getBoolean(Constant.ISLOGIN, false);
         return status;
     }
+
     /**
      * 获取是否第一次登录状态
      *
@@ -74,12 +77,16 @@ public class MySharedpreferences {
 
     /**
      * 保存服务器地址
+     *
      * @param value
      * @param callback
      */
     public static void putServerString(String value, ServerAddressActivity.Callback callback) {
-        serverSp.edit().putString(Constant.URL, value).commit();
-        callback.onStartLogin();
+        if (serverSp.edit().putString(Constant.URL, value).commit()) {
+            callback.onStartLogin();
+        } else {
+            callback.onFail();
+        }
     }
 
     /**
