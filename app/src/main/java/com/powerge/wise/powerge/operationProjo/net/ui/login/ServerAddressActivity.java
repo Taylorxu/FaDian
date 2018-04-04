@@ -50,9 +50,19 @@ public class ServerAddressActivity extends BaseActivity implements View.OnClickL
             ToastUtil.toast(this, getResources().getString(R.string.toast_server));
             return;
         }
-        MySharedpreferences.putServerString(server_url);
-        ToastUtil.toast(this, getResources().getString(R.string.toast_server_save));
-        LoginActivity.start(this);
-        finish();
+        MySharedpreferences.putServerString(server_url, new Callback() {
+            @Override
+            public void onStartLogin() {
+                ToastUtil.toast(ServerAddressActivity.this, getResources().getString(R.string.toast_server_save));
+                LoginActivity.start(ServerAddressActivity.this);
+                finish();
+            }
+        });
+
     }
+
+    public interface Callback {
+        void onStartLogin();
+    }
+
 }

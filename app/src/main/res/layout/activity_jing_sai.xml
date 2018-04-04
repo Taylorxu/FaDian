@@ -27,6 +27,17 @@
                 <TextView
                     android:id="@+id/title"
                     style="@style/Title" />
+
+                <ImageView
+                    android:id="@+id/btn_select_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right|center_vertical"
+                    android:layout_marginRight="20dp"
+                    android:background="@drawable/ic_calander_qx"
+                    android:onClick="onClick"
+
+                    />
             </FrameLayout>
 
             <android.support.design.widget.TabLayout

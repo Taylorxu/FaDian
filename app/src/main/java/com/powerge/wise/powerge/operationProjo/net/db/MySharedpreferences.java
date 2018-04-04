@@ -8,6 +8,7 @@ import com.google.gson.Gson;
 import com.powerge.wise.powerge.MyApplication;
 import com.powerge.wise.powerge.bean.User;
 import com.powerge.wise.powerge.operationProjo.net.Constant;
+import com.powerge.wise.powerge.operationProjo.net.ui.login.ServerAddressActivity;
 
 
 /**
@@ -73,11 +74,12 @@ public class MySharedpreferences {
 
     /**
      * 保存服务器地址
-     *
      * @param value
+     * @param callback
      */
-    public static void putServerString(String value) {
+    public static void putServerString(String value, ServerAddressActivity.Callback callback) {
         serverSp.edit().putString(Constant.URL, value).commit();
+        callback.onStartLogin();
     }
 
     /**

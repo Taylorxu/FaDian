@@ -2,7 +2,6 @@ package com.powerge.wise.powerge.otherPages.JingSai;
 
 
 import android.annotation.SuppressLint;
-import android.database.DatabaseUtils;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,17 +13,28 @@ import android.widget.ExpandableListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import com.powerge.wise.basestone.heart.network.FlatMapResponse;
+import com.powerge.wise.basestone.heart.network.FlatMapTopRes;
+import com.powerge.wise.basestone.heart.network.ResultModel;
 import com.powerge.wise.basestone.heart.util.DensityUtil;
 import com.powerge.wise.powerge.R;
-import com.powerge.wise.powerge.bean.KaoHeChildItemBean;
 import com.powerge.wise.powerge.bean.PaiMingChildItemBean;
+import com.powerge.wise.powerge.bean.User;
+import com.powerge.wise.powerge.config.soap.ApiService;
+import com.powerge.wise.powerge.config.soap.request.BaseUrl;
+import com.powerge.wise.powerge.config.soap.request.RequestBody;
+import com.powerge.wise.powerge.config.soap.request.RequestEnvelope;
 import com.powerge.wise.powerge.databinding.FragmentJingSaiPaiMingBinding;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 public class JingSaiPaiMingFragment extends Fragment {
     FragmentJingSaiPaiMingBinding binding;
+    JingSaiPaiMingExpandAdapter expandAdapter = new JingSaiPaiMingExpandAdapter();
 
     public JingSaiPaiMingFragment() {
     }
@@ -48,8 +58,6 @@ public class JingSaiPaiMingFragment extends Fragment {
 
     private void initView() {
         createMonthGroup();
-
-        final JingSaiPaiMingExpandAdapter expandAdapter = new JingSaiPaiMingExpandAdapter(dataAll);
         binding.contentPaiMing.setAdapter(expandAdapter);
         binding.contentPaiMing.setGroupIndicator(null);
         binding.contentPaiMing.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
@@ -84,25 +92,35 @@ public class JingSaiPaiMingFragment extends Fragment {
         }
     }
 
-    List<PaiMingChildItemBean> dataAll = new ArrayList<>();
-
     private void getData() {
-        for (int i = 0; i < 5; i++) {
-            PaiMingChildItemBean bean = new PaiMingChildItemBean();
-            bean.setZhiBan(i + 1 + "值");
-            bean.setMingCi("第" + (i + 1) + "名");
-            List<PaiMingChildItemBean.PmChildBean> datac = new ArrayList<>();
-            for (int j = 0; j < 5; j++) {
-                PaiMingChildItemBean.PmChildBean childBean = new PaiMingChildItemBean.PmChildBean();
-                childBean.setHour_value("34");
-                childBean.setZhi_biao("1#机组耗煤");
-                childBean.setAllStart("100");
-                datac.add(childBean);
-            }
+        PaiMingChildItemBean nameBean = new PaiMingChildItemBean();
+        nameBean.setNameSpace(BaseUrl.NAMESPACE_P);
+        nameBean.setUserName(User.getCurrentUser().getName());
+        nameBean.setArg1("2018-03");
 
-            bean.setKh_child(datac);
-            dataAll.add(bean);
-        }
+        RequestEnvelope.getRequestEnvelope().setBody(new RequestBody<>(nameBean));
+        ApiService.Creator.get().queryRankOfMonthData(RequestEnvelope.getRequestEnvelope())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .flatMap(new FlatMapResponse<ResultModel<List<PaiMingChildItemBean>>>())
+                .flatMap(new FlatMapTopRes<List<PaiMingChildItemBean>>())
+                .subscribe(new Subscriber<List<PaiMingChildItemBean>>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(List<PaiMingChildItemBean> paiMingChildItemBeans) {
+                        expandAdapter.setList(paiMingChildItemBeans);
+                    }
+                });
+
     }
 
 }

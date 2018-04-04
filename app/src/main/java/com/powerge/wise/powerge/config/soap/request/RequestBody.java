@@ -11,6 +11,7 @@ import com.powerge.wise.powerge.bean.JingSaiDeFenBean;
 import com.powerge.wise.powerge.bean.KaoHeChildItemBean;
 import com.powerge.wise.powerge.bean.MainPageBean;
 import com.powerge.wise.powerge.bean.MorningMeetingBean;
+import com.powerge.wise.powerge.bean.PaiMingChildItemBean;
 import com.powerge.wise.powerge.bean.PeroidDateLineListBean;
 import com.powerge.wise.powerge.bean.PlanTaskBean;
 import com.powerge.wise.powerge.bean.PlanTaskDetailBean;
@@ -68,6 +69,7 @@ public class RequestBody<Data> {
             @Element(name = "n0:queryGroupScore", type = JingSaiDeFenBean.class),
             @Element(name = "n0:queryWeatherInfo", type = Weather.class),
             @Element(name = "n0:queryMainPageData", type = MainPageBean.class),
+            @Element(name = "n0:queryRankOfMonthData", type = PaiMingChildItemBean.class),
             @Element(name = "n0:queryMonitorLogs", type = ZhiZhangLogBean.class)
     })
     public Data requestModel;

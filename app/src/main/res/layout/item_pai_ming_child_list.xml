@@ -28,7 +28,7 @@
                     android:layout_gravity="center_vertical"
                     android:includeFontPadding="false"
                     android:paddingLeft="13dp"
-                    android:text="@{pmChild.zhi_biao}"
+                    android:text='@{pmChild.UNIT_NAME+" "+pmChild.INDICATOR_NAME}'
                     android:textColor="@color/color_673"
                     android:textSize="14sp" />
             </FrameLayout>
@@ -48,7 +48,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:includeFontPadding="false"
-                        android:text="@{pmChild.hour_value}"
+                        android:text="@{pmChild.AVG_SCORE}"
                         android:textColor="@color/color_673"
                         android:textSize="14sp" />
                 </FrameLayout>
@@ -63,7 +63,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:includeFontPadding="false"
-                        android:text="@{pmChild.allStart}"
+                        android:text="@{pmChild.MONTH_ALL_SCORE}"
                         android:textColor="@color/color_673"
                         android:textSize="14sp" />
                 </FrameLayout>

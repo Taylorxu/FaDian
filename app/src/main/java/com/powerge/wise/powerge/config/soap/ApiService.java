@@ -15,6 +15,7 @@ import com.powerge.wise.powerge.bean.JingSaiDeFenBean;
 import com.powerge.wise.powerge.bean.KaoHeChildItemBean;
 import com.powerge.wise.powerge.bean.MainPageBean;
 import com.powerge.wise.powerge.bean.MorningMeetingBean;
+import com.powerge.wise.powerge.bean.PaiMingChildItemBean;
 import com.powerge.wise.powerge.bean.PeroidDateLineListBean;
 import com.powerge.wise.powerge.bean.PlanTaskBean;
 import com.powerge.wise.powerge.bean.PlanTaskDetailBean;
@@ -279,6 +280,18 @@ public interface ApiService {
     })
     @POST(BaseUrl.SERVICE_P)
     Observable<Response<ResultModel<MainPageBean>>> queryMainPageData(@Body RequestEnvelope requestEnvelope);
+
+    /**
+     * 竞赛排名
+     * @param requestEnvelope
+     * @return
+     */
+    @Headers({
+            "Content-Type:text/xml; charset=utf-8",
+            "Accept-Charset: utf-8"
+    })
+    @POST(BaseUrl.SERVICE_P)
+    Observable<Response<ResultModel<List<PaiMingChildItemBean>>>> queryRankOfMonthData(@Body RequestEnvelope requestEnvelope);
 
 
     class Creator {

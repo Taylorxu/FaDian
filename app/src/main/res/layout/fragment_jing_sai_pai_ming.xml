@@ -31,10 +31,11 @@
 
             </HorizontalScrollView>
 
+
             <ExpandableListView
                 android:id="@+id/content_pai_ming"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"></ExpandableListView>
+                android:layout_height="wrap_content" />
         </LinearLayout>
 
 

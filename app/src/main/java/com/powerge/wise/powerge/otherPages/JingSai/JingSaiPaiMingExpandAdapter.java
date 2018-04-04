@@ -12,15 +12,12 @@ import android.widget.ImageView;
 import com.powerge.wise.basestone.heart.ui.XAdapter;
 import com.powerge.wise.powerge.BR;
 import com.powerge.wise.powerge.R;
-import com.powerge.wise.powerge.bean.KaoHeChildItemBean;
 import com.powerge.wise.powerge.bean.PaiMingChildItemBean;
-import com.powerge.wise.powerge.databinding.ItemKaoHeListExpandChildBinding;
-import com.powerge.wise.powerge.databinding.ItemKaoheChildListBinding;
 import com.powerge.wise.powerge.databinding.ItemPaiMingChildListBinding;
 import com.powerge.wise.powerge.databinding.ItemPaiMingListExpandChildBinding;
-import com.powerge.wise.powerge.databinding.ItemTextKaoHeExpandRootBinding;
 import com.powerge.wise.powerge.databinding.ItemTextPaiMingExpandRootBinding;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,12 +25,16 @@ import java.util.List;
  */
 
 public class JingSaiPaiMingExpandAdapter extends BaseExpandableListAdapter {
-    List<PaiMingChildItemBean> list;
+    List<PaiMingChildItemBean> list=new ArrayList<>();
     private SparseArray<ImageView> mIndicators;
 
-    public JingSaiPaiMingExpandAdapter(List<PaiMingChildItemBean> listp) {
-        this.list = listp;
+    public JingSaiPaiMingExpandAdapter() {
         mIndicators = new SparseArray<>();
+    }
+
+    public void setList(List<PaiMingChildItemBean> listp) {
+        this.list = listp;
+        notifyDataSetChanged();
     }
 
     @Override
@@ -53,7 +54,7 @@ public class JingSaiPaiMingExpandAdapter extends BaseExpandableListAdapter {
 
     @Override
     public Object getChild(int groupPosition, int childPosition) {
-        return list.get(groupPosition).getKh_child().get(childPosition);
+        return list.get(groupPosition).getDetails().get(childPosition);
     }
 
     @Override
@@ -103,7 +104,7 @@ public class JingSaiPaiMingExpandAdapter extends BaseExpandableListAdapter {
         expandChildBinding.contentPaiMingChildList.setLayoutManager(new LinearLayoutManager(parent.getContext()));
         XAdapter<PaiMingChildItemBean.PmChildBean, ItemPaiMingChildListBinding> adapter = new XAdapter.SimpleAdapter<>(BR.pmChild, R.layout.item_pai_ming_child_list);
         expandChildBinding.contentPaiMingChildList.setAdapter(adapter);
-        adapter.setList(list.get(groupPosition).getKh_child());
+        adapter.setList(list.get(groupPosition).getDetails());
         return convertView;
     }
 
