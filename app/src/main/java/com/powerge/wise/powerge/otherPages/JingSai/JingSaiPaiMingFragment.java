@@ -18,6 +18,7 @@ import android.widget.PopupWindow;
 import com.powerge.wise.basestone.heart.network.FlatMapResponse;
 import com.powerge.wise.basestone.heart.network.FlatMapTopRes;
 import com.powerge.wise.basestone.heart.network.ResultModel;
+import com.powerge.wise.basestone.heart.util.LogUtils;
 import com.powerge.wise.powerge.R;
 import com.powerge.wise.powerge.bean.PaiMingChildItemBean;
 import com.powerge.wise.powerge.bean.User;
@@ -123,8 +124,8 @@ public class JingSaiPaiMingFragment extends Fragment implements View.OnClickList
         monthOfYearText = calendar.get(Calendar.MONTH);
         int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
 //给显示
-        binding.textYear.setText(String.valueOf(yearText));
-        binding.textMonth.setText(String.valueOf(monthOfYearText));
+        binding.textYear.setText(String.valueOf(yearText) + "年");
+        binding.textMonth.setText(String.valueOf(monthOfYearText) + "月");
 //付给参数
         calendar.set(yearText, monthOfYearText - 1, dayOfMonth);
         dateParam = format.format(calendar.getTime());
@@ -136,11 +137,12 @@ public class JingSaiPaiMingFragment extends Fragment implements View.OnClickList
         popBinding.datePickerView.setMaxDate(time);
         //隐藏日选择
         ((ViewGroup) ((ViewGroup) popBinding.datePickerView.getChildAt(0)).getChildAt(0)).getChildAt(2).setVisibility(View.GONE);
-        popBinding.datePickerView.init(yearText, monthOfYearText - 1, dayOfMonth, new DatePicker.OnDateChangedListener() {
+        popBinding.datePickerView.init(yearText, monthOfYearText, dayOfMonth, new DatePicker.OnDateChangedListener() {
             @Override
             public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                monthOfYearText = monthOfYear - 1;
-                calendar.set(year, monthOfYear - 1, dayOfMonth);
+                LogUtils.e(monthOfYear+"---------------");
+                monthOfYearText = monthOfYear+1;
+                calendar.set(year, monthOfYear, dayOfMonth);
                 dateParam = format.format(calendar.getTime());
             }
         });
@@ -181,8 +183,8 @@ public class JingSaiPaiMingFragment extends Fragment implements View.OnClickList
                     window.dismiss();
                     break;
                 case R.id.btn_done:
-                    binding.textYear.setText(String.valueOf(yearText));
-                    binding.textMonth.setText(String.valueOf(monthOfYearText));
+                    binding.textYear.setText(String.valueOf(yearText) + "年");
+                    binding.textMonth.setText(String.valueOf(monthOfYearText) + "月");
                     getData();
                     window.dismiss();
                     break;
