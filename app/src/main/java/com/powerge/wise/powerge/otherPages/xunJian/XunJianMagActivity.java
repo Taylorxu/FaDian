@@ -55,6 +55,7 @@ public class XunJianMagActivity extends AppCompatActivity implements XunJianDate
     private String pointNo, termType;
     private Handler mHandler = new Handler();
     private boolean mScanning;
+    private String DateChecked;
 
     public static void start(Context context) {
         Intent starter = new Intent(context, XunJianMagActivity.class);
@@ -108,7 +109,10 @@ public class XunJianMagActivity extends AppCompatActivity implements XunJianDate
         @Override
         public void onBindViewHolder(XViewHolder<XunJianSignBean, ItemXunJianSingListBinding> holder, int position) {
             super.onBindViewHolder(holder, position);
-            holder.getBinding().setXunJianSign(getItemData(position));
+            XunJianSignBean signBean = getItemData(position);
+            signBean.setDateCehcked(DateChecked);
+            signBean.setTermType(termType);
+            holder.getBinding().setXunJianSign(signBean);
         }
     };
 
@@ -154,7 +158,7 @@ public class XunJianMagActivity extends AppCompatActivity implements XunJianDate
 
                     @Override
                     public void onNext(List<XunJianSignBean> xunJianSignBeans) {
-                         adapter.setList(xunJianSignBeans);
+                        adapter.setList(xunJianSignBeans);
                     }
                 });
 
@@ -195,7 +199,7 @@ public class XunJianMagActivity extends AppCompatActivity implements XunJianDate
 
                     @Override
                     public void onNext(SignSoapRequest x) {
-                        Toast.makeText(getBaseContext(),"签到成功",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getBaseContext(), "签到成功", Toast.LENGTH_SHORT).show();
                         List<XunJianSignBean> list = adapter.getList();
                         for (XunJianSignBean xun : list) {
                             if (xun.getPointNo().equals(pointNo)) {
@@ -212,6 +216,7 @@ public class XunJianMagActivity extends AppCompatActivity implements XunJianDate
 
     @Override
     public void onDateCehckedListener(Map<String, String> params) {
+        DateChecked = params.get("checkId");
         createData(params);
     }
 

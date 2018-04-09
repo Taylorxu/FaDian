@@ -17,7 +17,7 @@ import java.util.List;
  * Created by Administrator on 2018/3/6.
  */
 
-public class XunJianSignBean extends RootBean implements Parcelable{
+public class XunJianSignBean extends RootBean implements Parcelable {
     @Element(name = "arg1")
     String arg1;
     @Element(name = "arg2")
@@ -37,6 +37,8 @@ public class XunJianSignBean extends RootBean implements Parcelable{
     private String blueToothNo;
     private int inspectedNum;//已经签过次数
     private List<Detail> inspectedDetails;
+    private String dateCehcked;
+    private String termType;
 
     public XunJianSignBean() {
     }
@@ -49,6 +51,8 @@ public class XunJianSignBean extends RootBean implements Parcelable{
         num = in.readInt();
         blueToothNo = in.readString();
         inspectedNum = in.readInt();
+        dateCehcked = in.readString();
+        termType = in.readString();
     }
 
     public static final Creator<XunJianSignBean> CREATOR = new Creator<XunJianSignBean>() {
@@ -77,8 +81,18 @@ public class XunJianSignBean extends RootBean implements Parcelable{
         return s;
     }
 
-    public void signAction() {
-
+    /**
+     * 根据radioButton ID(在日期组里的游标) 确定是哪个日期被选中 ，分别根据日期类型 去判断按钮游标是否是第3或者第1
+     *
+     * @return
+     */
+    public boolean isEnable() {
+        if (Integer.parseInt(termType) == 2) {//周期 为周
+            if (Integer.parseInt(dateCehcked) == 1) return true;
+        } else {
+            if (Integer.parseInt(dateCehcked) == 3) return true;
+        }
+        return false;
     }
 
     public String getPointNo() {
@@ -147,6 +161,22 @@ public class XunJianSignBean extends RootBean implements Parcelable{
         this.inspectedDetails = inspectedDetails;
     }
 
+    public String getDateCehcked() {
+        return dateCehcked;
+    }
+
+    public void setDateCehcked(String dateCehcked) {
+        this.dateCehcked = dateCehcked;
+    }
+
+    public String getTermType() {
+        return termType;
+    }
+
+    public void setTermType(String termType) {
+        this.termType = termType;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -161,5 +191,7 @@ public class XunJianSignBean extends RootBean implements Parcelable{
         dest.writeInt(num);
         dest.writeString(blueToothNo);
         dest.writeInt(inspectedNum);
+        dest.writeString(dateCehcked);
+        dest.writeString(termType);
     }
 }

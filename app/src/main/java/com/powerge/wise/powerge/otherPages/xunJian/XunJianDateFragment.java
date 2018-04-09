@@ -213,11 +213,12 @@ public class XunJianDateFragment extends Fragment implements RadioGroup.OnChecke
     }
 
 
-    public void onButtonPressed() {
+    public void onButtonPressed(int checkedId) {
         if (mListener != null) {
             Map<String, String> p = new HashMap<>();
             p.put("termType", String.valueOf(termType));
             p.put("date", datep);
+            p.put("checkId", String.valueOf(checkedId));
             mListener.onDateCehckedListener(p);
         }
     }
@@ -260,7 +261,7 @@ public class XunJianDateFragment extends Fragment implements RadioGroup.OnChecke
                     termType = 1;//日
                 }
             }
-            onButtonPressed();
+            onButtonPressed(checkedId);
         }
     }
 

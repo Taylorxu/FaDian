@@ -30,6 +30,7 @@
                     android:background="@drawable/selector_btn_bg_sing"
                     android:tag="@{xunJianSign.blueToothNo}"
                     android:text="签到"
+                    android:enabled="@{xunJianSign.enable}"
                     android:textColor="@android:color/white"
                     android:textSize="13sp" />
 
