@@ -60,6 +60,7 @@ public class DianLiangManagementActivity extends AppCompatActivity implements Ra
         jiZuList = getIntent().getParcelableArrayListExtra(JiZuBean.INTENTKEY);
         createRadioBtnGroup(jiZuList);
         binding.jiZuGroups.setOnCheckedChangeListener(this);
+        ((RadioButton)binding.jiZuGroups.getChildAt(0)).setChecked(true);
     }
 
 
@@ -120,7 +121,6 @@ public class DianLiangManagementActivity extends AppCompatActivity implements Ra
             radioButton.setTextSize(15f);
             radioButton.setText(jiZuBean.getName());
             radioButton.setTag(jiZuBean.getId());
-            if (i == 0) radioButton.setChecked(true);
             radioButton.setId(i);
             binding.jiZuGroups.addView(radioButton);
         }

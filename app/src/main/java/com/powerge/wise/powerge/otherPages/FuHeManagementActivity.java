@@ -417,6 +417,7 @@ public class FuHeManagementActivity extends AppCompatActivity implements RadioGr
             if (requestCode == DatePeriodSelectActivity.REQUEST_CODE_F_DATE_PER) {
                 binding.textStartText.setText(data.getStringExtra(DatePeriodSelectActivity.INTENT_STARTDATE));
                 binding.textEndText.setText(data.getStringExtra(DatePeriodSelectActivity.INTENT_ENDDATE));
+                queryLoadRatioData(String.valueOf(checkedIdp));
             }
         }
     }
