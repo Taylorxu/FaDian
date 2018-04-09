@@ -12,6 +12,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
@@ -163,6 +164,8 @@ public class QueXianMagActivity extends AppCompatActivity implements View.OnClic
         dateParam = format.format(calendar.getTime());
         setCalendarArray(year, monthOfYear, dayOfMonth);
         popBinding = DataBindingUtil.inflate(LayoutInflater.from(getBaseContext()), R.layout.activity_date_select, null, false);
+        //隐藏日选择
+        ((ViewGroup) ((ViewGroup) popBinding.datePickerView.getChildAt(0)).getChildAt(0)).getChildAt(2).setVisibility(View.GONE);
         popBinding.datePickerView.init(year, monthOfYear, dayOfMonth, new DatePicker.OnDateChangedListener() {
             @Override
             public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
