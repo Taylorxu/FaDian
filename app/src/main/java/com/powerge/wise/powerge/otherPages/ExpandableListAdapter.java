@@ -5,8 +5,12 @@ import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnticipateOvershootInterpolator;
+import android.view.animation.RotateAnimation;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageView;
+
 import com.powerge.wise.powerge.R;
 import com.powerge.wise.powerge.bean.SheBeiRootBean;
 import com.powerge.wise.powerge.databinding.ItemTextBinding;
@@ -20,7 +24,7 @@ import java.util.List;
  */
 
 public class ExpandableListAdapter extends BaseExpandableListAdapter {
-    static List<SheBeiRootBean> list=new ArrayList<>();
+    static List<SheBeiRootBean> list = new ArrayList<>();
     private SparseArray<ImageView> mIndicators;
 
     ItemTextExpandListBinding expandListBinding;
@@ -96,14 +100,15 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
             expandListBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.item_text_expand_list, parent, false);
             convertView = expandListBinding.getRoot();
             convertView.setTag(expandListBinding);
+            //      把位置和图标添加到Map
+            mIndicators.put(groupPosition, expandListBinding.btnRootExpand);
+            //      根据分组状态设置Indicator
+            setIndicatorState(groupPosition, isExpanded);
         } else {
             expandListBinding = (ItemTextExpandListBinding) convertView.getTag();
         }
         expandListBinding.setExpand(list.get(groupPosition));
-        //      把位置和图标添加到Map
-        mIndicators.put(groupPosition, expandListBinding.btnRootExpand);
-        //      根据分组状态设置Indicator
-        setIndicatorState(groupPosition, isExpanded);
+
         return convertView;
     }
 
@@ -128,111 +133,21 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
     // 根据分组的展开闭合状态设置指示器
     public void setIndicatorState(int groupPosition, boolean isExpanded) {
-        if (isExpanded) {
-            mIndicators.get(groupPosition).setImageResource(R.drawable.ic_scroll);
-        } else {
-            mIndicators.get(groupPosition).setImageResource(R.drawable.ic_expand);
+        if (isExpanded) {//需要展开
+            RotateAnimation rotateAnimation = new RotateAnimation(90, 0f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+            rotateAnimation.setDuration(200);
+            rotateAnimation.setFillAfter(true);
+            rotateAnimation.setInterpolator(new AnticipateOvershootInterpolator());
+            mIndicators.get(groupPosition).startAnimation(rotateAnimation);
+        }
+        if (!isExpanded) {
+            RotateAnimation rotateAnimation = new RotateAnimation(0, 90, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+            rotateAnimation.setDuration(200);
+            rotateAnimation.setFillAfter(true);
+            rotateAnimation.setInterpolator(new AnticipateOvershootInterpolator());
+            mIndicators.get(groupPosition).startAnimation(rotateAnimation);
         }
     }
-
-    /*root下面的二级expandListView*/
-    /**
-     * 改为一层父级
-     class SecondExpandAdapter extends BaseExpandableListAdapter {
-     private final int childPosition;
-     SheBeiRootBean.SheBeiChildBean sheBeiChildBeans;
-     private SparseArray<ImageView> mIndicators;
-
-     *//**
-     * @param sheBeiChild
-     * @param childPosition 最顶部的 每个子view possition（有多少层字view 就会在开展开时调用多少次）
-     *//*
-        public SecondExpandAdapter(SheBeiRootBean.SheBeiChildBean sheBeiChild, int childPosition) {
-            this.sheBeiChildBeans = sheBeiChild;
-            this.childPosition = childPosition;
-            mIndicators = new SparseArray<>();
-        }
-
-        @Override
-        public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
-            if (convertView == null) {
-                childExpandListBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.item_text_child_expand_list, parent, false);
-                convertView = childExpandListBinding.getRoot();
-                convertView.setTag(childExpandListBinding);
-            } else {
-                childExpandListBinding = (ItemTextChildExpandListBinding) convertView.getTag();
-            }
-            childExpandListBinding.setExpandChild(sheBeiChildBeans);
-            mIndicators.put(childPosition, childExpandListBinding.btnExpand);//对应的存储 expand的 possition 和在expandview上的图标
-            setIndicatorState2level(childPosition, isExpanded);//初始化 expandlist 的展开状态图标
-            return convertView;
-        }
-
-        @Override
-        public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
-            if (convertView == null) {
-                textBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.item_text, parent, false);
-                convertView = textBinding.getRoot();
-                convertView.setTag(textBinding);
-            } else {
-                textBinding = (ItemTextBinding) convertView.getTag();
-            }
-            textBinding.textContent.setText(sheBeiChildBeans.getName());
-            return convertView;
-        }
-
-        @Override
-        public boolean isChildSelectable(int groupPosition, int childPosition) {
-            return true;
-        }
-
-        public void setIndicatorState2level(int groupPosition, boolean groupExpanded) {
-            if (groupExpanded) {
-                mIndicators.get(groupPosition).setImageResource(R.drawable.ic_scroll);
-            } else {
-                mIndicators.get(groupPosition).setImageResource(R.drawable.ic_expand);
-            }
-        }
-
-
-        @Override
-
-        public int getGroupCount() {
-            return 1;
-        }
-
-        @Override
-        public int getChildrenCount(int groupPosition) {
-            return 1;
-        }
-
-        @Override
-        public Object getGroup(int groupPosition) {
-            return sheBeiChildBeans.getName();
-        }
-
-        @Override
-        public Object getChild(int groupPosition, int childPosition) {
-            return sheBeiChildBeans.getName();
-        }
-
-        @Override
-        public long getGroupId(int groupPosition) {
-            return groupPosition;
-        }
-
-        @Override
-        public long getChildId(int groupPosition, int childPosition) {
-            return childPosition;
-        }
-
-        @Override
-        public boolean hasStableIds() {
-            return true;
-        }
-
-
-    }*/
 
 
 }

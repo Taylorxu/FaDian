@@ -5,25 +5,15 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.powerge.wise.basestone.heart.WApp;
-import com.powerge.wise.basestone.heart.util.LogUtils;
-import com.powerge.wise.basestone.heart.util.PhoneInfo;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
-import java.net.ConnectException;
 import java.util.List;
-import java.util.Locale;
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Cookie;
 import okhttp3.CookieJar;
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
-import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -72,7 +62,7 @@ public class NetConfig implements Interceptor, CookieJar {
         Request.Builder builder = request.newBuilder();
         Response response = chain.proceed(builder.build());
         okhttp3.MediaType mediaType = response.body().contentType();
-        if ("text/xml;charset=UTF-8".equals(mediaType.toString())) {
+        if (null!=mediaType&&"text/xml;charset=UTF-8".equals(mediaType.toString())) {
             String content = response.body().string();
             Log.e("response.body()---", content);
             if (content.indexOf("<soap:Fault>") > -1) {
