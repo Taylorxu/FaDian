@@ -50,6 +50,9 @@ public class ServerAddressActivity extends BaseActivity implements View.OnClickL
         if (TextUtils.isEmpty(server_url)) {
             ToastUtil.toast(this, getResources().getString(R.string.toast_server));
             return;
+        }else if(!server_url.endsWith("/")){
+            ToastUtil.toast(this,getResources().getString(R.string.toast_server_end));
+            return;
         }
         MySharedpreferences.putServerString(server_url, new Callback() {
             @Override

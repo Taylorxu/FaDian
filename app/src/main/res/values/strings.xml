@@ -121,6 +121,7 @@
     <string name="save">保存</string>
     <string name="server_title">设置服务器地址</string>
     <string name="toast_server">服务器地址不能为空</string>
+    <string name="toast_server_end">请已 / 结尾</string>
     <string name="toast_server_save">保存成功</string>
     <string name="toast_server_fail">保存失败</string>
     <string name="exit_main">再按一次后退键退出程序</string>

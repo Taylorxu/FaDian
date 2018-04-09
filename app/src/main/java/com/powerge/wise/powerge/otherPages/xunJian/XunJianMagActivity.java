@@ -195,6 +195,7 @@ public class XunJianMagActivity extends AppCompatActivity implements XunJianDate
 
                     @Override
                     public void onNext(SignSoapRequest x) {
+                        Toast.makeText(getBaseContext(),"签到成功",Toast.LENGTH_SHORT).show();
                         List<XunJianSignBean> list = adapter.getList();
                         for (XunJianSignBean xun : list) {
                             if (xun.getPointNo().equals(pointNo)) {
@@ -304,6 +305,7 @@ public class XunJianMagActivity extends AppCompatActivity implements XunJianDate
     };
 
     public void showLoading(boolean should) {
+        mScanning = should;
         binding.loadingRLayout.setVisibility(should ? View.VISIBLE : View.GONE);
         binding.loadingCenterText.setText("正在扫描中...");
         binding.contentSingList.setAlpha(should ? 0.5f : 1f);
@@ -313,7 +315,6 @@ public class XunJianMagActivity extends AppCompatActivity implements XunJianDate
         @SuppressLint("NewApi")
         @Override
         public void run() {
-            mScanning = false;
             mBluetoothAdapter.stopLeScan(callback);
             showLoading(false);
             Toast.makeText(getBaseContext(), "扫描结束", Toast.LENGTH_SHORT).show();
@@ -323,11 +324,9 @@ public class XunJianMagActivity extends AppCompatActivity implements XunJianDate
     @SuppressLint("NewApi")
     private void scanLeDevice() {
         showLoading(true);
-        if (!mScanning) {//不在扫描中
+        if (mScanning) {//不在扫描中
             mHandler.postDelayed(runnable, 10000);
-
             mScanning = mBluetoothAdapter.startLeScan(callback);
-
         }
     }
 
