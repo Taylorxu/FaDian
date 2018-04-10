@@ -55,7 +55,7 @@ public class RequestTask extends AsyncTask {
     public void runTask(String namespae, String method, String url, List<String> list, ResultCallback callBack) {
         this.namespace = namespae;
         this.method = method;
-        this.url = url;
+        this.url ="http://"+ url;
         this.list = list;
         this.callBack = callBack;
         Log.e("requestUrl",url+"/"+method+""+list.toString());
