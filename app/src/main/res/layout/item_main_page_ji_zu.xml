@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
 
@@ -8,27 +8,29 @@
             type="com.powerge.wise.powerge.bean.MainPageBean.UnitsLoadDataListBean" />
     </data>
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="80dp"
-        android:layout_height="match_parent"
-        android:background="?android:attr/selectableItemBackground"
-        android:gravity="center"
-        android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text='@{data.value+""}'
-            android:textColor="@color/text_color_jizu_fuhe"
-            android:textSize="20sp"
+        <LinearLayout
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:background="?android:attr/selectableItemBackground"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:orientation="vertical">
 
-            />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text='@{data.value+""}'
+                android:textColor="@color/text_color_jizu_fuhe"
+                android:textSize="20sp"
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@{data.name}"
-            android:textColor="@color/text_color_jizu_name"
-            android:textSize="12sp" />
-    </LinearLayout>
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{data.name}"
+                android:textColor="@color/text_color_jizu_name"
+                android:textSize="12sp" />
+        </LinearLayout>
 </layout>
