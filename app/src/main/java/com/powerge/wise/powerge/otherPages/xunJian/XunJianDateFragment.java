@@ -5,6 +5,7 @@ import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,9 +18,12 @@ import com.powerge.wise.basestone.heart.util.LogUtils;
 import com.powerge.wise.powerge.R;
 import com.powerge.wise.powerge.databinding.FragmentXunJianDateBinding;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -91,12 +95,11 @@ public class XunJianDateFragment extends Fragment implements RadioGroup.OnChecke
     }
 
 
-
     //初始化 月,周，日份 buttion 列表
     @SuppressLint("ResourceType")
     private void createMonthGroup() {
-        if(binding.monthGroup.getChildCount()>0)binding.monthGroup.removeAllViews();
-        String [] week = new String[]{"上一周", "本周", "下一周"};
+        if (binding.monthGroup.getChildCount() > 0) binding.monthGroup.removeAllViews();
+        String[] week = new String[]{"上一周", "本周", "下一周"};
         int leng = 7, radioBtWidth = 60;
         if (dateType == 0) {
             radioBtWidth = 90;
@@ -121,11 +124,11 @@ public class XunJianDateFragment extends Fragment implements RadioGroup.OnChecke
             radioButton.setTextSize(14f);
 
             if (leng > 3) {
-                if(i==3)radioButton.setChecked(true);
+                if (i == 3) radioButton.setChecked(true);
                 radioButton.setText(dateList.get(i));
                 radioButton.setTag(dateList.get(i));
             } else {
-                if(i==1)radioButton.setChecked(true);
+                if (i == 1) radioButton.setChecked(true);
                 radioButton.setText(week[i]);
                 radioButton.setTag(week[i]);
             }
@@ -140,18 +143,10 @@ public class XunJianDateFragment extends Fragment implements RadioGroup.OnChecke
 
     @SuppressLint("WrongConstant")
     public String getfirstDayOfWeek(int type) {
-        Calendar c = Calendar.getInstance();
+        Calendar c = new GregorianCalendar();
         c.setFirstDayOfWeek(Calendar.MONDAY);
-        int current_day, current_month, current_year;
-        String mYear, mMonth, mDay;
-        current_year = c.get(Calendar.YEAR);
-        current_day = c.get(Calendar.DAY_OF_WEEK);
-        current_month = c.get(Calendar.MONTH);
-        c.clear();
-        c.set(Calendar.MONTH, current_month);
-        c.set(Calendar.DAY_OF_MONTH, current_day);
-        c.set(Calendar.YEAR, current_year);
-
+        SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd");
+        c.setTime(new Date());
         if (type == 2) {//获取下周第一天
             c.add(Calendar.DATE, +7);
         } else if (type == 0) {// 上周 的一天
@@ -159,10 +154,10 @@ public class XunJianDateFragment extends Fragment implements RadioGroup.OnChecke
         } else {//本周，获取本周第一天
 
         }
-        mMonth = String.valueOf(c.get(Calendar.MONTH) + 1);// 获取当前月份
-        mDay = String.valueOf(c.get(Calendar.DAY_OF_MONTH));// 获取当前日份的日期号码
-        mYear = String.valueOf(c.get(Calendar.YEAR));// 获取当前年份
-        return mYear + "-" + mMonth + "-" + mDay;
+        c.set(Calendar.DAY_OF_WEEK, c.getFirstDayOfWeek());
+        Date first = c.getTime();
+        Log.e("Date", formater.format(first));
+        return formater.format(first);
 
 
     }
