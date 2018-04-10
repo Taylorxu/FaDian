@@ -238,11 +238,7 @@
                 <action android:name="android.intent.action.USER_PRESENT" />
             </intent-filter>
         </receiver>
-        <receiver android:name="com.wisesignsoft.OperationManagement.MyBroadcastReceiver">
-            <intent-filter>
-                <action android:name="operationerror" />
-            </intent-filter>
-        </receiver>
+       
 
         <activity android:name=".otherPages.FuHeManagementActivity" />
         <activity android:name=".otherPages.DianLiangManagementActivity" />
