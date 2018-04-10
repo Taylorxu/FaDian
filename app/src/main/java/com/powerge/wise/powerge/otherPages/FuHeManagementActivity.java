@@ -306,7 +306,10 @@ public class FuHeManagementActivity extends AppCompatActivity implements RadioGr
             Color.rgb(196, 8, 243)
     };
 
-
+    /**
+     * 昨日 今日曲线图 填充数据
+     * @param chartData
+     */
     private void setYTChartData(FuHeYTChartLineBean chartData) {
         ArrayList<ILineDataSet> dataSets = new ArrayList<>();
         ArrayList<Entry> values = new ArrayList<>();
@@ -323,6 +326,8 @@ public class FuHeManagementActivity extends AppCompatActivity implements RadioGr
             LineDataSet d = new LineDataSet(values, "DataSet " + 0);
             d.setMode(LineDataSet.Mode.CUBIC_BEZIER);
             d.setLineWidth(2f);
+            d.setDrawValues(false);//在线上不显示 数据值
+            d.setDrawCircles(false);//不显示对相应x/y轴 点
             int color = mColors[0];
             d.setColor(color);
             d.setHighLightColor(Color.RED);
@@ -339,6 +344,8 @@ public class FuHeManagementActivity extends AppCompatActivity implements RadioGr
             LineDataSet d = new LineDataSet(values1, "DataSet " + 1);
             d.setMode(LineDataSet.Mode.CUBIC_BEZIER);
             d.setLineWidth(2f);
+            d.setDrawValues(false);//在线上不显示 数据值
+            d.setDrawCircles(false);//不显示对相应x/y轴 点
             int color = mColors[1];
             d.setColor(color);
             d.setHighLightColor(Color.RED);
@@ -349,7 +356,7 @@ public class FuHeManagementActivity extends AppCompatActivity implements RadioGr
 
         LineData data = new LineData(dataSets);
         binding.chart1.setData(data);
-        binding.chart1.animateXY(3000, 3000);
+        binding.chart1.animateXY(1000, 1000);
         binding.chart1.invalidate();
     }
 
