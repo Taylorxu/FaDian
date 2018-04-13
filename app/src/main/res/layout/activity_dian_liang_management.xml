@@ -195,7 +195,7 @@
                                 <RelativeLayout
                                     android:layout_width="0dp"
                                     android:layout_height="match_parent"
-                                    android:layout_weight="1">
+                                    android:layout_weight="1.5">
 
                                     <TextView
                                         android:id="@+id/text_rijun"
@@ -241,7 +241,7 @@
                                 <RelativeLayout
                                     android:layout_width="0dp"
                                     android:layout_height="match_parent"
-                                    android:layout_weight="1">
+                                    android:layout_weight="1.5">
 
                                     <TextView
                                         android:id="@+id/text_zuori"
@@ -287,7 +287,7 @@
                                 <RelativeLayout
                                     android:layout_width="0dp"
                                     android:layout_height="match_parent"
-                                    android:layout_weight="1">
+                                    android:layout_weight="1.5">
 
                                     <TextView
                                         android:id="@+id/text_riliyong"
@@ -431,7 +431,7 @@
                                 <RelativeLayout
                                     android:layout_width="0dp"
                                     android:layout_height="match_parent"
-                                    android:layout_weight="1">
+                                    android:layout_weight="1.5">
 
                                     <TextView
                                         android:id="@+id/text_shengyu"
@@ -477,7 +477,7 @@
                                 <RelativeLayout
                                     android:layout_width="0dp"
                                     android:layout_height="match_parent"
-                                    android:layout_weight="1">
+                                    android:layout_weight="1.5">
 
                                     <TextView
                                         android:id="@+id/text_benyue_jihua"
@@ -523,7 +523,7 @@
                                 <RelativeLayout
                                     android:layout_width="0dp"
                                     android:layout_height="match_parent"
-                                    android:layout_weight="1">
+                                    android:layout_weight="1.5">
 
                                     <TextView
                                         android:id="@+id/text_yuejihua"
@@ -571,7 +571,7 @@
                                 <RelativeLayout
                                     android:layout_width="0dp"
                                     android:layout_height="match_parent"
-                                    android:layout_weight="1">
+                                    android:layout_weight="1.5">
 
                                     <TextView
                                         android:id="@+id/text_yueliyong"
@@ -715,7 +715,7 @@
                                 <RelativeLayout
                                     android:layout_width="0dp"
                                     android:layout_height="match_parent"
-                                    android:layout_weight="1">
+                                    android:layout_weight="1.5">
 
                                     <TextView
                                         android:id="@+id/text_nian_jihua"
@@ -761,7 +761,7 @@
                                 <RelativeLayout
                                     android:layout_width="0dp"
                                     android:layout_height="match_parent"
-                                    android:layout_weight="1">
+                                    android:layout_weight="1.5">
 
                                     <TextView
                                         android:id="@+id/text_nian_shiji"
