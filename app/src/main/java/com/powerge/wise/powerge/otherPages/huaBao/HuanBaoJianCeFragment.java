@@ -6,15 +6,12 @@ import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
 import android.graphics.DashPathEffect;
-import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.SpannableString;
 import android.text.Spanned;
-import android.text.style.ForegroundColorSpan;
 import android.text.style.RelativeSizeSpan;
-import android.text.style.StyleSpan;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,7 +19,6 @@ import android.view.ViewGroup;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
-import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.Entry;
@@ -32,9 +28,7 @@ import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.powerge.wise.basestone.heart.network.FlatMapResponse;
 import com.powerge.wise.basestone.heart.network.FlatMapTopRes;
-import com.powerge.wise.basestone.heart.network.FlatMapTopResList;
 import com.powerge.wise.basestone.heart.network.ResultModel;
-import com.powerge.wise.basestone.heart.network.ResultModelData;
 import com.powerge.wise.basestone.heart.ui.XAdapter;
 import com.powerge.wise.basestone.heart.util.DensityUtil;
 import com.powerge.wise.powerge.BR;
@@ -51,9 +45,7 @@ import com.powerge.wise.powerge.databinding.HuanBaoItemDuiBiBinding;
 import com.powerge.wise.powerge.helper.EEMsgToastHelper;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -250,9 +242,12 @@ public class HuanBaoJianCeFragment extends Fragment implements RadioGroup.OnChec
 
         @Override
         public String getFormattedValue(float value, AxisBase axis) {
-            String date = dateX[(int) value];
-            return date;
-
+            int index = (int) Math.abs(value);
+            if (dateX.length > 0 && index < dateX.length) {
+                String date = dateX[index];
+                return date;
+            }
+            return String.valueOf(value);
         }
 
     }

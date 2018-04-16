@@ -308,6 +308,7 @@ public class FuHeManagementActivity extends AppCompatActivity implements RadioGr
 
     /**
      * 昨日 今日曲线图 填充数据
+     *
      * @param chartData
      */
     private void setYTChartData(FuHeYTChartLineBean chartData) {
@@ -440,8 +441,9 @@ public class FuHeManagementActivity extends AppCompatActivity implements RadioGr
 
         @Override
         public String getFormattedValue(float value, AxisBase axis) {
-            if (dateX.length > 0) {
-                String date = dateX[(int) Math.abs(value)];
+            int index = (int) Math.abs(value);
+            if (dateX.length > 0 && index <dateX.length) {
+                String date = dateX[index];
                 return date.substring(date.indexOf("-") + 1, date.length());
             }
             return String.valueOf(value);
