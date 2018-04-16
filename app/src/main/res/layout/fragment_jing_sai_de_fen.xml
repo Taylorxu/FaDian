@@ -80,7 +80,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:text="当日得分"
+                    android:text="当值均分"
                     android:textColor="@color/color_4d"
                     android:textSize="15sp" />
 
