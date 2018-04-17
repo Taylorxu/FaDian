@@ -3,8 +3,8 @@ package com.powerge.wise.powerge.otherPages;
 import android.app.Activity;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.Toast;
@@ -14,6 +14,7 @@ import com.powerge.wise.powerge.databinding.ActivityDatePeriodSelectBinding;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 public class DatePeriodSelectActivity extends AppCompatActivity {
     public static int REQUEST_CODE_F_DATE_PER = 8008;
@@ -41,6 +42,10 @@ public class DatePeriodSelectActivity extends AppCompatActivity {
         int year = calendar.get(Calendar.YEAR);
         int monthOfYear = calendar.get(Calendar.MONTH);
         int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
+
+        Date date = calendar.getTime();
+        long time = date.getTime();
+        binding.datePickerView.setMaxDate(time);
 
         binding.textStartD.setText(format.format(calendar.getTime()));
         binding.datePickerView.setDescendantFocusability(DatePicker.FOCUS_BLOCK_DESCENDANTS);
@@ -100,7 +105,7 @@ public class DatePeriodSelectActivity extends AppCompatActivity {
         if (start_d > end_d) {
             Toast.makeText(getBaseContext(), "起始时间不能大于结束时间", Toast.LENGTH_SHORT).show();
             return;
-        } else if (Math.abs(end_d - start_d) > 7) {
+        } else if (Math.abs(end_d - start_d) >=7) {
             Toast.makeText(getBaseContext(), "日期区间不能超出7天", Toast.LENGTH_SHORT).show();
             return;
         } else {
