@@ -1,5 +1,7 @@
 package com.powerge.wise.powerge.otherPages.queXian;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
@@ -72,7 +74,7 @@ public class QueXianPieChartActivity extends AppCompatActivity {
         final SimpleDateFormat format = new SimpleDateFormat("yyyyMM");
         calendar.set(dateArray[0], dateArray[1], dateArray[2]);
         dateParam = format.format(calendar.getTime());
-        binding.weekOfMonth.setText(dateArray[1] + 1 + "月");//calendar.get(WEEK_OF_MONTH)
+        binding.weekOfMonth.setText(dateParam);//calendar.get(WEEK_OF_MONTH)
     }
 
     private void initView() {
@@ -120,6 +122,25 @@ public class QueXianPieChartActivity extends AppCompatActivity {
             {Color.rgb(38, 222, 138), Color.rgb(229, 229, 229)}
     };
 
+    public void crossfade() {
+        binding.viewData.setAlpha(0f);
+        binding.viewData.setVisibility(View.VISIBLE);
+        binding.viewData.animate().alpha(1f)
+                .setDuration(1500)
+                .setListener(null);
+
+        binding.progressBar.animate()
+                .alpha(0f)
+                .setDuration(1500)
+                .setListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        binding.progressBar.setVisibility(View.GONE);
+                    }
+                });
+
+    }
+
     /**
      * 获取 环形图数据
      */
@@ -138,7 +159,7 @@ public class QueXianPieChartActivity extends AppCompatActivity {
                 .subscribe(new Subscriber<QueXianFormBean>() {
                     @Override
                     public void onCompleted() {
-
+                        crossfade();
                     }
 
                     @Override
@@ -183,21 +204,21 @@ public class QueXianPieChartActivity extends AppCompatActivity {
     private SpannableString generateCenterSpannableText(int p, float pieChartData) {
         SpannableString s = null;
         if (p == 0) {
-            s = new SpannableString("及时率\n"+pieChartData+"%");
+            s = new SpannableString("及时率\n" + pieChartData + "%");
             s.setSpan(new RelativeSizeSpan(1.2f), 3, 7, 0);
             s.setSpan(new StyleSpan(Typeface.NORMAL), 0, s.length(), 0);
             s.setSpan(new ForegroundColorSpan(mtextColors[0]), 0, s.length(), 0);
 
         } else if (p == 1) {
-            s = new SpannableString(pieChartData+"%");
+            s = new SpannableString(pieChartData + "%");
             s.setSpan(new StyleSpan(Typeface.NORMAL), 0, s.length(), 0);
             s.setSpan(new ForegroundColorSpan(mtextColors[1]), 0, s.length(), 0);
         } else if (p == 2) {
-            s = new SpannableString(pieChartData+"%");
+            s = new SpannableString(pieChartData + "%");
             s.setSpan(new StyleSpan(Typeface.NORMAL), 0, s.length(), 0);
             s.setSpan(new ForegroundColorSpan(mtextColors[2]), 0, s.length(), 0);
         } else if (p == 3) {
-            s = new SpannableString(pieChartData+"%");
+            s = new SpannableString(pieChartData + "%");
             s.setSpan(new StyleSpan(Typeface.NORMAL), 0, s.length(), 0);
             s.setSpan(new ForegroundColorSpan(mtextColors[3]), 0, s.length(), 0);
         }
