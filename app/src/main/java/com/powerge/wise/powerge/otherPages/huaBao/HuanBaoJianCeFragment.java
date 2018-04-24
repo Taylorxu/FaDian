@@ -140,7 +140,9 @@ public class HuanBaoJianCeFragment extends Fragment implements RadioGroup.OnChec
                         if (list.size() > 1) {//一条数据，画图会崩溃
                             setChart1Data(list);
                         }
-                        adapter.setList(list);
+                        List<HuanBaoBean> lastOne=new ArrayList<>();
+                        lastOne.add(list.get(list.size()-1));
+                        adapter.setList(lastOne);
                     }
                 });
     }
