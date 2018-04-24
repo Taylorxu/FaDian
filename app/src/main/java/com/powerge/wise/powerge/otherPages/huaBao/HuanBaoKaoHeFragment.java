@@ -3,16 +3,13 @@ package com.powerge.wise.powerge.otherPages.huaBao;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.database.DatabaseUtils;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AbsListView;
 import android.widget.ExpandableListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -22,7 +19,6 @@ import com.powerge.wise.basestone.heart.network.FlatMapTopRes;
 import com.powerge.wise.basestone.heart.network.ResultModel;
 import com.powerge.wise.basestone.heart.util.DensityUtil;
 import com.powerge.wise.powerge.R;
-import com.powerge.wise.powerge.bean.HuanBaoBean;
 import com.powerge.wise.powerge.bean.JiZuBean;
 import com.powerge.wise.powerge.bean.KaoHeChildItemBean;
 import com.powerge.wise.powerge.bean.User;
@@ -33,7 +29,6 @@ import com.powerge.wise.powerge.config.soap.request.RequestEnvelope;
 import com.powerge.wise.powerge.databinding.FragmentHuanBaoKaoHeBinding;
 import com.powerge.wise.powerge.helper.EEMsgToastHelper;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import rx.Subscriber;
@@ -67,15 +62,15 @@ public class HuanBaoKaoHeFragment extends Fragment implements RadioGroup.OnCheck
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_huan_bao_kao_he, container, false);
-        getData();
         iniView();
+        getData();
 
         return binding.getRoot();
     }
 
     private void iniView() {
-        createRadioBtnGroup();
         binding.jiZuGroups.setOnCheckedChangeListener(this);
+        createRadioBtnGroup();
         binding.contentKaoHe.setAdapter(expandAdapter);
         binding.contentKaoHe.setGroupIndicator(null);
         binding.contentKaoHe.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
