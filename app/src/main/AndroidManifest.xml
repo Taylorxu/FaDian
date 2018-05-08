@@ -235,7 +235,8 @@
             android:theme="@android:style/Theme.Translucent" />
         <activity android:name=".otherPages.issues.IssuesManagerActivity" />
         <activity android:name=".otherPages.DateSelectActivity" />
-        <activity android:name=".otherPages.xunJian.XjFillFormActivity"></activity>
+        <activity android:name=".otherPages.xunJian.XjFillFormActivity" />
+        <activity android:name=".otherPages.xunJian.XjEdititemActivity"></activity>
     </application>
 
 </manifest>

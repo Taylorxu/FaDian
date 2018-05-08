@@ -7,8 +7,10 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
+import android.widget.LinearLayout;
 
 import com.powerge.wise.basestone.heart.ui.XAdapter;
 import com.powerge.wise.basestone.heart.ui.XViewHolder;
@@ -17,7 +19,6 @@ import com.powerge.wise.powerge.R;
 import com.powerge.wise.powerge.bean.XunJianFormBean;
 import com.powerge.wise.powerge.databinding.ActivityXjFillFormBinding;
 import com.powerge.wise.powerge.databinding.ItemXunJianFillFormBinding;
-import com.powerge.wise.powerge.operationProjo.net.utils.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +28,7 @@ public class XjFillFormActivity extends AppCompatActivity {
     public static String extraKeyTitle = "TITLE";
     private String title;
     private Boolean isEdit;
+    public static int requestCode=200;
     private ActivityXjFillFormBinding binding;
     private XAdapter<XunJianFormBean, ItemXunJianFillFormBinding> adapter = new XAdapter.SimpleAdapter<>(BR.data, R.layout.item_xun_jian_fill_form);
 
@@ -51,10 +53,12 @@ public class XjFillFormActivity extends AppCompatActivity {
         binding.title.setText(title + "检查项");
         binding.contentList.setLayoutManager(new LinearLayoutManager(getBaseContext()));
         binding.contentList.setAdapter(adapter);
+        binding.contentList.addItemDecoration(new DividerItemDecoration(getBaseContext(), LinearLayout.VERTICAL));
         // 编辑
         if (isEdit) {
             binding.progressBar.setVisibility(View.GONE);
             adapter.setItemClickListener(itemClickListener);
+            putNameData();
         } else {  //查看 添加数据
             putData();
         }
@@ -70,6 +74,16 @@ public class XjFillFormActivity extends AppCompatActivity {
         }
         adapter.setList(list);
         crossfade();
+    }
+
+    private void putNameData() {
+        List<XunJianFormBean> list = new ArrayList<>();
+        for (int i = 0; i < 5; i++) {
+            XunJianFormBean formBean = new XunJianFormBean();
+            formBean.setItemName("温度" + i);
+            list.add(formBean);
+        }
+        adapter.setList(list);
     }
 
     public void crossfade() {
@@ -94,7 +108,15 @@ public class XjFillFormActivity extends AppCompatActivity {
     XAdapter.OnItemClickListener<XunJianFormBean, ItemXunJianFillFormBinding> itemClickListener = new XAdapter.OnItemClickListener<XunJianFormBean, ItemXunJianFillFormBinding>() {
         @Override
         public void onItemClick(XViewHolder<XunJianFormBean, ItemXunJianFillFormBinding> holder) {
-            ToastUtil.toast(getBaseContext(), "aaaaaaaaaaaaaaaa");
+            XjEdititemActivity.start(XjFillFormActivity.this, holder.getBinding().getData().getItemName());
         }
     };
+
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.btn_back:
+                finish();
+                break;
+        }
+    }
 }
