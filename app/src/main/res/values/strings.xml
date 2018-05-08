@@ -118,7 +118,7 @@
     <string name="solved">已处理</string>
     <string name="re">返回</string>
     <string name="server">请输入服务器地址</string>
-    <string name="save">保存</string>
+    <string name="save">保 存</string>
     <string name="server_title">设置服务器地址</string>
     <string name="toast_server">服务器地址不能为空</string>
     <string name="toast_server_end">请已 / 结尾</string>

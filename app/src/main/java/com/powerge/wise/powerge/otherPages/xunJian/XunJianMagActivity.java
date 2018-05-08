@@ -102,7 +102,7 @@ public class XunJianMagActivity extends AppCompatActivity implements XunJianDate
                    /* uuidChecked = holder.getBinding().btnSign.getTag().toString();
                     pointNo = holder.getBinding().pointNo.getTag().toString();
                     initBlueTooth();*/
-                    XjFillFormActivity.starter(getBaseContext(),false,holder.getBinding().getXunJianSign().getName());
+                    XjFillFormActivity.starter(getBaseContext(), true, holder.getBinding().getXunJianSign().getName());
                 }
             });
         }

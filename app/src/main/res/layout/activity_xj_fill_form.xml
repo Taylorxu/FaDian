@@ -30,21 +30,29 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="10dp"
-            android:background="@android:color/white"
-            >
+            android:background="@android:color/white">
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/content_list"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:visibility="gone"
-                />
+                android:visibility="gone" />
 
             <ProgressBar
                 android:id="@+id/progress_bar"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_gravity="center" />
+
+            <Button
+                android:id="@+id/bt_save"
+                android:layout_width="match_parent"
+                android:layout_height="49dp"
+                android:layout_gravity="bottom"
+                android:background="@color/color_420a"
+                android:text="@string/save"
+                android:textColor="@android:color/white"
+                android:textSize="15sp" />
         </FrameLayout>
 
 

@@ -40,6 +40,7 @@
             android:layout_weight="0.3">
 
             <TextView
+                android:id="@+id/tv_item_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical|right"
@@ -47,7 +48,8 @@
                 android:text="@{data.itemValue}"
                 android:textColor="@color/color_4d"
                 android:textSize="15sp"
-                android:visibility="@{isView?view.GONE:view.VISIBLE}"
+                android:tag="@{data.itemName}"
+
                 />
 
         </FrameLayout>

@@ -26,9 +26,10 @@ import java.util.List;
 public class XjFillFormActivity extends AppCompatActivity {
     public static String extraKeyEdit = "ISEDIT";
     public static String extraKeyTitle = "TITLE";
+    public static String extraResult = "RESULTOKEXTRA";
     private String title;
     private Boolean isEdit;
-    public static int requestCode=200;
+    public static int requestCode = 200;
     private ActivityXjFillFormBinding binding;
     private XAdapter<XunJianFormBean, ItemXunJianFillFormBinding> adapter = new XAdapter.SimpleAdapter<>(BR.data, R.layout.item_xun_jian_fill_form);
 
@@ -57,9 +58,11 @@ public class XjFillFormActivity extends AppCompatActivity {
         // 编辑
         if (isEdit) {
             binding.progressBar.setVisibility(View.GONE);
+            binding.contentList.setVisibility(View.VISIBLE);
             adapter.setItemClickListener(itemClickListener);
             putNameData();
         } else {  //查看 添加数据
+            binding.btSave.setVisibility(View.GONE);
             putData();
         }
     }
@@ -81,6 +84,7 @@ public class XjFillFormActivity extends AppCompatActivity {
         for (int i = 0; i < 5; i++) {
             XunJianFormBean formBean = new XunJianFormBean();
             formBean.setItemName("温度" + i);
+            formBean.setItemValue("");
             list.add(formBean);
         }
         adapter.setList(list);
@@ -108,9 +112,26 @@ public class XjFillFormActivity extends AppCompatActivity {
     XAdapter.OnItemClickListener<XunJianFormBean, ItemXunJianFillFormBinding> itemClickListener = new XAdapter.OnItemClickListener<XunJianFormBean, ItemXunJianFillFormBinding>() {
         @Override
         public void onItemClick(XViewHolder<XunJianFormBean, ItemXunJianFillFormBinding> holder) {
-            XjEdititemActivity.start(XjFillFormActivity.this, holder.getBinding().getData().getItemName());
+            XjEdititemActivity.start(XjFillFormActivity.this, holder.getBinding().getData());
         }
     };
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK) {
+            if (requestCode == requestCode) {
+                XunJianFormBean formBean = data.getParcelableExtra(extraResult);
+                for (int i = 0; i < adapter.getList().size(); i++) {
+                    if (formBean.getItemName().equals(adapter.getItemData(i).getItemName())) {
+                        adapter.getItemData(i).setItemValue(formBean.getItemValue());
+                        break;
+                    }
+                }
+                adapter.notifyDataSetChanged();
+            }
+        }
+    }
+
 
     public void onClick(View view) {
         switch (view.getId()) {
