@@ -196,9 +196,6 @@
         <activity
             android:name=".operationProjo.net.ui.login.ServerAddressActivity"
             android:screenOrientation="portrait" />
-
-
-
         <activity android:name=".otherPages.FuHeManagementActivity" />
         <activity android:name=".otherPages.DianLiangManagementActivity" />
         <activity android:name=".otherPages.DianLiangFillFormActivity" />
@@ -237,7 +234,8 @@
             android:launchMode="singleTop"
             android:theme="@android:style/Theme.Translucent" />
         <activity android:name=".otherPages.issues.IssuesManagerActivity" />
-        <activity android:name=".otherPages.DateSelectActivity"></activity>
+        <activity android:name=".otherPages.DateSelectActivity" />
+        <activity android:name=".otherPages.xunJian.XjFillFormActivity"></activity>
     </application>
 
 </manifest>

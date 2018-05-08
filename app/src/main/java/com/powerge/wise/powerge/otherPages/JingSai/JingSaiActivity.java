@@ -104,6 +104,9 @@ public class JingSaiActivity extends AppCompatActivity implements View.OnClickLi
 
                     @Override
                     public void onNext(List<ZhiBaioNameBean> list) {
+                        ZhiBaioNameBean baioNameBean = new ZhiBaioNameBean();
+                        baioNameBean.setName("全部指标");
+                        list.add(0, baioNameBean);
                         if (list.size() > 0) {
                             zhibiaoAdapter.setList(list);
                         }

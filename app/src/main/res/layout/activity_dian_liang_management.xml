@@ -106,7 +106,7 @@
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
                             android:layout_toLeftOf="@+id/text_1"
-                            android:text="@{data.day.planedAmount}"
+                            android:text="@{data.day.realAmount}"
                             android:textColor="@color/color_42b1"
                             android:textSize="24sp" />
 

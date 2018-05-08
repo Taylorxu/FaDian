@@ -1,7 +1,6 @@
 package com.powerge.wise.powerge.otherPages.huaBao;
 
 import android.databinding.DataBindingUtil;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
@@ -18,13 +17,8 @@ import com.powerge.wise.powerge.databinding.ItemKaoHeListExpandChildBinding;
 import com.powerge.wise.powerge.databinding.ItemKaoheChildListBinding;
 import com.powerge.wise.powerge.databinding.ItemTextKaoHeExpandRootBinding;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-import java.util.logging.SimpleFormatter;
 
 /**
  * Created by Administrator on 2018/3/5.
@@ -92,7 +86,7 @@ public class KaoHeExpandAdapter extends BaseExpandableListAdapter {
         }
         expandRootBinding.setKaohe(list.get(groupPosition));
         expandRootBinding.setMany("考核" + list.get(groupPosition).getCount() + "次");
-        expandRootBinding.setTime(Calendar.getInstance().get(Calendar.YEAR)+"年"+list.get(groupPosition).getMonth());
+        expandRootBinding.setTime(list.get(groupPosition).getMonth());
         mIndicators.put(groupPosition, expandRootBinding.btnRootExpand);
         setIndicatorState(groupPosition, isExpanded);
         return convertView;

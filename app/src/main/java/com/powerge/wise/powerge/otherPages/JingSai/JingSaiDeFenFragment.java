@@ -3,16 +3,9 @@ package com.powerge.wise.powerge.otherPages.JingSai;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
-import android.databinding.DataBindingUtil;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
-import android.text.TextUtils;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.powerge.wise.basestone.heart.network.FlatMapResponse;
 import com.powerge.wise.basestone.heart.network.FlatMapTopRes;
@@ -20,15 +13,11 @@ import com.powerge.wise.basestone.heart.network.Notification;
 import com.powerge.wise.basestone.heart.network.ResultModel;
 import com.powerge.wise.basestone.heart.ui.WFragment;
 import com.powerge.wise.basestone.heart.ui.XAdapter;
-import com.powerge.wise.basestone.heart.ui.XViewHolder;
 import com.powerge.wise.basestone.heart.util.RxBus;
 import com.powerge.wise.powerge.BR;
 import com.powerge.wise.powerge.R;
-import com.powerge.wise.powerge.bean.Items;
 import com.powerge.wise.powerge.bean.JingSaiDeFenBean;
-import com.powerge.wise.powerge.bean.SimpleListTextItem;
 import com.powerge.wise.powerge.bean.User;
-import com.powerge.wise.powerge.bean.ZhiBaioNameBean;
 import com.powerge.wise.powerge.config.soap.ApiService;
 import com.powerge.wise.powerge.config.soap.request.BaseUrl;
 import com.powerge.wise.powerge.config.soap.request.RequestBody;
@@ -36,12 +25,8 @@ import com.powerge.wise.powerge.config.soap.request.RequestEnvelope;
 import com.powerge.wise.powerge.databinding.FragmentJingSaiDeFenBinding;
 import com.powerge.wise.powerge.databinding.ItemJingSaiDeFenBinding;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 
 
@@ -84,9 +69,10 @@ public class JingSaiDeFenFragment extends WFragment<FragmentJingSaiDeFenBinding>
         if (getArguments() != null) {
             unitName = getArguments().getString("unitName");
             indicator = getArguments().getString("indicator");
-            if (!indicator.equals("9999")) {
+            if (!indicator.equals("9999") && !"全部指标".equals(indicator)) {
                 getBinding().textAlign.setText(indicator + "指标");
             } else {
+                if (indicator.equals("全部指标")) indicator = "9999";
                 getBinding().textAlign.setText("全部指标");
             }
 
