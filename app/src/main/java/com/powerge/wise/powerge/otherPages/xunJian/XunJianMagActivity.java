@@ -13,6 +13,7 @@ import android.databinding.DataBindingUtil;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
@@ -62,6 +63,7 @@ public class XunJianMagActivity extends AppCompatActivity implements XunJianDate
         context.startActivity(starter);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,24 +73,12 @@ public class XunJianMagActivity extends AppCompatActivity implements XunJianDate
     }
 
 
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.btn_back:
-                finish();
-                break;
-        }
-    }
-
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
     private void initView() {
         binding.dateContent.setAdapter(new XunJianDatePagerAdapter(getSupportFragmentManager()));
         binding.xunJianTabL.setupWithViewPager(binding.dateContent);
-        binding.xunJianTabL.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-
-            }
-        });
-        requestPermissions();
+        initBlueTooth();  //初始化蓝牙，成立后扫描
+        requestPermissions(); // 获取地址权限
         initContentSign();
     }
 
@@ -99,10 +89,7 @@ public class XunJianMagActivity extends AppCompatActivity implements XunJianDate
             holder.getBinding().btnSign.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                   /* uuidChecked = holder.getBinding().btnSign.getTag().toString();
-                    pointNo = holder.getBinding().pointNo.getTag().toString();
-                    initBlueTooth();*/
-                    XjFillFormActivity.starter(getBaseContext(), true, holder.getBinding().getXunJianSign().getName());
+                    XjFillFormActivity.starter(getBaseContext(), true, holder.getBinding().getXunJianSign().getName(), holder.getBinding().getXunJianSign().getPointNo());
                 }
             });
         }
@@ -111,8 +98,7 @@ public class XunJianMagActivity extends AppCompatActivity implements XunJianDate
         public void onBindViewHolder(XViewHolder<XunJianSignBean, ItemXunJianSingListBinding> holder, int position) {
             super.onBindViewHolder(holder, position);
             XunJianSignBean signBean = getItemData(position);
-            signBean.setDateCehcked(DateChecked);
-            signBean.setTermType(termType);
+            signBean.setEnable(false);//初始化 签到按钮不可点
             holder.getBinding().setXunJianSign(signBean);
         }
     };
@@ -157,9 +143,18 @@ public class XunJianMagActivity extends AppCompatActivity implements XunJianDate
                         EEMsgToastHelper.newInstance().selectWitch(e.getMessage());
                     }
 
+                    @SuppressLint("NewApi")
                     @Override
                     public void onNext(List<XunJianSignBean> xunJianSignBeans) {
                         adapter.setList(xunJianSignBeans);
+                        if (mBluetoothAdapter != null) mBluetoothAdapter.stopLeScan(callback);
+
+                        if (!mBluetoothAdapter.isEnabled()) {//没打开蓝牙，则请求打开
+                            Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
+                            startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
+                        } else {
+                            scanLeDevice();
+                        }
                     }
                 });
 
@@ -183,10 +178,8 @@ public class XunJianMagActivity extends AppCompatActivity implements XunJianDate
                 .flatMap(new FlatMapResponse<ResultModel<SignSoapRequest>>())
                 .flatMap(new FlatMapTopRes<SignSoapRequest>())
                 .subscribe(new Subscriber<SignSoapRequest>() {
-                    @SuppressLint("NewApi")
-                    @Override
                     public void onCompleted() {
-                        showLoading(false);
+
                     }
 
                     @Override
@@ -195,7 +188,7 @@ public class XunJianMagActivity extends AppCompatActivity implements XunJianDate
                         if (e != null) {
                             EEMsgToastHelper.newInstance().selectWitch(e.getMessage());
                         }
-                        showLoading(false);
+
                     }
 
                     @Override
@@ -219,9 +212,11 @@ public class XunJianMagActivity extends AppCompatActivity implements XunJianDate
     public void onDateCehckedListener(Map<String, String> params) {
         DateChecked = params.get("checkId");
         createData(params);
+
     }
 
 
+    @SuppressLint("NewApi")
     private void initBlueTooth() {
         final BluetoothManager bluetoothManager = (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
         //是否支持 低耗功能 BLE
@@ -230,12 +225,6 @@ public class XunJianMagActivity extends AppCompatActivity implements XunJianDate
         } else {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {//必须是Android4.3 以上 (SDK_INT)API==18
                 mBluetoothAdapter = bluetoothManager.getAdapter();
-                if (!mBluetoothAdapter.isEnabled()) {//没打开蓝牙，则请求打开
-                    Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
-                    startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
-                } else {
-                    scanLeDevice();
-                }
             } else {
                 Toast.makeText(this, "该手机不支持蓝牙", Toast.LENGTH_LONG);
             }
@@ -243,18 +232,70 @@ public class XunJianMagActivity extends AppCompatActivity implements XunJianDate
 
     }
 
+    String[] serviceUuids;
+
+    @SuppressLint("NewApi")
+    private void scanLeDevice() {
+        if (adapter.getList() == null) return;
+        Log.e(TAG, adapter.getList().toString());
+        serviceUuids = new String[adapter.getList().size()];
+        for (int i = 0; i < adapter.getList().size(); i++) {
+            serviceUuids[i] = adapter.getList().get(i).getBlueToothUUID().toLowerCase();
+        }
+//        mBluetoothAdapter.startLeScan(serviceUuids,callback);
+        mBluetoothAdapter.startLeScan(callback);
+    }
+
+
+    final BluetoothAdapter.LeScanCallback callback = new BluetoothAdapter.LeScanCallback() {
+        @SuppressLint("NewApi")
+        @Override
+        public void onLeScan(final BluetoothDevice device, int rssi, byte[] scanRecord) {
+            final iBeaconClass.iBeacon ibeacon = iBeaconClass.fromScanData(device, rssi, scanRecord);
+            if (ibeacon != null) {
+                if ((Integer.parseInt(termType) == 2 && Integer.parseInt(DateChecked) == 1) || (Integer.parseInt(termType) != 2 && Integer.parseInt(DateChecked) == 3)) {
+                    for (int i = 0; i < serviceUuids.length; i++) {
+                        if (serviceUuids[i].equals(ibeacon.proximityUuid)) {
+                            for (XunJianSignBean bean : adapter.getList()) {
+                                int major_data = Integer.parseInt(bean.getBlueToothNo());
+                                String uuid_data = bean.getBlueToothUUID().toLowerCase();
+                                if (major_data == ibeacon.major) {//如果搜到信标，签到按钮是不可编辑状态
+                                    bean.setEnable(true);
+                                    break;
+                                }
+                            }
+                            adapter.notifyDataSetChanged();
+                        }
+                    }
+                }
+//                LogUtils.e(iBeaconClass.bytesToHexString(scanRecord) + "   ----------------------");
+            }
+           /* if (ibeacon != null && adapter.getList() != null) {
+                Log.e(TAG, ibeacon.major + "---------------------");
+                //只有当前中间的 日期区间可签到
+                if ((Integer.parseInt(termType) == 2 && Integer.parseInt(DateChecked) == 1) || (Integer.parseInt(termType) != 2 && Integer.parseInt(DateChecked) == 3)) {
+
+                    for (XunJianSignBean bean : adapter.getList()) {
+                        int major_data = Integer.parseInt(bean.getBlueToothNo());
+                        String uuid_data = bean.getBlueToothUUID().toLowerCase();
+                        if (major_data == ibeacon.major && uuid_data.equals(ibeacon.proximityUuid)) {//如果搜到信标，签到按钮是不可编辑状态
+                            bean.setEnable(true);
+                            adapter.notifyDataSetChanged();
+                        }
+                    }
+
+                }
+
+            }*/
+        }
+
+    };
+
 
     private void requestPermissions() {
         AndPermission.with(this)
                 .permission(android.Manifest.permission.ACCESS_COARSE_LOCATION
                 )
-               /* .onGranted(new Action() {
-                    @SuppressLint("NewApi")
-                    @Override
-                    public void onAction(List<String> permissions) {
-                        Toast.makeText(getBaseContext(), "授权成功", Toast.LENGTH_SHORT).show();
-                    }
-                })*/
                 .rationale(rationaleListener)
                 .onDenied(action)
                 .start();
@@ -310,49 +351,6 @@ public class XunJianMagActivity extends AppCompatActivity implements XunJianDate
         }
     };
 
-    public void showLoading(boolean should) {
-        mScanning = should;
-        binding.loadingRLayout.setVisibility(should ? View.VISIBLE : View.GONE);
-        binding.loadingCenterText.setText("正在扫描中...");
-        binding.contentSingList.setAlpha(should ? 0.5f : 1f);
-    }
-
-    Runnable runnable = new Runnable() {
-        @SuppressLint("NewApi")
-        @Override
-        public void run() {
-            mBluetoothAdapter.stopLeScan(callback);
-            showLoading(false);
-            Toast.makeText(getBaseContext(), "扫描结束", Toast.LENGTH_SHORT).show();
-        }
-    };
-
-    @SuppressLint("NewApi")
-    private void scanLeDevice() {
-        showLoading(true);
-        if (mScanning) {//不在扫描中
-            mHandler.postDelayed(runnable, 10000);
-            mScanning = mBluetoothAdapter.startLeScan(callback);
-        }
-    }
-
-    final BluetoothAdapter.LeScanCallback callback = new BluetoothAdapter.LeScanCallback() {
-        @SuppressLint("NewApi")
-        @Override
-        public void onLeScan(final BluetoothDevice device, int rssi, byte[] scanRecord) {
-            final iBeaconClass.iBeacon ibeacon = iBeaconClass.fromScanData(device, rssi, scanRecord);
-            if (ibeacon != null && uuidChecked != null) {
-                Log.e(TAG, ibeacon.proximityUuid);
-                if (ibeacon.proximityUuid.equals(uuidChecked.toLowerCase())) {
-                    mBluetoothAdapter.stopLeScan(callback);
-                    mHandler.removeCallbacks(runnable);
-                    binding.loadingCenterText.setText("开始签到");
-                    signAction();
-                }
-            }
-        }
-
-    };
 
     @SuppressLint("NewApi")
     @Override
@@ -375,6 +373,14 @@ public class XunJianMagActivity extends AppCompatActivity implements XunJianDate
     protected void onDestroy() {
         super.onDestroy();
         if (mBluetoothAdapter != null) mBluetoothAdapter.stopLeScan(callback);
+    }
+
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.btn_back:
+                finish();
+                break;
+        }
     }
 
 }
