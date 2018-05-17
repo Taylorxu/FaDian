@@ -25,6 +25,7 @@ import com.powerge.wise.basestone.heart.network.FlatMapTopRes;
 import com.powerge.wise.basestone.heart.network.ResultModel;
 import com.powerge.wise.basestone.heart.ui.XAdapter;
 import com.powerge.wise.basestone.heart.ui.XViewHolder;
+import com.powerge.wise.basestone.heart.util.LogUtils;
 import com.powerge.wise.powerge.R;
 import com.powerge.wise.powerge.bean.User;
 import com.powerge.wise.powerge.bean.XunJianSignBean;
@@ -57,6 +58,7 @@ public class XunJianMagActivity extends AppCompatActivity implements XunJianDate
     private Handler mHandler = new Handler();
     private boolean mScanning;
     private String DateChecked;
+    private String UUID = "b5b182c7-eab1-4988-aa99-b5c1517008d9";
 
     public static void start(Context context) {
         Intent starter = new Intent(context, XunJianMagActivity.class);
@@ -98,7 +100,7 @@ public class XunJianMagActivity extends AppCompatActivity implements XunJianDate
         public void onBindViewHolder(XViewHolder<XunJianSignBean, ItemXunJianSingListBinding> holder, int position) {
             super.onBindViewHolder(holder, position);
             XunJianSignBean signBean = getItemData(position);
-            signBean.setEnable(false);//初始化 签到按钮不可点
+//            signBean.setEnable(false);//初始化 签到按钮不可点
             holder.getBinding().setXunJianSign(signBean);
         }
     };
@@ -232,18 +234,13 @@ public class XunJianMagActivity extends AppCompatActivity implements XunJianDate
 
     }
 
-    String[] serviceUuids;
 
     @SuppressLint("NewApi")
     private void scanLeDevice() {
         if (adapter.getList() == null) return;
         Log.e(TAG, adapter.getList().toString());
-        serviceUuids = new String[adapter.getList().size()];
-        for (int i = 0; i < adapter.getList().size(); i++) {
-            serviceUuids[i] = adapter.getList().get(i).getBlueToothUUID().toLowerCase();
-        }
-//        mBluetoothAdapter.startLeScan(serviceUuids,callback);
         mBluetoothAdapter.startLeScan(callback);
+
     }
 
 
@@ -254,39 +251,21 @@ public class XunJianMagActivity extends AppCompatActivity implements XunJianDate
             final iBeaconClass.iBeacon ibeacon = iBeaconClass.fromScanData(device, rssi, scanRecord);
             if (ibeacon != null) {
                 if ((Integer.parseInt(termType) == 2 && Integer.parseInt(DateChecked) == 1) || (Integer.parseInt(termType) != 2 && Integer.parseInt(DateChecked) == 3)) {
-                    for (int i = 0; i < serviceUuids.length; i++) {
-                        if (serviceUuids[i].equals(ibeacon.proximityUuid)) {
-                            for (XunJianSignBean bean : adapter.getList()) {
-                                int major_data = Integer.parseInt(bean.getBlueToothNo());
-                                String uuid_data = bean.getBlueToothUUID().toLowerCase();
-                                if (major_data == ibeacon.major) {//如果搜到信标，签到按钮是不可编辑状态
-                                    bean.setEnable(true);
-                                    break;
-                                }
+                    LogUtils.e(ibeacon.proximityUuid + "   ----------------------");
+                    if (UUID.equals(ibeacon.proximityUuid)) {
+                        for (XunJianSignBean bean : adapter.getList()) {
+                            int major_data = Integer.parseInt(bean.getBlueToothNo());
+                            String uuid_data = bean.getBlueToothUUID().toLowerCase();
+                            if (major_data == ibeacon.major) {//如果搜到信标，签到按钮是不可编辑状态
+                                bean.setEnable(true);
+                                break;
                             }
-                            adapter.notifyDataSetChanged();
                         }
+                        adapter.notifyDataSetChanged();
                     }
                 }
 //                LogUtils.e(iBeaconClass.bytesToHexString(scanRecord) + "   ----------------------");
             }
-           /* if (ibeacon != null && adapter.getList() != null) {
-                Log.e(TAG, ibeacon.major + "---------------------");
-                //只有当前中间的 日期区间可签到
-                if ((Integer.parseInt(termType) == 2 && Integer.parseInt(DateChecked) == 1) || (Integer.parseInt(termType) != 2 && Integer.parseInt(DateChecked) == 3)) {
-
-                    for (XunJianSignBean bean : adapter.getList()) {
-                        int major_data = Integer.parseInt(bean.getBlueToothNo());
-                        String uuid_data = bean.getBlueToothUUID().toLowerCase();
-                        if (major_data == ibeacon.major && uuid_data.equals(ibeacon.proximityUuid)) {//如果搜到信标，签到按钮是不可编辑状态
-                            bean.setEnable(true);
-                            adapter.notifyDataSetChanged();
-                        }
-                    }
-
-                }
-
-            }*/
         }
 
     };
