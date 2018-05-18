@@ -46,7 +46,7 @@ public class XjEdititemActivity extends AppCompatActivity {
 
     private void initView() {
         binding.title.setText(xunJianFormBean.getCheckItem());
-        if (xunJianFormBean.imgvisibility() == View.VISIBLE) {//单选列表
+        if (xunJianFormBean.getImgvisibility() == View.VISIBLE) {//单选列表
             binding.rtMultiple.setVisibility(View.VISIBLE);
             binding.rtMultiple.setLayoutManager(new LinearLayoutManager(getBaseContext()));
             binding.rtMultiple.setAdapter(adapter);
@@ -78,7 +78,7 @@ public class XjEdititemActivity extends AppCompatActivity {
             }
             holder.getBinding().ivState.animate().scaleX(1f).scaleY(1f).alpha(1f).setDuration(300);
             oldImageView = holder.getBinding().ivState;
-            xunJianFormBean.setRadioBtResult(Integer.parseInt(holder.getBinding().rbName.getTag().toString()));
+            xunJianFormBean.setCheckResult(holder.getBinding().rbName.getTag().toString());
         }
     };
 

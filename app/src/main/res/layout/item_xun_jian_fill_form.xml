@@ -49,7 +49,7 @@
                 android:layout_gravity="center_vertical|right"
                 android:layout_marginRight="15dp"
                 android:tag="@{data.checkItem}"
-                android:text="@{data.checkResult}"
+                android:text="@{data.itemValue}"
                 android:textColor="@color/color_4d"
                 android:textSize="15sp"
 
@@ -61,7 +61,7 @@
             android:id="@+id/bt_to_edit"
             android:layout_width="50dp"
             android:layout_height="match_parent"
-            android:visibility="@{data.imgvisibility()}">
+            android:visibility="@{data.imgvisibility}">
 
             <ImageView
                 android:layout_width="wrap_content"

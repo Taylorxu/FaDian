@@ -52,7 +52,9 @@
                 android:background="@color/color_420a"
                 android:text="@string/save"
                 android:textColor="@android:color/white"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:onClick="onClick"
+                />
         </FrameLayout>
 
 

@@ -54,7 +54,7 @@ public class XunJianMagActivity extends AppCompatActivity implements XunJianDate
     private BluetoothAdapter mBluetoothAdapter;
     int REQUEST_ENABLE_BT = 0101;
     private String TAG = "BLUE_TOOTH_LOG";
-    private String pointNo, termType;
+    private String date, termType;
     private Handler mHandler = new Handler();
     private boolean mScanning;
     private String DateChecked;
@@ -74,6 +74,11 @@ public class XunJianMagActivity extends AppCompatActivity implements XunJianDate
         initView();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(termType!=null)createData();
+    }
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
     private void initView() {
@@ -91,7 +96,7 @@ public class XunJianMagActivity extends AppCompatActivity implements XunJianDate
             holder.getBinding().btnSign.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    XjFillFormActivity.starter(getBaseContext(), true, holder.getBinding().getXunJianSign().getName(), holder.getBinding().getXunJianSign().getPointNo());
+                    XjFillFormActivity.starter(getBaseContext(), true, holder.getBinding().getXunJianSign(), termType);
                 }
             });
         }
@@ -120,13 +125,12 @@ public class XunJianMagActivity extends AppCompatActivity implements XunJianDate
         }
     };
 
-    private void createData(Map<String, String> params) {
-        termType = params.get("termType");
+    private void createData() {
         XunJianSignBean bean = new XunJianSignBean();
         bean.setNameSpace(BaseUrl.NAMESPACE_P);
         bean.setUserName(User.getCurrentUser().getName());
         bean.setArg1(termType);
-        bean.setArg2(params.get("date"));
+        bean.setArg2(date);
         RequestEnvelope.getRequestEnvelope().setBody(new RequestBody<>(bean));
         ApiService.Creator.get().queryInspectionResultData(RequestEnvelope.getRequestEnvelope())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -163,57 +167,13 @@ public class XunJianMagActivity extends AppCompatActivity implements XunJianDate
 
     }
 
-    /**
-     * 签到
-     */
-    private void signAction() {
-        SignSoapRequest bean = new SignSoapRequest();
-        bean.setNameSpace(BaseUrl.NAMESPACE_P);
-        bean.setUserName(User.getCurrentUser().getName());
-        bean.setArg1(pointNo);
-        bean.setArg2(uuidChecked);
-        bean.setArg3(termType);
-        RequestEnvelope.getRequestEnvelope().setBody(new RequestBody<>(bean));
-        ApiService.Creator.get().inspectPoint(RequestEnvelope.getRequestEnvelope())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribeOn(Schedulers.io())
-                .flatMap(new FlatMapResponse<ResultModel<SignSoapRequest>>())
-                .flatMap(new FlatMapTopRes<SignSoapRequest>())
-                .subscribe(new Subscriber<SignSoapRequest>() {
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        e.printStackTrace();
-                        if (e != null) {
-                            EEMsgToastHelper.newInstance().selectWitch(e.getMessage());
-                        }
-
-                    }
-
-                    @Override
-                    public void onNext(SignSoapRequest x) {
-                        Toast.makeText(getBaseContext(), "签到成功", Toast.LENGTH_SHORT).show();
-                        List<XunJianSignBean> list = adapter.getList();
-                        for (XunJianSignBean xun : list) {
-                            if (xun.getPointNo().equals(pointNo)) {
-                                xun.setInspectedNum(x.getInspectedNum());
-                                xun.setInspectedDetails(x.getInspectedDetails());
-                                break;
-                            }
-                        }
-                        adapter.notifyDataSetChanged();
-                    }
-                });
-
-    }
 
     @Override
     public void onDateCehckedListener(Map<String, String> params) {
         DateChecked = params.get("checkId");
-        createData(params);
+        termType = params.get("termType");
+        date = params.get("date");
+        createData();
 
     }
 

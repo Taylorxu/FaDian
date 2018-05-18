@@ -12,7 +12,9 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.powerge.wise.basestone.heart.network.FlatMapResponse;
 import com.powerge.wise.basestone.heart.network.FlatMapTopRes;
 import com.powerge.wise.basestone.heart.network.ResultModel;
@@ -22,6 +24,7 @@ import com.powerge.wise.powerge.BR;
 import com.powerge.wise.powerge.R;
 import com.powerge.wise.powerge.bean.User;
 import com.powerge.wise.powerge.bean.XunJianFormBean;
+import com.powerge.wise.powerge.bean.XunJianSignBean;
 import com.powerge.wise.powerge.config.soap.ApiService;
 import com.powerge.wise.powerge.config.soap.request.BaseUrl;
 import com.powerge.wise.powerge.config.soap.request.RequestBody;
@@ -29,6 +32,8 @@ import com.powerge.wise.powerge.config.soap.request.RequestEnvelope;
 import com.powerge.wise.powerge.databinding.ActivityXjFillFormBinding;
 import com.powerge.wise.powerge.databinding.ItemXunJianFillFormBinding;
 import com.powerge.wise.powerge.helper.EEMsgToastHelper;
+import com.powerge.wise.powerge.operationProjo.net.utils.LogUtil;
+import com.powerge.wise.powerge.operationProjo.net.utils.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,21 +43,21 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 public class XjFillFormActivity extends AppCompatActivity {
-    public static String extraKeyEdit = "ISEDIT";
-    public static String extraKeyTitle = "TITLE";
-    public static String extraKeyPointId = "POINTID ";
+    public static String extraKeyEdit = "ISEDIT", extraKeyParcelable = "ISEDIT", extraKeytermType = "TERMTYPE";
     public static String extraResult = "RESULTOKEXTRA";
-    private String title, pointId;
+    private XunJianSignBean xunJianSignBean;
     private Boolean isEdit;
+    private String termType;
     public static int requestCode = 200;
     private ActivityXjFillFormBinding binding;
     private XAdapter<XunJianFormBean, ItemXunJianFillFormBinding> adapter = new XAdapter.SimpleAdapter<>(BR.data, R.layout.item_xun_jian_fill_form);
 
-    public static void starter(Context context, Boolean isEdit, String title, String id) {
+
+    public static void starter(Context context, boolean isEdit, XunJianSignBean xunJianSign, String termType) {
         Intent starter = new Intent(context, XjFillFormActivity.class);
         starter.putExtra(extraKeyEdit, isEdit);
-        starter.putExtra(extraKeyTitle, title);
-        starter.putExtra(extraKeyPointId, id);
+        starter.putExtra(extraKeyParcelable, xunJianSign);
+        starter.putExtra(extraKeytermType, termType);
         context.startActivity(starter);
     }
 
@@ -61,21 +66,19 @@ public class XjFillFormActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_xj_fill_form);
         isEdit = getIntent().getBooleanExtra(extraKeyEdit, true);
-        title = getIntent().getStringExtra(extraKeyTitle);
-        pointId = getIntent().getStringExtra(extraKeyPointId);
+        xunJianSignBean = getIntent().getParcelableExtra(extraKeyParcelable);
+        termType = getIntent().getStringExtra(extraKeytermType);
         initView();
 
     }
 
     private void initView() {
-        binding.title.setText(title + "检查项");
+        binding.title.setText(xunJianSignBean.getName() + "检查项");
         binding.contentList.setLayoutManager(new LinearLayoutManager(getBaseContext()));
         binding.contentList.setAdapter(adapter);
         binding.contentList.addItemDecoration(new DividerItemDecoration(getBaseContext(), LinearLayout.VERTICAL));
         // 编辑
         if (isEdit) {
-            binding.progressBar.setVisibility(View.GONE);
-            binding.contentList.setVisibility(View.VISIBLE);
             adapter.setItemClickListener(itemClickListener);
             putNameData();
         } else {  //查看 添加数据
@@ -99,7 +102,7 @@ public class XjFillFormActivity extends AppCompatActivity {
         XunJianFormBean bean = new XunJianFormBean();
         bean.setNameSpace(BaseUrl.NAMESPACE_P);
         bean.setUserName(User.getCurrentUser().getName());
-        bean.setArg1(pointId);
+        bean.setArg1(xunJianSignBean.getPointNo());
         RequestEnvelope.getRequestEnvelope().setBody(new RequestBody<>(bean));
         ApiService.Creator.get().queryItemsOfPoint(RequestEnvelope.getRequestEnvelope())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -182,6 +185,93 @@ public class XjFillFormActivity extends AppCompatActivity {
             case R.id.btn_back:
                 finish();
                 break;
+            case R.id.bt_save:
+                List<FormData> list = new ArrayList<>();
+                for (XunJianFormBean form : adapter.getList()) {
+                    if (form.checkEmpty()) {
+                        ToastUtil.toast(getBaseContext(), "请填写" + form.getCheckItem());
+                        break;
+                    }
+                    FormData data = new FormData(form.getCheckItemId(), form.getCheckItem(), form.getCheckResult());
+                    list.add(data);
+                }
+                Gson gson = new Gson();
+                LogUtil.log(gson.toJson(list) + "巡检项 数据信息");
+                signAction(gson.toJson(list));
+                break;
+        }
+    }
+
+
+    /**
+     * 签到
+     */
+    private void signAction(String checkItemsData) {
+        waitingSign();
+        SignSoapRequest bean = new SignSoapRequest();
+        bean.setNameSpace(BaseUrl.NAMESPACE_P);
+        bean.setUserName(User.getCurrentUser().getName());
+        bean.setArg1(xunJianSignBean.getPointNo());
+        bean.setArg2(xunJianSignBean.getName());
+        bean.setArg3(xunJianSignBean.getBlueToothNo());
+        bean.setArg4(termType);
+        bean.setArg5(checkItemsData);
+
+        RequestEnvelope.getRequestEnvelope().setBody(new RequestBody<>(bean));
+        ApiService.Creator.get().inspectPoint(RequestEnvelope.getRequestEnvelope())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .flatMap(new FlatMapResponse<ResultModel<SignSoapRequest>>())
+                .flatMap(new FlatMapTopRes<SignSoapRequest>())
+                .subscribe(new Subscriber<SignSoapRequest>() {
+                    public void onCompleted() {
+                        finish();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        e.printStackTrace();
+                        if (e != null) {
+                            EEMsgToastHelper.newInstance().selectWitch(e.getMessage());
+                        }
+                        binding.progressBar.setVisibility(View.GONE);
+                    }
+
+                    @Override
+                    public void onNext(SignSoapRequest x) {
+                        Toast.makeText(getBaseContext(), "签到成功", Toast.LENGTH_SHORT).show();
+                        binding.progressBar.setVisibility(View.GONE);
+
+                    }
+                });
+
+    }
+
+    public void waitingSign() {
+        binding.progressBar.animate()
+                .alpha(1f)
+                .setDuration(200)
+                .setListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        binding.progressBar.setVisibility(View.VISIBLE);
+                    }
+                });
+    }
+
+    private class FormData {
+        /**
+         * {checkNo="检查项编号1"; checkName="检查项名称1"; checkData="检查项结果1"}
+         * checkData为选项时：0-正常，1-异常
+         */
+        private String checkNo;
+        private String checkName;
+        private String checkData;
+
+        public FormData(String checkNo, String checkName, String checkData) {
+            this.checkNo = checkNo;
+            this.checkName = checkName;
+            this.checkData = checkData;
         }
     }
 }

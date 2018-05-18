@@ -23,14 +23,13 @@ public class XunJianSignBean extends RootBean implements Parcelable {
     @Element(name = "arg2")
     String arg2;
     /**
-     * pointNo : 1001
-     * name : 锅炉
-     * num : 3
-     * blueToothNo : fda50693-a4e2-4fb1-afcf-c6eb07647825
-     * inspectedNum : 0
-     * inspectedDetails : []
+     * pointNo= "巡检点编号1";
+     * name= "巡检点名称1";
+     * num= " 周期内应巡检次数 ";
+     * blueToothNo=" 蓝牙设备编号";
+     * blueToothUUID=" 蓝牙设备ID";
+     * inspectedNum="周期内已巡检次数";
      */
-
     private String pointNo;
     private String name;
     private int num;
@@ -56,7 +55,7 @@ public class XunJianSignBean extends RootBean implements Parcelable {
         termType = in.readString();
         pointNo = in.readString();
         blueToothUUID = in.readString();
-        enable=in.readByte() != 1;
+        enable = in.readByte() != 1;
     }
 
     public static final Creator<XunJianSignBean> CREATOR = new Creator<XunJianSignBean>() {

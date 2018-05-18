@@ -72,4 +72,5 @@ dependencies {
         maven { url 'https://oss.sonatype.org/content/repositories/ksoap2-android-releases/' }
     }
     implementation files('libs/ksoap2-android-assembly-3.5.0-jar-with-dependencies.jar')
+    compile 'org.altbeacon:android-beacon-library:2+'
 }

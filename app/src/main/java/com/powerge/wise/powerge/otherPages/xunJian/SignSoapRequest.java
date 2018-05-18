@@ -18,6 +18,11 @@ public class SignSoapRequest extends RootBean {
     String arg2;
     @Element(name = "arg3")
     String arg3;
+    @Element(name = "arg4")
+    String arg4;
+    @Element(name = "arg5")
+    String arg5;
+
     /**
      * shouldInspectNum : 40
      * inspectedDetails : [{"detail":"2018-03-27 08:02:49"},{"detail":"2018-03-27 06:40:20"},{"detail":"2018-03-27 06:38:03"}]
@@ -51,6 +56,22 @@ public class SignSoapRequest extends RootBean {
 
     public void setArg3(String arg3) {
         this.arg3 = arg3;
+    }
+
+    public String getArg4() {
+        return arg4;
+    }
+
+    public void setArg4(String arg4) {
+        this.arg4 = arg4;
+    }
+
+    public String getArg5() {
+        return arg5;
+    }
+
+    public void setArg5(String arg5) {
+        this.arg5 = arg5;
     }
 
     public String getShouldInspectNum() {

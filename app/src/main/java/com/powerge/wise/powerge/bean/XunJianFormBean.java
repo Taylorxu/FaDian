@@ -2,6 +2,7 @@ package com.powerge.wise.powerge.bean;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.text.TextUtils;
 import android.view.View;
 
 import org.simpleframework.xml.Element;
@@ -27,8 +28,8 @@ public class XunJianFormBean extends RootBean implements Parcelable {
     private String checkNeeded;
     private String checkItem;
     private String checkType;
-    private String checkResult;  //查看时 的数据值
-    private int radioBtResult=9;  // 单选时，返回的结果
+    private String checkResult = "";  //查看时 的数据值
+    private int radioBtResult = 9;  // 单选时，返回的结果
 
     public XunJianFormBean() {
     }
@@ -95,12 +96,25 @@ public class XunJianFormBean extends RootBean implements Parcelable {
         this.checkType = checkType;
     }
 
+    String options[] = new String[]{"是", "否"};
+
     public String getCheckResult() {
         return checkResult;
     }
 
     public void setCheckResult(String checkResult) {
         this.checkResult = checkResult;
+    }
+
+    public String getItemValue() {
+        if (TextUtils.isEmpty(checkResult)) return "";
+        String value;
+        if (!checkType.equals("dict1id")) {
+            value = checkResult;
+        } else {
+            value = options[Integer.parseInt(checkResult)];
+        }
+        return value;
     }
 
     public int getRadioBtResult() {
@@ -126,12 +140,19 @@ public class XunJianFormBean extends RootBean implements Parcelable {
         dest.writeInt(radioBtResult);
     }
 
-    public int imgvisibility() {
+    public int getImgvisibility() {
         if (checkType.equals("dict1id")) {// 单选
             return View.VISIBLE;
         } else if (checkType.equals("dict2id")) {//文本框
             return View.INVISIBLE;
         }
         return View.INVISIBLE;
+    }
+
+    public boolean checkEmpty() {
+        if (checkNeeded.equals("dict2id") &&TextUtils.isEmpty(checkResult)) {//必填
+            return true;
+        }
+        return false;
     }
 }
