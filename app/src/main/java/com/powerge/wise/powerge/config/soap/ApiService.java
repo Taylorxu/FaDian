@@ -306,6 +306,18 @@ public interface ApiService {
     @POST(BaseUrl.SERVICE_P)
     Observable<Response<ResultModel<List<XunJianFormBean>>>> queryItemsOfPoint(@Body RequestEnvelope requestEnvelope);
 
+ /**
+     *
+     * @param requestEnvelope
+     * @return
+     */
+    @Headers({
+            "Content-Type:text/xml; charset=utf-8",
+            "Accept-Charset: utf-8"
+    })
+    @POST(BaseUrl.SERVICE_P)
+    Observable<Response<ResultModel<List<XunJianFormBean>>>> queryCheckResults(@Body RequestEnvelope requestEnvelope);
+
 
     class Creator {
         private static Strategy strategy = new AnnotationStrategy();

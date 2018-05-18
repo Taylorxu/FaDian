@@ -20,6 +20,7 @@ import com.powerge.wise.powerge.bean.QueXianMagBean;
 import com.powerge.wise.powerge.bean.SheBeiRootBean;
 import com.powerge.wise.powerge.bean.TongJiForm;
 import com.powerge.wise.powerge.bean.Weather;
+import com.powerge.wise.powerge.bean.XuJianCheckBean;
 import com.powerge.wise.powerge.bean.XunJianFormBean;
 import com.powerge.wise.powerge.bean.XunJianSignBean;
 import com.powerge.wise.powerge.bean.ZhiBIaoValueBean;
@@ -45,7 +46,8 @@ public class RequestBody<Data> {
         this.requestModel = requestModel;
     }
 
-    @ElementUnion({
+
+    @ElementUnion(value = {
             @Element(name = "n0:mobileLogin", type = LoginBean.class),
             @Element(name = "n0:queryProductionEarlyMeetingData", type = MorningMeetingBean.class),
             @Element(name = "n0:queryDevicesData", type = SheBeiRootBean.class),
@@ -72,6 +74,7 @@ public class RequestBody<Data> {
             @Element(name = "n0:queryMainPageData", type = MainPageBean.class),
             @Element(name = "n0:queryRankOfMonthData", type = PaiMingChildItemBean.class),
             @Element(name = "n0:queryItemsOfPoint", type = XunJianFormBean.class),
+            @Element(name = "n0:queryCheckResults", type = XuJianCheckBean.class),
             @Element(name = "n0:queryMonitorLogs", type = ZhiZhangLogBean.class)
     })
     public Data requestModel;

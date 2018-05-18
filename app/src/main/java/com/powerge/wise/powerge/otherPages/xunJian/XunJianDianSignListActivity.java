@@ -21,7 +21,7 @@ import java.util.List;
 
 public class XunJianDianSignListActivity extends AppCompatActivity {
     ActivityXunJianDianSignListBinding binding;
-    public String title;
+    public String titleText;
     public static String titleKey = "TITLE", listKey = "LIST";
     List<Detail> list = new ArrayList<>();
 
@@ -37,7 +37,7 @@ public class XunJianDianSignListActivity extends AppCompatActivity {
         public void onBindViewHolder(XViewHolder<Detail, ItemSignTimeListBinding> holder, int position) {
             super.onBindViewHolder(holder, position);
             holder.getBinding().setSignTime(getItemData(position));
-            holder.getBinding().setIndex(String.valueOf(position));
+            holder.getBinding().setIndex(String.valueOf(position + 1));
 
         }
     };
@@ -46,13 +46,21 @@ public class XunJianDianSignListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_xun_jian_dian_sign_list);
-        binding.title.setText(getIntent().getStringExtra(titleKey));
+        titleText = getIntent().getStringExtra(titleKey);
+        binding.title.setText(titleText);
         list = getIntent().getParcelableArrayListExtra(listKey);
         binding.contentSignTime.setLayoutManager(new LinearLayoutManager(this));
         binding.contentSignTime.setAdapter(adapter);
+        adapter.setItemClickListener(itemClickListener);
         adapter.setList(list);
     }
-    //TODO 跳转到检查项查看界面 itemClick 后台 接口需要对数据结构进行改造-包含 检查项 数据体
+
+    XAdapter.OnItemClickListener<Detail, ItemSignTimeListBinding> itemClickListener = new XAdapter.OnItemClickListener<Detail, ItemSignTimeListBinding>() {
+        @Override
+        public void onItemClick(XViewHolder<Detail, ItemSignTimeListBinding> holder) {
+            XjFillFormActivity.starter(getBaseContext(), false, holder.getBinding().getSignTime().getDetail(), titleText);
+        }
+    };
 
     public void onClick(View view) {
         finish();

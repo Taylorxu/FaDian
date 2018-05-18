@@ -23,6 +23,7 @@ import com.powerge.wise.basestone.heart.ui.XViewHolder;
 import com.powerge.wise.powerge.BR;
 import com.powerge.wise.powerge.R;
 import com.powerge.wise.powerge.bean.User;
+import com.powerge.wise.powerge.bean.XuJianCheckBean;
 import com.powerge.wise.powerge.bean.XunJianFormBean;
 import com.powerge.wise.powerge.bean.XunJianSignBean;
 import com.powerge.wise.powerge.config.soap.ApiService;
@@ -38,12 +39,13 @@ import com.powerge.wise.powerge.operationProjo.net.utils.ToastUtil;
 import java.util.ArrayList;
 import java.util.List;
 
+import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
 public class XjFillFormActivity extends AppCompatActivity {
-    public static String extraKeyEdit = "ISEDIT", extraKeyParcelable = "ISEDIT", extraKeytermType = "TERMTYPE";
+    public static String extraKeyEdit = "ISEDIT", extraKeyParcelable = "PARCELABLE", extraKeytermType = "TERMTYPE", extraKeyDate = "DATE", extraKeyTitle = "TITLE";
     public static String extraResult = "RESULTOKEXTRA";
     private XunJianSignBean xunJianSignBean;
     private Boolean isEdit;
@@ -61,51 +63,62 @@ public class XjFillFormActivity extends AppCompatActivity {
         context.startActivity(starter);
     }
 
+    public static void starter(Context context, boolean isEdit, String date, String title) {
+        Intent starter = new Intent(context, XjFillFormActivity.class);
+        starter.putExtra(extraKeyEdit, isEdit);
+        starter.putExtra(extraKeyDate, date);
+        starter.putExtra(extraKeyTitle, title);
+        context.startActivity(starter);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_xj_fill_form);
         isEdit = getIntent().getBooleanExtra(extraKeyEdit, true);
-        xunJianSignBean = getIntent().getParcelableExtra(extraKeyParcelable);
-        termType = getIntent().getStringExtra(extraKeytermType);
         initView();
 
     }
 
     private void initView() {
-        binding.title.setText(xunJianSignBean.getName() + "检查项");
         binding.contentList.setLayoutManager(new LinearLayoutManager(getBaseContext()));
         binding.contentList.setAdapter(adapter);
         binding.contentList.addItemDecoration(new DividerItemDecoration(getBaseContext(), LinearLayout.VERTICAL));
         // 编辑
         if (isEdit) {
+            xunJianSignBean = getIntent().getParcelableExtra(extraKeyParcelable);
+            binding.title.setText(xunJianSignBean.getName() + "检查项");
+            termType = getIntent().getStringExtra(extraKeytermType);
             adapter.setItemClickListener(itemClickListener);
-            putNameData();
+            putNameData(xunJianSignBean.getPointNo());
         } else {  //查看 添加数据
+            binding.title.setText(getIntent().getStringExtra(extraKeyTitle) + "检查项");
             binding.btSave.setVisibility(View.GONE);
-            putData();
+            putNameData(getIntent().getStringExtra(extraKeyDate));
         }
     }
 
-    private void putData() {
-        List<XunJianFormBean> list = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
-            XunJianFormBean formBean = new XunJianFormBean();
-            formBean.setCheckItem("温度" + i);
-            list.add(formBean);
-        }
-        adapter.setList(list);
-        crossfade();
-    }
 
-    private void putNameData() {
-        XunJianFormBean bean = new XunJianFormBean();
-        bean.setNameSpace(BaseUrl.NAMESPACE_P);
-        bean.setUserName(User.getCurrentUser().getName());
-        bean.setArg1(xunJianSignBean.getPointNo());
-        RequestEnvelope.getRequestEnvelope().setBody(new RequestBody<>(bean));
-        ApiService.Creator.get().queryItemsOfPoint(RequestEnvelope.getRequestEnvelope())
-                .observeOn(AndroidSchedulers.mainThread())
+    private void putNameData(String arg1) {
+        Observable observable = null;
+        if (isEdit) {
+            XunJianFormBean bean = new XunJianFormBean();
+            bean.setNameSpace(BaseUrl.NAMESPACE_P);
+            bean.setUserName(User.getCurrentUser().getName());
+            bean.setArg1(arg1);
+            RequestEnvelope.getRequestEnvelope().setBody(new RequestBody<>(bean));
+            observable = ApiService.Creator.get().queryItemsOfPoint(RequestEnvelope.getRequestEnvelope());
+        } else {
+            XuJianCheckBean bean = new XuJianCheckBean();
+            bean.setNameSpace(BaseUrl.NAMESPACE_P);
+            bean.setUserName(User.getCurrentUser().getName());
+            bean.setArg1(arg1);
+            RequestEnvelope.getRequestEnvelope().setBody(new RequestBody<>(bean));
+            observable = ApiService.Creator.get().queryCheckResults(RequestEnvelope.getRequestEnvelope());
+
+        }
+
+        observable.observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .flatMap(new FlatMapResponse<ResultModel<List<XunJianFormBean>>>())
                 .flatMap(new FlatMapTopRes<List<XunJianFormBean>>())
@@ -128,7 +141,6 @@ public class XjFillFormActivity extends AppCompatActivity {
                         adapter.setList(list);
                     }
                 });
-
     }
 
     public void crossfade() {
@@ -157,8 +169,6 @@ public class XjFillFormActivity extends AppCompatActivity {
         }
     };
 
-    String options[] = new String[]{"是", "否"};
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (resultCode == RESULT_OK) {
@@ -166,11 +176,7 @@ public class XjFillFormActivity extends AppCompatActivity {
                 XunJianFormBean formBean = data.getParcelableExtra(extraResult);
                 for (int i = 0; i < adapter.getList().size(); i++) {
                     if (formBean.getCheckItem().equals(adapter.getItemData(i).getCheckItem())) {
-                        if (formBean.getRadioBtResult() == 9) {
-                            adapter.getItemData(i).setCheckResult(formBean.getCheckResult());
-                        } else {
-                            adapter.getItemData(i).setCheckResult(options[formBean.getRadioBtResult()]);
-                        }
+                        adapter.getItemData(i).setCheckResult(formBean.getCheckResult());
                         break;
                     }
                 }

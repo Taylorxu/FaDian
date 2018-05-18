@@ -24,10 +24,10 @@ public class XunJianFormBean extends RootBean implements Parcelable {
     @Element(name = "arg1")
     public String arg1;
 
-    private String checkItemId;
-    private String checkNeeded;
-    private String checkItem;
-    private String checkType;
+    private String checkItemId = "";
+    private String checkNeeded = "";
+    private String checkItem = "";
+    private String checkType = "";
     private String checkResult = "";  //查看时 的数据值
     private int radioBtResult = 9;  // 单选时，返回的结果
 
@@ -150,7 +150,7 @@ public class XunJianFormBean extends RootBean implements Parcelable {
     }
 
     public boolean checkEmpty() {
-        if (checkNeeded.equals("dict2id") &&TextUtils.isEmpty(checkResult)) {//必填
+        if (checkNeeded.equals("dict2id") && TextUtils.isEmpty(checkResult)) {//必填
             return true;
         }
         return false;
