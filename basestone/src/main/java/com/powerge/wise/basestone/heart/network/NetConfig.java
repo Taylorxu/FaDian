@@ -4,6 +4,7 @@ import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.parkingwang.okhttp3.LogInterceptor.LogInterceptor;
 import com.powerge.wise.basestone.heart.WApp;
 
 import java.io.IOException;
@@ -88,6 +89,7 @@ public class NetConfig implements Interceptor, CookieJar {
     public OkHttpClient getClient() {
         if (client == null)
             client = new OkHttpClient.Builder()
+                    .addInterceptor(new LogInterceptor())
                     .readTimeout(30, TimeUnit.SECONDS)
                     .writeTimeout(30, TimeUnit.SECONDS)
                     .connectTimeout(30, TimeUnit.SECONDS)

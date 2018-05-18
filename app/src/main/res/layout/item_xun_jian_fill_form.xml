@@ -6,12 +6,14 @@
         <variable
             name="data"
             type="com.powerge.wise.powerge.bean.XunJianFormBean" />
+
         <variable
             name="isView"
-            type="Boolean"/>
+            type="Boolean" />
+
         <variable
             name="view"
-            type="android.view.View"/>
+            type="android.view.View" />
     </data>
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -29,11 +31,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:text="@{data.itemName}"
+                android:text="@{data.checkItem}"
                 android:textColor="@color/color_4d"
                 android:textSize="15sp" />
 
         </FrameLayout>
+
         <FrameLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -45,21 +48,20 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical|right"
                 android:layout_marginRight="15dp"
-                android:text="@{data.itemValue}"
+                android:tag="@{data.checkItem}"
+                android:text="@{data.checkResult}"
                 android:textColor="@color/color_4d"
                 android:textSize="15sp"
-                android:tag="@{data.itemName}"
 
                 />
 
         </FrameLayout>
 
         <FrameLayout
+            android:id="@+id/bt_to_edit"
             android:layout_width="50dp"
             android:layout_height="match_parent"
-            android:id="@+id/bt_to_edit"
-            android:visibility="@{isView?view.VISIBLE:view.GONE}"
-            >
+            android:visibility="@{data.imgvisibility()}">
 
             <ImageView
                 android:layout_width="wrap_content"

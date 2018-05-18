@@ -238,7 +238,8 @@
         <activity android:name=".otherPages.xunJian.XjFillFormActivity" />
         <activity
             android:name=".otherPages.xunJian.XjEdititemActivity"
-            android:windowSoftInputMode="stateVisible"></activity>
+            android:windowSoftInputMode="adjustUnspecified" />
+
     </application>
 
 </manifest>

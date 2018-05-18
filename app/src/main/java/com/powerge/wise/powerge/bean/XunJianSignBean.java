@@ -39,6 +39,8 @@ public class XunJianSignBean extends RootBean implements Parcelable {
     private List<Detail> inspectedDetails;
     private String dateCehcked;
     private String termType;
+    private String blueToothUUID;
+    private boolean enable;
 
     public XunJianSignBean() {
     }
@@ -46,13 +48,15 @@ public class XunJianSignBean extends RootBean implements Parcelable {
     public XunJianSignBean(Parcel in) {
         arg1 = in.readString();
         arg2 = in.readString();
-        pointNo = in.readString();
         name = in.readString();
         num = in.readInt();
         blueToothNo = in.readString();
         inspectedNum = in.readInt();
         dateCehcked = in.readString();
         termType = in.readString();
+        pointNo = in.readString();
+        blueToothUUID = in.readString();
+        enable=in.readByte() != 1;
     }
 
     public static final Creator<XunJianSignBean> CREATOR = new Creator<XunJianSignBean>() {
@@ -86,13 +90,14 @@ public class XunJianSignBean extends RootBean implements Parcelable {
      *
      * @return
      */
+    @Bindable
     public boolean isEnable() {
-        if (Integer.parseInt(termType) == 2) {//周期 为周
-            if (Integer.parseInt(dateCehcked) == 1) return true;
-        } else {
-            if (Integer.parseInt(dateCehcked) == 3) return true;
-        }
-        return false;
+        return enable;
+    }
+
+    public void setEnable(boolean enable) {
+        this.enable = enable;
+        notifyPropertyChanged(BR.enable);
     }
 
     public String getPointNo() {
@@ -173,6 +178,14 @@ public class XunJianSignBean extends RootBean implements Parcelable {
         return termType;
     }
 
+    public String getBlueToothUUID() {
+        return blueToothUUID;
+    }
+
+    public void setBlueToothUUID(String blueToothUUID) {
+        this.blueToothUUID = blueToothUUID;
+    }
+
     public void setTermType(String termType) {
         this.termType = termType;
     }
@@ -186,12 +199,14 @@ public class XunJianSignBean extends RootBean implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(arg1);
         dest.writeString(arg2);
-        dest.writeString(pointNo);
         dest.writeString(name);
         dest.writeInt(num);
         dest.writeString(blueToothNo);
         dest.writeInt(inspectedNum);
         dest.writeString(dateCehcked);
         dest.writeString(termType);
+        dest.writeString(pointNo);
+        dest.writeString(blueToothUUID);
+        dest.writeByte((byte) (enable ? 1 : 0));
     }
 }

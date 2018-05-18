@@ -24,6 +24,7 @@ import com.powerge.wise.powerge.bean.QueXianMagBean;
 import com.powerge.wise.powerge.bean.SheBeiRootBean;
 import com.powerge.wise.powerge.bean.TongJiForm;
 import com.powerge.wise.powerge.bean.Weather;
+import com.powerge.wise.powerge.bean.XunJianFormBean;
 import com.powerge.wise.powerge.bean.XunJianSignBean;
 import com.powerge.wise.powerge.bean.ZhiBIaoValueBean;
 import com.powerge.wise.powerge.bean.ZhiBaioNameBean;
@@ -292,6 +293,18 @@ public interface ApiService {
     })
     @POST(BaseUrl.SERVICE_P)
     Observable<Response<ResultModel<List<PaiMingChildItemBean>>>> queryRankOfMonthData(@Body RequestEnvelope requestEnvelope);
+
+    /**
+     *
+     * @param requestEnvelope
+     * @return
+     */
+    @Headers({
+            "Content-Type:text/xml; charset=utf-8",
+            "Accept-Charset: utf-8"
+    })
+    @POST(BaseUrl.SERVICE_P)
+    Observable<Response<ResultModel<List<XunJianFormBean>>>> queryItemsOfPoint(@Body RequestEnvelope requestEnvelope);
 
 
     class Creator {

@@ -100,7 +100,7 @@ public class XunJianMagActivity extends AppCompatActivity implements XunJianDate
         public void onBindViewHolder(XViewHolder<XunJianSignBean, ItemXunJianSingListBinding> holder, int position) {
             super.onBindViewHolder(holder, position);
             XunJianSignBean signBean = getItemData(position);
-//            signBean.setEnable(false);//初始化 签到按钮不可点
+            signBean.setEnable(true);//初始化 签到按钮不可点
             holder.getBinding().setXunJianSign(signBean);
         }
     };
@@ -149,14 +149,14 @@ public class XunJianMagActivity extends AppCompatActivity implements XunJianDate
                     @Override
                     public void onNext(List<XunJianSignBean> xunJianSignBeans) {
                         adapter.setList(xunJianSignBeans);
-                        if (mBluetoothAdapter != null) mBluetoothAdapter.stopLeScan(callback);
+                       /* if (mBluetoothAdapter != null) mBluetoothAdapter.stopLeScan(callback);
 
                         if (!mBluetoothAdapter.isEnabled()) {//没打开蓝牙，则请求打开
                             Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
                             startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
                         } else {
                             scanLeDevice();
-                        }
+                        }*/
                     }
                 });
 
@@ -250,6 +250,9 @@ public class XunJianMagActivity extends AppCompatActivity implements XunJianDate
         public void onLeScan(final BluetoothDevice device, int rssi, byte[] scanRecord) {
             final iBeaconClass.iBeacon ibeacon = iBeaconClass.fromScanData(device, rssi, scanRecord);
             if (ibeacon != null) {
+                if (UUID.equals(ibeacon.proximityUuid)) {
+                    LogUtils.e(iBeaconClass.bytesToHexString(scanRecord) + "   ----------------------");
+                }
                 if ((Integer.parseInt(termType) == 2 && Integer.parseInt(DateChecked) == 1) || (Integer.parseInt(termType) != 2 && Integer.parseInt(DateChecked) == 3)) {
                     LogUtils.e(ibeacon.proximityUuid + "   ----------------------");
                     if (UUID.equals(ibeacon.proximityUuid)) {
@@ -266,6 +269,8 @@ public class XunJianMagActivity extends AppCompatActivity implements XunJianDate
                 }
 //                LogUtils.e(iBeaconClass.bytesToHexString(scanRecord) + "   ----------------------");
             }
+
+
         }
 
     };

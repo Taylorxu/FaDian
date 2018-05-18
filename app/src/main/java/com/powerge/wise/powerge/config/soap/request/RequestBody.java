@@ -20,6 +20,7 @@ import com.powerge.wise.powerge.bean.QueXianMagBean;
 import com.powerge.wise.powerge.bean.SheBeiRootBean;
 import com.powerge.wise.powerge.bean.TongJiForm;
 import com.powerge.wise.powerge.bean.Weather;
+import com.powerge.wise.powerge.bean.XunJianFormBean;
 import com.powerge.wise.powerge.bean.XunJianSignBean;
 import com.powerge.wise.powerge.bean.ZhiBIaoValueBean;
 import com.powerge.wise.powerge.bean.ZhiBaioNameBean;
@@ -70,6 +71,7 @@ public class RequestBody<Data> {
             @Element(name = "n0:queryWeatherInfo", type = Weather.class),
             @Element(name = "n0:queryMainPageData", type = MainPageBean.class),
             @Element(name = "n0:queryRankOfMonthData", type = PaiMingChildItemBean.class),
+            @Element(name = "n0:queryItemsOfPoint", type = XunJianFormBean.class),
             @Element(name = "n0:queryMonitorLogs", type = ZhiZhangLogBean.class)
     })
     public Data requestModel;

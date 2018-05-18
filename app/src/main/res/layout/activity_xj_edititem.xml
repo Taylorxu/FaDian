@@ -3,6 +3,7 @@
     tools:context="com.powerge.wise.powerge.otherPages.xunJian.XjEdititemActivity">
 
     <data>
+
         <variable
             name="data"
             type="com.powerge.wise.powerge.bean.XunJianFormBean" />
@@ -66,12 +67,21 @@
                     android:background="@color/transparent"
                     android:paddingLeft="15dp"
                     android:textColor="@color/color_4d"
-                    android:textSize="15sp" />
+                    android:textSize="15sp"
+                    android:visibility="gone" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rt_multiple"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone" />
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:background="@color/color_line_1" />
+
+
             </LinearLayout>
         </FrameLayout>
 

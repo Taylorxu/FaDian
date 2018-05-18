@@ -120,53 +120,14 @@
                     android:layout_height="1dp"
                     android:background="@color/color_line" />
 
-                <RelativeLayout
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/content_sing_list"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center">
+                    android:layout_height="match_parent" />
 
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/content_sing_list"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent" />
-
-                    <RelativeLayout
-                        android:id="@+id/loading_r_layout"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_centerInParent="true"
-                        android:visibility="gone">
-
-                        <TextView
-                            android:id="@+id/loading_center_text"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerInParent="true"
-                            android:text="搜索中"
-                            android:textColor="@color/color_4d"
-                            android:textSize="15sp" />
-
-                        <ProgressBar
-                            android:layout_width="35dp"
-                            android:layout_height="35dp"
-                            android:layout_below="@+id/loading_center_text"
-                            android:layout_centerInParent="true"
-                            android:layout_gravity="center" />
-                    </RelativeLayout>
-
-                </RelativeLayout>
             </LinearLayout>
 
-            <!--  <Button
-                  android:id="@+id/btn_search_blue_tooth"
-                  android:layout_width="match_parent"
-                  android:layout_height="50dp"
-                  android:layout_gravity="bottom"
-                  android:background="@drawable/selector_ripple"
-                  android:text="搜寻蓝牙"
-                  android:textColor="@android:color/white"
-                  android:textSize="13sp"
-                  app:layout_constraintBottom_toBottomOf="parent" />-->
+
         </android.support.constraint.ConstraintLayout>
 
 
