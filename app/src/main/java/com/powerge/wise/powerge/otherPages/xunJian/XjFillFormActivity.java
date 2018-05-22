@@ -6,6 +6,7 @@ import android.annotation.SuppressLint;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothManager;
+import android.bluetooth.le.BluetoothLeScanner;
 import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
@@ -247,13 +248,18 @@ public class XjFillFormActivity extends AppCompatActivity {
         for (XunJianFormBean form : adapter.getList()) {
             if (form.checkEmpty()) {
                 ToastUtil.toast(getBaseContext(), "请填写" + form.getCheckItem());
-                break;
+                return;
             }
             FormData data = new FormData(form.getCheckItemId(), form.getCheckItem(), form.getCheckResult());
             list.add(data);
         }
         Gson gson = new Gson();
         itemParamsString = gson.toJson(list);
+        BluetoothLeScanner scanner = mBluetoothAdapter.getBluetoothLeScanner();
+        if (scanner == null) {
+            ToastUtil.toast(getBaseContext(), "请打开蓝牙");
+            return;
+        }
         waitingSign();
         mBluetoothAdapter.startLeScan(callback);
         handler.postDelayed(runnable, 30000);

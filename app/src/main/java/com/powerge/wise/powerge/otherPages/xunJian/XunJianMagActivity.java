@@ -182,6 +182,8 @@ public class XunJianMagActivity extends AppCompatActivity implements XunJianDate
             public void handleMessage(Message msg) {
                 switch (msg.what) {
                     case 1:
+                        if(adapter.getList()==null)return;
+                        bluToothLEHelper.stopLeScan(callback);
                         for (XunJianSignBean bean : adapter.getList()) {
                             bean.setEnable(false);
                             adapter.notifyDataSetChanged();
@@ -200,7 +202,6 @@ public class XunJianMagActivity extends AppCompatActivity implements XunJianDate
                 Message message = new Message();
                 message.what = 1;
                 mHandler.sendMessage(message);
-                bluToothLEHelper.stopLeScan(callback);
             }
         }, 1000, 15000);
 
