@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.annotation.SuppressLint;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
+import android.bluetooth.BluetoothManager;
 import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
@@ -37,6 +38,7 @@ import com.powerge.wise.powerge.databinding.ActivityXjFillFormBinding;
 import com.powerge.wise.powerge.databinding.ItemXunJianFillFormBinding;
 import com.powerge.wise.powerge.helper.BluToothLEHelper;
 import com.powerge.wise.powerge.helper.EEMsgToastHelper;
+import com.powerge.wise.powerge.operationProjo.net.utils.LogUtil;
 import com.powerge.wise.powerge.operationProjo.net.utils.ToastUtil;
 
 import java.util.ArrayList;
@@ -59,6 +61,7 @@ public class XjFillFormActivity extends AppCompatActivity {
     private ActivityXjFillFormBinding binding;
     private XAdapter<XunJianFormBean, ItemXunJianFillFormBinding> adapter = new XAdapter.SimpleAdapter<>(BR.data, R.layout.item_xun_jian_fill_form);
 
+    private BluetoothAdapter mBluetoothAdapter;
 
     public static void starter(Context context, boolean isEdit, XunJianSignBean xunJianSign, String termType) {
         Intent starter = new Intent(context, XjFillFormActivity.class);
@@ -76,11 +79,14 @@ public class XjFillFormActivity extends AppCompatActivity {
         context.startActivity(starter);
     }
 
+    @SuppressLint("NewApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_xj_fill_form);
         isEdit = getIntent().getBooleanExtra(extraKeyEdit, true);
+        BluetoothManager bluetoothManager = (BluetoothManager) getSystemService(Context.BLUETOOTH_SERVICE);
+        mBluetoothAdapter = bluetoothManager.getAdapter();
         initView();
 
     }
@@ -197,6 +203,7 @@ public class XjFillFormActivity extends AppCompatActivity {
                 finish();
                 break;
             case R.id.bt_save:
+                binding.btSave.setEnabled(false);
                 signAction();
                 break;
         }
@@ -209,8 +216,9 @@ public class XjFillFormActivity extends AppCompatActivity {
         public void onLeScan(final BluetoothDevice device, int rssi, byte[] scanRecord) {
             final iBeaconClass.iBeacon ibeacon = iBeaconClass.fromScanData(device, rssi, scanRecord);
             if (ibeacon != null && UUID.equals(ibeacon.proximityUuid) && ibeacon.major == Integer.decode(xunJianSignBean.getBlueToothNo())) {
+                LogUtil.log("XXXXXXXXXXXXXXXX+++++++++++++++++++++++++++++++++");
                 handler.removeCallbacks(runnable);
-                bluToothLEHelper.stopLeScan();
+                mBluetoothAdapter.stopLeScan(callback);
                 requestSign();
             }
         }
@@ -223,13 +231,17 @@ public class XjFillFormActivity extends AppCompatActivity {
     private String itemParamsString;
     private Handler handler = new Handler();
     private Runnable runnable = new Runnable() {
+        @SuppressLint("NewApi")
         @Override
         public void run() {
+            binding.progressBar.setVisibility(View.GONE);
             ToastUtil.toast(getBaseContext(), "未搜索到巡检点,请在巡检点附近再次尝试连接");
-            bluToothLEHelper.stopLeScan();
+            mBluetoothAdapter.stopLeScan(callback);
+            binding.btSave.setEnabled(true);
         }
     };
 
+    @SuppressLint("NewApi")
     private void signAction() {
         List<FormData> list = new ArrayList<>();
         for (XunJianFormBean form : adapter.getList()) {
@@ -243,7 +255,7 @@ public class XjFillFormActivity extends AppCompatActivity {
         Gson gson = new Gson();
         itemParamsString = gson.toJson(list);
         waitingSign();
-        bluToothLEHelper = new BluToothLEHelper.Builder().setParams(this, getBaseContext(), callback).build();
+        mBluetoothAdapter.startLeScan(callback);
         handler.postDelayed(runnable, 30000);
     }
 
@@ -275,6 +287,7 @@ public class XjFillFormActivity extends AppCompatActivity {
                             EEMsgToastHelper.newInstance().selectWitch(e.getMessage());
                         }
                         binding.progressBar.setVisibility(View.GONE);
+                        binding.btSave.setEnabled(true);
                     }
 
                     @Override
@@ -315,16 +328,17 @@ public class XjFillFormActivity extends AppCompatActivity {
     }
 
 
+    @SuppressLint("NewApi")
     protected void onStop() {
         super.onStop();
-        if (bluToothLEHelper != null) bluToothLEHelper.stopLeScan();
+        if (mBluetoothAdapter != null) mBluetoothAdapter.stopLeScan(callback);
     }
 
     @SuppressLint("NewApi")
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (bluToothLEHelper != null) bluToothLEHelper.stopLeScan();
+        if (mBluetoothAdapter != null) mBluetoothAdapter.stopLeScan(callback);
     }
 
 }

@@ -32,6 +32,7 @@ import com.powerge.wise.powerge.databinding.ItemXunJianSingListBinding;
 import com.powerge.wise.powerge.helper.BluToothLEHelper;
 import com.powerge.wise.powerge.helper.EEMsgToastHelper;
 import com.powerge.wise.powerge.helper.RequestPermissionsHelper;
+import com.powerge.wise.powerge.operationProjo.net.utils.LogUtil;
 
 import java.util.List;
 import java.util.Map;
@@ -81,9 +82,9 @@ public class XunJianMagActivity extends AppCompatActivity implements XunJianDate
     private void initView() {
         binding.dateContent.setAdapter(new XunJianDatePagerAdapter(getSupportFragmentManager()));
         binding.xunJianTabL.setupWithViewPager(binding.dateContent);
-        bluToothLEHelper = new BluToothLEHelper.Builder().setParams(this, getBaseContext(), callback).build();
+        bluToothLEHelper = new BluToothLEHelper.Builder().setParams(this, getBaseContext()).build();
         stopThenStart();
-        RequestPermissionsHelper.instant(this, getBaseContext(), permissionParam); // 获取地址权限
+        RequestPermissionsHelper.instant(this, getBaseContext(), permissionParam).requestPermissions(); // 获取地址权限
         initContentSign();
     }
 
@@ -93,6 +94,7 @@ public class XunJianMagActivity extends AppCompatActivity implements XunJianDate
             holder.getBinding().btnSign.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    removeListener();
                     XjFillFormActivity.starter(getBaseContext(), true, holder.getBinding().getXunJianSign(), termType);
                 }
             });
@@ -184,7 +186,7 @@ public class XunJianMagActivity extends AppCompatActivity implements XunJianDate
                             bean.setEnable(false);
                             adapter.notifyDataSetChanged();
                         }
-                        bluToothLEHelper.startLeScan();
+                        bluToothLEHelper.startLeScan(callback);
                         break;
                 }
             }
@@ -194,12 +196,13 @@ public class XunJianMagActivity extends AppCompatActivity implements XunJianDate
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
+                LogUtil.log("TIMER+++++++++++++++++++++++++++++++++");
                 Message message = new Message();
                 message.what = 1;
                 mHandler.sendMessage(message);
-                bluToothLEHelper.stopLeScan();
+                bluToothLEHelper.stopLeScan(callback);
             }
-        }, 10000, 30000);
+        }, 1000, 15000);
 
 
     }
@@ -234,7 +237,7 @@ public class XunJianMagActivity extends AppCompatActivity implements XunJianDate
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_ENABLE_BT) {
-            bluToothLEHelper.startLeScan();
+            bluToothLEHelper.startLeScan(callback);
         }
     }
 
@@ -242,15 +245,17 @@ public class XunJianMagActivity extends AppCompatActivity implements XunJianDate
     @Override
     protected void onStop() {
         super.onStop();
-        if (bluToothLEHelper != null) bluToothLEHelper.stopLeScan();
-        timer.cancel();
+        removeListener();
     }
 
     @SuppressLint("NewApi")
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (bluToothLEHelper != null) bluToothLEHelper.stopLeScan();
+        removeListener();
+    }
+    public void removeListener(){
+        if (bluToothLEHelper != null) bluToothLEHelper.stopLeScan(callback);
         timer.cancel();
     }
 

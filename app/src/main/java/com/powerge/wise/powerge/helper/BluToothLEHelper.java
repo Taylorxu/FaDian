@@ -16,15 +16,17 @@ public final class BluToothLEHelper {
     private BluetoothAdapter mBluetoothAdapter;
     private final Activity mActivity;
     private final Context mContext;
-    private BluetoothAdapter.LeScanCallback mScanCallback = null;
 
-    private BluToothLEHelper(Activity activity, Context context, BluetoothAdapter.LeScanCallback scanCallback) {
+    private BluToothLEHelper(Activity activity, Context context) {
         this.mActivity = activity;
         this.mContext = context;
-        this.mScanCallback = scanCallback;
+
         initBlueTooth();
     }
 
+    public BluetoothAdapter getBluetoothAdapter() {
+        return mBluetoothAdapter;
+    }
 
     @SuppressLint("NewApi")
     public void initBlueTooth() {
@@ -38,8 +40,6 @@ public final class BluToothLEHelper {
                 if (!mBluetoothAdapter.isEnabled()) {//没打开蓝牙，则请求打开
                     Intent enableBtIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
                     mActivity.startActivityForResult(enableBtIntent, REQUEST_ENABLE_BT);
-                } else {
-                    startLeScan();
                 }
             } else {
                 Toast.makeText(mActivity, "该手机不支持蓝牙", Toast.LENGTH_LONG);
@@ -50,7 +50,7 @@ public final class BluToothLEHelper {
 
 
     @SuppressLint("NewApi")
-    public void startLeScan() {
+    public void startLeScan(final BluetoothAdapter.LeScanCallback mScanCallback) {
         mBluetoothAdapter.startLeScan(new BluetoothAdapter.LeScanCallback() {
             @Override
             public void onLeScan(BluetoothDevice device, int rssi, byte[] scanRecord) {
@@ -60,7 +60,7 @@ public final class BluToothLEHelper {
     }
 
     @SuppressLint("NewApi")
-    public void stopLeScan() {
+    public void stopLeScan(final BluetoothAdapter.LeScanCallback mScanCallback) {
         mBluetoothAdapter.stopLeScan(mScanCallback);
     }
 
@@ -68,17 +68,15 @@ public final class BluToothLEHelper {
     public static final class Builder {
         private Activity mActivity;
         private Context mContext;
-        private BluetoothAdapter.LeScanCallback mScanCallback = null;
 
-        public Builder setParams(Activity activity, Context context, BluetoothAdapter.LeScanCallback scanCallback) {
+        public Builder setParams(Activity activity, Context context) {
             mActivity = activity;
             mContext = context;
-            mScanCallback = scanCallback;
             return this;
         }
 
         public BluToothLEHelper build() {
-            return new BluToothLEHelper(mActivity, mContext, mScanCallback);
+            return new BluToothLEHelper(mActivity, mContext);
         }
     }
 

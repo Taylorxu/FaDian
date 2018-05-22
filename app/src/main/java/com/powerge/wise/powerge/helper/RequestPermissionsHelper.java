@@ -35,7 +35,7 @@ public class RequestPermissionsHelper {
     /**
      * android.Manifest.permission.ACCESS_COARSE_LOCATION
      */
-    private void requestPermissions() {
+    public void requestPermissions() {
         AndPermission.with(mActivity).permission(mPermission)
                 .rationale(rationaleListener)
                 .onDenied(action)
