@@ -32,6 +32,7 @@ import rx.schedulers.Schedulers;
 
 public class JingSaiDeFenFragment extends WFragment<FragmentJingSaiDeFenBinding> implements View.OnClickListener {
     String unitName = "9999", indicator = "9999";
+    private String unitText;
 
     public JingSaiDeFenFragment() {
     }
@@ -69,6 +70,7 @@ public class JingSaiDeFenFragment extends WFragment<FragmentJingSaiDeFenBinding>
         if (getArguments() != null) {
             unitName = getArguments().getString("unitName");
             indicator = getArguments().getString("indicator");
+            unitText = getArguments().getString("unitText");
             if (!indicator.equals("9999") && !"全部指标".equals(indicator)) {
                 getBinding().textAlign.setText(indicator + "指标");
             } else {
@@ -77,7 +79,7 @@ public class JingSaiDeFenFragment extends WFragment<FragmentJingSaiDeFenBinding>
             }
 
             if (!unitName.equals("9999")) {
-                getBinding().textAlign1.setText(unitName + "机组");
+                getBinding().textAlign1.setText(unitText);
             } else {
                 getBinding().textAlign1.setText("全部机组");
             }
