@@ -3,10 +3,13 @@ package com.powerge.wise.powerge.otherPages.xunJian;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.SuppressLint;
+import android.bluetooth.BluetoothAdapter;
+import android.bluetooth.BluetoothDevice;
 import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -32,8 +35,8 @@ import com.powerge.wise.powerge.config.soap.request.RequestBody;
 import com.powerge.wise.powerge.config.soap.request.RequestEnvelope;
 import com.powerge.wise.powerge.databinding.ActivityXjFillFormBinding;
 import com.powerge.wise.powerge.databinding.ItemXunJianFillFormBinding;
+import com.powerge.wise.powerge.helper.BluToothLEHelper;
 import com.powerge.wise.powerge.helper.EEMsgToastHelper;
-import com.powerge.wise.powerge.operationProjo.net.utils.LogUtil;
 import com.powerge.wise.powerge.operationProjo.net.utils.ToastUtil;
 
 import java.util.ArrayList;
@@ -48,6 +51,8 @@ public class XjFillFormActivity extends AppCompatActivity {
     public static String extraKeyEdit = "ISEDIT", extraKeyParcelable = "PARCELABLE", extraKeytermType = "TERMTYPE", extraKeyDate = "DATE", extraKeyTitle = "TITLE";
     public static String extraResult = "RESULTOKEXTRA";
     private XunJianSignBean xunJianSignBean;
+    private BluToothLEHelper bluToothLEHelper = null;
+    private String UUID = "b5b182c7-eab1-4988-aa99-b5c1517008d9";
     private Boolean isEdit;
     private String termType;
     public static int requestCode = 200;
@@ -192,28 +197,57 @@ public class XjFillFormActivity extends AppCompatActivity {
                 finish();
                 break;
             case R.id.bt_save:
-                List<FormData> list = new ArrayList<>();
-                for (XunJianFormBean form : adapter.getList()) {
-                    if (form.checkEmpty()) {
-                        ToastUtil.toast(getBaseContext(), "请填写" + form.getCheckItem());
-                        break;
-                    }
-                    FormData data = new FormData(form.getCheckItemId(), form.getCheckItem(), form.getCheckResult());
-                    list.add(data);
-                }
-                Gson gson = new Gson();
-                LogUtil.log(gson.toJson(list) + "巡检项 数据信息");
-                signAction(gson.toJson(list));
+                signAction();
                 break;
         }
     }
 
 
+    final BluetoothAdapter.LeScanCallback callback = new BluetoothAdapter.LeScanCallback() {
+        @SuppressLint("NewApi")
+        @Override
+        public void onLeScan(final BluetoothDevice device, int rssi, byte[] scanRecord) {
+            final iBeaconClass.iBeacon ibeacon = iBeaconClass.fromScanData(device, rssi, scanRecord);
+            if (ibeacon != null && UUID.equals(ibeacon.proximityUuid) && ibeacon.major == Integer.decode(xunJianSignBean.getBlueToothNo())) {
+                handler.removeCallbacks(runnable);
+                bluToothLEHelper.stopLeScan();
+                requestSign();
+            }
+        }
+    };
+
+
     /**
      * 签到
      */
-    private void signAction(String checkItemsData) {
+    private String itemParamsString;
+    private Handler handler = new Handler();
+    private Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            ToastUtil.toast(getBaseContext(), "未搜索到巡检点,请在巡检点附近再次尝试连接");
+            bluToothLEHelper.stopLeScan();
+        }
+    };
+
+    private void signAction() {
+        List<FormData> list = new ArrayList<>();
+        for (XunJianFormBean form : adapter.getList()) {
+            if (form.checkEmpty()) {
+                ToastUtil.toast(getBaseContext(), "请填写" + form.getCheckItem());
+                break;
+            }
+            FormData data = new FormData(form.getCheckItemId(), form.getCheckItem(), form.getCheckResult());
+            list.add(data);
+        }
+        Gson gson = new Gson();
+        itemParamsString = gson.toJson(list);
         waitingSign();
+        bluToothLEHelper = new BluToothLEHelper.Builder().setParams(this, getBaseContext(), callback).build();
+        handler.postDelayed(runnable, 30000);
+    }
+
+    private void requestSign() {
         SignSoapRequest bean = new SignSoapRequest();
         bean.setNameSpace(BaseUrl.NAMESPACE_P);
         bean.setUserName(User.getCurrentUser().getName());
@@ -221,7 +255,7 @@ public class XjFillFormActivity extends AppCompatActivity {
         bean.setArg2(xunJianSignBean.getName());
         bean.setArg3(xunJianSignBean.getBlueToothNo());
         bean.setArg4(termType);
-        bean.setArg5(checkItemsData);
+        bean.setArg5(itemParamsString);
 
         RequestEnvelope.getRequestEnvelope().setBody(new RequestBody<>(bean));
         ApiService.Creator.get().inspectPoint(RequestEnvelope.getRequestEnvelope())
@@ -250,7 +284,6 @@ public class XjFillFormActivity extends AppCompatActivity {
 
                     }
                 });
-
     }
 
     public void waitingSign() {
@@ -280,4 +313,18 @@ public class XjFillFormActivity extends AppCompatActivity {
             this.checkData = checkData;
         }
     }
+
+
+    protected void onStop() {
+        super.onStop();
+        if (bluToothLEHelper != null) bluToothLEHelper.stopLeScan();
+    }
+
+    @SuppressLint("NewApi")
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (bluToothLEHelper != null) bluToothLEHelper.stopLeScan();
+    }
+
 }
