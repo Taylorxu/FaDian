@@ -39,7 +39,6 @@ import com.powerge.wise.powerge.databinding.ActivityXjFillFormBinding;
 import com.powerge.wise.powerge.databinding.ItemXunJianFillFormBinding;
 import com.powerge.wise.powerge.helper.BluToothLEHelper;
 import com.powerge.wise.powerge.helper.EEMsgToastHelper;
-import com.powerge.wise.powerge.operationProjo.net.utils.LogUtil;
 import com.powerge.wise.powerge.operationProjo.net.utils.ToastUtil;
 
 import java.util.ArrayList;
@@ -217,7 +216,6 @@ public class XjFillFormActivity extends AppCompatActivity {
         public void onLeScan(final BluetoothDevice device, int rssi, byte[] scanRecord) {
             final iBeaconClass.iBeacon ibeacon = iBeaconClass.fromScanData(device, rssi, scanRecord);
             if (ibeacon != null && UUID.equals(ibeacon.proximityUuid) && ibeacon.major == Integer.decode(xunJianSignBean.getBlueToothNo())) {
-                LogUtil.log("XXXXXXXXXXXXXXXX+++++++++++++++++++++++++++++++++");
                 handler.removeCallbacks(runnable);
                 mBluetoothAdapter.stopLeScan(callback);
                 requestSign();

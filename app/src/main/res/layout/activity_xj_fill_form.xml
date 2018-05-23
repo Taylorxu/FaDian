@@ -49,12 +49,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="49dp"
                 android:layout_gravity="bottom"
-                android:background="@color/color_420a"
+                android:background="@drawable/selector_btn_bg_sing"
+                android:onClick="onClick"
+                android:layout_margin="2dp"
                 android:text="@string/save"
                 android:textColor="@android:color/white"
-                android:textSize="15sp"
-                android:onClick="onClick"
-                />
+                android:textSize="15sp" />
         </FrameLayout>
 
 
