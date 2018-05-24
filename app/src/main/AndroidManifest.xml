@@ -240,6 +240,7 @@
             android:name=".otherPages.xunJian.XjEdititemActivity"
             android:windowSoftInputMode="adjustUnspecified" />
 
+        <activity android:name=".otherPages.StaffTraningActivity" />
     </application>
 
 </manifest>

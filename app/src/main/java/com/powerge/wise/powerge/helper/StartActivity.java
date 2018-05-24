@@ -1,6 +1,7 @@
 package com.powerge.wise.powerge.helper;
 
 import android.content.Context;
+import android.content.Intent;
 
 import com.powerge.wise.powerge.bean.JiZuBean;
 import com.powerge.wise.powerge.operationProjo.net.utils.ToastUtil;
@@ -11,6 +12,7 @@ import com.powerge.wise.powerge.otherPages.JingSai.JingSaiActivity;
 import com.powerge.wise.powerge.otherPages.MorningMeetingActivity;
 import com.powerge.wise.powerge.otherPages.PlanTasksMag.PlanTasksMagActivity;
 import com.powerge.wise.powerge.otherPages.SheBeiInfoActivity;
+import com.powerge.wise.powerge.otherPages.StaffTraningActivity;
 import com.powerge.wise.powerge.otherPages.TongJiFormActivity;
 import com.powerge.wise.powerge.otherPages.ZHiZhangLogActivity;
 import com.powerge.wise.powerge.otherPages.huaBao.HuanBaoActivity;
@@ -20,6 +22,7 @@ import com.powerge.wise.powerge.otherPages.xunJian.XunJianMagActivity;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 
 /**
@@ -56,7 +59,8 @@ public class StartActivity {
         } else if (where == 9) {
             QueXianMagActivity.start(context);
         } else if (where == 10) {
-//            QueXianPieChartActivity.start(context);
+            Intent intent=new Intent(context,StaffTraningActivity.class);
+            context.startActivity(intent);
         } else if (where == 11) {
             XunJianMagActivity.start(context);
         } else if (where == 12) {

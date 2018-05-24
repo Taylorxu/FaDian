@@ -135,7 +135,8 @@ public class FirstFragment extends Fragment {
             R.drawable.ic_shengchan_zaohui,
             R.drawable.ic_zhiji_jingsai,
             R.drawable.ic_huanbao_zhibiao,
-            R.drawable.ic_que_xian_guan_li
+            R.drawable.ic_que_xian_guan_li,
+            R.drawable.ic_traing_staff
     };
 
     public void createdData() {

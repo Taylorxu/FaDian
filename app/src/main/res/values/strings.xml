@@ -30,6 +30,7 @@
         <item name="first_fragment_item8">值际竞赛</item>
         <item name="first_fragment_item9">环保指标</item>
         <item name="first_fragment_item10">缺陷管理</item>
+        <item name="first_fragment_item11">员工培训</item>
     </array>
 
     <string-array name="title_array">
