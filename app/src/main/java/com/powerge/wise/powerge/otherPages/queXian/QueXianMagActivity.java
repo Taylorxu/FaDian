@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -66,7 +67,10 @@ public class QueXianMagActivity extends AppCompatActivity implements View.OnClic
 
     private void initView() {
         initPopInnerView();
-        binding.textDate.setText(dateParam);
+        if (!TextUtils.isEmpty(dateParam)) {
+            String dateText[] = dateParam.split("-");
+            binding.textDate.setText(dateText[0] + "年" + dateText[1] + "月" + dateText[2]);
+        }
         binding.refreshLayout.setColorSchemeColors(getResources().getColor(R.color.colorPrimary));
         binding.refreshLayout.setOnRefreshListener(refreshListener);
         binding.contentQxList.setOnLoadMoreListener(onLoadMoreListener);

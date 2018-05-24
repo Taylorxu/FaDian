@@ -32,7 +32,6 @@ import com.powerge.wise.powerge.databinding.ItemXunJianSingListBinding;
 import com.powerge.wise.powerge.helper.BluToothLEHelper;
 import com.powerge.wise.powerge.helper.EEMsgToastHelper;
 import com.powerge.wise.powerge.helper.RequestPermissionsHelper;
-import com.powerge.wise.powerge.operationProjo.net.utils.LogUtil;
 
 import java.util.List;
 import java.util.Map;
@@ -198,7 +197,6 @@ public class XunJianMagActivity extends AppCompatActivity implements XunJianDate
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                LogUtil.log("TIMER+++++++++++++++++++++++++++++++++");
                 Message message = new Message();
                 message.what = 1;
                 mHandler.sendMessage(message);
