@@ -69,7 +69,7 @@ public class QueXianMagActivity extends AppCompatActivity implements View.OnClic
         initPopInnerView();
         if (!TextUtils.isEmpty(dateParam)) {
             String dateText[] = dateParam.split("-");
-            binding.textDate.setText(dateText[0] + "年" + dateText[1] + "月" + dateText[2]);
+            binding.textDate.setText(dateText[0] + "年" + dateText[1] + "月");
         }
         binding.refreshLayout.setColorSchemeColors(getResources().getColor(R.color.colorPrimary));
         binding.refreshLayout.setOnRefreshListener(refreshListener);

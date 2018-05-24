@@ -68,7 +68,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:includeFontPadding="false"
-                            android:text="环保均值"
+                            android:text="小时均值"
                             android:textColor="@color/color_420a"
                             android:textSize="14sp" />
                     </FrameLayout>
@@ -83,7 +83,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:includeFontPadding="false"
-                            android:text="环保上限"
+                            android:text="环保局上限"
                             android:textColor="@color/color_420a"
                             android:textSize="14sp" />
                     </FrameLayout>
