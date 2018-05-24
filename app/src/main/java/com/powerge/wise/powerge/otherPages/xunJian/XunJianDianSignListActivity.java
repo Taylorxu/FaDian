@@ -19,6 +19,8 @@ import com.powerge.wise.powerge.databinding.ItemSignTimeListBinding;
 import java.util.ArrayList;
 import java.util.List;
 
+import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
+
 public class XunJianDianSignListActivity extends AppCompatActivity {
     ActivityXunJianDianSignListBinding binding;
     public String titleText;
@@ -29,6 +31,7 @@ public class XunJianDianSignListActivity extends AppCompatActivity {
         Intent starter = new Intent(context, XunJianDianSignListActivity.class);
         starter.putExtra(titleKey, title);
         starter.putParcelableArrayListExtra(listKey, (ArrayList<? extends Parcelable>) listValue);
+        starter.setFlags(FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(starter);
     }
 

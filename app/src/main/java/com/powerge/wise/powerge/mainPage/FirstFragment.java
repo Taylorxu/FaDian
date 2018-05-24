@@ -11,7 +11,6 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 
@@ -339,30 +338,19 @@ public class FirstFragment extends Fragment {
     }
 
     private void createHeaderJiZu() {
+        if (fragmentBinding.headerJiZuHsview.getChildCount() > 0)
+            fragmentBinding.headerJiZuHsview.removeAllViews();
         if (unitsLoadList.size() > 0) {
-            if (fragmentBinding.headerJiZuLl.getChildCount() > 0)
-                fragmentBinding.headerJiZuLl.removeAllViews();
-            WindowManager wm = getActivity().getWindowManager();
-            int scr_width = wm.getDefaultDisplay().getWidth();
-            int sum_view_width = DensityUtil.px2dip(getContext(), 20) * unitsLoadList.size();
-            int width_put;
-            if (sum_view_width > scr_width) {
-                width_put = ViewGroup.LayoutParams.WRAP_CONTENT;
-            } else {
-                width_put = scr_width / unitsLoadList.size();
-            }
+            LinearLayout frameLayout = new LinearLayout(getContext());
             for (int i = 0; i < unitsLoadList.size(); i++) {
-                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(width_put, ViewGroup.LayoutParams.MATCH_PARENT);
-                LinearLayout frameLayout = new LinearLayout(getContext());
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.MATCH_PARENT);
                 frameLayout.setLayoutParams(params);
                 frameLayout.setGravity(Gravity.CENTER);
-
                 ItemMainPageJiZuBinding itemJiZuBd = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.item_main_page_ji_zu, frameLayout, false);
                 itemJiZuBd.setData(unitsLoadList.get(i));
                 frameLayout.addView(itemJiZuBd.getRoot());
-
-                fragmentBinding.headerJiZuLl.addView(frameLayout);
             }
+            fragmentBinding.headerJiZuHsview.addView(frameLayout);
         }
 
     }

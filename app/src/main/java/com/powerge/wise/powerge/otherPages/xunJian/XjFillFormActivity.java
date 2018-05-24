@@ -49,6 +49,8 @@ import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
+import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
+
 public class XjFillFormActivity extends AppCompatActivity {
     public static String extraKeyEdit = "ISEDIT", extraKeyParcelable = "PARCELABLE", extraKeytermType = "TERMTYPE", extraKeyDate = "DATE", extraKeyTitle = "TITLE";
     public static String extraResult = "RESULTOKEXTRA";
@@ -68,6 +70,7 @@ public class XjFillFormActivity extends AppCompatActivity {
         starter.putExtra(extraKeyEdit, isEdit);
         starter.putExtra(extraKeyParcelable, xunJianSign);
         starter.putExtra(extraKeytermType, termType);
+        starter.setFlags(FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(starter);
     }
 
@@ -76,6 +79,7 @@ public class XjFillFormActivity extends AppCompatActivity {
         starter.putExtra(extraKeyEdit, isEdit);
         starter.putExtra(extraKeyDate, date);
         starter.putExtra(extraKeyTitle, title);
+        starter.setFlags(FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(starter);
     }
 
