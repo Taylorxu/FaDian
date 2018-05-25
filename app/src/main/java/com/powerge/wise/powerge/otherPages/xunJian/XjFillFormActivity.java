@@ -37,7 +37,6 @@ import com.powerge.wise.powerge.config.soap.request.RequestBody;
 import com.powerge.wise.powerge.config.soap.request.RequestEnvelope;
 import com.powerge.wise.powerge.databinding.ActivityXjFillFormBinding;
 import com.powerge.wise.powerge.databinding.ItemXunJianFillFormBinding;
-import com.powerge.wise.powerge.helper.BluToothLEHelper;
 import com.powerge.wise.powerge.helper.EEMsgToastHelper;
 import com.powerge.wise.powerge.operationProjo.net.utils.ToastUtil;
 
@@ -55,7 +54,6 @@ public class XjFillFormActivity extends AppCompatActivity {
     public static String extraKeyEdit = "ISEDIT", extraKeyParcelable = "PARCELABLE", extraKeytermType = "TERMTYPE", extraKeyDate = "DATE", extraKeyTitle = "TITLE";
     public static String extraResult = "RESULTOKEXTRA";
     private XunJianSignBean xunJianSignBean;
-    private BluToothLEHelper bluToothLEHelper = null;
     private String UUID = "b5b182c7-eab1-4988-aa99-b5c1517008d9";
     private Boolean isEdit;
     private String termType;

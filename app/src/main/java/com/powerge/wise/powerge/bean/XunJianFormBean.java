@@ -96,7 +96,7 @@ public class XunJianFormBean extends RootBean implements Parcelable {
         this.checkType = checkType;
     }
 
-    String options[] = new String[]{"是", "否"};
+    String options[] = new String[]{"正常", "异常"};
 
     public String getCheckResult() {
         return checkResult;
@@ -141,10 +141,12 @@ public class XunJianFormBean extends RootBean implements Parcelable {
     }
 
     public int getImgvisibility() {
-        if (checkType.equals("dict1id")) {// 单选
-            return View.VISIBLE;
-        } else if (checkType.equals("dict2id")) {//文本框
-            return View.INVISIBLE;
+        if (!TextUtils.isEmpty(checkNeeded)) { //如果checkNeeded 为空 说明是查看功能 不可见
+            if (checkType.equals("dict1id")) {// 单选
+                return View.VISIBLE;
+            } else if (checkType.equals("dict2id")) {//文本框
+                return View.INVISIBLE;
+            }
         }
         return View.INVISIBLE;
     }

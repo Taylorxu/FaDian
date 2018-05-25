@@ -2,25 +2,42 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <android.support.design.widget.CoordinatorLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <android.support.design.widget.AppBarLayout
+        <View
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/color_line">
+            android:layout_height="1dp"
+            android:background="@color/color_line" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/color_line" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:weightSum="3">
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left|center_vertical"
+                    android:layout_marginLeft="13dp"
+                    android:includeFontPadding="false"
+                    android:text="时间"
+                    android:textColor="@color/color_420a"
+                    android:textSize="14sp" />
+            </FrameLayout>
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:orientation="horizontal"
-                android:weightSum="3">
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2">
 
                 <FrameLayout
                     android:layout_width="0dp"
@@ -30,87 +47,58 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="left|center_vertical"
-                        android:layout_marginLeft="13dp"
+                        android:layout_gravity="center"
                         android:includeFontPadding="false"
-                        android:text="时间"
+                        android:text="指标"
                         android:textColor="@color/color_420a"
                         android:textSize="14sp" />
                 </FrameLayout>
 
-                <LinearLayout
+                <FrameLayout
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="2">
+                    android:layout_weight="1">
 
-                    <FrameLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:includeFontPadding="false"
+                        android:text="小时均值"
+                        android:textColor="@color/color_420a"
+                        android:textSize="14sp" />
+                </FrameLayout>
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:includeFontPadding="false"
-                            android:text="指标"
-                            android:textColor="@color/color_420a"
-                            android:textSize="14sp" />
-                    </FrameLayout>
+                <FrameLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
 
-                    <FrameLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:includeFontPadding="false"
-                            android:text="小时均值"
-                            android:textColor="@color/color_420a"
-                            android:textSize="14sp" />
-                    </FrameLayout>
-
-                    <FrameLayout
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:includeFontPadding="false"
-                            android:text="环保局上限"
-                            android:textColor="@color/color_420a"
-                            android:textSize="14sp" />
-                    </FrameLayout>
-
-                </LinearLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:includeFontPadding="false"
+                        android:text="环保局上限"
+                        android:textColor="@color/color_420a"
+                        android:textSize="14sp" />
+                </FrameLayout>
 
             </LinearLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@color/color_line" />
-        </android.support.design.widget.AppBarLayout>
+        </LinearLayout>
 
-        <android.support.v4.widget.NestedScrollView
+        <View
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            android:layout_height="1dp"
+            android:background="@color/color_line" />
 
-            <com.powerge.wise.powerge.helper.MeasureListView
-                android:id="@+id/content_kaohe_child_list"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </android.support.v4.widget.NestedScrollView>
+        <com.powerge.wise.powerge.helper.MeasureListView
+            android:id="@+id/content_kaohe_child_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-
-    </android.support.design.widget.CoordinatorLayout>
+    </LinearLayout>
 
 
 </layout>
